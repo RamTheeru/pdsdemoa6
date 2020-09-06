@@ -20,11 +20,8 @@ loaded : boolean = false;
 dates =[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
 userTypes : UserType[];
 empForm : FormGroup;
-  maritals = [
-    { id: 0, name: 'Married' },
-    { id: 1, name: 'Un Married' }
+  maritals = ['married','unmarried'];
 
-  ];
     empTypes = [
     { id: 0, name: 'Permanent' },
     { id: 1, name: 'Contract' }
@@ -53,9 +50,10 @@ initForm(){
     firstName: new FormControl(),
     lastName: new FormControl(),
     middleName: new FormControl(),
-     day: new FormControl(),
-      month: new FormControl(''),
-       year: new FormControl(),
+    birthdate : new FormControl(),
+    //  day: new FormControl(),
+    //   month: new FormControl(''),
+    //    year: new FormControl(),
         age: new FormControl(),
         bg: new FormControl(),
          gender: new FormControl(''),
@@ -116,6 +114,7 @@ initForm(){
      emp.Day = this.empForm.value['day'];
      emp.Month = this.empForm.value['month'];
      emp.Year = this.empForm.value['year'];
+
      emp.Age = this.empForm.value['age'];
      emp.BloodGroup = this.empForm.value['bg'];
      emp.Gender = this.empForm.value['gender'];

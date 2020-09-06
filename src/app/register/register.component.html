@@ -1,21 +1,71 @@
  
   <div class="container">
    <app-loading [deliver]="loaded"  ></app-loading>
- 
+
 <h1 class="text-primary"><u>Employee Registration Form:</u></h1>
+
    <button type="submit" style="float:right;background-color:blue;" ><a routerLink="/home"><b class="text-light" >Go to Home >></b></a></button> 
- 
+
+
   <!-- <a role="button" routerLink="/home" style="float:right;" ><span class="badge badge-primary"><b>Go to Home</b></span></a> -->
    <form class="form-horizontal" [formGroup]="empForm" (ngSubmit)="onSubmit()" role="form">
   
- <mat-grid-list cols="2" rowHeight="300px">
+ <mat-grid-list cols="2">
 <mat-grid-tile>
 
  <div class="contrl-cont">
+    <legend>Personal Information Details</legend>
+     <!-- <input type="hidden" formControlName="$key" > -->
   <mat-form-field>
-    <input type="text" formControlName="firstName" matInput placeholder="FirstName*">
+    <input type="text" formControlName="firstName" class="form-control" matInput placeholder="FirstName*">
     <mat-error>This field is mandatory</mat-error>
   </mat-form-field>
+    <mat-form-field>
+       <input type="text" name="middleName" formControlName="middleName" matInput placeholder="Middle Name" class="form-control">
+    <mat-error>This field is mandatory</mat-error>
+  </mat-form-field>
+    <mat-form-field>
+     <input type="text" name="lastName" formControlName="lastName" matInput placeholder="Last Name" class="form-control">
+    <mat-error>This field is mandatory</mat-error>
+  </mat-form-field>
+
+      <mat-form-field>
+    <mat-select formControlName="gender"  aria-placeholder="Gender" >
+      <mat-option value="">Select Gender</mat-option>
+        <mat-option value="male">male</mat-option>
+         <mat-option value="female">female</mat-option>
+    </mat-select>
+  </mat-form-field>
+   <mat-form-field>
+    <input  formControlName="birthdate" matInput [matDatepicker]="picker" class="form-control" placeholder="Date Of Birth">
+    <mat-datepicker-toggle matSuffix  [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+       <mat-error>This field is mandatory</mat-error>
+  </mat-form-field>
+    <mat-form-field>
+    <input type="text" formControlName="age" class="form-control" matInput placeholder="Age*">
+    <mat-error>This field is mandatory</mat-error>
+  </mat-form-field>
+    <mat-form-field>
+    <input type="text" formControlName="bg" class="form-control" matInput placeholder="Blood Group">
+    <mat-error>This field is mandatory</mat-error>
+  </mat-form-field>
+  
+  <!-- <div class="add-bottom-padding"  formArrayName="mars" *ngFor="let c of maritalsFormArray.controls; let i = index;" >
+  <mat-checkbox (change)="checkValue($event,'m')" name="m" id="i" [formControlName]="i">{{maritals[i].name}}e</mat-checkbox>
+</div> -->
+
+
+
+  </div>
+
+<!-- <p>
+  Button with a badge on the left
+  <button mat-raised-button color="primary"
+      matBadge="8" matBadgePosition="before" matBadgeColor="accent">
+    Action
+  </button>
+</p> -->
     <!-- <mat-form-field>
     <input type="text" formControlName="email" matInput placeholder="Email">
     <mat-error>Invalid Email address</mat-error>
@@ -31,13 +81,7 @@
 </div>
 </mat-grid-tile>
 <mat-grid-tile>
-  <div class="control-cont">
-    <div class="add-bottom-padding">
-      <mat-radio-group formControlName="gender">
-          <mat-radio-button value="1">Male</mat-radio-button>
-          <mat-radio-button value="2">Female</mat-radio-button>
-      </mat-radio-group>
-    </div>
+
       <mat-form-field>
     <mat-select formControlName="department"  aria-placeholder="Department" >
       <mat-option value="0">None</mat-option>
@@ -58,11 +102,12 @@
   <button mat-raised-button color="primary" type="submit" [disabled]="empServ.form.invalid">Submit</button> 
    <button mat-raised-button color="warn" (click)="onClear()" >Clear</button> 
 </div> -->
-</div>
+
 
 </mat-grid-tile>
 </mat-grid-list>
 
 </form>
+
 </div>
 
