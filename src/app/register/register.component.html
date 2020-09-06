@@ -1,8 +1,9 @@
-  <mat-toolbar>
+ 
+  <div class="container">
    <app-loading [deliver]="loaded"  ></app-loading>
  
-  <!-- <h1 class="text-primary"><u>Employee Registration Form:</u></h1>
-   <button type="submit" style="float:right;background-color:blue;" ><a routerLink="/home"><b class="text-light" >Go to Home >></b></a></button> -->
+<h1 class="text-primary"><u>Employee Registration Form:</u></h1>
+   <button type="submit" style="float:right;background-color:blue;" ><a routerLink="/home"><b class="text-light" >Go to Home >></b></a></button> 
  
   <!-- <a role="button" routerLink="/home" style="float:right;" ><span class="badge badge-primary"><b>Go to Home</b></span></a> -->
    <form class="form-horizontal" [formGroup]="empForm" (ngSubmit)="onSubmit()" role="form">
@@ -10,7 +11,7 @@
  <mat-grid-list cols="2" rowHeight="300px">
 <mat-grid-tile>
 
- 
+ <div class="contrl-cont">
   <mat-form-field>
     <input type="text" formControlName="firstName" matInput placeholder="FirstName*">
     <mat-error>This field is mandatory</mat-error>
@@ -57,11 +58,11 @@
   <button mat-raised-button color="primary" type="submit" [disabled]="empServ.form.invalid">Submit</button> 
    <button mat-raised-button color="warn" (click)="onClear()" >Clear</button> 
 </div> -->
-
+</div>
 
 </mat-grid-tile>
 </mat-grid-list>
 
 </form>
-</mat-toolbar>
+</div>
 
