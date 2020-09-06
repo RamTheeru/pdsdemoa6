@@ -59,7 +59,7 @@ initForm(){
         age: new FormControl(),
         bg: new FormControl(),
          gender: new FormControl(''),
-      /mars:new FormArray([]),
+      mars:new FormArray([]),
        ad1: new FormControl(),
         ad2: new FormControl(),
          place: new FormControl(),
