@@ -6,6 +6,7 @@ import {Routes,RouterModule,PreloadAllModules} from '@angular/router';
 import { AppComponent } from './app.component';
 import {MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {appRoutingModule} from './app-routing.module';
 //import {HttpClientModule} from "@angular/common/http";
 
@@ -25,7 +26,7 @@ import { PdsApiService } from './pds-api.service';
 
 
 @NgModule({
-  imports:      [ BrowserModule, FormsModule,BrowserAnimationsModule,ReactiveFormsModule,HttpClientModule,appRoutingModule,MaterialModule ],
+  imports:      [ BrowserModule, FormsModule,BrowserAnimationsModule,NoopAnimationsModule,ReactiveFormsModule,HttpClientModule,appRoutingModule,MaterialModule ],
   declarations: [ AppComponent, PdsMainComponent, HomeComponent, LoadingComponent, AboutusComponent, LogintabComponent, ScrollingComponent, RegisterComponent, AbtusComponent ],
   bootstrap:    [ AppComponent ],
   providers: [ViewService, PdsApiService]
