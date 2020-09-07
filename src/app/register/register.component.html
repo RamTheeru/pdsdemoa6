@@ -8,9 +8,9 @@
 
 
   <!-- <a role="button" routerLink="/home" style="float:right;" ><span class="badge badge-primary"><b>Go to Home</b></span></a> -->
-   <form class="form-horizontal" [formGroup]="empForm" (ngSubmit)="onSubmit()" role="form">
+   <form class="form-horizontal" [formGroup]="empForm" (ngSubmit)="onSubmit()">
   
- <mat-grid-list cols="2">
+ <mat-grid-list cols="2" rowHeight="1000px;">
 <mat-grid-tile>
 
  <div class="contrl-cont">
@@ -50,10 +50,10 @@
     <input type="text" formControlName="bg" class="form-control" matInput placeholder="Blood Group">
     <mat-error>This field is mandatory</mat-error>
   </mat-form-field>
-  
-  <!-- <div class="add-bottom-padding"  formArrayName="mars" *ngFor="let c of maritalsFormArray.controls; let i = index;" >
-  <mat-checkbox (change)="checkValue($event,'m')" name="m" id="i" [formControlName]="i">{{maritals[i].name}}e</mat-checkbox>
-</div> -->
+   <legend>Marital Status</legend>
+  <div class="add-bottom-padding"   *ngFor="let c of maritals; let i = index;" >
+  <mat-checkbox (change)="checkValue($event,'m')" name="{{c}}" [formControlName]="c">{{c}}</mat-checkbox>
+</div>
 
 
 

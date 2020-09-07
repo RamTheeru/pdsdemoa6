@@ -29,8 +29,8 @@ empForm : FormGroup;
   ];
   constructor(private _fb:FormBuilder,private api:PdsApiService,private _swServ:SweetService) {
      this.initForm();
-    this.addCheckboxes();
-    this.addCheckboxes_t();
+    //this.addCheckboxes();
+    //this.addCheckboxes_t();
    }
 
    ngOnInit() {
@@ -57,7 +57,9 @@ initForm(){
         age: new FormControl(),
         bg: new FormControl(),
          gender: new FormControl(''),
-      mars:new FormArray([]),
+         married :  new FormControl(),
+              unmarried :  new FormControl(),
+     // mars:new FormArray([]),
        ad1: new FormControl(),
         ad2: new FormControl(),
          place: new FormControl(),
