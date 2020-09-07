@@ -22,11 +22,8 @@ userTypes : UserType[];
 empForm : FormGroup;
   maritals = ['married','unmarried'];
 
-    empTypes = [
-    { id: 0, name: 'Permanent' },
-    { id: 1, name: 'Contract' }
-
-  ];
+    empTypes = ['permanent','contract'];
+ 
   constructor(private _fb:FormBuilder,private api:PdsApiService,private _swServ:SweetService) {
      this.initForm();
     //this.addCheckboxes();
@@ -51,6 +48,7 @@ initForm(){
     lastName: new FormControl(),
     middleName: new FormControl(),
     birthdate : new FormControl(),
+     joindate : new FormControl(),
     //  day: new FormControl(),
     //   month: new FormControl(''),
     //    year: new FormControl(),
@@ -59,6 +57,8 @@ initForm(){
          gender: new FormControl(''),
          married :  new FormControl(),
               unmarried :  new FormControl(),
+                  permanent :  new FormControl(),
+              contract :  new FormControl(),
      // mars:new FormArray([]),
        ad1: new FormControl(),
         ad2: new FormControl(),
@@ -67,7 +67,7 @@ initForm(){
            postal: new FormControl(),
             aad: new FormControl(),
         pan: new FormControl(),
-        typs : new FormArray([]),
+        //typs : new FormArray([]),
             gfirstName: new FormControl(),
     glastName: new FormControl(),
     gmiddleName: new FormControl(),

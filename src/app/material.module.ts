@@ -18,7 +18,8 @@ import * as Material from '@angular/material';
     Material.MatSnackBarModule,
     Material.MatTableModule,
     Material.MatIconModule,
-    Material.MatDialogModule
+    Material.MatDialogModule,
+    Material.MatDividerModule
    
   
   ],
@@ -36,7 +37,8 @@ import * as Material from '@angular/material';
        Material.MatSnackBarModule,
         Material.MatTableModule,
         Material.MatIconModule,
-    Material.MatDialogModule
+    Material.MatDialogModule,
+    Material.MatDividerModule
   
      ],
   declarations: []
