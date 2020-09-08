@@ -9,13 +9,8 @@
 
   <!-- <a role="button" routerLink="/home" style="float:right;" ><span class="badge badge-primary"><b>Go to Home</b></span></a> -->
    <form class="form-horizontal" [formGroup]="empForm" (ngSubmit)="onSubmit()">
-     <section>
-         <div class="example-button-row" >
-    <button type="submit" mat-raised-button color="warn">Cancel</button>
-      <button type="submit" mat-raised-button color="primary">Save</button>
-    </div>
-  </section>
- <mat-grid-list cols="2" rowHeight="1250px">
+ 
+ <mat-grid-list cols="2" rowHeight="1255px">
    
 
    
@@ -151,6 +146,7 @@
          <mat-option value="female">Finance (LE)</mat-option>
     </mat-select>
   </mat-form-field>
+    <legend>Location Details</legend>
         <mat-form-field>
          <input type="text" name="StationCode" formControlName="station" matInput placeholder="Station Code" class="form-control">
         <mat-error>This field is mandatory</mat-error>
@@ -163,7 +159,12 @@
   </mat-grid-tile>
 
 </mat-grid-list>
-
+    <section>
+         <div class="example-button-row" >
+    <button type="submit" mat-raised-button color="warn">Cancel</button>
+      <button type="submit" mat-raised-button color="primary">Save</button>
+    </div>
+  </section>
 </form>
 
 </div>
