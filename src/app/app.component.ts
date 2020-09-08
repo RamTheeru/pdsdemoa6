@@ -13,6 +13,7 @@ import {Router,Event as RouterEvent,
 })
 export class AppComponent  {
    url='';
+   isLogin: Boolean = false;
   tabView : Boolean = true;  
   name = 'Angular ' + VERSION.major;
     text = 'Welcome to PENNA DELIVERY SERVICES!!!!!!';
@@ -59,7 +60,12 @@ export class AppComponent  {
             // );
 
         }
-        else{this.tabView=true;}
+        else if(this.url == '/loginhome')
+        {
+          this.isLogin = true;
+          this.tabView = false;
+        }
+        else{this.tabView=true;this.isLogin=false;}
       setTimeout(() => { // here
         this.load = false;
       }, 2000);

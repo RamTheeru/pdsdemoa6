@@ -18,6 +18,7 @@ import { LogintabComponent } from './logintab/logintab.component';
 import { ScrollingComponent } from './scrolling/scrolling.component';
 import { RegisterComponent } from './register/register.component';
 import { AbtusComponent } from './abtus/abtus.component';
+import {LoginhomeComponent} from './loginhome/loginhome.component';
 import { ViewService } from './view.service';
 import { PdsApiService } from './pds-api.service';
 //import { SweetService } from './sweet.service';
@@ -27,7 +28,7 @@ import { PdsApiService } from './pds-api.service';
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule,BrowserAnimationsModule,NoopAnimationsModule,ReactiveFormsModule,HttpClientModule,appRoutingModule,MaterialModule ],
-  declarations: [ AppComponent, PdsMainComponent, HomeComponent, LoadingComponent, AboutusComponent, LogintabComponent, ScrollingComponent, RegisterComponent, AbtusComponent ],
+  declarations: [ AppComponent, PdsMainComponent, HomeComponent, LoadingComponent, AboutusComponent, LogintabComponent, ScrollingComponent, RegisterComponent, AbtusComponent,LoginhomeComponent ],
   bootstrap:    [ AppComponent ],
   providers: [ViewService, PdsApiService]
 })

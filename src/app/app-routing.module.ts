@@ -5,13 +5,15 @@ import {PdsMainComponent} from './pds-main/pds-main.component';
 import {AboutusComponent} from './aboutus/aboutus.component';
 import {AbtusComponent} from './abtus/abtus.component';
 import {RegisterComponent} from './register/register.component';
+import {LoginhomeComponent} from './loginhome/loginhome.component';
 const appRoutes : Routes =[
   {path:'',redirectTo:'/home',pathMatch:'full'},
   {path:'home',component:HomeComponent },
   {path:'login',component:PdsMainComponent},
   {path:'vision',component:AboutusComponent},
   {path:'aboutus',component:AbtusComponent},
-  {path:'register',component:RegisterComponent}
+  {path:'register',component:RegisterComponent},
+  {path:'loginhome',component:LoginhomeComponent}
 ]
 
 @NgModule({
