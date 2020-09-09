@@ -1,15 +1,51 @@
+<div class="container-fluid">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand"></a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">UserName</a>
+            </li>
+            <li>
+                <form class="form-inline" action="/action_page.php">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+    <button class="btn btn-success" type="submit">Search</button>
+  </form>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" >Logout</a>
+            </li>
 
-
-<p>
+        </ul>
+    </div>
+</nav>
+<div class="row">
+  <div class="col-sm-2">
+<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+  <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
+  <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
+  <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
+  <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+</div>
+</div><!--col1-->
+<div class="col-sm-8">
+<div class="tab-content" id="v-pills-tabContent">
+  <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">...</div>
+  <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
+  <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
+  <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+</div>
+</div><!--col2-->
+</div><!--row-->
+</div><!--container-->
+<!-- <p>
   <mat-toolbar color="primary">
-    <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
-    </button> -->
+
     <span>Login Name of User</span>
     <span class="example-spacer"></span>
-    <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
-    </button> -->
+
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
       <mat-icon>Logout</mat-icon>
     </button>
@@ -17,37 +53,26 @@
 </p>
 
 <mat-sidenav-container>
-  <mat-sidenav opened>
+  <mat-sidenav [opened]="shoesidenav">
     <mat-nav-list>
 
-      <a mat-list-item routerLink="/loginhome"> Home </a>
-      <a mat-list-item routerLink="/"> Create Account </a>
-      <a mat-list-item routerLink="/"> Contacts </a>
-      <a mat-list-item routerLink="/"> Create Contact </a>
-      <a mat-list-item routerLink="/"> Activities </a>
-      <a mat-list-item routerLink="/"> Create Activity </a>
+      <a mat-list-item routerLink="/loginhome"> User Stats </a>
+      <a mat-list-item routerLink="/loginhome"> Info </a>
+      <a mat-list-item routerLink="/loginhome"> Contacts </a>
 
 
     </mat-nav-list>
   </mat-sidenav>
       <mat-sidenav opened position="end">
+         <button type="submit" class="bg-primary" (click)="Onbtnclick()" ><b class="text-light" >>>Side Menu </b></button> 
       Notifications 
     </mat-sidenav>
   <mat-sidenav-content>
-    <div style="height: 88vh;">
+    <div id="content">
 
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
-</mat-sidenav-container>
-<!-- <mat-list >
- <mat-list-item> Pepper </mat-list-item>
- <mat-list-item> Salt </mat-list-item>
- <mat-list-item> Paprika </mat-list-item>
-</mat-list> -->
-<!-- <mat-sidenav-container class="example-container" >
-  <mat-sidenav opened>I'm a drawer</mat-sidenav>
- <mat-sidenav >I'm a drawer2</mat-sidenav>
-  <mat-sidenav-content>I am content</mat-sidenav-content>
 </mat-sidenav-container> -->
+
 
