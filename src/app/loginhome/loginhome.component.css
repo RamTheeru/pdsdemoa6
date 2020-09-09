@@ -11,18 +11,24 @@
   left: 0;
   right: 0;
 }
-
+.mat-drawer-backdrop, mat-drawer-shown{
+  background-color: bisque;
+}
 mat-sidenav-container{
   height: 100%;
   margin-top: 49px;
+   background-color: bisque;
 }
 mat-sidenav-content{
   width:100%;
+  background-color: bis;
+
 }
 mat-sidenav,mat-sidenav-content{
   padding:16px;
+   background-color: bisque;
 }
 mat-sidenav{
-  background-color: lightblue;
+
   width:200px;
 }
