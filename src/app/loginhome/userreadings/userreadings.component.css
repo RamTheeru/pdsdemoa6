@@ -1,11 +1,15 @@
-body{
-  background-color: white;
- 
-}
+
   span {
+    color:white;
+    background-color: blue;
     display: inline-block;
-    width: 70px;
-    height: 70px;
-    margin: 6px;
-    background-color: #555;
+    width: 200px;
+    height: 150px;
+    margin: 15px;
+    font-weight: bold;
+text-align: center;
+    
+  }
+  p{
+    padding-top: 55px;
   }
