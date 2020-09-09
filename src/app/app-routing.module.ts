@@ -6,6 +6,7 @@ import {AboutusComponent} from './aboutus/aboutus.component';
 import {AbtusComponent} from './abtus/abtus.component';
 import {RegisterComponent} from './register/register.component';
 import {LoginhomeComponent} from './loginhome/loginhome.component';
+import {UserreadingsComponent} from './loginhome/userreadings/userreadings.component';
 const appRoutes : Routes =[
   {path:'',redirectTo:'/home',pathMatch:'full'},
   {path:'home',component:HomeComponent },
@@ -15,13 +16,13 @@ const appRoutes : Routes =[
   {path:'register',component:RegisterComponent},
   {
     path:'loginhome',component:LoginhomeComponent,
-  //     children:[
-  //    { path :'' ,component : RecipeStartComponent},
-  //    {path : 'new',component: RecipeEditComponent ,canActivate:[AuthGuard]},
-  //    {path : ':id',component: RecipeDetailComponent },
+      children:[
+     { path :'' ,component : UserreadingsComponent}
+    //  {path : 'new',component: RecipeEditComponent ,canActivate:[AuthGuard]},
+    //  {path : ':id',component: RecipeDetailComponent },
       
-  //      {path : ':id/edit',component: RecipeEditComponent,canActivate:[AuthGuard],canDeactivate:[CanDeactivateGuard] }
-  // ]
+    //    {path : ':id/edit',component: RecipeEditComponent,canActivate:[AuthGuard],canDeactivate:[CanDeactivateGuard] }
+  ]
   
   }
 ]
