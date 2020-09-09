@@ -13,7 +13,17 @@ const appRoutes : Routes =[
   {path:'vision',component:AboutusComponent},
   {path:'aboutus',component:AbtusComponent},
   {path:'register',component:RegisterComponent},
-  {path:'loginhome',component:LoginhomeComponent}
+  {
+    path:'loginhome',component:LoginhomeComponent,
+  //     children:[
+  //    { path :'' ,component : RecipeStartComponent},
+  //    {path : 'new',component: RecipeEditComponent ,canActivate:[AuthGuard]},
+  //    {path : ':id',component: RecipeDetailComponent },
+      
+  //      {path : ':id/edit',component: RecipeEditComponent,canActivate:[AuthGuard],canDeactivate:[CanDeactivateGuard] }
+  // ]
+  
+  }
 ]
 
 @NgModule({

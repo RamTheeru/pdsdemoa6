@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import * as Material from '@angular/material';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
   imports: [
@@ -19,7 +22,13 @@ import * as Material from '@angular/material';
     Material.MatTableModule,
     Material.MatIconModule,
     Material.MatDialogModule,
-    Material.MatDividerModule
+    Material.MatDividerModule,
+    MatTableModule,
+    MatPaginatorModule,
+   // Material.MatDrawerContainer,
+    MatSidenavModule
+    //Material.MatDrawerContent
+   
    
   
   ],
@@ -38,7 +47,13 @@ import * as Material from '@angular/material';
         Material.MatTableModule,
         Material.MatIconModule,
     Material.MatDialogModule,
-    Material.MatDividerModule
+    Material.MatDividerModule,
+    MatTableModule,
+    MatPaginatorModule,
+    // Material.MatDrawerContainer,
+     MatSidenavModule
+    //Material.MatDrawerContent
+   
   
      ],
   declarations: []
