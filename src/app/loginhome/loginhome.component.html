@@ -16,10 +16,30 @@
   </mat-toolbar>
 </p>
 
+<mat-sidenav-container>
+  <mat-sidenav opened>
+    <mat-nav-list>
 
-<mat-sidenav-container class="example-container" >
-  <mat-sidenav  opened>I'm a drawer</mat-sidenav>
-   <mat-sidenav  opened>I'm a drawer</mat-sidenav>
-  <mat-sidenav-content>I am content</mat-sidenav-content>
+      <a mat-list-item [routerLink]="'/accounts'"> Accounts </a>
+      <a mat-list-item [routerLink]="'/create-account'"> Create Account </a>
+      <a mat-list-item [routerLink]="'/contacts'"> Contacts </a>
+      <a mat-list-item [routerLink]="'/create-contact'"> Create Contact </a>
+      <a mat-list-item [routerLink]="'/activities'"> Activities </a>
+      <a mat-list-item [routerLink]="'/create-activity'"> Create Activity </a>
+
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div style="height: 88vh;">
+
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
 </mat-sidenav-container>
+<!-- <mat-sidenav-container class="example-container" >
+  <mat-sidenav opened>I'm a drawer</mat-sidenav>
+ <mat-sidenav >I'm a drawer2</mat-sidenav>
+  <mat-sidenav-content>I am content</mat-sidenav-content>
+</mat-sidenav-container> -->
 

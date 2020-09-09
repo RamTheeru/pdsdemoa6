@@ -26,7 +26,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatTableModule,
     MatPaginatorModule,
    // Material.MatDrawerContainer,
-    MatSidenavModule
+    MatSidenavModule,
+    Material.MatListModule
     //Material.MatDrawerContent
    
    
@@ -51,7 +52,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatTableModule,
     MatPaginatorModule,
     // Material.MatDrawerContainer,
-     MatSidenavModule
+     MatSidenavModule,
+      Material.MatListModule
     //Material.MatDrawerContent
    
   

@@ -11,7 +11,7 @@
   left: 0;
   right: 0;
 }
-.mat-drawer-backdrop, mat-drawer-shown{
+/deep/ .mat-sidenav-transition .mat-sidenav-backdrop.mat-sidenav-shown {
   background-color: bisque;
 }
 mat-sidenav-container{
@@ -21,7 +21,7 @@ mat-sidenav-container{
 }
 mat-sidenav-content{
   width:100%;
-  background-color: bis;
+  background-color: bisque;
 
 }
 mat-sidenav,mat-sidenav-content{
