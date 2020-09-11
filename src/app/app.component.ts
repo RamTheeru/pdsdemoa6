@@ -50,6 +50,7 @@ export class AppComponent  {
     if (event instanceof NavigationEnd) {
         //console.log(event.urlAfterRedirects)
         this.url = event.urlAfterRedirects;
+          var index = this.url.indexOf('loginhome'); 
         if(this.url == '/register')
         {
           this.tabView = false;
@@ -60,7 +61,7 @@ export class AppComponent  {
             // );
 
         }
-        else if(this.url == '/loginhome')
+        else if(index !== -1)
         {
           this.isLogin = true;
           this.tabView = false;

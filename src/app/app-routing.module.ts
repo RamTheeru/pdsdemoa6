@@ -7,6 +7,7 @@ import {AbtusComponent} from './abtus/abtus.component';
 import {RegisterComponent} from './register/register.component';
 import {LoginhomeComponent} from './loginhome/loginhome.component';
 import {UserreadingsComponent} from './loginhome/userreadings/userreadings.component';
+import {CreateEmployeeComponent} from './loginhome/create-employee/create-employee.component';
 const appRoutes : Routes =[
   {path:'',redirectTo:'/home',pathMatch:'full'},
   {path:'home',component:HomeComponent },
@@ -17,7 +18,8 @@ const appRoutes : Routes =[
   {
     path:'loginhome',component:LoginhomeComponent,
       children:[
-     { path :'' ,component : UserreadingsComponent}
+     { path :'' ,component : UserreadingsComponent},
+      { path :'createemployee' ,component : CreateEmployeeComponent}
     //  {path : 'new',component: RecipeEditComponent ,canActivate:[AuthGuard]},
     //  {path : ':id',component: RecipeDetailComponent },
       
