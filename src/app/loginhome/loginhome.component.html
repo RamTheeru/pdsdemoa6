@@ -15,7 +15,7 @@
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" >Logout</a>
+                <a class="nav-link" routerLink="/home" >Logout</a>
             </li>
 
         </ul>
@@ -24,13 +24,13 @@
 <div class="row">
   <div class="col-sm-2">
 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-  <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true"  routerLink="/loginhome">Home</a>
-  <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false" routerLink="/loginhome/createemployee">Create Employee</a>
+  <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true" (click)="onloghomeclk()"  routerLink="/loginhome">Home</a>
+  <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false" (click)="oncreateclk()" routerLink="/loginhome/createemployee">Create Employee</a>
   <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
   <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
 </div>
 </div><!--col1-->
-<div class="col-sm-8">
+<div  [ngClass]="shownotify ? 'col-sm-8' : 'col-sm-10'">
 <div class="tab-content" id="v-pills-tabContent">
   <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
     <router-outlet></router-outlet>

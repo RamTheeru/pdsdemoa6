@@ -16,5 +16,11 @@ export class LoginhomeComponent implements OnInit {
   Onbtnclick(){
     this.shoesidenav = !this.shoesidenav;
   }
+  oncreateclk(){
+    this.shownotify=false;
+  }
+  onloghomeclk(){
+    this.shownotify=true;
+  }
 
 }
