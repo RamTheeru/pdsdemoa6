@@ -2,5 +2,6 @@
   background-color: bisque;
 }
 .tab-content{
-  height: 100%
+  height: 100%;
+  margin-left: 22px;
 }

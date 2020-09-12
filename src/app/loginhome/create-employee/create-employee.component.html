@@ -18,26 +18,38 @@
   <form class="form-horizontal" [formGroup]="empForm2" (ngSubmit)="onSubmit()">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 
-    <mat-grid-list cols="2" rowHeight="100vh">
-      <mat-grid-tile>
-         <mat-form-field>
-            <input type="text" formControlName="firstName" class="form-control" matInput placeholder="FirstName*">
-            <mat-error>This field is mandatory</mat-error>
-          </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile>
-         <mat-form-field>
-            <input type="text" name="middleName" formControlName="middleName" matInput placeholder="Middle Name" class="form-control">
-           <mat-error>This field is mandatory</mat-error>
-          </mat-form-field>
-      </mat-grid-tile>
-            <mat-grid-tile>
-         <mat-form-field>
-            <input type="text" name="lastName" formControlName="lastName" matInput placeholder="Last Name" class="form-control">
-           <mat-error>This field is mandatory</mat-error>
-          </mat-form-field>
-      </mat-grid-tile>
-    </mat-grid-list>
+          <div class="row">
+             <div class="col">
+                <mat-form-field>
+                    <input type="text" formControlName="firstName" class="form-control" matInput placeholder="FirstName*">
+                    <mat-error>This field is mandatory</mat-error>
+                  </mat-form-field>
+              </div>
+             <div class="col">
+                  <mat-form-field>
+                    <input type="text" name="middleName" formControlName="middleName" matInput placeholder="Middle Name" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                  </mat-form-field>
+              </div>
+              <div class="col">
+                  <mat-form-field>
+                    <input type="text" name="lastName" formControlName="lastName" matInput placeholder="Last Name" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                  </mat-form-field>
+              </div>
+        </div>
+        <div class="row">
+                <mat-form-field>
+                    <input type="text" name="middleName" formControlName="middleName" matInput placeholder="Middle Name" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                  </mat-form-field>
+        </div>
+        <div class="row">
+                <mat-form-field>
+                    <input type="text" name="lastName" formControlName="lastName" matInput placeholder="Last Name" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                  </mat-form-field>
+        </div>
   </div>
   <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">..</div>
   <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">......</div>
