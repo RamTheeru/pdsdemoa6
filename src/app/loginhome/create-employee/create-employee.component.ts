@@ -115,14 +115,14 @@ hidTab3 : Boolean = true;
           var test = false;
           if(txt == '' || txt==null){
           var msg = field+' '+' field required!!';
-            this._swServ.showErrorMessage(title,msg);
+           // this._swServ.showErrorMessage(title,msg);
           }
           else if(field == 'Employee Contact Number')
           {
             var msg = field+' '+' contains Only Numbers!!';
              test = this.ValidateNumbers(txt);
              if(!test){
-               this._swServ.showErrorMessage(title,msg);
+             //  this._swServ.showErrorMessage(title,msg);
                
              }
 
