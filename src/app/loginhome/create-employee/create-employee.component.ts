@@ -10,6 +10,7 @@ empForm2 : FormGroup;
 hidTab1 : Boolean = false;
 hidTab2 : Boolean = true;
 hidTab3 : Boolean = true;
+dllstatselect : string = '';
   maritals = ['married','unmarried'];
    empTypes = ['permanent','contract'];
   constructor(private _fb:FormBuilder) { 
