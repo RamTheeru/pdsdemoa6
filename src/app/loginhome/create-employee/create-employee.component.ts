@@ -7,13 +7,42 @@ import {FormGroup,FormBuilder,FormControl,FormArray,Validators} from '@angular/f
 })
 export class CreateEmployeeComponent implements OnInit {
 empForm2 : FormGroup;
+hidTab1 : Boolean = false;
+hidTab2 : Boolean = true;
+hidTab3 : Boolean = true;
   maritals = ['married','unmarried'];
    empTypes = ['permanent','contract'];
   constructor(private _fb:FormBuilder) { 
     this.initForm();
   }
+  showtab(tabNum){
+    if(tabNum == 1)
+    {
+      this.hidTab1 = false;
+      this.hidTab2 = true;
+      this.hidTab3 = true;
+    }
+    else if (tabNum == 2)
+    {
+      this.hidTab1 = true;
+      this.hidTab2 = false;
+      this.hidTab3 = true;
+
+    }
+    else if (tabNum == 3)
+    {
+            this.hidTab1 = true;
+      this.hidTab2 = true;
+      this.hidTab3 = false;
+
+    }
+  }
+
 
   ngOnInit() {
+          this.hidTab1 = false;
+      this.hidTab2 = true;
+      this.hidTab3 = true;
   }
   initForm(){
 
@@ -64,6 +93,7 @@ empForm2 : FormGroup;
   onSubmit(){
 
   }
+
 
    focusOutFunction(field,event:any):void{
 
