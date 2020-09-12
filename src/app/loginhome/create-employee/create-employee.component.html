@@ -6,7 +6,7 @@
     <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Personal Details</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Address Details</a>
+    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Address Details & Designation </a>
   </li>
   <li class="nav-item">
     <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Other Details</a>
@@ -39,19 +39,124 @@
               </div>
         </div>
         <div class="row">
-                <mat-form-field>
-                    <input type="text" name="middleName" formControlName="middleName" matInput placeholder="Middle Name" class="form-control">
-                  <mat-error>This field is mandatory</mat-error>
-                  </mat-form-field>
+                  <div class="col">
+                                <mat-form-field>
+                                  <mat-select formControlName="gender"  aria-placeholder="Gender" >
+                                    <mat-option value="">Select Gender</mat-option>
+                                      <mat-option value="male">male</mat-option>
+                                      <mat-option value="female">female</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                  </div>
+                  <div class="col">
+                               <mat-form-field>
+                                  <input  formControlName="birthdate" matInput [matDatepicker]="picker" class="form-control" placeholder="Date Of Birth">
+                                  <mat-datepicker-toggle matSuffix  [for]="picker"></mat-datepicker-toggle>
+                                  <mat-datepicker #picker></mat-datepicker>
+                                    <mat-error>This field is mandatory</mat-error>
+                                </mat-form-field>
+
+                  </div>
+                  <div class="col">
+                                    <mat-form-field>
+                                      <input type="text" formControlName="age" class="form-control" matInput placeholder="Age*">
+                                      <mat-error>This field is mandatory</mat-error>
+                                    </mat-form-field>
+                  </div>
         </div>
         <div class="row">
-                <mat-form-field>
-                    <input type="text" name="lastName" formControlName="lastName" matInput placeholder="Last Name" class="form-control">
-                  <mat-error>This field is mandatory</mat-error>
-                  </mat-form-field>
+                  <div class="col">
+                                  <mat-form-field>
+                                    <input type="text" formControlName="bg" class="form-control" matInput placeholder="Blood Group">
+                                    <mat-error>This field is mandatory</mat-error>
+                                  </mat-form-field>
+                  </div>
+                  <div class="col">
+                                 <legend>Marital Status</legend>
+                                <div class="add-bottom-padding"   *ngFor="let c of maritals; let i = index;" >
+                                <mat-checkbox (change)="checkValue($event,'m')" name="{{c}}" value="{{c}}" [formControlName]="c">{{c}}</mat-checkbox>
+                                </div>
+                  </div>
+                  <div class="col">
+                                   <mat-form-field>
+                                      <mat-label>Contact:+91-</mat-label>
+                                    <input type="text" name="phone" matInput (focusout)="focusOutFunction('phone',$event)" formControlName="phone" placeholder="Phone*" class="form-control">
+                                    <mat-error>This field is mandatory</mat-error>
+                                  </mat-form-field>
+                  </div>
         </div>
   </div>
-  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">..</div>
+  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+              <div class="row">
+             <div class="col">
+                  <mat-form-field>
+                      <input type="text" name="addressLine1" formControlName="ad1" matInput placeholder="Address Line 1" class="form-control">
+                        <mat-error>This field is mandatory</mat-error>
+                      </mat-form-field>
+              </div>
+             <div class="col">
+                      <mat-form-field>
+                      <input type="text" name="addressLine2" formControlName="ad2" matInput placeholder="Address Line 2" class="form-control">
+                      <mat-error>This field is mandatory</mat-error>
+                    </mat-form-field>
+              </div>
+              <div class="col">
+                    <mat-form-field>
+                  <input type="text" name="place" formControlName="place" matInput placeholder="Town/Mandal/Taluka/Village" class="form-control">
+                    <mat-error>This field is mandatory</mat-error>
+                  </mat-form-field>
+              </div>
+        </div>
+        <div class="row">
+                  <div class="col">
+                        <mat-form-field>
+                        <input type="text" name="state" formControlName="state" matInput placeholder="State" class="form-control">
+                        <mat-error>This field is mandatory</mat-error>
+                      </mat-form-field>
+                       
+                  </div>
+                  <div class="col">
+                        <mat-form-field>
+                      <input type="text" name="postal" formControlName="postal" matInput placeholder="Postal Code" class="form-control">
+                        <mat-error>This field is mandatory</mat-error>
+                      </mat-form-field>
+
+                  </div>
+                  <div class="col">
+                        <mat-form-field>
+                        <input type="text" name="aad" formControlName="aad" matInput placeholder="Aadhar number" class="form-control">
+                        <mat-error>This field is mandatory</mat-error>
+                      </mat-form-field>
+                  </div>
+        </div>
+        <div class="row">
+                  <div class="col">
+                      <mat-form-field>
+                        <input type="text" name="pan" formControlName="pan" matInput placeholder="PAN number" class="form-control">
+                        <mat-error>This field is mandatory</mat-error>
+                      </mat-form-field>
+                  </div>
+                  <div class="col">
+                          <legend>Employee Type</legend>
+                        <div class="add-bottom-padding"   *ngFor="let c of empTypes; let i = index;" >
+                        <mat-checkbox (change)="checkValue($event,'m')" name="{{c}}" value="{{c}}" [formControlName]="c">{{c}}</mat-checkbox>
+                    </div>
+
+                  </div>
+                  <div class="col">
+                          <mat-form-field>
+                            <mat-select formControlName="desg"  aria-placeholder="Designation" >
+                              <mat-option value="">Select Designation</mat-option>
+                                <mat-option value="Ka">KeyAccountsManager</mat-option>
+                                <mat-option value="Su">Supervisor</mat-option>
+                                  <mat-option value="Sr">Sr. Manager</mat-option>
+                                  <mat-option value="Ast">Asst. Manager</mat-option>
+                                    <mat-option value="Su">Office Assistant</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                  </div>
+        </div>
+  </div>
   <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">......</div>
   </form>
 </div>
