@@ -7,10 +7,7 @@
                 <a class="nav-link" href="#">UserName</a>
             </li>
             <li>
-                <form class="form-inline" action="/action_page.php">
-    <input class="form-control mr-sm-2" type="text" placeholder="Search">
-    <button class="btn btn-success" type="submit">Search</button>
-  </form>
+
             </li>
         </ul>
         <ul class="navbar-nav">
@@ -21,23 +18,24 @@
         </ul>
     </div>
 </nav>
+
 <div class="row">
   <div class="col-sm-2">
 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-  <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true" (click)="onloghomeclk()"  routerLink="/loginhome">Home</a>
-  <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false" (click)="oncreateclk()" routerLink="/loginhome/createemployee">Create Employee</a>
+  <a  class="nav-link"  id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true" (click)="onloghomeclk()"  routerLink="/loginhome">Home</a>
+  <a  class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false" (click)="oncreateclk()" routerLink="/loginhome/createemployee">Create Employee</a>
 
 
-         <a class="nav-link collapsed py-1" id="sub" href="#submenu1sub1" data-toggle="collapse" data-target="#submenu1sub1" ><span>Bulk View</span></a>
+         <a class="nav-link collapsed py-1" id="v-pills-sub-tab" data-toggle="pill" href="#v-pills-sub" role="tab" aria-controls="v-pills-sub" aria-selected="false" href="#submenu1sub1" data-toggle="collapse" data-target="#submenu1sub1" ><span>Bulk View</span></a>
                                 <div class="collapse" id="submenu1sub1" aria-expanded="false">
                                     <ul class="flex-column nav pl-4">
                                         <li class="nav-item">
-                                            <a class="nav-link p-1"  (click)="oncreateclk()"
+                                            <a class="nav-link p-1" aria-controls="v-pills-emp"  id="v-pills-emp-tab" role="tab"  href="#v-pills-emp" data-toggle="pill" aria-selected="false" (click)="oncreateclk('sub')"
                                             routerLink="/loginhome/individualview/1">
                                                 <i class="fa fa-fw fa-clock-o"></i> Individual View </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link p-1" routerLink="/loginhome/createemployee" (click)="oncreateclk()">
+                                            <a class="nav-link p-1" id="v-pills-ind-tab" aria-controls="v-pills-ind"  role="tab"  href="#v-pills-ind"  data-toggle="pill" aria-selected="false" routerLink="/loginhome/createemployee" (click)="oncreateclk()">
                                                 <i class="fa fa-fw fa-dashboard"></i> Location based List </a>
                                         </li>
                                         </ul>

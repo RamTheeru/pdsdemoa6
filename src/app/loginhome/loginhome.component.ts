@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class LoginhomeComponent implements OnInit {
   shoesidenav : Boolean = false;
   shownotify : Boolean = true;
+  actTab:Boolean=false;
  //shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
   constructor() { }
 
@@ -16,8 +17,9 @@ export class LoginhomeComponent implements OnInit {
   Onbtnclick(){
     this.shoesidenav = !this.shoesidenav;
   }
-  oncreateclk(){
+  oncreateclk(tab=''){
     this.shownotify=false;
+
   }
   onloghomeclk(){
     this.shownotify=true;

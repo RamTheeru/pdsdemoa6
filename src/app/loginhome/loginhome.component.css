@@ -1,23 +1,26 @@
 .col-sm-2{
-  background-color: aliceblue;
+  background-color: bisque;
 }
 .col-sm-8{
-  background-color: bisque;
+  background-color: floralwhite;
+  padding-top: 10px;
 }
 .col-sm-10{
-  background-color: bisque;
+  background-color: floralwhite;
+  padding-top: 10px;
 }
 .row{
 
   height:100vh;
 }
 
-#sub[data-toggle].collapsed:before {
+#v-pills-sub-tab[data-toggle].collapsed:before {
     content: " ▾";
 }
-#sub[data-toggle]:not(.collapsed):before {
+#v-pills-sub-tab[data-toggle]:not(.collapsed):before {
     content: " ▴";
 }
+
 
 /* .example-spacer {
   flex: 1 1 auto;

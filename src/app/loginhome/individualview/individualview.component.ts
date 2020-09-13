@@ -58,7 +58,9 @@ hidTab3 : Boolean = true;
           this.showbtns = params['id'] != null;
             this.initForm();
       }
+
     )
+    this.empForm2.disable();
   }
  private initForm(){
   
