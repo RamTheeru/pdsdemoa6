@@ -54,7 +54,8 @@ hidTab3 : Boolean = true;
             this.empId=+params['id'];
             let vw = this.route.url['_value'];
             let str = vw[0].path;
-             let index = str.indexOf('individualview'); 
+             let index = str.indexOf('individual'); 
+             console.log(index);
             if(index!=="-1")
             {
               this.showbtns = false;
