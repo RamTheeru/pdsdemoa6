@@ -11,7 +11,7 @@ export class CreateEmployeeComponent implements OnInit {
   empId : number;
    editMode = false;
    indiView = false;
-   showbtns : Boolean = true;
+
 empForm2 : FormGroup;
 hidTab1 : Boolean = false;
 hidTab2 : Boolean = true;
@@ -56,13 +56,13 @@ hidTab3 : Boolean = true;
             let str = vw[0].path;
              let index = str.indexOf('individual'); 
              console.log(index);
-            if(index!=="-1")
-            {
-              this.showbtns = false;
-            }
-            else{
-              this.showbtns = true;
-            }
+            // if(index!=="-1")
+            // {
+            //   this.showbtns = true;
+            // }
+            // else{
+            //   this.showbtns = false;
+            // }
             this.editMode = params['id'] != null;
             this.initForm();
       }
@@ -113,7 +113,7 @@ hidTab3 : Boolean = true;
                bbranch: new FormControl('Hitech'),
                              veh: new FormControl('testvehicle'),
                dllr: new FormControl('testdl'),
-               dlstat: new FormControl('')
+               dlstat: new FormControl('DL')
         });
 
 
@@ -143,13 +143,14 @@ hidTab3 : Boolean = true;
            postal: new FormControl(),
             aad: new FormControl(),
         pan: new FormControl(),
+           phone : new FormControl(),
         //typs : new FormArray([]),
             gName: new FormControl(),
     gphone : new FormControl(),
-         day2: new FormControl(),
-      month2: new FormControl(''),
-       year2: new FormControl(),
-        ut: new FormControl(''),
+      //    day2: new FormControl(),
+      // month2: new FormControl(''),
+      //  year2: new FormControl(),
+      //   ut: new FormControl(''),
          desg: new FormControl(''),
           station: new FormControl(),
            location: new FormControl(),

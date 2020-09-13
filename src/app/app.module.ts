@@ -21,6 +21,7 @@ import { AbtusComponent } from './abtus/abtus.component';
 import {LoginhomeComponent} from './loginhome/loginhome.component';
 import {UserreadingsComponent} from './loginhome/userreadings/userreadings.component';
 import {CreateEmployeeComponent} from './loginhome/create-employee/create-employee.component';
+import {IndividualviewComponent} from './loginhome/individualview/individualview.component';
 import { ViewService } from './view.service';
 import { PdsApiService } from './pds-api.service';
 //import { SweetService } from './sweet.service';
@@ -30,7 +31,7 @@ import { PdsApiService } from './pds-api.service';
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule,BrowserAnimationsModule,NoopAnimationsModule,ReactiveFormsModule,HttpClientModule,appRoutingModule,MaterialModule ],
-  declarations: [ AppComponent, PdsMainComponent, HomeComponent, LoadingComponent, AboutusComponent, LogintabComponent, ScrollingComponent, RegisterComponent, AbtusComponent,LoginhomeComponent,UserreadingsComponent,CreateEmployeeComponent ],
+  declarations: [ AppComponent, PdsMainComponent, HomeComponent, LoadingComponent, AboutusComponent, LogintabComponent, ScrollingComponent, RegisterComponent, AbtusComponent,LoginhomeComponent,UserreadingsComponent,CreateEmployeeComponent,IndividualviewComponent ],
   bootstrap:    [ AppComponent ],
   providers: [ViewService, PdsApiService]
 })
