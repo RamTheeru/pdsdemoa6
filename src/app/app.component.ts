@@ -54,6 +54,7 @@ export class AppComponent  {
         if(this.url == '/register')
         {
           this.tabView = false;
+           this.isLogin = false;
             //   this.subsc = this.vServ.view.subscribe(
             //   (val:Boolean)=>{
             //     this.tabView = val;

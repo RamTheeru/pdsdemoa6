@@ -26,8 +26,24 @@
 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
   <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true" (click)="onloghomeclk()"  routerLink="/loginhome">Home</a>
   <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false" (click)="oncreateclk()" routerLink="/loginhome/createemployee">Create Employee</a>
-  <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
-  <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+
+
+         <a class="nav-link collapsed py-1" id="sub" href="#submenu1sub1" data-toggle="collapse" data-target="#submenu1sub1" ><span>Bulk View</span></a>
+                                <div class="collapse" id="submenu1sub1" aria-expanded="false">
+                                    <ul class="flex-column nav pl-4">
+                                        <li class="nav-item">
+                                            <a class="nav-link p-1"  (click)="oncreateclk()"
+                                            routerLink="/loginhome/individualview/1">
+                                                <i class="fa fa-fw fa-clock-o"></i> Individual View </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link p-1" routerLink="/loginhome" (click)="oncreateclk()">
+                                                <i class="fa fa-fw fa-dashboard"></i> Location based List </a>
+                                        </li>
+                                        </ul>
+                                     </div>
+
+
 </div>
 </div><!--col1-->
 <div  [ngClass]="shownotify ? 'col-sm-8' : 'col-sm-10'">

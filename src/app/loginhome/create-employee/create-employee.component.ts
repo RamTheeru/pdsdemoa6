@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup,FormBuilder,FormControl,FormArray,Validators} from '@angular/forms';
 import {ActivatedRoute,Params,Router} from '@angular/router';
+
 @Component({
   selector: 'app-create-employee',
   templateUrl: './create-employee.component.html',
@@ -9,6 +10,8 @@ import {ActivatedRoute,Params,Router} from '@angular/router';
 export class CreateEmployeeComponent implements OnInit {
   empId : number;
    editMode = false;
+   indiView = false;
+   showbtns : Boolean = true;
 empForm2 : FormGroup;
 hidTab1 : Boolean = false;
 hidTab2 : Boolean = true;
@@ -49,6 +52,16 @@ hidTab3 : Boolean = true;
       this.route.params.subscribe(
       (params:Params)=>{
             this.empId=+params['id'];
+            let vw = this.route.url['_value'];
+            let str = vw[0].path;
+             let index = str.indexOf('individualview'); 
+            if(index!=="-1")
+            {
+              this.showbtns = false;
+            }
+            else{
+              this.showbtns = true;
+            }
             this.editMode = params['id'] != null;
             this.initForm();
       }
@@ -57,12 +70,13 @@ hidTab3 : Boolean = true;
  private initForm(){
    if(this.editMode)
    {
+     let eDate = new FormControl(new Date('09/15/1990')); 
        this.empForm2 = this._fb.group({
    firstName: new FormControl('testfirst'),
     lastName: new FormControl('testlast'),
     middleName: new FormControl('middleNametest'),
-    birthdate : new FormControl('9/15/1990'),
-     joindate : new FormControl('9/15/2020'),
+    birthdate : eDate,//new FormControl('09/15/1990'),
+     joindate : eDate,//new FormControl('09/15/2020'),
     //  day: new FormControl(),
     //   month: new FormControl(''),
     //    year: new FormControl(),
