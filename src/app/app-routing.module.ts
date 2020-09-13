@@ -19,7 +19,8 @@ const appRoutes : Routes =[
     path:'loginhome',component:LoginhomeComponent,
       children:[
      { path :'' ,component : UserreadingsComponent},
-      { path :'createemployee' ,component : CreateEmployeeComponent}
+      { path :'createemployee' ,component : CreateEmployeeComponent},
+        {path : 'employeeedit/:id',component: CreateEmployeeComponent}
     //  {path : 'new',component: RecipeEditComponent ,canActivate:[AuthGuard]},
     //  {path : ':id',component: RecipeDetailComponent },
       

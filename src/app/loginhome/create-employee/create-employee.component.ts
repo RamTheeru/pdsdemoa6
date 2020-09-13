@@ -1,19 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup,FormBuilder,FormControl,FormArray,Validators} from '@angular/forms';
+import {ActivatedRoute,Params,Router} from '@angular/router';
 @Component({
   selector: 'app-create-employee',
   templateUrl: './create-employee.component.html',
   styleUrls: ['./create-employee.component.css']
 })
 export class CreateEmployeeComponent implements OnInit {
+  empId : number;
+   editMode = false;
 empForm2 : FormGroup;
 hidTab1 : Boolean = false;
 hidTab2 : Boolean = true;
 hidTab3 : Boolean = true;
-dllstatselect : string = '';
   maritals = ['married','unmarried'];
    empTypes = ['permanent','contract'];
-  constructor(private _fb:FormBuilder) { 
+  constructor(private _fb:FormBuilder,private route : ActivatedRoute) { 
     this.initForm();
   }
   showtab(tabNum){
@@ -44,9 +46,64 @@ dllstatselect : string = '';
           this.hidTab1 = false;
       this.hidTab2 = true;
       this.hidTab3 = true;
+      this.route.params.subscribe(
+      (params:Params)=>{
+            this.empId=+params['id'];
+            this.editMode = params['id'] != null;
+            this.initForm();
+      }
+    )
   }
-  initForm(){
+ private initForm(){
+   if(this.editMode)
+   {
+       this.empForm2 = this._fb.group({
+   firstName: new FormControl('testfirst'),
+    lastName: new FormControl('testlast'),
+    middleName: new FormControl('middleNametest'),
+    birthdate : new FormControl('9/15/1990'),
+     joindate : new FormControl('9/15/2020'),
+    //  day: new FormControl(),
+    //   month: new FormControl(''),
+    //    year: new FormControl(),
+        age: new FormControl('28'),
+        bg: new FormControl('BPositive'),
+         gender: new FormControl('male'),
+         married :  new FormControl(),
+              unmarried :  new FormControl('true'),
+                  permanent :  new FormControl('true'),
+              contract :  new FormControl(),
+     // mars:new FormArray([]),
+       ad1: new FormControl('testad1'),
+        ad2: new FormControl('testad2'),
+         place: new FormControl('testplace'),
+          state: new FormControl('teststate'),
+           postal: new FormControl('testpostal'),
+            aad: new FormControl('aadtest'),
+        pan: new FormControl('pantest'),
+        //typs : new FormArray([]),
+            phone : new FormControl('313131'),
+            gName: new FormControl('stestgnamde'),
+    gphone : new FormControl('313131'),
+      //    day2: new FormControl(),
+      // month2: new FormControl(''),
+      //  year2: new FormControl(),
+       // ut: new FormControl(''),
+         desg: new FormControl('Su'),
+          station: new FormControl('teststation'),
+           location: new FormControl('testloaction'),
+            account: new FormControl('3242533'),
+             ifsc: new FormControl('ICIC21421'),
+              bank: new FormControl('ICIC'),
+               bbranch: new FormControl('Hitech'),
+                             veh: new FormControl('testvehicle'),
+               dllr: new FormControl('testdl'),
+               dlstat: new FormControl('')
+        });
 
+
+   }
+   else{
   this.empForm2 = this._fb.group({
    firstName: new FormControl(),
     lastName: new FormControl(),
@@ -87,8 +144,9 @@ dllstatselect : string = '';
                bbranch: new FormControl(),
                              veh: new FormControl(),
                dllr: new FormControl(),
-               dlstat: new FormControl()
+               dlstat: new FormControl('')
         });
+   }
 
   }
   onSubmit(){

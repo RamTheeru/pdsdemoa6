@@ -98,17 +98,17 @@ initForm(){
    const emp : Employee = new Employee();
     const errorTitle : string = 'INVALID INPUT!!!';
     //this.loaded = true;
-    const selectedmaritals = this.empForm.value.mars
-      .map((checked, i) => checked ? this.maritals[i].name : null)
-      .filter(v => v !== null);
-      console.log('checkboxes')
-      console.log(selectedmaritals);
+    // const selectedmaritals = this.empForm.value.mars
+    //   .map((checked, i) => checked ? this.maritals[i].name : null)
+    //   .filter(v => v !== null);
+    //   console.log('checkboxes')
+    //   console.log(selectedmaritals);
 
-      const selectempTypes = this.empForm.value.typs
-      .map((checked, i) => checked ? this.empTypes[i].name : null)
-      .filter(v => v !== null);
-      console.log('checkboxes')
-      console.log(selectempTypes);
+    //   const selectempTypes = this.empForm.value.typs
+    //   .map((checked, i) => checked ? this.empTypes[i].name : null)
+    //   .filter(v => v !== null);
+    //   console.log('checkboxes')
+    //   console.log(selectempTypes);
      emp.FirstName = this.empForm.value['firstName'];
      emp.LastName = this.empForm.value['lastName'];
      emp.MiddleName = this.empForm.value['middleName'];
