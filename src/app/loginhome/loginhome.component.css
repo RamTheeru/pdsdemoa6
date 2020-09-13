@@ -20,8 +20,13 @@
 #v-pills-sub-tab[data-toggle]:not(.collapsed):before {
     content: " ▴";
 }
+.dropdown-menu{
+margin-top: 8px;margin-left: -93px;background-color: bisque;
 
-
+}
+.limenu{
+   margin: 4px 0;
+}
 /* .example-spacer {
   flex: 1 1 auto;
 }

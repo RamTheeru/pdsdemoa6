@@ -21,12 +21,30 @@
 
 <div class="row">
   <div class="col-sm-2">
+
+
 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-  <a  class="nav-link"  id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true" (click)="onloghomeclk()"  routerLink="/loginhome">Home</a>
+  <a  class="nav-link active"  id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true" (click)="onloghomeclk()"  routerLink="/loginhome">Home</a>
   <a  class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false" (click)="oncreateclk()" routerLink="/loginhome/createemployee">Create Employee</a>
+    <a  class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false" (click)="oncreateclk()" >
+<div class="btn-group">
+  <button class="btn">Bulk View</button>
+  <button class="btn dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+  </button>
+ <ul class="dropdown-menu">
+   <li class="limenu">
+     <a  class="nav-link" id="v-pills-sub1-tab" data-toggle="pill" href="#v-pills-sub1" role="tab" aria-controls="v-pills-sub1" aria-selected="false" (click)="oncreateclk()" routerLink="/loginhome/individualview/1"> Individual View</a>
+     </li>
+     <li>
+       <a  class="nav-link" id="v-pills-sub2-tab" data-toggle="pill" href="#v-pills-sub2" role="tab" aria-controls="v-pills-sub2" aria-selected="false" (click)="oncreateclk()" routerLink="/loginhome/createemployee"> Location based List</a>
+       </li>
+  </ul>
 
-
-         <a class="nav-link collapsed py-1" id="v-pills-sub-tab" data-toggle="pill" href="#v-pills-sub" role="tab" aria-controls="v-pills-sub" aria-selected="false" href="#submenu1sub1" data-toggle="collapse" data-target="#submenu1sub1" ><span>Bulk View</span></a>
+</div>
+ 
+</a>
+         <!-- <a class="nav-link collapsed py-1" id="v-pills-sub-tab" data-toggle="pill" href="#v-pills-sub" role="tab" aria-controls="v-pills-sub" aria-selected="false" href="#submenu1sub1" data-toggle="collapse" data-target="#submenu1sub1" ><span>Bulk View</span></a>
                                 <div class="collapse" id="submenu1sub1" aria-expanded="false">
                                     <ul class="flex-column nav pl-4">
                                         <li class="nav-item">
@@ -39,7 +57,7 @@
                                                 <i class="fa fa-fw fa-dashboard"></i> Location based List </a>
                                         </li>
                                         </ul>
-                                     </div>
+                                     </div> -->
 
 
 </div>
