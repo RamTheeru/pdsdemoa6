@@ -13,7 +13,7 @@ export class CreateEmployeeComponent implements OnInit,AfterViewInit  {
    editMode = false;
    indiView = false;
    activeTab:number;
-
+    childClassess =[];
 empForm2 : FormGroup;
 hidTab1 : Boolean = false;
 hidTab2 : Boolean = true;
@@ -26,8 +26,13 @@ hidTab3 : Boolean = true;
   }
     ngAfterViewInit() {
       console.log('ElementRef');
-    console.log(this.someInput);
-      console.log(this.someInput.n.children[0].className);
+       this.childClassess = this.someInput.nativeElement.children;
+       console.log(this.childClasses);
+       
+for (var val of this.childClassess) {
+  console.log(val.id)
+   console.log(val.className)
+}
   }
   onchangetab(){
 
