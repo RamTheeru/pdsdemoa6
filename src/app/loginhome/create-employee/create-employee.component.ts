@@ -31,6 +31,9 @@ hidTab3 : Boolean = true;
     if(this.editMode){
       this.formText = 'Edit Employee Form:';
     }
+    else{
+       this.formText = 'Create Employee Form:';
+    }
   
   }
     ngAfterViewInit() {
