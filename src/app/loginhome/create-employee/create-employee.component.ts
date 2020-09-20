@@ -79,7 +79,7 @@ hidTab3 : Boolean = true;
       else if(text == 'n'){
            this.activeTab == this.activeTab + 1;
       }
-      this.showtab();
+      this.showtab(this.activeTab);
   }
 
   showtab(tabNum){
