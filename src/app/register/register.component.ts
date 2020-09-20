@@ -4,7 +4,7 @@ import {FormGroup,FormBuilder,FormControl,FormArray,Validators} from '@angular/f
 import {PdsApiService} from '../pds-api.service';
 import {SweetService} from '../sweet.service';
 import {UserType} from '../models/usertype';
-import {Employee} from '../models/employee';
+import {RegisterEmployee} from '../models/registeremployee';
 
 
 @Component({
@@ -95,7 +95,7 @@ initForm(){
     return this.empForm.controls.typs as FormArray;
   }
   onSubmit(){
-   const emp : Employee = new Employee();
+   const emp : RegisterEmployee = new RegisterEmployee();
     const errorTitle : string = 'INVALID INPUT!!!';
     //this.loaded = true;
     // const selectedmaritals = this.empForm.value.mars
@@ -120,37 +120,37 @@ initForm(){
      emp.Age = this.empForm.value['age'];
      emp.BloodGroup = this.empForm.value['bg'];
      emp.Gender = this.empForm.value['gender'];
-     if(selectedmaritals.length>0)
-     {
-      emp.Marital = selectedmaritals[0];
-      if(emp.Marital == "Married"){
-        emp.MaritalStatus = true;
-      }
-      else{emp.MaritalStatus= false;}
-     }
-     else{
-       emp.MaritalStatus= false;
-         var txt = '';
-        var f = 'Employee Marital Status';
-         this.showrequiredMessage(f,'',errorTitle);
-       }
+    //  if(selectedmaritals.length>0)
+    //  {
+    //   emp.Marital = selectedmaritals[0];
+    //   if(emp.Marital == "Married"){
+    //     emp.MaritalStatus = true;
+    //   }
+    //   else{emp.MaritalStatus= false;}
+    //  }
+    //  else{
+    //    emp.MaritalStatus= false;
+    //      var txt = '';
+    //     var f = 'Employee Marital Status';
+    //      this.showrequiredMessage(f,'',errorTitle);
+    //    }
 
-     if(selectempTypes.length>0)
-     {
-        emp.Employeetype = selectempTypes[0];
-        if(emp.Employeetype == "Permanent"){
-        emp.IsPermanent = true;
-      }
-      else{emp.IsPermanent= false;}
-     }
-     else
-     {
-       emp.IsPermanent= false;
-        var txt = '';
-        var f = 'Employee Type ';
-        this.showrequiredMessage(f,'',errorTitle);
+    //  if(selectempTypes.length>0)
+    //  {
+    //     emp.Employeetype = selectempTypes[0];
+    //     if(emp.Employeetype == "Permanent"){
+    //     emp.IsPermanent = true;
+    //   }
+    //   else{emp.IsPermanent= false;}
+    //  }
+    //  else
+    //  {
+    //    emp.IsPermanent= false;
+    //     var txt = '';
+    //     var f = 'Employee Type ';
+    //     this.showrequiredMessage(f,'',errorTitle);
        
-       }
+    //    }
 
       emp.Address1 = this.empForm.value['ad1'];
       emp.Adress2 = this.empForm.value['ad2'];
@@ -228,57 +228,57 @@ initForm(){
 
   }
   checkValue(event:any,field){
-    const emp : Employee = new Employee();
+    const emp : RegisterEmployee = new RegisterEmployee();
         const errorTitle : string = 'INVALID INPUT!!!';
         if(field=='mars'){
-              const selectedmaritals = this.empForm.value.mars
-                  .map((checked, i) => checked ? this.maritals[i].name : null)
-                  .filter(v => v !== null);
+              // const selectedmaritals = this.empForm.value.mars
+              //     .map((checked, i) => checked ? this.maritals[i].name : null)
+              //     .filter(v => v !== null);
 
           
 
-                if(selectedmaritals.length>0)
-                {
-                  emp.Marital = selectedmaritals[0];
-                  if(emp.Marital == "Married"){
-                    emp.MaritalStatus = true;
-                  }
-                  else{
-                    emp.MaritalStatus= false;
+              //   if(selectedmaritals.length>0)
+              //   {
+              //     emp.Marital = selectedmaritals[0];
+              //     if(emp.Marital == "Married"){
+              //       emp.MaritalStatus = true;
+              //     }
+              //     else{
+              //       emp.MaritalStatus= false;
 
-                    }
-                }
-                else
-                {
-                  emp.MaritalStatus= false;
-                    var txt = '';
-                    var f = 'Employee Marital Status';
-                    this.showrequiredMessage(f,'',errorTitle);
+              //       }
+              //   }
+              //   else
+              //   {
+              //     emp.MaritalStatus= false;
+              //       var txt = '';
+              //       var f = 'Employee Marital Status';
+              //       this.showrequiredMessage(f,'',errorTitle);
                     
 
-                }
+              //   }
         }
         else{
-                    const selectempTypes = this.empForm.value.typs
-                .map((checked, i) => checked ? this.empTypes[i].name : null)
-                .filter(v => v !== null);
+                //     const selectempTypes = this.empForm.value.typs
+                // .map((checked, i) => checked ? this.empTypes[i].name : null)
+                // .filter(v => v !== null);
 
-                if(selectempTypes.length>0)
-                {
-                  emp.Employeetype = selectempTypes[0];
-                    if(emp.Employeetype == "Permanent"){
-                    emp.IsPermanent = true;
-                  }
-                  else{emp.IsPermanent= false;}
-                }
-                else
-                {
-                  emp.IsPermanent= false;
-                    var txt = '';
-                    var f = 'Employee Type ';
-                    this.showrequiredMessage(f,'',errorTitle);
+                // if(selectempTypes.length>0)
+                // {
+                //   emp.Employeetype = selectempTypes[0];
+                //     if(emp.Employeetype == "Permanent"){
+                //     emp.IsPermanent = true;
+                //   }
+                //   else{emp.IsPermanent= false;}
+                // }
+                // else
+                // {
+                //   emp.IsPermanent= false;
+                //     var txt = '';
+                //     var f = 'Employee Type ';
+                //     this.showrequiredMessage(f,'',errorTitle);
 
-                }
+                // }
 
 
         }

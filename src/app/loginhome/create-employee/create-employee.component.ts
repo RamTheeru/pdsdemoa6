@@ -1,6 +1,7 @@
 import { Component, OnInit,AfterViewInit ,ViewChild,ElementRef } from '@angular/core';
 import {FormGroup,FormBuilder,FormControl,FormArray,Validators} from '@angular/forms';
 import {ActivatedRoute,Params,Router} from '@angular/router';
+import {Employee} from '../../models/employee';
 
 @Component({
   selector: 'app-create-employee',
@@ -241,6 +242,100 @@ hidTab3 : Boolean = true;
 
   }
   onSubmit(){
+
+     const emp : Employee = new Employee();
+    const errorTitle : string = 'INVALID INPUT!!!';
+    //this.loaded = true;
+    // const selectedmaritals = this.empForm.value.mars
+    //   .map((checked, i) => checked ? this.maritals[i].name : null)
+    //   .filter(v => v !== null);
+    //   console.log('checkboxes')
+    //   console.log(selectedmaritals);
+
+    //   const selectempTypes = this.empForm.value.typs
+    //   .map((checked, i) => checked ? this.empTypes[i].name : null)
+    //   .filter(v => v !== null);
+    //   console.log('checkboxes')
+    //   console.log(selectempTypes);
+     emp.FirstName = this.empForm2.value['firstName'];
+     emp.LastName = this.empForm2.value['lastName'];
+     emp.MiddleName = this.empForm2.value['middleName'];
+     emp.Phone = this.empForm2.value['phone'];
+    //  emp.Day = this.empForm2.value['day'];
+    //  emp.Month = this.empForm2.value['month'];
+    //  emp.Year = this.empForm2.value['year'];
+
+     emp.Age = this.empForm2.value['age'];
+     emp.BloodGroup = this.empForm2.value['bg'];
+     emp.Gender = this.empForm2.value['gender'];
+    //  if(selectedmaritals.length>0)
+    //  {
+    //   emp.Marital = selectedmaritals[0];
+    //   if(emp.Marital == "Married"){
+    //     emp.MaritalStatus = true;
+    //   }
+    //   else{emp.MaritalStatus= false;}
+    //  }
+    //  else{
+    //    emp.MaritalStatus= false;
+    //      var txt = '';
+    //     var f = 'Employee Marital Status';
+    //      this.showrequiredMessage(f,'',errorTitle);
+    //    }
+
+    //  if(selectempTypes.length>0)
+    //  {
+    //     emp.Employeetype = selectempTypes[0];
+    //     if(emp.Employeetype == "Permanent"){
+    //     emp.IsPermanent = true;
+    //   }
+    //   else{emp.IsPermanent= false;}
+    //  }
+    //  else
+    //  {
+    //    emp.IsPermanent= false;
+    //     var txt = '';
+    //     var f = 'Employee Type ';
+    //     this.showrequiredMessage(f,'',errorTitle);
+       
+    //    }
+
+      emp.Address1 = this.empForm2.value['ad1'];
+      emp.Adress2 = this.empForm2.value['ad2'];
+      emp.Place = this.empForm2.value['place'];
+      emp.State = this.empForm2.value['state'];
+      emp.PostalCode = this.empForm2.value['postal'];
+      emp.AAdharNumber = this.empForm2.value['aad'];
+      emp.PAN = this.empForm2.value['pan'];
+      emp.Guard_FullName = this.empForm2.value['gName'];
+
+      emp.Guard_Phone = this.empForm2.value['gphone'];
+       emp.DOB = this.empForm2.value['birthdate'];
+      emp.DOJ = this.empForm2.value['joindate'];
+      // emp.Day2 = this.empForm2.value['day2'];
+      // emp.Month2 = this.empForm2.value['month2'];
+      // emp.Year2 = this.empForm2.value['year2'];
+      emp.LoginType = this.empForm2.value['ut'];
+      emp.Designation = this.empForm2.value['desg'];
+      emp.StationCode = this.empForm2.value['station'];
+      emp.LocationName = this.empForm2.value['location'];
+        emp.DLLRStatus = this.empForm2.value['dlstat'];
+         emp.VehicleNumber = this.empForm2.value['veh'];
+         emp.DLLRNumber =   this.empForm2.value['dllr'];
+            emp.BankAccountNumber =   this.empForm2.value['account'];
+            emp.BankName =  this.empForm2.value['bank'];
+             emp.IFSCCode =  this.empForm2.value['ifsc'];
+              emp.IFSCCode =  this.empForm2.value['bbranch'];
+      console.log('on submit.....');
+         
+         console.log(emp);
+
+        //  setTimeout(function(){
+        //     this.loaded=false;
+
+        //  },2000);
+         
+
 
   }
 
