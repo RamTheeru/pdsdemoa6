@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,AfterViewInit,ViewChild,ElementRef } from '@angular/core';
 import {FormGroup,FormBuilder,FormControl,FormArray,Validators} from '@angular/forms';
 import {ActivatedRoute,Params,Router} from '@angular/router';
 
@@ -8,6 +8,14 @@ import {ActivatedRoute,Params,Router} from '@angular/router';
   styleUrls: ['./individualview.component.css']
 })
 export class IndividualviewComponent implements OnInit {
+    @ViewChild('someInput') someInput: ElementRef;
+  tab1Id = 'pills-home';
+   tab2Id = 'pills-profile';
+    tab3Id = 'pills-contact';
+    hidPrev : Boolean = true;
+    hidNext : Boolean = false;
+       activeTab:number;
+    childClassess =[];
  empId : number;
  
    showbtns : Boolean = false;
@@ -19,6 +27,65 @@ hidTab3 : Boolean = true;
    empTypes = ['permanent','contract'];
   constructor(private _fb:FormBuilder,private route : ActivatedRoute) { 
     this.initForm();
+  }
+  ngAfterViewInit() {
+      console.log('ElementRef');
+       this.childClassess = this.someInput.nativeElement.children;
+    
+       
+      for (var val of this.childClassess) {
+  //console.log(val.id)
+   //console.log(val.className)
+    var index = val.className.indexOf('active'); 
+        if(this.tab1Id == val.id && index !== -1)
+        {
+          this.activeTab = 1;
+            this.showtab(1);
+            this.hidPrev  = true;
+           this.hidNext = false;
+
+        }
+        else if(this.tab2Id == val.id && index !== -1){
+          this.activeTab = 2;
+             this.showtab(2);
+            this.hidPrev  = false;
+           this.hidNext = false;
+        }
+        else if(this.tab3Id == val.id && index !== -1){
+               this.activeTab = 3;
+               this.showtab(3);
+                this.hidPrev  = false;
+            this.hidNext = true;
+        }
+      }
+  }
+  onchangetab(text:string){
+        if(text == 'p'){
+        this.activeTab = this.activeTab - 1;
+      }
+      else {
+           this.activeTab = this.activeTab + 1;
+      }
+      if(this.activeTab == 3)
+      {
+            this.hidPrev  = false;
+           this.hidNext = true;
+        
+      }
+      else if(this.activeTab == 1)
+      {
+            this.hidPrev  = true;
+           this.hidNext = false;
+              
+      }
+      else if(this.activeTab == 2){
+            this.hidPrev  = false;
+           this.hidNext = false;
+
+      }
+
+        console.log(this.activeTab);
+      this.showtab(this.activeTab);
   }
   showtab(tabNum){
     if(tabNum == 1)
