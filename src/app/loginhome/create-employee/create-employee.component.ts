@@ -15,7 +15,7 @@ export class CreateEmployeeComponent implements OnInit,AfterViewInit  {
     hidPrev : Boolean = true;
     hidNext : Boolean = false;
   empId : number;
-  
+  formText : string = 'Create Employee Form:';
    editMode = false;
    indiView = false;
    activeTab:number;
@@ -28,6 +28,9 @@ hidTab3 : Boolean = true;
    empTypes = ['permanent','contract'];
   constructor(private _fb:FormBuilder,private route : ActivatedRoute) { 
     this.initForm();
+    if(this.editMode){
+      this.formText = 'Edit Employee Form:';
+    }
   
   }
     ngAfterViewInit() {
