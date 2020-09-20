@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,AfterViewInit ,ViewChild,ElementRef } from '@angular/core';
 import {FormGroup,FormBuilder,FormControl,FormArray,Validators} from '@angular/forms';
 import {ActivatedRoute,Params,Router} from '@angular/router';
 
@@ -7,10 +7,12 @@ import {ActivatedRoute,Params,Router} from '@angular/router';
   templateUrl: './create-employee.component.html',
   styleUrls: ['./create-employee.component.css']
 })
-export class CreateEmployeeComponent implements OnInit {
+export class CreateEmployeeComponent implements OnInit,AfterViewInit  {
+  @ViewChild('someInput') someInput: ElementRef;
   empId : number;
    editMode = false;
    indiView = false;
+   activeTab:number;
 
 empForm2 : FormGroup;
 hidTab1 : Boolean = false;
@@ -20,7 +22,17 @@ hidTab3 : Boolean = true;
    empTypes = ['permanent','contract'];
   constructor(private _fb:FormBuilder,private route : ActivatedRoute) { 
     this.initForm();
+  
   }
+    ngAfterViewInit() {
+      console.log('ElementRef');
+    console.log(this.someInput);
+      console.log(this.someInput.n.children[0].className);
+  }
+  onchangetab(){
+
+  }
+
   showtab(tabNum){
     if(tabNum == 1)
     {
