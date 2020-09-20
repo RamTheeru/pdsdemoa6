@@ -39,7 +39,11 @@ AboutUsDescription : ` started with Mumbai as its headquarters and
               our ability of setting up services at
               short notice at any place in India, we are
               actively pursuing the develop an array of
-              logistics services to be offered across India`
+              logistics services to be offered across India`,
+      
+      Block1Text:'Registered users',
+         Block2Text:'Approved users',
+            Block3Text:'Inactive Users'
             
 
  // APIEndpoint: 'https://dev.endpoint.com'
