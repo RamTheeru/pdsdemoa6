@@ -74,10 +74,10 @@ hidTab3 : Boolean = true;
 
       }
       if(text == 'p'){
-          this.activeTab == this.activeTab - 1;
+          this.activeTab = this.activeTab - 1;
       }
       else if(text == 'n'){
-           this.activeTab == this.activeTab + 1;
+           this.activeTab = this.activeTab + 1;
       }
       this.showtab(this.activeTab);
   }
