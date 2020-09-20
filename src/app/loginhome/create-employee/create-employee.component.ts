@@ -62,6 +62,12 @@ hidTab3 : Boolean = true;
       }
   }
   onchangetab(text:string){
+        if(text == 'p'){
+        this.activeTab = this.activeTab - 1;
+      }
+      else {
+           this.activeTab = this.activeTab + 1;
+      }
       if(this.activeTab == 3)
       {
             this.hidPrev  = false;
@@ -79,12 +85,8 @@ hidTab3 : Boolean = true;
            this.hidNext = false;
 
       }
-      if(text == 'p'){
-          this.activeTab = this.activeTab - 1;
-      }
-      else if(text == 'n'){
-           this.activeTab = this.activeTab + 1;
-      }
+
+        console.log(this.activeTab);
       this.showtab(this.activeTab);
   }
 
