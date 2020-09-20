@@ -9,6 +9,9 @@ import {ActivatedRoute,Params,Router} from '@angular/router';
 })
 export class CreateEmployeeComponent implements OnInit,AfterViewInit  {
   @ViewChild('someInput') someInput: ElementRef;
+  tab1Id = 'pills-home';
+   tab2Id = 'pills-profile';
+    tab3Id = 'pills-contact';
   empId : number;
    editMode = false;
    indiView = false;
@@ -27,12 +30,24 @@ hidTab3 : Boolean = true;
     ngAfterViewInit() {
       console.log('ElementRef');
        this.childClassess = this.someInput.nativeElement.children;
-       console.log(this.childClasses);
+    
        
-for (var val of this.childClassess) {
-  console.log(val.id)
-   console.log(val.className)
-}
+      for (var val of this.childClassess) {
+  //console.log(val.id)
+   //console.log(val.className)
+    var index = val.className.indexOf('active'); 
+        if(this.tab1Id == val.id && index !== -1)
+        {
+            this.showtab(1);
+
+        }
+        else if(this.tab2Id == val.id && index !== -1){
+             this.showtab(2);
+        }
+        else if(this.tab3Id == val.id && index !== -1){
+               this.showtab(3);
+        }
+      }
   }
   onchangetab(){
 
