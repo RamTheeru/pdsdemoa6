@@ -1,5 +1,5 @@
 // environment.ts environment variables
-export const environment = {
+export const Environment = {
   Production: false,
   MainLogo : 'https://github.com/RamTheeru/pds/blob/master/src/app/images/pdslogo.jpeg?raw=true',
   FooterText : 'People expect good service but few are willing to give it.',
@@ -39,7 +39,7 @@ AboutUsDescription : ` started with Mumbai as its headquarters and
               our ability of setting up services at
               short notice at any place in India, we are
               actively pursuing the develop an array of
-              logistics services to be offered across India`,
+              logistics services to be offered across India`
             
 
  // APIEndpoint: 'https://dev.endpoint.com'
