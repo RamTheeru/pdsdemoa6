@@ -6,6 +6,7 @@ import {Router,Event as RouterEvent,
   NavigationError
 
 } from '@angular/router';
+import {Environment} from './environment';
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
@@ -13,6 +14,7 @@ import {Router,Event as RouterEvent,
 })
 export class AppComponent  {
    url='';
+   footerText : string = '';
    isLogin: Boolean = false;
   tabView : Boolean = true;  
   name = 'Angular ' + VERSION.major;
@@ -29,6 +31,7 @@ export class AppComponent  {
      })
   }
  ngOnInit() {
+   this.footerText = Environment.FooterText;
     // this.api.getClients()
     //     .subscribe(data =>{
     //       console.log(data); 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Environment} from '../environment';
 //import {ViewService} from '../view.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class PdsMainComponent implements OnInit {
 
   ngOnInit() {
   
-     this.img = 'https://github.com/RamTheeru/pds/blob/master/src/app/images/pdslogo.jpeg?raw=true';
+     this.img = Environment.MainLogo;
    
   }
   // onRegister(){
