@@ -12,7 +12,10 @@ export class CreateEmployeeComponent implements OnInit,AfterViewInit  {
   tab1Id = 'pills-home';
    tab2Id = 'pills-profile';
     tab3Id = 'pills-contact';
+    hidPrev : Boolean = true;
+    hidNext : Boolean = false;
   empId : number;
+  
    editMode = false;
    indiView = false;
    activeTab:number;
@@ -38,19 +41,45 @@ hidTab3 : Boolean = true;
     var index = val.className.indexOf('active'); 
         if(this.tab1Id == val.id && index !== -1)
         {
+          this.activeTab = 1;
             this.showtab(1);
 
         }
         else if(this.tab2Id == val.id && index !== -1){
+          this.activeTab = 2;
              this.showtab(2);
         }
         else if(this.tab3Id == val.id && index !== -1){
+          this.activeTab = 3;
                this.showtab(3);
         }
       }
   }
-  onchangetab(){
+  onchangetab(text:string){
+      if(this.activeTab == 3)
+      {
+            this.hidPrev  = false;
+           this.hidNext = true;
+        
+      }
+      else if(this.activeTab == 1)
+      {
+            this.hidPrev  = true;
+           this.hidNext = false;
+              
+      }
+      else if(this.activeTab == 2){
+            this.hidPrev  = false;
+           this.hidNext = false;
 
+      }
+      if(text == 'p'){
+          this.activeTab == this.activeTab - 1;
+      }
+      else if(text == 'n'){
+           this.activeTab == this.activeTab + 1;
+      }
+      this.showtab();
   }
 
   showtab(tabNum){
