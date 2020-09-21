@@ -13,8 +13,8 @@ export class LoginhomeComponent implements OnInit {
   isExpanded = true;
   showSubmenu: boolean = false;
   isShowing = false;
-  showSubSubMenu: boolean = false;
-
+  act1SubMenu: boolean = false;
+   act2SubMenu: boolean = false;
   mouseenter() {
     if (!this.isExpanded) {
       this.isShowing = true;
@@ -36,6 +36,18 @@ export class LoginhomeComponent implements OnInit {
   }
   oncreateclk(tab=''){
     this.shownotify=false;
+    if(tab=='si'){
+          this.act1SubMenu = true;
+          this.act2SubMenu = false;
+    }
+    else if(tab=='sl'){
+       this.act1SubMenu = false;
+          this.act2SubMenu = true;
+    }
+    else{
+        this.act1SubMenu = false;
+          this.act2SubMenu = false;
+    }
 
   }
   onloghomeclk(){
