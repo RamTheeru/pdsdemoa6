@@ -27,7 +27,7 @@
   <a  class="nav-link active"  id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true" (click)="onloghomeclk()"  routerLink="/loginhome">Home</a>
   <a  class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false" (click)="oncreateclk()" routerLink="/loginhome/createemployee">Create Employee</a>
     <a  class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false" (click)="oncreateclk()" >
-<div class="btn-group">
+<!-- <div class="btn-group">
   <button class="btn">Bulk View</button>
   <button class="btn dropdown-toggle" data-toggle="dropdown">
     <span class="caret"></span>
@@ -41,7 +41,24 @@
        </li>
   </ul>
 
-</div>
+</div> -->
+  <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Bulk View</span> <span class="caret"></span></a>
+            <ul class="dropdown-menu" id="drop">
+                <li> <a  class="nav-link" id="v-pills-sub1-tab" data-toggle="pill" href="#v-pills-sub1" role="tab" aria-controls="v-pills-sub1" aria-selected="false" (click)="oncreateclk()" routerLink="/loginhome/individualview/1"> Individual View</a></li>
+                <li> <a  class="nav-link" id="v-pills-sub2-tab" data-toggle="pill" href="#v-pills-sub2" role="tab" aria-controls="v-pills-sub2" aria-selected="false" (click)="oncreateclk()" routerLink="/loginhome/createemployee"> Location based List</a></li>
+                <!-- <li class="dropdown-submenu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="nav-label">Service C</span><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Service C1</a></li>
+                        <li><a href="#">Service C2</a></li>
+                        <li><a href="#">Service C3</a></li>
+                        <li><a href="#">Service C4</a></li>
+                        <li><a href="#">Service C5</a></li>
+                    </ul>
+                </li> -->
+            </ul>
+        </li>
  
 </a>
          <!-- <a class="nav-link collapsed py-1" id="v-pills-sub-tab" data-toggle="pill" href="#v-pills-sub" role="tab" aria-controls="v-pills-sub" aria-selected="false" href="#submenu1sub1" data-toggle="collapse" data-target="#submenu1sub1" ><span>Bulk View</span></a>
