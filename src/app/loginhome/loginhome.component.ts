@@ -52,6 +52,8 @@ export class LoginhomeComponent implements OnInit {
   }
   onloghomeclk(){
     this.shownotify=true;
+       this.act1SubMenu = false;
+          this.act2SubMenu = false;
   }
 
 }
