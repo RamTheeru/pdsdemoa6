@@ -1,6 +1,7 @@
 import { Component,  OnInit } from '@angular/core';
-import {RegisterEmployee} from '../models/registeremployee';
+import {RegisterEmployee} from '../../models/registeremployee';
 import {Employee} from '../../models/employee';
+import {APIResult} from '../../models/apiresult';
 import {PdsApiService} from '../../pds-api.service';
 import {SweetService} from '../../sweet.service';
 @Component({
@@ -11,6 +12,7 @@ import {SweetService} from '../../sweet.service';
 export class EmployeelistComponent implements OnInit {
 employees : Employee[];
 stationCode:string='';
+apiResult : APIResult;
 isHide = true;
   constructor(private api:PdsApiService,private swServ:SweetService) { }
 
@@ -18,15 +20,16 @@ isHide = true;
        this.api.getEmployees()
         .subscribe(data =>{
           console.log(data); 
-              let status = data.Status;
-              let message = data.Message;
+          this.apiResult = data;
+             
               
-              if(status)
+              if(this.apiResult.Status)
               {
-                  this.employees = data.employees;
+                  this.employees = this.apiResult.employees;
+                   console.log(this.employees); 
               }
               else{
-                   this.swServ.showErrorMessage('Failure',message);
+                   this.swServ.showErrorMessage('Failure',this.apiResult.Message);
               }
            }
            );
