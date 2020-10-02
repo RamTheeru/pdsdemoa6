@@ -21,7 +21,9 @@ isHide = true;
         .subscribe(data =>{
           console.log(data); 
           this.apiResult = data;
-             
+             console.log(''+this.apiResult.Status); 
+              this.apiResult.Status = data.status;
+              this.apiResult.Message = data.message;
               
               if(this.apiResult.Status)
               {
