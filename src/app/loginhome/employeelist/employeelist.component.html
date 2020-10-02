@@ -1,7 +1,7 @@
 <div class="container">
          <form class="form-inline" >
-    <input class="form-control mr-sm-2" type="text" [(ngModel)]="stationCode" placeholder="StationCode">
-    <button class="btn btn-success" (click)="getemployeesbyStation()"  type="submit">Search</button>
+    <input class="form-control mr-sm-2" type="text"  placeholder="StationCode">
+    <button class="btn btn-success" (click)="getemployeesbyStation($event)"  type="submit">Search</button>
   </form>
   <table class="table table-striped">
     <thead>

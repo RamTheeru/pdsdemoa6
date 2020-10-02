@@ -33,7 +33,7 @@ isHide = true;
    
     //this.swServ.showWarning('Delete it')
   }
-  getemployeesbyStation(){
+  getemployeesbyStation(event){
           this.api.getEmployees(this.stationCode)
         .subscribe(data =>{
           console.log(data); 

@@ -25,7 +25,7 @@ import {IndividualviewComponent} from './loginhome/individualview/individualview
 import {EmployeelistComponent} from './loginhome/employeelist/employeelist.component';
 import { ViewService } from './view.service';
 import { PdsApiService } from './pds-api.service';
-//import { SweetService } from './sweet.service';
+import { SweetService } from './sweet.service';
 
 
 
@@ -34,6 +34,6 @@ import { PdsApiService } from './pds-api.service';
   imports:      [ BrowserModule, FormsModule,BrowserAnimationsModule,NoopAnimationsModule,ReactiveFormsModule,HttpClientModule,appRoutingModule,MaterialModule ],
   declarations: [ AppComponent, PdsMainComponent, HomeComponent, LoadingComponent, AboutusComponent, LogintabComponent, ScrollingComponent, RegisterComponent, AbtusComponent,LoginhomeComponent,UserreadingsComponent,CreateEmployeeComponent,IndividualviewComponent,EmployeelistComponent ],
   bootstrap:    [ AppComponent ],
-  providers: [ViewService, PdsApiService]
+  providers: [ViewService, PdsApiService,SweetService]
 })
 export class AppModule { }
