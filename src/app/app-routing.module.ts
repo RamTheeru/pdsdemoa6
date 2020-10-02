@@ -9,6 +9,7 @@ import {LoginhomeComponent} from './loginhome/loginhome.component';
 import {UserreadingsComponent} from './loginhome/userreadings/userreadings.component';
 import {CreateEmployeeComponent} from './loginhome/create-employee/create-employee.component';
 import {IndividualviewComponent} from './loginhome/individualview/individualview.component';
+import {EmployeelistComponent} from './loginhome/employeelist/employeelist.component';
 const appRoutes : Routes =[
   {path:'',redirectTo:'/home',pathMatch:'full'},
   {path:'home',component:HomeComponent },
@@ -23,6 +24,7 @@ const appRoutes : Routes =[
       { path :'createemployee' ,component : CreateEmployeeComponent},
         {path : 'employeeedit/:id',component: CreateEmployeeComponent},
          {path : 'individualview/:id',component: IndividualviewComponent},
+           {path : 'employeelist',component: EmployeelistComponent}
     //  {path : 'new',component: RecipeEditComponent ,canActivate:[AuthGuard]},
     //  {path : ':id',component: RecipeDetailComponent },
       

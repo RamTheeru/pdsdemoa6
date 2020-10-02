@@ -1,4 +1,5 @@
 export class RegisterEmployee{
+  RegisterId : number;
 EmployeeId : number;
 EmpId : string;
 FirstName : string;

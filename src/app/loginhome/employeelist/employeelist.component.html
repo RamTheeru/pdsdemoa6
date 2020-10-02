@@ -1,0 +1,29 @@
+<div class="container">
+         <form class="form-inline" >
+    <input class="form-control mr-sm-2" type="text" [(ngModel)]="stationCode" placeholder="StationCode">
+    <button class="btn btn-success" (click)="getemployeesbyStation()"  type="submit">Search</button>
+  </form>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>LoginType</th>
+        <th>Designation</th>
+        <th>StateCode</th>
+        <th>LocationName</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of employees;">
+        <td [hidden]="isHide">emp.EmployeeId</td>
+        <td>emp.FirstName</td>
+        <td>emp.Phone</td>
+         <td>emp.LoginType</td>
+          <td>emp.Designation</td>
+           <td>emp.StationCode</td>
+            <td>emp.LocationName</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
