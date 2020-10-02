@@ -1,4 +1,4 @@
-import { Component, NgModule,  OnInit } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
 import {Employee} from '../../models/employee';
 import {PdsApiService} from '../../pds-api.service';
 import {SweetService} from '../../sweet.service';
