@@ -1,4 +1,5 @@
 import { Component,  OnInit } from '@angular/core';
+import {RegisterEmployee} from '../models/registeremployee';
 import {Employee} from '../../models/employee';
 import {PdsApiService} from '../../pds-api.service';
 import {SweetService} from '../../sweet.service';

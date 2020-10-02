@@ -17,7 +17,7 @@ export class PdsApiService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
         //'X-Requested-With': 'XMLHttpRequest',
-      'Access-Control-Allow-Origin': '*'
+      //'Access-Control-Allow-Origin': '*'
        //'access-Control-Allow-Methods:':'GET,POST,OPTIONS,DELETE,PUT'
     })
   }
