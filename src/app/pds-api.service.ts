@@ -10,8 +10,9 @@ export class PdsApiService {
    //baseurl = 'http://35.153.184.145/api/Employee/';
   baseurl='https://localhost:44302/api/Employee/';
 
-   userTypesUrl : string = 'UserTypes';
+   constantsUrl : string = 'UserTypes';
    employeesUrl : string = 'Employees';
+   approveUrl : string = 'ApproveUser';
      constructor(private http: HttpClient) { }
       httpOptions = {
     headers: new HttpHeaders({
@@ -26,10 +27,19 @@ export class PdsApiService {
 //   return this.http.get(this.baseurl + this.userTypesUrl,this.httpOptions)
 
 // }
+getConstants():R.Observable<any> {
+  console.log(this.baseurl + this.constantsUrl);
+  return this.http.get(this.baseurl + this.constantsUrl,this.httpOptions)
+
+}
 getEmployees(stationCode:string=''):R.Observable<any> {
   console.log(this.baseurl + this.employeesUrl);
   return this.http.get(this.baseurl + this.employeesUrl,this.httpOptions)
 
+}
+approveUser(id:any):R.Observable<any>{
+   console.log(this.baseurl + this.approveUrl);
+  return this.http.get(this.baseurl + this.approveUrl,this.httpOptions)
 }
 
 }

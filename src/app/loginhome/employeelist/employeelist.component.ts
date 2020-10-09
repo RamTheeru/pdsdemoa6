@@ -55,5 +55,11 @@ isHide = true;
            }
            );
   }
+  approveUser(emp:Employee){
+    var id = emp.EmployeeId;
+    var res =  this.swServ.showWarning('Do you want to approve this user?');
+    console.log(res);
+
+  }
 
 }

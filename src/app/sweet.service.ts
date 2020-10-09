@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import swal   from 'sweetalert2';
-
+import * as R from 'rxjs';
+import {PdsApiService} from './pds-api.service';
 
 @Injectable()
 export class SweetService {
 
-  constructor() { }
+  constructor(private api:PdsApiService) { }
 
   showSuccessMessage(title,text=''){
     swal(title,text,'success');
@@ -15,8 +16,8 @@ export class SweetService {
 
   }
 
-  showWarning(text){
-    
+  showWarning(text,obj?:any):R.Observable<any>{
+    let r :R.Observable<any>;
    swal({
       title: "Are you sure?",
       text: text,
@@ -28,13 +29,13 @@ export class SweetService {
 
         if(willDelete.value){
              swal("Success");
+          r = this.api.approveUser(obj);
         }else{
           swal("Fail");
         }
-
-      console.log(willDelete)
+      
     });
-
+  return r;
   }
 
 }
