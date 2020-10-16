@@ -33,11 +33,8 @@ const appRoutes: Routes = [
       //    {path : ':id/edit',component: RecipeEditComponent,canActivate:[AuthGuard],canDeactivate:[CanDeactivateGuard] }
     ]
   },
-  {
-    path: "**",
-    pathMatch: "full",
-    component: NopageComponent
-  }
+  { path: "404", component: NopageComponent },
+  { path: "**", redirectTo: "/404" }
 ];
 
 @NgModule({
