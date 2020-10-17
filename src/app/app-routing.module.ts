@@ -11,6 +11,8 @@ import { UserreadingsComponent } from "./loginhome/userreadings/userreadings.com
 import { CreateEmployeeComponent } from "./loginhome/create-employee/create-employee.component";
 import { IndividualviewComponent } from "./loginhome/individualview/individualview.component";
 import { EmployeelistComponent } from "./loginhome/employeelist/employeelist.component";
+import { LogindefaulthomeComponent } from "./loginhome/logindefaulthome/logindefaulthome.component";
+import { EntercreditdetailsComponent } from "./loginhome/entercreditdetails/entercreditdetails.component";
 const appRoutes: Routes = [
   { path: "", redirectTo: "/home", pathMatch: "full" },
   { path: "home", component: HomeComponent },
@@ -22,11 +24,13 @@ const appRoutes: Routes = [
     path: "loginhome",
     component: LoginhomeComponent,
     children: [
-      { path: "", component: UserreadingsComponent },
+      { path: "", component: LogindefaulthomeComponent },
+      { path: "userreadings", component: UserreadingsComponent },
       { path: "createemployee", component: CreateEmployeeComponent },
       { path: "employeeedit/:id", component: CreateEmployeeComponent },
       { path: "individualview/:id", component: IndividualviewComponent },
-      { path: "employeelist", component: EmployeelistComponent }
+      { path: "employeelist", component: EmployeelistComponent },
+      { path: "entercreditdetails", component: EntercreditdetailsComponent }
       //  {path : 'new',component: RecipeEditComponent ,canActivate:[AuthGuard]},
       //  {path : ':id',component: RecipeDetailComponent },
 
