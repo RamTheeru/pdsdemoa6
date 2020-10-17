@@ -1,0 +1,33 @@
+<div class="container-fluid">
+
+	<form class="form-horizontal" [formGroup]="creditForm" (ngSubmit)="onSubmit()">
+		<div class="row">
+			<mat-form-field>
+				<input type="text" formControlName="lmcredit" class="form-control" matInput placeholder="Last Month's Credit*">
+				<mat-error>This field is mandatory</mat-error>
+			</mat-form-field>
+		</div>
+		<div class="row">
+			<mat-form-field>
+				<input type="text" name="lmtdebit" formControlName="lmtdebit" matInput placeholder="Last Month's Total Debit" class="form-control">
+				<mat-error>This field is mandatory</mat-error>
+			</mat-form-field>
+		</div>
+		<div class="row">
+			<mat-form-field>
+				<input type="text" name="balance" formControlName="balance" matInput placeholder="Balance Cash in-hand" class="form-control">
+				<mat-error>This field is mandatory</mat-error>
+			</mat-form-field>
+		</div>
+    		<div class="row">
+			<mat-form-field>
+				<input type="text" name="balance" formControlName="tmcredit" matInput placeholder="This Month's Credit" class="form-control">
+				<mat-error>This field is mandatory</mat-error>
+			</mat-form-field>
+		</div>
+	</form>
+	<div class="row" id="btnset">
+		<button  type="button" mat-raised-button color="warn" style="margin-right:10px;" >Cancel</button>
+		<button  type="button" mat-raised-button color="primary" >Submit</button>
+	</div>
+</div>

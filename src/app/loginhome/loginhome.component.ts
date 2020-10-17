@@ -33,7 +33,7 @@ export class LoginhomeComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.user = 'fle';
+    this.user = "fle";
     if (this.user === "admin") {
       this.userType = 1;
     } else if (this.user === "fle") {
