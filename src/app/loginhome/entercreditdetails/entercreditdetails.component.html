@@ -1,33 +1,51 @@
 <div class="container-fluid">
-
+	<h1 class="text-primary"><u>{{formText}}</u></h1>
 	<form class="form-horizontal" [formGroup]="creditForm" (ngSubmit)="onSubmit()">
-		<div class="row">
-			<mat-form-field>
-				<input type="text" formControlName="lmcredit" class="form-control" matInput placeholder="Last Month's Credit*">
-				<mat-error>This field is mandatory</mat-error>
-			</mat-form-field>
-		</div>
-		<div class="row">
-			<mat-form-field>
-				<input type="text" name="lmtdebit" formControlName="lmtdebit" matInput placeholder="Last Month's Total Debit" class="form-control">
-				<mat-error>This field is mandatory</mat-error>
-			</mat-form-field>
-		</div>
-		<div class="row">
-			<mat-form-field>
-				<input type="text" name="balance" formControlName="balance" matInput placeholder="Balance Cash in-hand" class="form-control">
-				<mat-error>This field is mandatory</mat-error>
-			</mat-form-field>
-		</div>
-    		<div class="row">
-			<mat-form-field>
-				<input type="text" name="balance" formControlName="tmcredit" matInput placeholder="This Month's Credit" class="form-control">
-				<mat-error>This field is mandatory</mat-error>
-			</mat-form-field>
+		<div class="frm">
+			<div class="row">
+				<div class="col"><label>Last Month's Credit:</label></div>
+				<div class="col">
+					<mat-form-field>
+
+						<input type="text" formControlName="lmcredit" class="form-control" matInput placeholder="Last Month's Credit*">
+						<mat-error>This field is mandatory</mat-error>
+					</mat-form-field>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col"><label>Last Month's Total Debit:</label></div>
+				<div class="col">
+					<mat-form-field>
+						<input type="text" name="lmtdebit" formControlName="lmtdebit" matInput placeholder="Last Month's Total Debit" class="form-control">
+						<mat-error>This field is mandatory</mat-error>
+					</mat-form-field>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col"><label>Balance Cash in-hand:</label></div>
+				<div class="col">
+					<mat-form-field>
+						<label>Balance Cash in-hand:</label>
+						<input type="text" name="balance" formControlName="balance" matInput placeholder="Balance Cash in-hand" class="form-control">
+						<mat-error>This field is mandatory</mat-error>
+					</mat-form-field>
+				</div>
+			</div>
+			<div class="row">
+        	<div class="col"><label>This Month's Credit:</label></div>
+          <div class="col">
+				<mat-form-field>
+					<label>This Month's Credit:</label>
+					<input type="text" name="balance" formControlName="tmcredit" matInput placeholder="This Month's Credit" class="form-control">
+					<mat-error>This field is mandatory</mat-error>
+				</mat-form-field>
+        
+			</div>
+			<div class="row" id="btnset">
+				<button  type="button" mat-raised-button color="warn" style="margin-right:10px;" >Cancel</button>
+				<button  type="button" mat-raised-button color="primary" >Submit</button>
+			</div>
 		</div>
 	</form>
-	<div class="row" id="btnset">
-		<button  type="button" mat-raised-button color="warn" style="margin-right:10px;" >Cancel</button>
-		<button  type="button" mat-raised-button color="primary" >Submit</button>
-	</div>
+
 </div>
