@@ -26,6 +26,7 @@ import { IndividualviewComponent } from "./loginhome/individualview/individualvi
 import { EmployeelistComponent } from "./loginhome/employeelist/employeelist.component";
 import { LogindefaulthomeComponent } from "./loginhome/logindefaulthome/logindefaulthome.component";
 import { EntercreditdetailsComponent } from "./loginhome/entercreditdetails/entercreditdetails.component";
+import { VoucherComponent } from "./loginhome/voucher/voucher.component";
 import { ViewService } from "./view.service";
 import { PdsApiService } from "./pds-api.service";
 import { SweetService } from "./sweet.service";
@@ -58,6 +59,7 @@ import { SweetService } from "./sweet.service";
     EmployeelistComponent,
     LogindefaulthomeComponent,
     EntercreditdetailsComponent,
+    VoucherComponent,
     NopageComponent
   ],
   bootstrap: [AppComponent],

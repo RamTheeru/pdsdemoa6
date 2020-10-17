@@ -13,6 +13,7 @@ import { IndividualviewComponent } from "./loginhome/individualview/individualvi
 import { EmployeelistComponent } from "./loginhome/employeelist/employeelist.component";
 import { LogindefaulthomeComponent } from "./loginhome/logindefaulthome/logindefaulthome.component";
 import { EntercreditdetailsComponent } from "./loginhome/entercreditdetails/entercreditdetails.component";
+import { VoucherComponent } from "./loginhome/voucher/voucher.component";
 const appRoutes: Routes = [
   { path: "", redirectTo: "/home", pathMatch: "full" },
   { path: "home", component: HomeComponent },
@@ -30,7 +31,8 @@ const appRoutes: Routes = [
       { path: "employeeedit/:id", component: CreateEmployeeComponent },
       { path: "individualview/:id", component: IndividualviewComponent },
       { path: "employeelist", component: EmployeelistComponent },
-      { path: "entercreditdetails", component: EntercreditdetailsComponent }
+      { path: "entercreditdetails", component: EntercreditdetailsComponent },
+      { path: "entervoucher", component: VoucherComponent }
       //  {path : 'new',component: RecipeEditComponent ,canActivate:[AuthGuard]},
       //  {path : ':id',component: RecipeDetailComponent },
 
