@@ -39,6 +39,7 @@ export class LoginhomeComponent implements OnInit {
       this.userType = 1;
     } else if (this.user === "fle") {
       this.userType = 2;
+      this.shownotify = false;
       this.loginInfo = "Finance LE Login";
     } else if (this.user === "fme") {
       this.userType = 3;
@@ -61,9 +62,15 @@ export class LoginhomeComponent implements OnInit {
       this.act2SubMenu = false;
     }
   }
-  onloghomeclk() {
-    this.shownotify = true;
-    this.act1SubMenu = false;
-    this.act2SubMenu = false;
+  onloghomeclk(tab = "") {
+    if (tab == "fh") {
+      this.shownotify = false;
+      this.act1SubMenu = false;
+      this.act2SubMenu = false;
+    } else {
+      this.shownotify = true;
+      this.act1SubMenu = false;
+      this.act2SubMenu = false;
+    }
   }
 }
