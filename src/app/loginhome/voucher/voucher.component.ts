@@ -47,7 +47,7 @@ export class VoucherComponent implements OnInit {
     if (this.editMode) {
       let eDate = new FormControl(new Date("09/15/2020"));
       this.voucherForm = this._fb.group({
-        location: new FormControl("Guntakal"),
+        location: new FormControl("gtk"),
         voucherdate: eDate,
         vno: new FormControl("3352365263"),
         paidto: new FormControl("Gtk"),
