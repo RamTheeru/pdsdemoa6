@@ -32,7 +32,8 @@ const appRoutes: Routes = [
       { path: "individualview/:id", component: IndividualviewComponent },
       { path: "employeelist", component: EmployeelistComponent },
       { path: "entercreditdetails", component: EntercreditdetailsComponent },
-      { path: "entervoucher", component: VoucherComponent }
+      { path: "entervoucher", component: VoucherComponent },
+      { path: "editvoucher/:id", component: VoucherComponent }
       //  {path : 'new',component: RecipeEditComponent ,canActivate:[AuthGuard]},
       //  {path : ':id',component: RecipeDetailComponent },
 

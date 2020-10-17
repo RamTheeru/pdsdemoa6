@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Params, Router } from "@angular/router";
 import {
   FormGroup,
   FormBuilder,
@@ -13,11 +14,28 @@ import {
 })
 export class VoucherComponent implements OnInit {
   voucherForm: FormGroup;
+  voucherId: number = 0;
   editMode: Boolean = false;
   formText: string = "Enter Voucher Details:";
-  constructor(private _fb: FormBuilder) {}
+  constructor(private _fb: FormBuilder, private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
+      this.voucherId = +params["id"];
+      // let vw = this.route.url["_value"];
+      // let str = vw[0].path;
+      // let index = str.indexOf("individual");
+      // console.log(index);
+      // if(index!=="-1")
+      // {
+      //   this.showbtns = true;
+      // }
+      // else{
+      //   this.showbtns = false;
+      // }
+      this.editMode = params["id"] != null;
+      this.initForm();
+    });
     this.initForm();
     if (this.editMode) {
       this.formText = "Edit Voucher Details:";
