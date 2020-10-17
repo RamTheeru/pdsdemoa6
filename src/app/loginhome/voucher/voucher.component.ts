@@ -49,11 +49,12 @@ export class VoucherComponent implements OnInit {
       this.voucherForm = this._fb.group({
         location: new FormControl("gtk"),
         voucherdate: eDate,
-        vno: new FormControl("3352365263"),
+        vno: new FormControl("PDS/2021/GTKl/10/001"),
         paidto: new FormControl("Gtk"),
         purpose: new FormControl("Transport"),
         netamnt: new FormControl("1000"),
-        tax: new FormControl("gst")
+        tax: new FormControl("gst"),
+        totalamnt: new FormControl("10000")
       });
     } else {
       this.voucherForm = this._fb.group({
@@ -63,7 +64,8 @@ export class VoucherComponent implements OnInit {
         paidto: new FormControl(),
         purpose: new FormControl(),
         netamnt: new FormControl(),
-        tax: new FormControl("")
+        tax: new FormControl(""),
+        totalamnt: new FormControl()
       });
     }
   }
