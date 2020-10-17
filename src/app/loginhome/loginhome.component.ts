@@ -7,6 +7,7 @@ import { MatSidenav } from "@angular/material";
 })
 export class LoginhomeComponent implements OnInit {
   @Input("") user: string;
+  loginInfo: string = "";
   userType: number = 0;
   isFle: Boolean = false;
   shoesidenav: Boolean = false;
@@ -38,6 +39,7 @@ export class LoginhomeComponent implements OnInit {
       this.userType = 1;
     } else if (this.user === "fle") {
       this.userType = 2;
+      this.loginInfo = "Finance LE Login";
     } else if (this.user === "fme") {
       this.userType = 3;
     } else {
