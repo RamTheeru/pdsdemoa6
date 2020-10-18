@@ -67,7 +67,7 @@
 
 			</ng-container>
 			<ng-template #elseif1>
-				<ng-container *ngIf="userType === 2; else elseif2">
+				<ng-container *ngIf="userType === 2 || userType === 3; else elseif2">
 					<!-- <p>FLE menu</p> -->
 					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 						<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home"

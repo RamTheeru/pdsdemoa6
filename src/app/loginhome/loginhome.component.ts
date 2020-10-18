@@ -43,6 +43,8 @@ export class LoginhomeComponent implements OnInit {
       this.loginInfo = "Finance LE Login";
     } else if (this.user === "fme") {
       this.userType = 3;
+      this.shownotify = false;
+      this.loginInfo = "Finance LE Login";
     } else {
     }
   }
