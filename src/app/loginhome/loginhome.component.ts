@@ -55,7 +55,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
     }
   }
   Onbtnclick() {
-    this.shoesidenav = !this.shoesidenav;
+    this.shoesidenav = !this.shoesidenav ;
   }
   oncreateclk(tab = "") {
     this.shownotify = false;
