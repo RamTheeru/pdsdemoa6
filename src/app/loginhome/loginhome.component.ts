@@ -41,7 +41,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
     this.subsc = this.vServ.data.subscribe((val: string) => {
       this.user = val;
     });
-    
+
     //this.user = "fle";
     if (this.user === "admin") {
       this.userType = 1;
