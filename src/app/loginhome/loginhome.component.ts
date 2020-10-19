@@ -89,9 +89,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
-      this.vServ.setVerify("fhe");
-      console.log("setting value verify in service");
-      //this.router.navigate["/loginhome/viewledger"];
+      this.vServ.removeValue("fheverify");
     } else {
       this.shownotify = true;
       this.act1SubMenu = false;
@@ -104,5 +102,6 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
   }
   onLogout() {
     this.vServ.removeValue("storedProp");
+    this.vServ.removeValue("fheverify");
   }
 }
