@@ -1,11 +1,17 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input, OnDestroy } from "@angular/core";
 import { Ledger } from "../../models/ledger";
+import * as r from "rxjs";
+import { ViewService } from "../../view.service";
 @Component({
   selector: "app-viewledger",
   templateUrl: "./viewledger.component.html",
   styleUrls: ["./viewledger.component.css"]
 })
-export class ViewledgerComponent implements OnInit {
+export class ViewledgerComponent implements OnInit, OnDestroy {
+  @Input("") userType: string;
+  private subsc: r.Subscription;
+  isLe: Boolean = false;
+  isHe: Boolean = false;
   fromDate: string = "";
   toDate: string = "";
   location: string = "";
@@ -41,8 +47,21 @@ export class ViewledgerComponent implements OnInit {
       Status: "R"
     }
   ];
-  constructor() {}
+  constructor(private vServ: ViewService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.subsc = this.vServ.data.subscribe((val: string) => {
+      this.userType = val;
+    });
+    var index = this.userType.indexOf("le");
+    if (index !== -1) {
+      this.isLe = true;
+    } else {
+      this.isHe = true;
+    }
+  }
+  ngOnDestroy() {
+    this.subsc.unsubscribe();
+  }
   getlist(event) {}
 }

@@ -8,6 +8,7 @@ import { MaterialModule } from "./material.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { appRoutingModule } from "./app-routing.module";
+import { CommonModule } from "@angular/common";
 //import {HttpClientModule} from "@angular/common/http";
 
 import { PdsMainComponent } from "./pds-main/pds-main.component";
@@ -41,7 +42,8 @@ import { SweetService } from "./sweet.service";
     ReactiveFormsModule,
     HttpClientModule,
     appRoutingModule,
-    MaterialModule
+    MaterialModule,
+    CommonModule
   ],
   declarations: [
     AppComponent,

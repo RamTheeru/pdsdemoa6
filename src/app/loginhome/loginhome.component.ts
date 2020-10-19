@@ -1,5 +1,7 @@
 import { Component, Input, ViewChild, OnInit } from "@angular/core";
 import { MatSidenav } from "@angular/material";
+import * as r from "rxjs";
+import { ViewService } from "../view.service";
 @Component({
   selector: "app-loginhome",
   templateUrl: "./loginhome.component.html",
@@ -7,6 +9,7 @@ import { MatSidenav } from "@angular/material";
 })
 export class LoginhomeComponent implements OnInit {
   @Input("") user: string;
+  private subsc: r.Subscription;
   loginInfo: string = "";
   userType: number = 0;
   isFle: Boolean = false;
@@ -31,17 +34,20 @@ export class LoginhomeComponent implements OnInit {
     }
   }
   //shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
-  constructor() {}
+  constructor(private vServ: ViewService) {}
 
   ngOnInit() {
-    this.user = "fle";
+    this.subsc = this.vServ.data.subscribe((val: string) => {
+      this.user = val;
+    });
+    //this.user = "fle";
     if (this.user === "admin") {
       this.userType = 1;
-    } else if (this.user === "fle") {
+    } else if (this.user === "financele") {
       this.userType = 2;
       this.shownotify = false;
       this.loginInfo = "Finance LE Login";
-    } else if (this.user === "fme") {
+    } else if (this.user === "financeme") {
       this.userType = 3;
       this.shownotify = false;
       this.loginInfo = "Finance ME Login";

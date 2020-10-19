@@ -61,25 +61,52 @@
 			<tr>
 				<th>S.No</th>
 				<th>Date</th>
+				<div *ngIf="isHe">
+					<th>Action</th>
+				</div>
 				<th>Voucher Number</th>
 				<th>Particulars</th>
 				<th>Credit</th>
 				<th>Debit</th>
 				<th>Balance</th>
-				<th>Status</th>
+				<div *ngIf="isHe">
+					<th>
+
+						<ng-container>Status</ng-container>
+
+					</th>
+				</div>
 			</tr>
 		</thead>
 		<tbody>
-			<tr *ngFor="let l of list;">
+			<tr *ngFor=" let l of list;">
 				<td>{{l.Id}}</td>
 				<td>{{l.VoucherDate}}</td>
-				<td><a routerLink="/loginhome/editvoucher/1">{{l.VoucherNumber}}</a></td>
-				<td>{{l.Particulars}}</td>
-				<td>{{l.Credit}}</td>
-				<td>{{l.Debit}}</td>
-				<td>{{l.Balance}}</td>
-				<td>{{l.Status}}</td>
-				<!-- <td> <button type="button" (click)="approveUser(l)" class="btn btn-primary" ><b class="text-light" >Edit</b></button>
+				<div *ngIf="isHe">
+					<td><input type="checkbox"/>
+				</div>
+					<td>
+						<div *ngIf="isLe; else fhe">
+							<ng-container>
+								<a routerLink="/loginhome/editvoucher/1">{{l.VoucherNumber}}</a>
+							</ng-container>
+						</div>
+						<ng-template #fhe>
+							{{l.VoucherNumber}}
+						</ng-template>
+					</td>
+					<td>{{l.Particulars}}</td>
+					<td>{{l.Credit}}</td>
+					<td>{{l.Debit}}</td>
+					<td>{{l.Balance}}</td>
+					<div *ngIf="isHe">
+						<td>
+
+							<ng-container>{{l.Status}}</ng-container>
+
+						</td>
+					</div>
+					<!-- <td> <button type="button" (click)="approveUser(l)" class="btn btn-primary" ><b class="text-light" >Edit</b></button>
 				</td> -->
 			</tr>
 		</tbody>
