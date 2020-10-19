@@ -24,7 +24,8 @@ export class ViewledgerComponent implements OnInit, OnDestroy {
       Credit: "XXX",
       Debit: "XXX",
       Balance: "10000",
-      Status: "A"
+      Status: "A",
+      VStatus: false
     },
     {
       Id: 2,
@@ -34,7 +35,8 @@ export class ViewledgerComponent implements OnInit, OnDestroy {
       Credit: "XXX",
       Debit: "XXX",
       Balance: "9000",
-      Status: "A"
+      Status: "A",
+      VStatus: false
     },
     {
       Id: 3,
@@ -44,12 +46,16 @@ export class ViewledgerComponent implements OnInit, OnDestroy {
       Credit: "XXX",
       Debit: "XXX",
       Balance: "12000",
-      Status: "R"
+      Status: "R",
+      VStatus: false
     }
   ];
   constructor(private vServ: ViewService) {}
 
   ngOnInit() {
+    this.list.forEach(obj => {
+      obj.VStatus = obj.Status == "A" ? true : false;
+    });
     this.subsc = this.vServ.data.subscribe((val: string) => {
       this.userType = val;
     });

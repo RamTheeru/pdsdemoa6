@@ -7,4 +7,5 @@ export class Ledger {
   Debit: string;
   Balance: string;
   Status: string;
+  VStatus: Boolean;
 }
