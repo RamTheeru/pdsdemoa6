@@ -17,7 +17,8 @@ export class ViewledgerComponent implements OnInit {
       Particulars: "Petty Cash to Station-ops",
       Credit: "XXX",
       Debit: "XXX",
-      Balance: "10000"
+      Balance: "10000",
+      Status: "A"
     },
     {
       Id: 2,
@@ -26,7 +27,8 @@ export class ViewledgerComponent implements OnInit {
       Particulars: "Petty Cash to Station-ops",
       Credit: "XXX",
       Debit: "XXX",
-      Balance: "9000"
+      Balance: "9000",
+      Status: "A"
     },
     {
       Id: 3,
@@ -35,7 +37,8 @@ export class ViewledgerComponent implements OnInit {
       Particulars: "Petty Cash to Station-ops",
       Credit: "XXX",
       Debit: "XXX",
-      Balance: "12000"
+      Balance: "12000",
+      Status: "R"
     }
   ];
   constructor() {}

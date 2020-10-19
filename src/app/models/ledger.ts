@@ -6,4 +6,5 @@ export class Ledger {
   Credit: string;
   Debit: string;
   Balance: string;
+  Status: string;
 }

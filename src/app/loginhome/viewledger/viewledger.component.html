@@ -66,17 +66,19 @@
 				<th>Credit</th>
 				<th>Debit</th>
 				<th>Balance</th>
+				<th>Status</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr *ngFor="let l of list;">
 				<td>{{l.Id}}</td>
 				<td>{{l.VoucherDate}}</td>
-				<td>{{l.VoucherNumber}}</td>
+				<td><a routerLink="/loginhome/editvoucher/1">{{l.VoucherNumber}}</a></td>
 				<td>{{l.Particulars}}</td>
 				<td>{{l.Credit}}</td>
 				<td>{{l.Debit}}</td>
 				<td>{{l.Balance}}</td>
+				<td>{{l.Status}}</td>
 				<!-- <td> <button type="button" (click)="approveUser(l)" class="btn btn-primary" ><b class="text-light" >Edit</b></button>
 				</td> -->
 			</tr>
