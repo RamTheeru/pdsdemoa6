@@ -7,17 +7,27 @@ import {
   FormArray,
   Validators
 } from "@angular/forms";
+import * as r from "rxjs";
+import { ViewService } from "../../view.service";
 @Component({
   selector: "app-voucher",
   templateUrl: "./voucher.component.html",
   styleUrls: ["./voucher.component.css"]
 })
 export class VoucherComponent implements OnInit {
+  userType: string;
+  private subsc: r.Subscription;
+  isLe: Boolean = false;
+  isHe: Boolean = false;
   voucherForm: FormGroup;
   voucherId: number = 0;
   editMode: Boolean = false;
   formText: string = "Enter Voucher Details:";
-  constructor(private _fb: FormBuilder, private route: ActivatedRoute) {}
+  constructor(
+    private _fb: FormBuilder,
+    private route: ActivatedRoute,
+    private vServ: ViewService
+  ) {}
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -34,10 +44,19 @@ export class VoucherComponent implements OnInit {
       //   this.showbtns = false;
       // }
       this.editMode = params["id"] != null;
+      this.subsc = this.vServ.data.subscribe((val: string) => {
+        this.userType = val;
+      });
       this.initForm();
     });
     this.initForm();
     if (this.editMode) {
+      var index = this.userType.indexOf("le");
+      if (index !== -1) {
+        this.isLe = true;
+      } else {
+        this.isHe = true;
+      }
       this.formText = "Edit Voucher Details:";
     } else {
       this.formText = "Enter Voucher Details:";
@@ -65,7 +84,8 @@ export class VoucherComponent implements OnInit {
         purpose: new FormControl(),
         netamnt: new FormControl(),
         tax: new FormControl(""),
-        totalamnt: new FormControl()
+        totalamnt: new FormControl(),
+        remark: new FormControl()
       });
     }
   }

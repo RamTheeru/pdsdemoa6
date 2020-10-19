@@ -95,11 +95,33 @@
 					<mat-error>This field is mandatory</mat-error>
 				</mat-form-field>
 			</div>
-			<div class="row" id="btnset">
-				<button  type="button" mat-raised-button color="warn" style="margin-right:10px;" >Cancel</button>
-				<button  type="button" mat-raised-button color="primary" >Submit</button>
+			<div class="row" *ngIf="editMode">
+				<label>Remarks:</label>
+
+				<mat-form-field class="inpt" style="margin-left:117px;">
+
+					<input type="text" name="remark" formControlName="remark" matInput placeholder="" class="form-control">
+					<mat-error>This field is mandatory</mat-error>
+				</mat-form-field>
 			</div>
 		</div>
-	</form>
+		<div class="row" id="btnset">
+			<button [ngClass]="isHe? 'col':''" type="button" mat-raised-button color="warn" style="margin-right:10px;" >Cancel</button>
+			<div *ngIf="editMode; else create">
+				<div *ngIf="isHe" class="col">
+					<button  type="button" mat-raised-button color="primary" >Accept</button></div>
+				<div *ngIf="isHe" class="col">
+					<button  type="button" mat-raised-button color="primary" >Reject</button></div>
+			</div>
+			<ng-template #create>
+
+				<button  type="button" mat-raised-button color="primary" >Submit</button>
+
+				<!-- {{l.VoucherNumber}} -->
+			</ng-template>
+
+		</div>
+</div>
+</form>
 
 </div>
