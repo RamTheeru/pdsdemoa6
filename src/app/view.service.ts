@@ -16,6 +16,9 @@ export class ViewService {
     if (storeProp) localStorage.setItem("storedProp", val);
     this.data.next(val);
   }
+  removeValue(key: string) {
+    localStorage.removeItem(key);
+  }
   // setValue(value: string) {
   //   this.data.next(value);
   // }

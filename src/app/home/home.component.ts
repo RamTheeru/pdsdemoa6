@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import {Environment} from '../environment';
+import { Component, OnInit } from "@angular/core";
+import { Environment } from "../environment";
+import { ViewService } from "../view.service";
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: "app-home",
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
-img : string ;
-  constructor() { }
+  img: string;
+  constructor(private vServ: ViewService) {}
 
   ngOnInit() {
+    this.vServ.removeValue("storedProp");
     this.img = Environment.MainLogo;
   }
-
 }
