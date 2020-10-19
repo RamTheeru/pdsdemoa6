@@ -4,13 +4,13 @@ import * as r from "rxjs";
 @Injectable()
 export class ViewService {
   //view = new r.Subject<Boolean>();
-  data = new r.BehaviorSubject<string>("");
+  data = new r.BehaviorSubject<string>("") ;
   constructor() {
     let storedProp = localStorage.getItem("storedProp");
     console.log("stored value check:" + storedProp);
     if (storedProp == "undefined" || storedProp == "" || storedProp == null)
       this.setValue(storedProp, true);
-    else this.setValue(storedProp, false) ;
+    else this.setValue(storedProp, false);
   }
   setValue(val: string, storeProp: boolean = true) {
     if (storeProp) localStorage.setItem("storedProp", val);
