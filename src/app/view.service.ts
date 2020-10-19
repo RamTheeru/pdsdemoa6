@@ -27,6 +27,7 @@ export class ViewService {
     localStorage.removeItem(key);
   }
   setVerify(val: string, storeProp: boolean = true) {
+    console.log("setting value verify in service"+val);
     if (storeProp) localStorage.setItem("fheverify", val);
     this.data.next(val);
   }
