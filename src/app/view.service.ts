@@ -4,7 +4,7 @@ import * as r from "rxjs";
 @Injectable()
 export class ViewService {
   //view = new r.Subject<Boolean>();
-  data = new r.BehaviorSubject<string>("");
+  data = new r.Subject<string>();
   constructor() {}
 
   setValue(value: string) {
