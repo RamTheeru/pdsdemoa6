@@ -29,7 +29,7 @@ export class ViewService {
   setVerify(val: string, storeProp: boolean = true) {
     console.log("setting value verify in service" + val);
     if (storeProp) localStorage.setItem("fheverify", val);
-    this.data.next(val);
+    this.verify.next(val);
   }
 
   // setValue(value: string) {
