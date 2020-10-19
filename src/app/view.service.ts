@@ -4,7 +4,7 @@ import * as r from "rxjs";
 @Injectable()
 export class ViewService {
   //view = new r.Subject<Boolean>();
-  data = new r.BehaviorSubject<string>("") ;
+  data = new r.BehaviorSubject<string>("");
   constructor() {
     let storedProp = localStorage.getItem("storedProp");
     console.log("stored value check:" + storedProp);
