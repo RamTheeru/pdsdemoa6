@@ -71,7 +71,7 @@ export class ViewledgerComponent implements OnInit, OnDestroy {
       this.isVerify = false;
     } else {
       this.isHe = true;
-       console.log('verifying value from service'+this.fheVerify)'
+      console.log("verifying value from service" + this.fheVerify);
       if (this.fheVerify == "fhe") {
         this.isVerify = true;
       } else {
