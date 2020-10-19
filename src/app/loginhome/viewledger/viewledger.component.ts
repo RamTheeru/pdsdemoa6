@@ -10,6 +10,7 @@ import { ViewService } from "../../view.service";
 export class ViewledgerComponent implements OnInit, OnDestroy {
   @Input("") userType: string;
   private subsc: r.Subscription;
+  private subsc2: r.Subscription;
   isLe: Boolean = false;
   isHe: Boolean = false;
   fheVerify: string = "";
@@ -61,7 +62,7 @@ export class ViewledgerComponent implements OnInit, OnDestroy {
     this.subsc = this.vServ.data.subscribe((val: string) => {
       this.userType = val;
     });
-    this.subsc = this.vServ.verify.subscribe((val: string) => {
+    this.subsc2 = this.vServ.verify.subscribe((val: string) => {
       this.fheVerify = val;
     });
 
@@ -81,6 +82,7 @@ export class ViewledgerComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     this.subsc.unsubscribe();
+    this.subsc2.unsubscribe();
   }
   getlist(event) {}
 }
