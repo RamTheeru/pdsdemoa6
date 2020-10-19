@@ -87,7 +87,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         //
         this.router.navigate(["/loginhome/viewledger"]);
-      }, 2000);
+      }, 000);
     } else if (tab == "fle") {
       this.shownotify = false;
       this.act1SubMenu = false;

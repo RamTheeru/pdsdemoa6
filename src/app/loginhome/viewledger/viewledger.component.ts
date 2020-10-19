@@ -62,11 +62,10 @@ export class ViewledgerComponent implements OnInit, OnDestroy {
     this.subsc = this.vServ.data.subscribe((val: string) => {
       this.userType = val;
     });
-    setTimeout(() => {
-      this.subsc2 = this.vServ.verify.subscribe((val: string) => {
-        this.fheVerify = val;
-      });
-    }, 2000);
+
+    this.subsc2 = this.vServ.verify.subscribe((val: string) => {
+      this.fheVerify = val;
+    });
 
     var index = this.userType.indexOf("le");
     if (index !== -1) {
@@ -74,7 +73,7 @@ export class ViewledgerComponent implements OnInit, OnDestroy {
       this.isVerify = false;
     } else {
       this.isHe = true;
-      console.log("verifying value from service" + this.fheVerify);
+      console.log("verifying value from service : " + this.fheVerify);
       if (this.fheVerify == "fhe") {
         this.isVerify = true;
       } else {
