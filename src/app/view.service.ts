@@ -6,12 +6,14 @@ export class ViewService {
   //view = new r.Subject<Boolean>();
   data = new r.BehaviorSubject<string>("");
   constructor() {
-    let storedProp = localStorage.get("storedProp");
-    if (storedProp == "undefined" || storedProp == "")
-      this.setValue(storedProp, false);
+    let storedProp = localStorage.getItem("storedProp");
+    console.log("stored value check:" + storedProp);
+    if (storedProp == "undefined" || storedProp == "" || storedProp == null)
+      this.setValue(storedProp, true);
+    else this.setValue(storedProp, false) ;
   }
   setValue(val: string, storeProp: boolean = true) {
-    if (storeProp) localStorage.set("storedProp", val);
+    if (storeProp) localStorage.setItem("storedProp", val);
     this.data.next(val);
   }
   // setValue(value: string) {
