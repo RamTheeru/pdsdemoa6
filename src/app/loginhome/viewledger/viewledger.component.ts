@@ -12,6 +12,8 @@ export class ViewledgerComponent implements OnInit, OnDestroy {
   private subsc: r.Subscription;
   isLe: Boolean = false;
   isHe: Boolean = false;
+  fheVerify: string = "";
+  isVerify: Boolean = false;
   fromDate: string = "";
   toDate: string = "";
   location: string = "";
@@ -59,11 +61,22 @@ export class ViewledgerComponent implements OnInit, OnDestroy {
     this.subsc = this.vServ.data.subscribe((val: string) => {
       this.userType = val;
     });
+    this.subsc = this.vServ.verify.subscribe((val: string) => {
+      this.fheVerify = val;
+    });
+
     var index = this.userType.indexOf("le");
     if (index !== -1) {
       this.isLe = true;
+      this.isVerify = false;
     } else {
       this.isHe = true;
+       console.log('verifying value from service'+this.fheVerify)'
+      if (this.fheVerify == "fhe") {
+        this.isVerify = true;
+      } else {
+        this.isVerify = false;
+      }
     }
   }
   ngOnDestroy() {

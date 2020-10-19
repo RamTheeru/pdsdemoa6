@@ -115,20 +115,19 @@
 		</tbody>
 	</table>
 	<div class="row" *ngIf="isHe">
-		<!-- <div class="row" *ngIf="isLe; else fhe">
-
-      </div> -->
-		<div class="col">
-			<button  type="button" mat-raised-button color="warn" style="margin-right:10px;" >Accept Voucher</button>
+		<div class="row" *ngIf="isVerify; else fhe">
+			<div class="col">
+				<button  type="button" mat-raised-button color="primary" style="margin-right:10px;" >Accept Voucher</button>
+			</div>
+			<div class="col"> <button  type="button" mat-raised-button color="warn" >Reject Voucher</button></div>
 		</div>
-		<div class="col"> <button  type="button" mat-raised-button color="primary" >Submit</button></div>
+		<ng-template #fhe>
+			<div class="col"> <button  type="button" mat-raised-button color="warn" >Download</button></div>
+		</ng-template>
+
 		<div class="col">
 			<button  type="button" mat-raised-button color="warn" style="margin-right:10px;" >Cancel</button></div>
 	</div>
-	<!-- <ng-template #fhe>
-		<div class="row">
 
-		</div>
-	</ng-template> -->
 
 </div>

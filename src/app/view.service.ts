@@ -5,7 +5,14 @@ import * as r from "rxjs";
 export class ViewService {
   //view = new r.Subject<Boolean>();
   data = new r.BehaviorSubject<string>("");
+  verify = new r.BehaviorSubject<string>("");
   constructor() {
+    let verifyval = localStorage.getItem("fheverify");
+    console.log("stored verify value check:" + verifyval);
+    if (verifyval == "undefined" || verifyval == "" || verifyval == null)
+      this.setVerify(verifyval, true);
+    else this.setVerify(verifyval, false);
+
     let storedProp = localStorage.getItem("storedProp");
     console.log("stored value check:" + storedProp);
     if (storedProp == "undefined" || storedProp == "" || storedProp == null)
@@ -19,6 +26,11 @@ export class ViewService {
   removeValue(key: string) {
     localStorage.removeItem(key);
   }
+  setVerify(val: string, storeProp: boolean = true) {
+    if (storeProp) localStorage.setItem("fheverify", val);
+    this.data.next(val);
+  }
+
   // setValue(value: string) {
   //   this.data.next(value);
   // }

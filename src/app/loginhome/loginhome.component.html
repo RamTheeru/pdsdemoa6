@@ -122,8 +122,11 @@
 							role="tab" aria-controls="v-pills-home" aria-selected="true" (click)="onloghomeclk('fh')"
 							routerLink="/loginhome">Home</a>
 						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
-							role="tab" aria-controls="v-pills-profile" aria-selected="false" (click)="oncreateclk()"
-							routerLink="/loginhome/viewledger">Verify Vouchers</a>
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="oncreateclk('fhe')" routerLink="/loginhome/viewledger">Verify Vouchers</a>
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="oncreateclk()">View Ledger</a>
 					</div>
 				</ng-container>
 			</ng-template>

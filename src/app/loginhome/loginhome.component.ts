@@ -1,4 +1,5 @@
 import { Component, Input, ViewChild, OnInit, OnDestroy } from "@angular/core";
+import { Router } from "@angular/router";
 import { MatSidenav } from "@angular/material";
 import * as r from "rxjs";
 import { ViewService } from "../view.service";
@@ -34,7 +35,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
     }
   }
   //shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
-  constructor(private vServ: ViewService) {}
+  constructor(private vServ: ViewService, private router: Router) {}
 
   ngOnInit() {
     this.subsc = this.vServ.data.subscribe((val: string) => {
@@ -75,10 +76,18 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
+      this.vServ.removeValue("fheverify");
+    } else if (tab == "fhe") {
+      this.shownotify = false;
+      this.act1SubMenu = false;
+      this.act2SubMenu = false;
+      this.vServ.setVerify("fhe");
+      this.router.navigate["/loginhome/viewledger"];
     } else {
       this.shownotify = true;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
+      this.vServ.removeValue("fheverify");
     }
   }
   ngOnDestroy() {
