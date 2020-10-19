@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, OnInit } from "@angular/core";
+import { Component, Input, ViewChild, OnInit, OnDestroy } from "@angular/core";
 import { MatSidenav } from "@angular/material";
 import * as r from "rxjs";
 import { ViewService } from "../view.service";
@@ -7,7 +7,7 @@ import { ViewService } from "../view.service";
   templateUrl: "./loginhome.component.html",
   styleUrls: ["./loginhome.component.css"]
 })
-export class LoginhomeComponent implements OnInit {
+export class LoginhomeComponent implements OnInit, OnDestroy {
   @Input("") user: string;
   private subsc: r.Subscription;
   loginInfo: string = "";
@@ -80,5 +80,8 @@ export class LoginhomeComponent implements OnInit {
       this.act1SubMenu = false;
       this.act2SubMenu = false;
     }
+  }
+  ngOnDestroy() {
+    this.subsc.unsubscribe();
   }
 }
