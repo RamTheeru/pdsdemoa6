@@ -47,7 +47,7 @@ export class VoucherComponent implements OnInit {
       this.subsc = this.vServ.data.subscribe((val: string) => {
         this.userType = val;
       });
-      
+
       this.initForm();
     });
     this.initForm();
