@@ -77,8 +77,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.act1SubMenu = false;
       this.act2SubMenu = false;
       this.vServ.removeValue("fheverify");
-       this.router.navigate["/loginhome/viewledger"];
-
+      this.router.navigate["/loginhome"];
     } else if (tab == "fhe") {
       this.shownotify = false;
       this.act1SubMenu = false;
@@ -86,6 +85,13 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.vServ.setVerify("fhe");
       console.log("setting value verify in service");
       this.router.navigate["/loginhome/viewledger"];
+    } else if (tab == "fle") {
+      this.shownotify = false;
+      this.act1SubMenu = false;
+      this.act2SubMenu = false;
+      this.vServ.setVerify("fhe");
+      console.log("setting value verify in service");
+      //this.router.navigate["/loginhome/viewledger"];
     } else {
       this.shownotify = true;
       this.act1SubMenu = false;

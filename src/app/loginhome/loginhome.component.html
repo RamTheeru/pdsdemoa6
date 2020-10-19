@@ -74,17 +74,18 @@
 							role="tab" aria-controls="v-pills-home" aria-selected="true" (click)="onloghomeclk('fh')"
 							routerLink="/loginhome">Home</a>
 						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
-							role="tab" aria-controls="v-pills-profile" aria-selected="false" (click)="oncreateclk()"
-							routerLink="/loginhome/entercreditdetails">Enter Credit Details</a>
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="oncreateclk('fle')" routerLink="/loginhome/entercreditdetails">Enter Credit
+							Details</a>
 						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
-							role="tab" aria-controls="v-pills-profile" aria-selected="false" (click)="oncreateclk()"
-							routerLink="/loginhome/entervoucher">Enter Voucher Details</a>
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="oncreateclk('fle')" routerLink="/loginhome/entervoucher">Enter Voucher Details</a>
 						<!-- <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
 							role="tab" aria-controls="v-pills-profile" aria-selected="false" (click)="oncreateclk()"
 							routerLink="/loginhome/editvoucher/1">Edit Voucher Detais</a> -->
 						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
-							role="tab" aria-controls="v-pills-profile" aria-selected="false" (click)="oncreateclk()"
-							routerLink="/loginhome/viewledger">View Ledger</a>
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="oncreateclk('fle')" routerLink="/loginhome/viewledger">View Ledger</a>
 						<!-- <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
 							role="tab" aria-controls="v-pills-profile" aria-selected="false">
 							<li class="dropdown">
@@ -119,14 +120,14 @@
 					<!-- <p>FHE menu</p> -->
 					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 						<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home"
-							role="tab" aria-controls="v-pills-home" aria-selected="true" (click)="onloghomeclk('fh')"
-							routerLink="/loginhome">Home</a>
+							role="tab" aria-controls="v-pills-home" aria-selected="true"
+							(click)="onloghomeclk('fh')">Home</a>
 						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
 							role="tab" aria-controls="v-pills-profile" aria-selected="false"
 							(click)="oncreateclk('fhe')">Verify Vouchers</a>
 						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
 							role="tab" aria-controls="v-pills-profile" aria-selected="false"
-							(click)="oncreateclk()">View Ledger</a>
+							(click)="oncreateclk('fhe')">View Ledger</a>
 					</div>
 				</ng-container>
 			</ng-template>
