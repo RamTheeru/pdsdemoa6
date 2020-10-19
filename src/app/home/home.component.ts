@@ -11,7 +11,6 @@ export class HomeComponent implements OnInit {
   constructor(private vServ: ViewService) {}
 
   ngOnInit() {
-    this.vServ.removeValue("storedProp");
     this.img = Environment.MainLogo;
   }
 }

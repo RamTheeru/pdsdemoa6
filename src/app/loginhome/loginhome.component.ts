@@ -84,4 +84,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subsc.unsubscribe();
   }
+  onLogout() {
+    this.vServ.removeValue("storedProp");
+  }
 }
