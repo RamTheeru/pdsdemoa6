@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from "@angular/core";
+import { Component, OnInit, Input, OnChanges, OnDestroy } from "@angular/core";
 import { Ledger } from "../../models/ledger";
 import * as r from "rxjs";
 import { ViewService } from "../../view.service";
@@ -7,13 +7,13 @@ import { ViewService } from "../../view.service";
   templateUrl: "./viewledger.component.html",
   styleUrls: ["./viewledger.component.css"]
 })
-export class ViewledgerComponent implements OnInit, OnDestroy {
+export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
   @Input("") userType: string;
   private subsc: r.Subscription;
   private subsc2: r.Subscription;
   isLe: Boolean = false;
   isHe: Boolean = false;
-  fheVerify: string = "";
+  @Input("") fheVerify: string = "";
   isVerify: Boolean = false;
   fromDate: string = "";
   toDate: string = "";
@@ -80,6 +80,10 @@ export class ViewledgerComponent implements OnInit, OnDestroy {
         this.isVerify = false;
       }
     }
+  }
+  ngOnChanges() {
+    console.log("page reloading");
+    this.ngOnInit();
   }
   ngOnDestroy() {
     this.subsc.unsubscribe();

@@ -1,8 +1,16 @@
 import { Component, Input, ViewChild, OnInit, OnDestroy } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, NavigationExtras } from "@angular/router";
 import { MatSidenav } from "@angular/material";
 import * as r from "rxjs";
 import { ViewService } from "../view.service";
+// const navigationExtras: NavigationExtras = {
+//   state: {
+//     transd: 'TRANS001',
+//     workQueue: false,
+//     services: 10,
+//     code: '003'
+//   }
+// };
 @Component({
   selector: "app-loginhome",
   templateUrl: "./loginhome.component.html",
@@ -98,7 +106,6 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.act1SubMenu = false;
       this.act2SubMenu = false;
       this.vServ.removeValue("fheverify");
-
     } else {
       this.shownotify = true;
       this.act1SubMenu = false;
