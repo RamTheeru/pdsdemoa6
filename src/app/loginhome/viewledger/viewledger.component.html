@@ -1,59 +1,58 @@
 <div class="container-fluid">
 
 	<!-- <form> -->
-		<div class="row">
-			<label>Select Location:</label>
+	<div class="row">
+		<label>Select Location:</label>
 
-			<!-- <mat-form-field class="inpt">
+		<!-- <mat-form-field class="inpt">
 
 					<input type="text" formControlName="lmcredit" class="form-control" matInput placeholder="Last Month's Credit*">
 					<mat-error>This field is mandatory</mat-error>
 				</mat-form-field> -->
 
-			<mat-form-field class="inpt">
-				<mat-select [(ngModel)]="location" name="location" aria-placeholder="Select Location"
-					class="form-control">
-					<mat-option value="">Select Location</mat-option>
-					<mat-option value="atp">Anantapur</mat-option>
-					<mat-option value="gtk">Guntakal</mat-option>
-				</mat-select>
+		<mat-form-field class="inpt">
+			<mat-select [(ngModel)]="location" name="location" aria-placeholder="Select Location" class="form-control">
+				<mat-option value="">Select Location</mat-option>
+				<mat-option value="atp">Anantapur</mat-option>
+				<mat-option value="gtk">Guntakal</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</div>
+	<div class="row">
+
+		<div class="col-sm-4">
+			<label>From Date: </label>
+
+			<!-- <mat-form-field class="inpt" style="margin-left:25px;">
+                  <input type="text" name="lmtdebit" formControlName="lmtdebit" matInput placeholder="Last Month's Total Debit" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field> -->
+			<mat-form-field class="inpt" style="margin-left:100px;margin-top:-40px;">
+				<input [(ngModel)]="fromDate" name="fromDate" matInput [matDatepicker]="picker" class="form-control" placeholder="From Date">
+				<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+				<mat-datepicker #picker></mat-datepicker>
+				<mat-error>This field is mandatory</mat-error>
 			</mat-form-field>
 		</div>
-		<div class="row">
+		<div class="col-sm-4">
+			<label>To Date: </label>
 
-			<div class="col-sm-4">
-				<label>From Date: </label>
-
-				<!-- <mat-form-field class="inpt" style="margin-left:25px;">
+			<!-- <mat-form-field class="inpt" style="margin-left:25px;">
                   <input type="text" name="lmtdebit" formControlName="lmtdebit" matInput placeholder="Last Month's Total Debit" class="form-control">
                   <mat-error>This field is mandatory</mat-error>
                 </mat-form-field> -->
-				<mat-form-field class="inpt" style="margin-left:100px;margin-top:-40px;">
-					<input [(ngModel)]="fromDate" name="fromDate" matInput [matDatepicker]="picker" class="form-control" placeholder="From Date">
-					<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-					<mat-datepicker #picker></mat-datepicker>
-					<mat-error>This field is mandatory</mat-error>
-				</mat-form-field>
-			</div>
-			<div class="col-sm-4">
-				<label>To Date: </label>
-
-				<!-- <mat-form-field class="inpt" style="margin-left:25px;">
-                  <input type="text" name="lmtdebit" formControlName="lmtdebit" matInput placeholder="Last Month's Total Debit" class="form-control">
-                  <mat-error>This field is mandatory</mat-error>
-                </mat-form-field> -->
-				<mat-form-field class="inpt" style="margin-left:100px;margin-top:-40px;">
-					<input [(ngModel)]="toDate" name="toDate"  matInput [matDatepicker]="picker2" class="form-control" placeholder="To Date">
-					<mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-					<mat-datepicker #picker2></mat-datepicker>
-					<mat-error>This field is mandatory</mat-error>
-				</mat-form-field>
-			</div>
-
+			<mat-form-field class="inpt" style="margin-left:100px;margin-top:-40px;">
+				<input [(ngModel)]="toDate" name="toDate"  matInput [matDatepicker]="picker2" class="form-control" placeholder="To Date">
+				<mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+				<mat-datepicker #picker2></mat-datepicker>
+				<mat-error>This field is mandatory</mat-error>
+			</mat-form-field>
 		</div>
-		<div class="row">
-			<button class="btn btn-success" style="margin-left:315px;" (click)="getlist($event)"  type="submit">Search</button>
-		</div>
+
+	</div>
+	<div class="row">
+		<button class="btn btn-success" style="margin-left:315px;" (click)="getlist($event)"  type="submit">Search</button>
+	</div>
 	<!-- </form> -->
 
 	<table class="table table-striped">
