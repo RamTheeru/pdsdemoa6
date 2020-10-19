@@ -7,3 +7,6 @@ a.disabled {
   background-color: grey;
   color: black;
 }
+#btns {
+  margin: 95px;
+}
