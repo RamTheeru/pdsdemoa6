@@ -62,9 +62,11 @@ export class ViewledgerComponent implements OnInit, OnDestroy {
     this.subsc = this.vServ.data.subscribe((val: string) => {
       this.userType = val;
     });
-    this.subsc2 = this.vServ.verify.subscribe((val: string) => {
-      this.fheVerify = val;
-    });
+    setTimeout(() => {
+      this.subsc2 = this.vServ.verify.subscribe((val: string) => {
+        this.fheVerify = val;
+      });
+    }, 2000);
 
     var index = this.userType.indexOf("le");
     if (index !== -1) {
