@@ -8,13 +8,11 @@ export class ViewService {
   verify = new r.BehaviorSubject<string>("");
   constructor() {
     let verifyval = localStorage.getItem("fheverify");
-    console.log("stored verify value check:" + verifyval);
     if (verifyval == "undefined" || verifyval == "" || verifyval == null)
       this.setVerify(verifyval, true);
     else this.setVerify(verifyval, false);
 
     let storedProp = localStorage.getItem("storedProp");
-    console.log("stored value check:" + storedProp);
     if (storedProp == "undefined" || storedProp == "" || storedProp == null)
       this.setValue(storedProp, true);
     else this.setValue(storedProp, false);
@@ -25,9 +23,10 @@ export class ViewService {
   }
   removeValue(key: string) {
     localStorage.removeItem(key);
+    if (key == "fheverify") this.verify.next(null);
+    else if (key == "storedProp") this.data.next(null);
   }
   setVerify(val: string, storeProp: boolean = true) {
-    console.log("setting value verify in service" + val);
     if (storeProp) localStorage.setItem("fheverify", val);
     this.verify.next(val);
   }

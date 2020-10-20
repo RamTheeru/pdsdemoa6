@@ -35,7 +35,8 @@ const appRoutes: Routes = [
       { path: "entercreditdetails", component: EntercreditdetailsComponent },
       { path: "entervoucher", component: VoucherComponent },
       { path: "editvoucher/:id", component: VoucherComponent },
-      { path: "viewledger", component: ViewledgerComponent }
+      { path: "viewledger", component: ViewledgerComponent },
+      { path: "verifyvouchers", component: ViewledgerComponent }
       //  {path : 'new',component: RecipeEditComponent ,canActivate:[AuthGuard]},
       //  {path : ':id',component: RecipeDetailComponent },
 

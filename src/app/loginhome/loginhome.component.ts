@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild, OnInit, OnDestroy } from "@angular/core";
 import { Router, NavigationExtras } from "@angular/router";
 import { MatSidenav } from "@angular/material";
-import * as r from "rxjs";
+import { ViewledgerComponent } from "./viewledger/viewledger.component";
 import { ViewService } from "../view.service";
 // const navigationExtras: NavigationExtras = {
 //   state: {
@@ -93,12 +93,13 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.act2SubMenu = false;
       this.vServ.setVerify("fhe");
       this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(["/loginhome/viewledger"]);
+      this.router.navigate(["/loginhome/verifyvouchers"]);
     } else if (tab == "fihe") {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
       this.vServ.removeValue("fheverify");
+
       this.router.onSameUrlNavigation = "reload";
       this.router.navigate(["/loginhome/viewledger"]);
     } else if (tab == "fle") {

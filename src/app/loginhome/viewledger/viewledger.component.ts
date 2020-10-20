@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnChanges, OnDestroy } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { Ledger } from "../../models/ledger";
 import * as r from "rxjs";
 import { ViewService } from "../../view.service";
@@ -53,7 +54,13 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
       VStatus: false
     }
   ];
-  constructor(private vServ: ViewService) {}
+  constructor(private vServ: ViewService, private route: ActivatedRoute) {
+    // console.log(this.route.snapshot["_routerState"].url);
+    //this.ngOnInit();
+    // this.route.params.subscribe(params => {
+    //   console.log(params);
+    // });
+  }
 
   ngOnInit() {
     this.list.forEach(obj => {
@@ -73,7 +80,6 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
       this.isVerify = false;
     } else {
       this.isHe = true;
-      console.log("verifying value from service : " + this.fheVerify);
       if (this.fheVerify == "fhe") {
         this.isVerify = true;
       } else {
