@@ -20,13 +20,14 @@ export class PdsMainComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    //
     this.img = Environment.MainLogo;
   }
   onLogin() {
     if (this.user == "financele" || this.password == "1234") {
       this.vServ.setValue(this.user);
       this.router.navigate(["/loginhome"]);
-    } else if (this.user == "financeme" || this.password == "1234") {
+    } else if (this.user == "financehe" || this.password == "1234") {
       this.vServ.setValue(this.user);
       this.router.navigate(["/loginhome"]);
     } else {

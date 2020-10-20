@@ -1,6 +1,7 @@
 import { Component, Input, ViewChild, OnInit, OnDestroy } from "@angular/core";
 import { Router, NavigationExtras } from "@angular/router";
 import { MatSidenav } from "@angular/material";
+import * as r from "rxjs";
 import { ViewledgerComponent } from "./viewledger/viewledger.component";
 import { ViewService } from "../view.service";
 // const navigationExtras: NavigationExtras = {
@@ -50,17 +51,17 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.user = val;
     });
 
-    //this.user = "fle";
+    //this.user = "fle"
     if (this.user === "admin") {
       this.userType = 1;
     } else if (this.user === "financele") {
       this.userType = 2;
       this.shownotify = false;
       this.loginInfo = "Finance LE Login";
-    } else if (this.user === "financeme") {
+    } else if (this.user === "financehe") {
       this.userType = 3;
       this.shownotify = false;
-      this.loginInfo = "Finance ME Login";
+      this.loginInfo = "Finance HE Login";
     } else {
     }
   }
