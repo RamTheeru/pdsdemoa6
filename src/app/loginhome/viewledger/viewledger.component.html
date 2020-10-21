@@ -54,80 +54,83 @@
 		<button class="btn btn-success" style="margin-left:315px;" (click)="getlist($event)"  type="submit">Search</button>
 	</div>
 	<!-- </form> -->
-
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>S.No</th>
-				<th>Date</th>
-				<div *ngIf="isHe">
-					<th>Action</th>
-				</div>
-				<th>Voucher Number</th>
-				<th>Particulars</th>
-				<th>Credit</th>
-				<th>Debit</th>
-				<th>Balance</th>
-				<div *ngIf="isLe">
-					<th>
-
-						<ng-container>Status</ng-container>
-
-					</th>
-				</div>
-			</tr>
-		</thead>
-		<tbody>
-			<tr *ngFor=" let l of list;">
-				<td>{{l.Id}}</td>
-				<td>{{l.VoucherDate}}</td>
-				<div *ngIf="isHe">
-					<td><input type="checkbox"/>
-				</div>
-					<td>
-						<div *ngIf="isLe; else fhe">
-							<ng-container>
-
-								<a [ngClass]="l.VStatus?'disabled':''"
-									routerLink="/loginhome/editvoucher/1">{{l.VoucherNumber}}</a>
-
-							</ng-container>
-						</div>
-						<ng-template #fhe>
-							{{l.VoucherNumber}}
-						</ng-template>
-					</td>
-					<td>{{l.Particulars}}</td>
-					<td>{{l.Credit}}</td>
-					<td>{{l.Debit}}</td>
-					<td>{{l.Balance}}</td>
-					<div *ngIf="isLe">
-						<td>
-
-							<ng-container>{{l.Status}}</ng-container>
-
-						</td>
+	<div class="row" #tablist>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>S.No</th>
+					<th>Date</th>
+					<div *ngIf="isHe">
+						<th>Action</th>
 					</div>
-					<!-- <td> <button type="button" (click)="approveUser(l)" class="btn btn-primary" ><b class="text-light" >Edit</b></button>
+					<th>Voucher Number</th>
+					<th>Particulars</th>
+					<th>Credit</th>
+					<th>Debit</th>
+					<th>Balance</th>
+					<div *ngIf="isLe">
+						<th>
+
+							<ng-container>Status</ng-container>
+
+						</th>
+					</div>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor=" let l of list;">
+					<td>{{l.Id}}</td>
+					<td>{{l.VoucherDate}}</td>
+					<div *ngIf="isHe">
+						<td><input type="checkbox"/>
+				</div>
+						<td>
+							<div *ngIf="isLe; else fhe">
+								<ng-container>
+
+									<a [ngClass]="l.VStatus?'disabled':''"
+										routerLink="/loginhome/editvoucher/1">{{l.VoucherNumber}}</a>
+
+								</ng-container>
+							</div>
+							<ng-template #fhe>
+								{{l.VoucherNumber}}
+							</ng-template>
+						</td>
+						<td>{{l.Particulars}}</td>
+						<td>{{l.Credit}}</td>
+						<td>{{l.Debit}}</td>
+						<td>{{l.Balance}}</td>
+						<div *ngIf="isLe">
+							<td>
+
+								<ng-container>{{l.Status}}</ng-container>
+
+							</td>
+						</div>
+						<!-- <td> <button type="button" (click)="approveUser(l)" class="btn btn-primary" ><b class="text-light" >Edit</b></button>
 				</td> -->
-			</tr>
-		</tbody>
-	</table>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 	<div class="container">
 		<div class="row" *ngIf="isHe">
 			<div class="row" *ngIf="isVerify; else fhe">
 				<div class="col" id="btns">
-					<button  type="button" mat-raised-button color="primary" style="margin-right:10px;" >Accept Voucher</button>
+					<button  type="button" (click)="onAccept()" mat-raised-button color="primary" style="margin-right:10px;" >Accept Voucher</button>
 				</div>
 				<div class="col" id="btns">
-					<button  type="button" mat-raised-button color="warn" >Reject Voucher</button></div>
+					<button  type="button" mat-raised-button color="warn" (click)="onReject()" >Reject Voucher</button>
+				</div>
 				<div class="col" id="btns">
 					<button  type="button" mat-raised-button color="warn" style="margin-right:10px;" >Cancel</button>
 				</div>
 			</div>
 		</div>
 		<ng-template #fhe>
-			<div class="col"> <button  type="button" mat-raised-button color="warn" >Download</button></div>
+			<div class="col">
+				<button (click)="onDownload()"  type="button" mat-raised-button color="warn" >Download</button></div>
 			<div class="col">
 				<button  type="button" mat-raised-button color="warn" style="margin-right:10px;" >Cancel</button></div>
 		</ng-template>

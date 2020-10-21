@@ -1,4 +1,12 @@
-import { Component, OnInit, Input, OnChanges, OnDestroy } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChild,
+  ElementRef,
+  OnChanges,
+  OnDestroy
+} from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Ledger } from "../../models/ledger";
 import * as r from "rxjs";
@@ -10,6 +18,7 @@ import { ViewService } from "../../view.service";
 })
 export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
   @Input("") userType: string;
+  @ViewChild("tablist") tablist: ElementRef;
   private subsc: r.Subscription;
   private subsc2: r.Subscription;
   isLe: Boolean = false;
@@ -95,5 +104,16 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
     this.subsc.unsubscribe();
     this.subsc2.unsubscribe();
   }
+  onAccept() {
+    let child = [];
+    child = this.tablist.nativeElement.children;
+    let cc = [];
+    cc = child[0].children[1].childNodes;
+    for (var val of cc) {
+      console.log(val);
+    }
+  }
+  onReject() {}
+  onDownload() {}
   getlist(event) {}
 }
