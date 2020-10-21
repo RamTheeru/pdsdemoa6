@@ -111,18 +111,23 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
     let cc = [];
     cc = child[0].children[1].children;
     console.log(cc);
-    for (var val of cc) {
-      //console.log(val);
-      let txt = val.childNodes[3];
-      let html = val.childNodes[4];
-      // let txt = cc2[3].innerText;
-      // let html = cc2[2].innerHTML;
-      // console.log(txt);
-      // console.log(html);
-      // for (var val2 of cc2) {
-      //   console.log(val2);
-      // }
+    let cc2 = [];
+
+    for (let i = 0; i < cc.length; i++) {
+      cc2 = cc[i].children;
+      console.log(cc2);
     }
+    // for (var val of cc2) {
+    //   let txt = val.childNodes[3];
+    //   let html = val.childNodes[4];
+    //   // let txt = cc2[3].innerText;
+    //   // let html = cc2[2].innerHTML;
+    //   // console.log(txt);
+    //   // console.log(html);
+    //   // for (var val2 of cc2) {
+    //   //   console.log(val2);
+    //   // }
+    // }
   }
   onReject() {}
   onDownload() {}
