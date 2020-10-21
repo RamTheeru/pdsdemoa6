@@ -37,15 +37,33 @@ export class EntercreditdetailsComponent implements OnInit {
     } else {
       this.creditForm = this._fb.group({
         location: new FormControl(""),
-        lmcredit: new FormControl({value: '', disabled: true}),
-        lmtdebit: new FormControl({value: '', disabled: true}),
-        balance: new FormControl({value: '', disabled: true}),
+        lmcredit: new FormControl({ value: "", disabled: true }),
+        lmtdebit: new FormControl({ value: "", disabled: true }),
+        balance: new FormControl({ value: "", disabled: true }),
         tmcredit: new FormControl()
       });
     }
   }
-  onSelectStation(event) {
-    console.log(event);
+  onSelectStation(evnt) {
+    console.log(evnt.value);
+    let val = evnt.value;
+    if (val !== "") {
+      this.creditForm = this._fb.group({
+        location: new FormControl(val),
+        lmcredit: new FormControl({ value: "100000", disabled: true }),
+        lmtdebit: new FormControl({ value: "90000", disabled: true }),
+        balance: new FormControl({ value: "10000", disabled: true }),
+        tmcredit: new FormControl()
+      });
+    } else {
+      this.creditForm = this._fb.group({
+        location: new FormControl(""),
+        lmcredit: new FormControl({ value: "", disabled: true }),
+        lmtdebit: new FormControl({ value: "", disabled: true }),
+        balance: new FormControl({ value: "", disabled: true }),
+        tmcredit: new FormControl()
+      });
+    }
   }
   onSubmit() {}
 }

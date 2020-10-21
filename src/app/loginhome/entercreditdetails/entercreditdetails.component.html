@@ -12,7 +12,7 @@
 				</mat-form-field> -->
 
 				<mat-form-field class="inpt" style="margin-left:85px;">
-					<mat-select formControlName="location" (change)="onSelectStation($event)"
+					<mat-select formControlName="location" (selectionChange)="onSelectStation($event)"
 						aria-placeholder="Select Location" class="form-control">
 						<mat-option value="">Select Location</mat-option>
 						<mat-option value="atp">Anantapur</mat-option>
