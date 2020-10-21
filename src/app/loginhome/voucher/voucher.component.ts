@@ -100,7 +100,7 @@ export class VoucherComponent implements OnInit {
     ntamnt = this.voucherForm.value["netamnt"];
     if (val !== "" && ntamnt !== 0) {
       txamnt = ntamnt * (18 / 100);
-      result = ntamnt + txamnt;
+      result = parseInt(ntamnt.toString()) + parseInt(txamnt.toString());
       this.voucherForm.controls.taxamnt.setValue(txamnt);
       this.voucherForm.controls.totalamnt.setValue(result);
     } else {
