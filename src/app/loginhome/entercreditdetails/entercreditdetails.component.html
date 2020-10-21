@@ -3,6 +3,24 @@
 	<form class="form-horizontal" [formGroup]="creditForm" (ngSubmit)="onSubmit()">
 		<div class="frm">
 			<div class="row">
+				<label>Select Location:</label>
+
+				<!-- <mat-form-field class="inpt">
+
+					<input type="text" formControlName="lmcredit" class="form-control" matInput placeholder="Last Month's Credit*">
+					<mat-error>This field is mandatory</mat-error>
+				</mat-form-field> -->
+
+				<mat-form-field class="inpt" style="margin-left:85px;">
+					<mat-select formControlName="location" (change)="onSelectStation($event)"
+						aria-placeholder="Select Location" class="form-control">
+						<mat-option value="">Select Location</mat-option>
+						<mat-option value="atp">Anantapur</mat-option>
+						<mat-option value="gtk">Guntakal</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+			<div class="row">
 				<label>Last Month's Credit:</label>
 
 				<mat-form-field class="inpt">

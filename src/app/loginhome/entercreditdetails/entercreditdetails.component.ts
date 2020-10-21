@@ -28,6 +28,7 @@ export class EntercreditdetailsComponent implements OnInit {
   initForm() {
     if (this.editMode) {
       this.creditForm = this._fb.group({
+        location: new FormControl("gtk"),
         lmcredit: new FormControl("4500"),
         lmtdebit: new FormControl("3200"),
         balance: new FormControl("300"),
@@ -35,12 +36,16 @@ export class EntercreditdetailsComponent implements OnInit {
       });
     } else {
       this.creditForm = this._fb.group({
-        lmcredit: new FormControl(),
-        lmtdebit: new FormControl(),
-        balance: new FormControl(),
+        location: new FormControl(""),
+        lmcredit: new FormControl({value: '', disabled: true}),
+        lmtdebit: new FormControl({value: '', disabled: true}),
+        balance: new FormControl({value: '', disabled: true}),
         tmcredit: new FormControl()
       });
     }
+  }
+  onSelectStation(event) {
+    console.log(event);
   }
   onSubmit() {}
 }
