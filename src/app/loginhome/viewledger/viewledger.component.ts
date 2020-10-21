@@ -109,10 +109,10 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
     child = this.tablist.nativeElement.children;
     //console.log(child[0].children[1].children);
     let cc = [];
-    cc = child[0].children;
-    //let cc2 = child[0].children[1].children[0];
+    cc = child[0].children[1].children;
+   // console.log(cc);
     for (var val of cc) {
-      console.log(val);
+      console.log(val.childNodes);
       // for (var val2 of val[0]) {
       //   console.log(val2);
       // }
