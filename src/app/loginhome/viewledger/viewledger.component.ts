@@ -117,11 +117,11 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
     let cc2 = [];
     for (let i = 0; i < cc.length; i++) {
       cc2 = cc[i].children;
-      let cc3 = {};
+      let cc3 = [];
       //console.log(cc2);
       for (let i = 0; i < cc2.length; i++) {
         cc3 = cc2[i];
-        console.log(cc3);
+        //console.log(cc3[0]);
       }
     }
     // for (var val of cc2) {
