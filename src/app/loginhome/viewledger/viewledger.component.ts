@@ -110,7 +110,7 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
     //console.log(child[0].children[1].children);
     let cc = [];
     cc = child[0].children[1].children;
-   // console.log(cc);
+    // console.log(cc);
     for (var val of cc) {
       console.log(val.childNodes);
       // for (var val2 of val[0]) {
@@ -122,7 +122,7 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
   onDownload() {}
   toggleEditable(event) {
     if (event.target.checked) {
-      event.target.value = "true";
+      event.target.value = true;
     }
   }
   getlist(event) {}
