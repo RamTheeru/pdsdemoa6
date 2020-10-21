@@ -82,7 +82,7 @@
 					<td>{{l.Id}}</td>
 					<td>{{l.VoucherDate}}</td>
 					<div *ngIf="isHe">
-						<td><input class="checkb" type="checkbox"/>
+						<td><input class="checkb" (change)="toggleEditable($event)" type="checkbox" value=""/>
 				</div>
 						<td>
 							<div *ngIf="isLe; else fhe">
