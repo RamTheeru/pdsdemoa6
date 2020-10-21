@@ -45,9 +45,10 @@ export class EntercreditdetailsComponent implements OnInit {
     }
   }
   onSelectStation(evnt) {
-    console.log(evnt.value);
     let val = evnt.value;
+    // ntamnt = this.creditForm.value["netamnt"];
     if (val !== "") {
+      //  this.creditForm.controls.taxamnt.setValue(txamnt);
       this.creditForm = this._fb.group({
         location: new FormControl(val),
         lmcredit: new FormControl({ value: "100000", disabled: true }),

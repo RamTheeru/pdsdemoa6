@@ -73,8 +73,9 @@ export class VoucherComponent implements OnInit {
         paidto: new FormControl("Gtk"),
         purpose: new FormControl("Transport"),
         netamnt: new FormControl("1000"),
+        taxamnt: new FormControl("200"),
         tax: new FormControl("gst"),
-        totalamnt: new FormControl("10000")
+        totalamnt: new FormControl("1200")
       });
     } else {
       this.voucherForm = this._fb.group({
@@ -84,10 +85,25 @@ export class VoucherComponent implements OnInit {
         paidto: new FormControl(),
         purpose: new FormControl(),
         netamnt: new FormControl(),
+        taxamnt: new FormControl(),
         tax: new FormControl(""),
         totalamnt: new FormControl(),
         remark: new FormControl()
       });
+    }
+  }
+  onSelectStation(evnt) {
+    let val = evnt.value;
+    let txamnt = 0;
+    let ntamnt = 0;
+    ntamnt = this.voucherForm.value["netamnt"];
+    if (val !== "" && ntamnt !== 0) {
+      txamnt = ntamnt * (18 / 100);
+      this.voucherForm.controls.taxamnt.setValue(txamnt);
+      this.voucherForm.controls.totalamnt.setValue(ntamnt + txamnt);
+    } else {
+      this.voucherForm.controls.taxamnt.setValue(txamnt);
+      this.voucherForm.controls.totalamnt.setValue(txamnt);
     }
   }
   onSubmit() {}

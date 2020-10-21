@@ -76,15 +76,27 @@
 
 			</div>
 			<div class="row">
-				<label>Taxes If Any:</label>
+				<div class="col">
+					<label>Tax Amount:</label>
 
-				<mat-form-field class="inpt" style="margin-left:117px;">
+					<mat-form-field class="inpt" style="margin-left:117px;">
 
-					<mat-select formControlName="tax" aria-placeholder="Select Tax" class="form-control">
-						<mat-option value="">Select Tax</mat-option>
-						<mat-option value="gst">GST</mat-option>
-					</mat-select>
-				</mat-form-field>
+						<input type="text" name="taxamnt" formControlName="taxamnt" matInput placeholder="Tax Amount" class="form-control">
+						<mat-error>This field is mandatory</mat-error>
+					</mat-form-field>
+				</div>
+				<div class="col">
+					<label>Taxes If Any:</label>
+
+					<mat-form-field class="inpt" style="margin-left:117px;">
+
+						<mat-select formControlName="tax" (selectionChange)="onSelectStation($event)"
+							aria-placeholder="Select Tax" class="form-control">
+							<mat-option value="">Select Tax</mat-option>
+							<mat-option value="gst">GST</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
 			</div>
 			<div class="row">
 				<label>Total Amount:</label>
