@@ -38,7 +38,8 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
       Debit: "XXX",
       Balance: "10000",
       Status: "A",
-      VStatus: false
+      VStatus: false,
+      CheckVal: false
     },
     {
       Id: 2,
@@ -49,7 +50,8 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
       Debit: "XXX",
       Balance: "9000",
       Status: "A",
-      VStatus: false
+      VStatus: false,
+      CheckVal: false
     },
     {
       Id: 3,
@@ -60,7 +62,8 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
       Debit: "XXX",
       Balance: "12000",
       Status: "R",
-      VStatus: false
+      VStatus: false,
+      CheckVal: false
     }
   ];
   constructor(private vServ: ViewService, private route: ActivatedRoute) {
@@ -104,24 +107,24 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
     this.subsc.unsubscribe();
     this.subsc2.unsubscribe();
   }
-  onAccept() {
-    let child = [];
-    child = this.tablist.nativeElement.children;
-    //console.log(child[0].children[1].children)
-    let cc = [];
-    cc = child[0].children[1].children;
-    // console.log(cc);
-    let cc2 = [];
-
-    for (let i = 0; i < cc.length; i++) {
-      cc2 = cc[i].children;
-      let cc3 = {};
-      //console.log(cc2);
-      for (let i = 0; i < cc2.length; i++) {
-        cc3 = cc2[i];
-        console.log(cc3);
-      }
-    }
+  onAccept(ledger) {
+    console.log(ledger);
+    // let child = [];
+    // child = this.tablist.nativeElement.children;
+    // //console.log(child[0].children[1].children)
+    // let cc = [];
+    // cc = child[0].children[1].children;
+    // // console.log(cc);
+    // let cc2 = [];
+    // for (let i = 0; i < cc.length; i++) {
+    //   cc2 = cc[i].children;
+    //   let cc3 = {};
+    //   //console.log(cc2);
+    //   for (let i = 0; i < cc2.length; i++) {
+    //     cc3 = cc2[i];
+    //     console.log(cc3);
+    //   }
+    //}
     // for (var val of cc2) {
     //   let txt = val.childNodes[3];
     //   let html = val.childNodes[4];

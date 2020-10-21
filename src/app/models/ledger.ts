@@ -8,4 +8,5 @@ export class Ledger {
   Balance: string;
   Status: string;
   VStatus: Boolean;
+  CheckVal: Boolean = false;
 }
