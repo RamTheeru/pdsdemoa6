@@ -94,13 +94,15 @@ export class VoucherComponent implements OnInit {
   }
   onSelectStation(evnt) {
     let val = evnt.value;
-    let txamnt = 0;
-    let ntamnt = 0;
+    let txamnt: number = 0;
+    let ntamnt: number = 0;
+    let result: number = 0;
     ntamnt = this.voucherForm.value["netamnt"];
     if (val !== "" && ntamnt !== 0) {
       txamnt = ntamnt * (18 / 100);
+      result = ntamnt + txamnt;
       this.voucherForm.controls.taxamnt.setValue(txamnt);
-      this.voucherForm.controls.totalamnt.setValue(ntamnt + txamnt);
+      this.voucherForm.controls.totalamnt.setValue(result);
     } else {
       this.voucherForm.controls.taxamnt.setValue(txamnt);
       this.voucherForm.controls.totalamnt.setValue(txamnt);
