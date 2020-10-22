@@ -2,7 +2,7 @@ import {
   Component,
   OnInit,
   Input,
-  ViewChild,
+  ViewChildren,
   ElementRef,
   OnChanges,
   OnDestroy
@@ -18,7 +18,7 @@ import { ViewService } from "../../view.service";
 })
 export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
   @Input("") userType: string;
-  @ViewChild("tablist") tablist: ElementRef;
+  @ViewChildren("tablist") tablist;
   private subsc: r.Subscription;
   private subsc2: r.Subscription;
   isLe: Boolean = false;
@@ -30,7 +30,7 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
   location: string = "";
   list: Ledger[] = [
     {
-      Id: 1,
+      Id: 101,
       VoucherDate: "09-04-2021",
       VoucherNumber: "PDS/2021/GTKl/10/001",
       Particulars: "Petty Cash to Station-ops",
@@ -42,7 +42,7 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
       CheckVal: false
     },
     {
-      Id: 2,
+      Id: 102,
       VoucherDate: "09-09-2021",
       VoucherNumber: "PDS/2021/GTKl/10/002",
       Particulars: "Petty Cash to Station-ops",
@@ -54,7 +54,7 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
       CheckVal: false
     },
     {
-      Id: 3,
+      Id: 13,
       VoucherDate: "09-18-2021",
       VoucherNumber: "PDS/2021/GTKl/10/003",
       Particulars: "Petty Cash to Station-ops",
@@ -108,22 +108,32 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
     this.subsc2.unsubscribe();
   }
   onAccept() {
-    let child = [];
-    child = this.tablist.nativeElement.children;
-    //console.log(child[0].children[1].children)
-    let cc = [];
-    cc = child[0].children[1].children;
-    // console.log(cc);
-    let cc2 = [];
-    for (let i = 0; i < cc.length; i++) {
-      cc2 = cc[i].children;
-      let cc3 = [];
-      //console.log(cc2);
-      for (let i = 0; i < cc2.length; i++) {
-        cc3 = cc2[i];
-        //console.log(cc3[0]);
-      }
-    }
+    // filter only checked element
+    const cbsChecked = this.tablist._results.filter(cb => {
+      return cb.nativeElement.checked;
+    });
+    console.log(cbsChecked);
+    // send city name in defined list
+    //  this.downloadClicked.emit(cbsChecked.map(cb => {
+    //   return {city: cb.nativeElement.value};
+    //  }));
+    // let child = [];
+    // child = this.tablist.nativeElement.children;
+    // //console.log(child[0].children[1].children)
+    // let cc = [];
+    // cc = child[0].children[1].children;
+    // // console.log(cc);
+    // let cc2 = [];
+
+    // for (let i = 0; i < cc.length; i++) {
+    //   cc2 = cc[i].children;
+    //   let cc3 = [];
+    //  // console.log(cc2);
+    //   for (let i = 0; i < cc2.length; i++) {
+    //     cc3 = cc2[i];
+    //     //console.log(cc3[0]);
+    //   }
+    // }
     // for (var val of cc2) {
     //   let txt = val.childNodes[3];
     //   let html = val.childNodes[4];
