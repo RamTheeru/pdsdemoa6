@@ -114,25 +114,54 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
     this.subsc2.unsubscribe();
   }
   onAccept() {
-    // // filter only checked element
+    // // filter only checked element;
     const cbsChecked = this.tablist._results.filter(cb => {
       return cb.nativeElement.checked;
     });
 
     for (var val2 of cbsChecked) {
       this.ledgerIds.push(val2.nativeElement.id);
-    
     }
-      if (this.ledgerIds.length > 0) {
-      } else {
-        this.swSwrv.showErrorMessage(
-          "Invalid Input!!",
-          "Please Select atleast one of the CheckBoxes!!"
-        );
-      }
+    if (this.ledgerIds.length > 0) {
+    } else {
+      this.swSwrv.showErrorMessage(
+        "Invalid Input!!",
+        "Please Select atleast one of the CheckBoxes!!"
+      );
+    }
   }
-  onReject() {}
-  onDownload() {}
+  onReject() {
+    const cbsChecked = this.tablist._results.filter(cb => {
+      return cb.nativeElement.checked;
+    });
+
+    for (var val2 of cbsChecked) {
+      this.ledgerIds.push(val2.nativeElement.id);
+    }
+    if (this.ledgerIds.length > 0) {
+    } else {
+      this.swSwrv.showErrorMessage(
+        "Invalid Input!!",
+        "Please Select atleast one of the CheckBoxes!!"
+      );
+    }
+  }
+  onDownload() {
+    const cbsChecked = this.tablist._results.filter(cb => {
+      return cb.nativeElement.checked;
+    });
+
+    for (var val2 of cbsChecked) {
+      this.ledgerIds.push(val2.nativeElement.id);
+    }
+    if (this.ledgerIds.length > 0) {
+    } else {
+      this.swSwrv.showErrorMessage(
+        "Invalid Input!!",
+        "Please Select atleast one of the CheckBoxes!!"
+      );
+    }
+  }
   toggleEditable(event) {
     if (event.target.checked) {
       event.target.value = true;
