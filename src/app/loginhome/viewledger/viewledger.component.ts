@@ -121,6 +121,8 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
 
     for (var val2 of cbsChecked) {
       this.ledgerIds.push(val2.nativeElement.id);
+    
+    }
       if (this.ledgerIds.length > 0) {
       } else {
         this.swSwrv.showErrorMessage(
@@ -128,7 +130,6 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
           "Please Select atleast one of the CheckBoxes!!"
         );
       }
-    }
   }
   onReject() {}
   onDownload() {}
