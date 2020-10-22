@@ -11,6 +11,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Ledger } from "../../models/ledger";
 import * as r from "rxjs";
 import { ViewService } from "../../view.service";
+import { SweetService } from "../../sweet.service";
 @Component({
   selector: "app-viewledger",
   templateUrl: "./viewledger.component.html",
@@ -19,6 +20,7 @@ import { ViewService } from "../../view.service";
 export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
   @Input("") userType: string;
   @ViewChildren("tablist") tablist;
+  ledgerIds = [];
   private subsc: r.Subscription;
   private subsc2: r.Subscription;
   isLe: Boolean = false;
@@ -54,7 +56,7 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
       CheckVal: false
     },
     {
-      Id: 13,
+      Id: 103,
       VoucherDate: "09-18-2021",
       VoucherNumber: "PDS/2021/GTKl/10/003",
       Particulars: "Petty Cash to Station-ops",
@@ -66,7 +68,11 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
       CheckVal: false
     }
   ];
-  constructor(private vServ: ViewService, private route: ActivatedRoute) {
+  constructor(
+    private vServ: ViewService,
+    private route: ActivatedRoute,
+    private swSwrv: SweetService
+  ) {
     // console.log(this.route.snapshot["_routerState"].url);
     //this.ngOnInit();
     // this.route.params.subscribe(params => {
@@ -108,43 +114,21 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
     this.subsc2.unsubscribe();
   }
   onAccept() {
-    // filter only checked element
+    // // filter only checked element
     const cbsChecked = this.tablist._results.filter(cb => {
       return cb.nativeElement.checked;
     });
-    console.log(cbsChecked);
-    // send city name in defined list
-    //  this.downloadClicked.emit(cbsChecked.map(cb => {
-    //   return {city: cb.nativeElement.value};
-    //  }));
-    // let child = [];
-    // child = this.tablist.nativeElement.children;
-    // //console.log(child[0].children[1].children)
-    // let cc = [];
-    // cc = child[0].children[1].children;
-    // // console.log(cc);
-    // let cc2 = [];
 
-    // for (let i = 0; i < cc.length; i++) {
-    //   cc2 = cc[i].children;
-    //   let cc3 = [];
-    //  // console.log(cc2);
-    //   for (let i = 0; i < cc2.length; i++) {
-    //     cc3 = cc2[i];
-    //     //console.log(cc3[0]);
-    //   }
-    // }
-    // for (var val of cc2) {
-    //   let txt = val.childNodes[3];
-    //   let html = val.childNodes[4];
-    //   // let txt = cc2[3].innerText;
-    //   // let html = cc2[2].innerHTML;
-    //   // console.log(txt);
-    //   // console.log(html);
-    //   // for (var val2 of cc2) {
-    //   //   console.log(val2);
-    //   // }
-    // }
+    for (var val2 of cbsChecked) {
+      this.ledgerIds.push(val2.nativeElement.id);
+      if (this.ledgerIds.length > 0) {
+      } else {
+        this.swSwrv.showErrorMessage(
+          "Invalid Input!!",
+          "Please Select atleast one of the CheckBoxes!!"
+        );
+      }
+    }
   }
   onReject() {}
   onDownload() {}
