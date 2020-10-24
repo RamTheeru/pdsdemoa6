@@ -7,14 +7,20 @@ export class ViewService {
   data = new r.BehaviorSubject<string>("");
   verify = new r.BehaviorSubject<string>("");
   constructor() {
-    // let verifyval = localStorage.getItem("fheverify");
-    // if (verifyval == "undefined" || verifyval == "" || verifyval == null)
-    //   this.setVerify(verifyval, true);
-    // else this.setVerify(verifyval, false);
-    // let storedProp = localStorage.getItem("storedProp");
-    // if (storedProp == "undefined" || storedProp == "" || storedProp == null)
-    //   this.setValue(storedProp, true);
-    // else this.setValue(storedProp, false);
+    let verifyval = localStorage.getItem("fheverify");
+    if (verifyval == "undefined" || verifyval == "" || verifyval == null)
+      this.setVerify(verifyval, true);
+    else this.setVerify(verifyval, false);
+
+    let verifyval2 = localStorage.getItem("edleverify");
+    if (verifyval2 == "undefined" || verifyval2 == "" || verifyval2 == null)
+      this.setVerify(verifyval2, true);
+    else this.setVerify(verifyval2, false);
+
+    let storedProp = localStorage.getItem("storedProp");
+    if (storedProp == "undefined" || storedProp == "" || storedProp == null)
+      this.setValue(storedProp, true);
+    else this.setValue(storedProp, false);
   }
   setValue(val: string, storeProp: boolean = true) {
     this.data = new r.BehaviorSubject<string>("");

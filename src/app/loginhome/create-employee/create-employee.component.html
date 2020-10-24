@@ -10,15 +10,16 @@
 				(click)="showtab(1)">Personal Details</a>
 		</li>
 		<li class="nav-item">
-			<a [ngClass]="hidTab2 ? 'nav-link' : 'nav-link active'" id="pills-profile-tab" data-toggle="pill"
-				href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"
-				(click)="showtab(2)">Address Details & Designation </a>
-		</li>
-		<li class="nav-item">
-			<a [ngClass]="hidTab3 ? 'nav-link' : 'nav-link active'" id="pills-contact-tab" data-toggle="pill"
+			<a [ngClass]="hidTab2 ? 'nav-link' : 'nav-link active'" id="pills-contact-tab" data-toggle="pill"
 				href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"
-				(click)="showtab(3)">Bank Account & Other Details</a>
+				(click)="showtab(2)">Bank Account & Other Details</a>
 		</li>
+		<li class="nav-item" *ngIf="isEdle">
+			<a [ngClass]="hidTab3 ? 'nav-link' : 'nav-link active'" id="pills-profile-tab" data-toggle="pill"
+				href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"
+				(click)="showtab(3)">Address Details & Designation </a>
+		</li>
+
 	</ul>
 
 
@@ -96,58 +97,6 @@
 							</mat-form-field>
 						</div>
 					</div>
-				</div>
-				<div [ngClass]="hidTab2 ? 'tab-pane fade' : 'tab-pane fade show active'" id="pills-profile"
-					role="tabpanel" aria-labelledby="pills-profile-tab" [hidden]="hidTab2">
-					<div class="row" *ngIf="!isEdle">
-						<div class="col">
-							<mat-form-field>
-								<input type="text" name="addressLine1" formControlName="ad1" matInput placeholder="Address Line 1" class="form-control">
-								<mat-error>This field is mandatory</mat-error>
-							</mat-form-field>
-						</div>
-						<div class="col">
-							<mat-form-field>
-								<input type="text" name="addressLine2" formControlName="ad2" matInput placeholder="Address Line 2" class="form-control">
-								<mat-error>This field is mandatory</mat-error>
-							</mat-form-field>
-						</div>
-						<div class="col">
-							<mat-form-field>
-								<input type="text" name="place" formControlName="place" matInput placeholder="Town/Mandal/Taluka/Village" class="form-control">
-								<mat-error>This field is mandatory</mat-error>
-							</mat-form-field>
-						</div>
-					</div>
-					<div class="row" *ngIf="!isEdle">
-						<div class="col">
-							<mat-form-field>
-								<input type="text" name="state" formControlName="state" matInput placeholder="State" class="form-control">
-								<mat-error>This field is mandatory</mat-error>
-							</mat-form-field>
-
-						</div>
-						<div class="col">
-							<mat-form-field>
-								<input type="text" name="postal" formControlName="postal" matInput placeholder="Postal Code" class="form-control">
-								<mat-error>This field is mandatory</mat-error>
-							</mat-form-field>
-
-						</div>
-						<div class="col">
-							<mat-form-field>
-								<mat-select formControlName="desg" aria-placeholder="Designation">
-									<mat-option value="">Select Designation</mat-option>
-									<mat-option value="Ka">KeyAccountsManager</mat-option>
-									<mat-option value="Su">Supervisor</mat-option>
-									<mat-option value="Sr">Sr. Manager</mat-option>
-									<mat-option value="Ast">Asst. Manager</mat-option>
-									<mat-option value="Su">Office Assistant</mat-option>
-								</mat-select>
-							</mat-form-field>
-						</div>
-
-					</div>
 					<div class="row">
 						<div class="col">
 							<mat-form-field>
@@ -172,8 +121,8 @@
 
 					</div>
 				</div>
-				<div [ngClass]="hidTab3 ? 'tab-pane fade' : 'tab-pane fade show active'" id="pills-contact"
-					role="tabpanel" aria-labelledby="pills-contact-tab" [hidden]="hidTab3">
+				<div [ngClass]="hidTab2 ? 'tab-pane fade' : 'tab-pane fade show active'" id="pills-profile"
+					role="tabpanel" aria-labelledby="pills-profile-tab" [hidden]="hidTab2">
 					<div class="row">
 						<div class="col">
 							<mat-form-field>
@@ -272,6 +221,62 @@
 
 						</div>
 					</div>
+
+				</div>
+				<div [ngClass]="hidTab3 ? 'tab-pane fade' : 'tab-pane fade show active'" id="pills-contact"
+					role="tabpanel" aria-labelledby="pills-contact-tab" [hidden]="hidTab3">
+
+					<div class="row">
+						<div class="col">
+							<mat-form-field>
+								<input type="text" name="addressLine1" formControlName="ad1" matInput placeholder="Address Line 1" class="form-control">
+								<mat-error>This field is mandatory</mat-error>
+							</mat-form-field>
+						</div>
+						<div class="col">
+							<mat-form-field>
+								<input type="text" name="addressLine2" formControlName="ad2" matInput placeholder="Address Line 2" class="form-control">
+								<mat-error>This field is mandatory</mat-error>
+							</mat-form-field>
+						</div>
+						<div class="col">
+							<mat-form-field>
+								<input type="text" name="place" formControlName="place" matInput placeholder="Town/Mandal/Taluka/Village" class="form-control">
+								<mat-error>This field is mandatory</mat-error>
+							</mat-form-field>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							<mat-form-field>
+								<input type="text" name="state" formControlName="state" matInput placeholder="State" class="form-control">
+								<mat-error>This field is mandatory</mat-error>
+							</mat-form-field>
+
+						</div>
+						<div class="col">
+							<mat-form-field>
+								<input type="text" name="postal" formControlName="postal" matInput placeholder="Postal Code" class="form-control">
+								<mat-error>This field is mandatory</mat-error>
+							</mat-form-field>
+
+						</div>
+						<div class="col">
+							<mat-form-field>
+								<mat-select formControlName="desg" aria-placeholder="Designation">
+									<mat-option value="">Select Designation</mat-option>
+									<mat-option value="Ka">KeyAccountsManager</mat-option>
+									<mat-option value="Su">Supervisor</mat-option>
+									<mat-option value="Sr">Sr. Manager</mat-option>
+									<mat-option value="Ast">Asst. Manager</mat-option>
+									<mat-option value="Su">Office Assistant</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+
+					</div>
+
+
 					<div class="row">
 
 

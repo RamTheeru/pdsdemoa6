@@ -34,7 +34,7 @@ export class CreateEmployeeComponent
   private subsc: r.Subscription;
   private subsc2: r.Subscription;
   edleVerify: string = "";
-  isEdle: Boolean = false;
+  isEdle: Boolean = true;
   isLe: Boolean = false;
   isHe: Boolean = false;
   apiResult: APIResult;
@@ -96,18 +96,30 @@ export class CreateEmployeeComponent
     }
   }
   onchangetab(text: string) {
-    if (text == "p") {
-      this.activeTab = this.activeTab - 1;
+    if (this.isEdle) {
+      if (text == "p") {
+        this.activeTab = this.activeTab - 1;
+      } else {
+        this.activeTab = this.activeTab + 1;
+      }
+      if (this.activeTab == 3) {
+        this.hidPrev = false;
+        this.hidNext = true;
+      } else if (this.activeTab == 1) {
+        this.hidPrev = true;
+        this.hidNext = false;
+      } else if (this.activeTab == 2) {
+        this.hidPrev = false;
+        this.hidNext = false;
+      }
     } else {
-      this.activeTab = this.activeTab + 1;
-    }
-    if (this.activeTab == 3) {
-      this.hidPrev = false;
-      this.hidNext = true;
-    } else if (this.activeTab == 1) {
-      this.hidPrev = true;
-      this.hidNext = false;
-    } else if (this.activeTab == 2) {
+      if (text == "p") {
+        this.activeTab = 2;
+        this.activeTab = this.activeTab - 1;
+      } else {
+        this.activeTab = 1;
+        this.activeTab = this.activeTab + 1;
+      }
       this.hidPrev = false;
       this.hidNext = false;
     }
@@ -148,9 +160,12 @@ export class CreateEmployeeComponent
       this.isLe = true;
       this.isHe = false;
       if (this.edleVerify == "edle") {
-        this.isEdle = true;
-      } else {
         this.isEdle = false;
+        this.hidPrev = false;
+        this.hidNext = false;
+        this.showtab(1);
+      } else {
+        this.isEdle = true;
       }
     } else {
       this.isHe = true;
