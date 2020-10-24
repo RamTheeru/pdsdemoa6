@@ -41,10 +41,18 @@ export class DeliveryDetailsComponent implements OnInit {
 
   ngOnInit() {}
   focusOutFunction(val, event) {
-    console.log(e)
+    console.log(event);
     if (val == "dvc") {
-      
+      var id = event.target.id;
+      var val = event.target.value;
+      this.inputs.push(id + "-delcount-" + val);
     } else if (val == "inc") {
+      var id = event.target.id;
+      var val = event.target.value;
+      this.inputs.push(id + "-incent-" + val);
     }
+  }
+  Onsub(){
+    console.log(this.inputs);
   }
 }
