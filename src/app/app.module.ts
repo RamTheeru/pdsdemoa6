@@ -26,6 +26,7 @@ import { CreateEmployeeComponent } from "./loginhome/create-employee/create-empl
 import { IndividualviewComponent } from "./loginhome/individualview/individualview.component";
 import { EmployeelistComponent } from "./loginhome/employeelist/employeelist.component";
 import { EmployeesComponent } from "./loginhome/employees/employees.component";
+import { DeliveryDetailsComponent } from "./loginhome/delivery-details/delivery-details.component";
 import { LogindefaulthomeComponent } from "./loginhome/logindefaulthome/logindefaulthome.component";
 import { EntercreditdetailsComponent } from "./loginhome/entercreditdetails/entercreditdetails.component";
 import { VoucherComponent } from "./loginhome/voucher/voucher.component";
@@ -66,6 +67,7 @@ import { SweetService } from "./sweet.service";
     EntercreditdetailsComponent,
     VoucherComponent,
     ViewledgerComponent,
+    DeliveryDetailsComponent,
     NopageComponent
   ],
   bootstrap: [AppComponent],

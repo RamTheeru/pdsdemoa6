@@ -14,6 +14,7 @@ import { EmployeelistComponent } from "./loginhome/employeelist/employeelist.com
 import { LogindefaulthomeComponent } from "./loginhome/logindefaulthome/logindefaulthome.component";
 import { EntercreditdetailsComponent } from "./loginhome/entercreditdetails/entercreditdetails.component";
 import { EmployeesComponent } from "./loginhome/employees/employees.component";
+import { DeliveryDetailsComponent } from "./loginhome/delivery-details/delivery-details.component";
 import { VoucherComponent } from "./loginhome/voucher/voucher.component";
 import { ViewledgerComponent } from "./loginhome/viewledger/viewledger.component";
 const appRoutes: Routes = [
@@ -31,6 +32,7 @@ const appRoutes: Routes = [
       { path: "userreadings", component: UserreadingsComponent },
       { path: "createemployee", component: CreateEmployeeComponent },
       { path: "createdeliveryassociate", component: CreateEmployeeComponent },
+      { path: "updatedeliverydetails", component: DeliveryDetailsComponent },
       { path: "employeeedit/:id", component: CreateEmployeeComponent },
       { path: "individualview/:id", component: IndividualviewComponent },
       { path: "employeelist", component: EmployeelistComponent },

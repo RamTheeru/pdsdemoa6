@@ -1,0 +1,35 @@
+<div class="container-fluid">
+	<div class="row">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>S.No</th>
+					<th>Employee Code</th>
+					<th>Employee Name</th>
+					<th>Delivery Count</th>
+					<th>Standard Rate/Delivery</th>
+					<th>Incentive</th>
+					<th>Total Amount</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let emp of list;">
+					<td> {{emp.Id}}</td>
+					<td>{{emp.EmployeeCode}}</td>
+					<td>{{emp.EmployeeName}}</td>
+					<td><input type="text" value="{{emp.DeliveryCount}}"/></td>
+					<td>{{emp.StandardRate}}</td>
+					<td><input type="text" value="{{emp.Incentive}}"/></td>
+					<td>{{emp.TotalAmount}}</td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="row">
+		<form class="form-inline">
+			<input class="form-control mr-sm-2" type="text"  placeholder="StationCode">
+			<button class="btn btn-success" (click)="getemployeesbyStation($event)"  type="submit">Search</button>
+		</form>
+	</div>
+</div>
