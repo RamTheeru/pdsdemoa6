@@ -39,7 +39,6 @@ export class EmployeesComponent implements OnInit {
     emp.Guard_Phone = "5353463473";
     emp.DOB = "09-09-1990";
     emp.DOJ = "09-09-2020";
-
     emp.Designation = "Office Assisstnat";
     emp.StationCode = "gtkl";
     emp.LocationName = "Guntakal";
