@@ -35,7 +35,6 @@ export class ViewService {
     if (key == "fheverify") this.verify.next(null);
     else if (key == "edleverify") this.verify.next(null);
     else if (key == "storedProp") this.data.next(null);
-    else this.data.next(null);
   }
   setVerify(val: string, storeProp: boolean = true) {
     if (storeProp && val == "fhe") localStorage.setItem("fheverify", val);

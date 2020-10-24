@@ -77,21 +77,35 @@ export class CreateEmployeeComponent
       //console.log(val.id)
       //console.log(val.className)
       var index = val.className.indexOf("active");
-      if (this.tab1Id == val.id && index !== -1) {
-        this.activeTab = 1;
-        this.showtab(1);
-        this.hidPrev = true;
-        this.hidNext = false;
-      } else if (this.tab2Id == val.id && index !== -1) {
-        this.activeTab = 2;
-        this.showtab(2);
-        this.hidPrev = false;
-        this.hidNext = false;
-      } else if (this.tab3Id == val.id && index !== -1) {
-        this.activeTab = 3;
-        this.showtab(3);
-        this.hidPrev = false;
-        this.hidNext = true;
+      if (this.isEdle) {
+        if (this.tab1Id == val.id && index !== -1) {
+          this.activeTab = 1;
+          this.showtab(1);
+          this.hidPrev = true;
+          this.hidNext = false;
+        } else if (this.tab2Id == val.id && index !== -1) {
+          this.activeTab = 2;
+          this.showtab(2);
+          this.hidPrev = false;
+          this.hidNext = false;
+        } else if (this.tab3Id == val.id && index !== -1) {
+          this.activeTab = 3;
+          this.showtab(3);
+          this.hidPrev = false;
+          this.hidNext = true;
+        }
+      } else {
+        if (this.tab1Id == val.id && index !== -1) {
+          this.activeTab = 1;
+          this.showtab(1);
+          this.hidPrev = false;
+          this.hidNext = false;
+        } else if (this.tab2Id == val.id && index !== -1) {
+          this.activeTab = 2;
+          this.showtab(2);
+          this.hidPrev = false;
+          this.hidNext = false;
+        }
       }
     }
   }
@@ -159,6 +173,7 @@ export class CreateEmployeeComponent
     if (index !== -1) {
       this.isLe = true;
       this.isHe = false;
+      console.log("edle : " + this.edleVerify);
       if (this.edleVerify == "edle") {
         this.isEdle = false;
         this.hidPrev = false;
