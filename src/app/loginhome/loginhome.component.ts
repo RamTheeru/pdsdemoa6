@@ -62,6 +62,10 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.userType = 3;
       this.shownotify = false;
       this.loginInfo = "Finance HE Login";
+    } else if (this.user === "executivele") {
+      this.userType = 4;
+      this.shownotify = false;
+      this.loginInfo = "Executive LE Login";
     } else {
     }
   }
@@ -104,6 +108,11 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.router.onSameUrlNavigation = "reload";
       this.router.navigate(["/loginhome/viewledger"]);
     } else if (tab == "fle") {
+      this.shownotify = false;
+      this.act1SubMenu = false;
+      this.act2SubMenu = false;
+      this.vServ.removeValue("fheverify");
+    } else if (tab == "ele") {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;

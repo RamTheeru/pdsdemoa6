@@ -25,6 +25,7 @@ export class ViewService {
     localStorage.removeItem(key);
     if (key == "fheverify") this.verify.next(null);
     else if (key == "storedProp") this.data.next(null);
+
   }
   setVerify(val: string, storeProp: boolean = true) {
     if (storeProp) localStorage.setItem("fheverify", val);
