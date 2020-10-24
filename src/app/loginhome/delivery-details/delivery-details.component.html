@@ -17,9 +17,9 @@
 					<td> {{emp.Id}}</td>
 					<td>{{emp.EmployeeCode}}</td>
 					<td>{{emp.EmployeeName}}</td>
-					<td><input type="text" value="{{emp.DeliveryCount}}"/></td>
+					<td><input type="text" id="{{emp.Id}}" (focusout)="focusOutFunction('dvc',$event)" value="{{emp.DeliveryCount}}"/></td>
 					<td>{{emp.StandardRate}}</td>
-					<td><input type="text" value="{{emp.Incentive}}"/></td>
+					<td><input type="text" id="{{emp.EmployeeCode}}" (focusout)="focusOutFunction('inc',$event)" value="{{emp.Incentive}}"/></td>
 					<td>{{emp.TotalAmount}} </td>
 
 				</tr>

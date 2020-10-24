@@ -7,6 +7,7 @@ import { DeliveryDetails } from "../../models/deliverydetails";
 })
 export class DeliveryDetailsComponent implements OnInit {
   deliverylist: DeliveryDetails[];
+  inputs: string[];
   list: DeliveryDetails[] = [
     {
       Id: 101,
@@ -39,4 +40,11 @@ export class DeliveryDetailsComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+  focusOutFunction(val, event) {
+    console.log(e)
+    if (val == "dvc") {
+      
+    } else if (val == "inc") {
+    }
+  }
 }
