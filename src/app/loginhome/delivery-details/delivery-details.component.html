@@ -20,16 +20,17 @@
 					<td><input type="text" value="{{emp.DeliveryCount}}"/></td>
 					<td>{{emp.StandardRate}}</td>
 					<td><input type="text" value="{{emp.Incentive}}"/></td>
-					<td>{{emp.TotalAmount}}</td>
+					<td>{{emp.TotalAmount}} </td>
 
 				</tr>
 			</tbody>
 		</table>
 	</div>
+
 	<div class="row">
-		<form class="form-inline">
-			<input class="form-control mr-sm-2" type="text"  placeholder="StationCode">
-			<button class="btn btn-success" (click)="getemployeesbyStation($event)"  type="submit">Search</button>
-		</form>
+		<div class="row" id="btnset">
+			<button  type="button" mat-raised-button color="warn" style="margin-right:10px;" >Cancel</button>
+			<button  type="button" mat-raised-button color="primary" >Submit</button>
+		</div>
 	</div>
 </div>
