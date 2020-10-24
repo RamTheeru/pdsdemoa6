@@ -1,18 +1,31 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { Employee } from "../../models/employee";
 import { APIResult } from "../../models/apiresult";
 import { PdsApiService } from "../../pds-api.service";
 import { SweetService } from "../../sweet.service";
+import { ViewService } from "../../view.service";
+import * as r from "rxjs";
 @Component({
   selector: "app-employees",
   templateUrl: "./employees.component.html",
   styleUrls: ["./employees.component.css"]
 })
 export class EmployeesComponent implements OnInit {
+  @Input("") userType: string;
   employees: Employee[] = [];
   e: Employee;
+  private subsc: r.Subscription;
+  private subsc2: r.Subscription;
+  edleVerify: string = "";
+  isEdle: Boolean = false;
+  isLe: Boolean = false;
+  isHe: Boolean = false;
   apiResult: APIResult;
-  constructor(private api: PdsApiService, private swServ: SweetService) {}
+  constructor(
+    private api: PdsApiService,
+    private swServ: SweetService,
+    private vServ: ViewService
+  ) {}
   getstaticEmployees() {
     const emp: Employee = new Employee();
     const errorTitle: string = "INVALID INPUT!!!";
@@ -53,6 +66,25 @@ export class EmployeesComponent implements OnInit {
     return emp;
   }
   ngOnInit() {
+    this.subsc = this.vServ.data.subscribe((val: string) => {
+      this.userType = val;
+    });
+
+    this.subsc2 = this.vServ.verify.subscribe((val: string) => {
+      this.edleVerify = val;
+    });
+    var index = this.userType.indexOf("le");
+    if (index !== -1) {
+      this.isLe = true;
+      this.isHe = false;
+      if (this.edleVerify == "edle") {
+        this.isEdle = true;
+      } else {
+        this.isEdle = false;
+      }
+    } else {
+      this.isHe = true;
+    }
     let em: Employee;
     em = this.getstaticEmployees();
     this.e = em;
