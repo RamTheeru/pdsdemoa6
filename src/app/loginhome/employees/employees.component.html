@@ -1,0 +1,71 @@
+<div class="container-fluid">
+	<form class="form-inline">
+		<input class="form-control mr-sm-2" type="text"  placeholder="StationCode">
+		<button class="btn btn-success" (click)="getemployeesbyStation($event)"  type="submit">Search</button>
+	</form>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>FirstName</th>
+				<th>LastName</th>
+				<th>FatherName</th>
+				<th>DOB</th>
+				<th>StateCode</th>
+				<th>LocationName</th>
+				<th>Designation</th>
+				<th>DOJ</th>
+				<th>AccountNumber</th>
+				<th>IFSC Code</th>
+				<th>Bank Name</th>
+				<th>Branch Name</th>
+				<th>Aadhar Number</th>
+				<th>PAN Status</th>
+				<th>PAN Number</th>
+				<th>DL/LR Status</th>
+				<th>DL/LLR Number</th>
+				<th>Vehicle Number</th>
+				<th>Address ( D.No )</th>
+				<th>Town/mandal</th>
+				<th>City</th>
+				<th>Mobile</th>
+				<th>Alternate number</th>
+				<th>Marital Status</th>
+				<th>Blood Group</th>
+				<th>Age</th>
+				<!-- <th>Action</th> -->
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let emp of employees;">
+				<td [hidden]="isHide">{{emp.employeeId}}</td>
+				<td>{{emp.FirstName}}</td>
+				<td>{{emp.LastName}}</td>
+				<td>{{emp.Guard_FullName}}</td>
+				<td>{{emp.DOB}}</td>
+				<td>{{emp.stationCode}}</td>
+				<td>{{emp.locationName}}</td>
+				<td>{{emp.Designation}}</td>
+				<td>{{emp.locationName}}</td>
+				<td>{{emp.DOJ}}</td>
+				<td>{{emp.AccountNumber}}</td>
+				<td>{{emp.IFSC}}</td>
+				<td>{{emp.Bank}}</td>
+				<td>{{emp.Branch}}</td>
+				<td>{{emp.Aadhar}}</td>
+				<td>{{emp.PANStatus}}</td>
+				<td>{{emp.PAN}}</td>
+				<td>{{emp.DLLRStatus}}</td>
+				<td>{{emp.DLLRNumber}}</td>
+				<td>{{emp.VehicleNumber}}</td>
+				<td>{{emp.Address}}</td>
+				<td>{{emp.Town}}</td>
+				<td>{{emp.City}}</td>
+				<td>{{emp.Phone}}</td>
+				<td>{{emp.Guard_Phone}}</td>
+        	<td>{{emp.Marital}}</td>
+          	<td>{{emp.BloodGroup}}</td>
+              	<td>{{emp.Age}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
