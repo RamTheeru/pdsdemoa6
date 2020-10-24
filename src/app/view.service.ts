@@ -17,6 +17,11 @@ export class ViewService {
       this.setVerify(verifyval2, true);
     else this.setVerify(verifyval2, false);
 
+    let verifyval3 = localStorage.getItem("evheverify");
+    if (verifyval3 == "undefined" || verifyval3 == "" || verifyval3 == null)
+      this.setVerify(verifyval3, true);
+    else this.setVerify(verifyval3, false);
+
     let storedProp = localStorage.getItem("storedProp");
     if (storedProp == "undefined" || storedProp == "" || storedProp == null)
       this.setValue(storedProp, true);
@@ -34,12 +39,15 @@ export class ViewService {
     localStorage.removeItem(key);
     if (key == "fheverify") this.verify.next(null);
     else if (key == "edleverify") this.verify.next(null);
+    else if (key == "evheverify") this.verify.next(null);
     else if (key == "storedProp") this.data.next(null);
   }
   setVerify(val: string, storeProp: boolean = true) {
     if (storeProp && val == "fhe") localStorage.setItem("fheverify", val);
     else if (storeProp && val == "edle")
       localStorage.setItem("edleverify", val);
+    else if (storeProp && val == "evhe")
+      localStorage.setItem("evheverify", val);
     this.verify.next(val);
   }
 

@@ -1,8 +1,8 @@
 <div class="container-fluid">
-	<!-- <form class="form-inline">
+	<form class="form-inline" *ngIf="isHe">
 		<input class="form-control mr-sm-2" type="text"  placeholder="StationCode">
 		<button class="btn btn-success" (click)="getemployeesbyStation($event)"  type="submit">Search</button>
-	</form> -->
+	</form>
 	<div style="height: 600px;overflow: scroll;">
 		<table id="t" class="table table-striped">
 			<thead>
@@ -10,6 +10,9 @@
 					<th></th>
 					<th>FirstName</th>
 					<th>LastName</th>
+					<div *ngIf="isHe">
+						<th>Action</th>
+					</div>
 					<th>FatherName</th>
 					<th>DOB</th>
 					<th>StateCode</th>
@@ -41,33 +44,57 @@
 					<td [hidden]="isHide">{{emp.employeeId}}</td>
 					<td>{{emp.FirstName}}</td>
 					<td>{{emp.LastName}}</td>
-					<td>{{emp.Guard_FullName}}</td>
-					<td>{{emp.DOB}}</td>
-					<td>{{emp.stationCode}}</td>
-					<td>{{emp.locationName}}</td>
-					<td>{{emp.Designation}}</td>
-
-					<td>{{emp.DOJ}}</td>
-					<td>{{emp.BankAccountNumber}}</td>
-					<td>{{emp.IFSCCode}}</td>
-					<td>{{emp.BankName}}</td>
-					<td>{{emp.BranchName}}</td>
-					<td>{{emp.Aadhar}}</td>
-					<td>{{emp.PANStatus}}</td>
-					<td>{{emp.PAN}}</td>
-					<td>{{emp.DLLRStatus}}</td>
-					<td>{{emp.DLLRNumber}}</td>
-					<td>{{emp.VehicleNumber}}</td>
-					<td>{{emp.Address1}}</td>
-					<td>{{emp.Town}}</td>
-					<td>{{emp.City}}</td>
-					<td>{{emp.Phone}}</td>
-					<td>{{emp.Guard_Phone}}</td>
-					<td>{{emp.Marital}}</td>
-					<td>{{emp.BloodGroup}}</td>
-					<td>{{emp.Age}}</td>
+					<div *ngIf="isHe">
+						<td><input  #tablist id="{{emp.employeeId}}" (click)="toggleEditable($event)" type="checkbox" value=""/>
+				</div>
+						<td>{{emp.Guard_FullName}}</td>
+						<td>{{emp.DOB}}</td>
+						<td>{{emp.stationCode}}</td>
+						<td>{{emp.locationName}}</td>
+						<td>{{emp.Designation}}</td>
+						<td>{{emp.DOJ}}</td>
+						<td>{{emp.BankAccountNumber}}</td>
+						<td>{{emp.IFSCCode}}</td>
+						<td>{{emp.BankName}}</td>
+						<td>{{emp.BranchName}}</td>
+						<td>{{emp.Aadhar}}</td>
+						<td>{{emp.PANStatus}}</td>
+						<td>{{emp.PAN}}</td>
+						<td>{{emp.DLLRStatus}}</td>
+						<td>{{emp.DLLRNumber}}</td>
+						<td>{{emp.VehicleNumber}}</td>
+						<td>{{emp.Address1}}</td>
+						<td>{{emp.Town}}</td>
+						<td>{{emp.City}}</td>
+						<td>{{emp.Phone}}</td>
+						<td>{{emp.Guard_Phone}}</td>
+						<td>{{emp.Marital}}</td>
+						<td>{{emp.BloodGroup}}</td>
+						<td>{{emp.Age}}</td>
 				</tr>
 			</tbody>
 		</table>
+	</div>
+	<div class="container">
+		<div class="row" *ngIf="isHe">
+			<div class="row" *ngIf="isEvhe; else ehe">
+				<div class="col" id="btns">
+					<button  type="button" (click)="onAccept()" mat-raised-button color="primary" style="margin-right:10px;" >Confirm Employee</button>
+				</div>
+				<div class="col" id="btns">
+					<button  type="button" mat-raised-button color="warn" (click)="onReject()" >Reject Employee</button>
+				</div>
+				<div class="col" id="btns">
+					<button  type="button" mat-raised-button color="warn" style="margin-right:10px;" >Cancel</button>
+				</div>
+			</div>
+		</div>
+		<ng-template #ehe>
+			<div class="col">
+				<button (click)="onDownload()"  type="button" mat-raised-button color="warn" >Download</button></div>
+			<div class="col">
+				<button  type="button" mat-raised-button color="warn" style="margin-right:10px;" >Cancel</button></div>
+		</ng-template>
+
 	</div>
 </div>

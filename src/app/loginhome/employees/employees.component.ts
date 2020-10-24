@@ -1,4 +1,10 @@
-import { Component, Input, OnInit, OnDestroy } from "@angular/core";
+import {
+  Component,
+  Input,
+  OnInit,
+  ViewChildren,
+  OnDestroy
+} from "@angular/core";
 import { Employee } from "../../models/employee";
 import { APIResult } from "../../models/apiresult";
 import { PdsApiService } from "../../pds-api.service";
@@ -12,12 +18,16 @@ import * as r from "rxjs";
 })
 export class EmployeesComponent implements OnInit, OnDestroy {
   @Input("") userType: string;
+  @ViewChildren("tablist") tablist;
+  ledgerIds = [];
   employees: Employee[] = [];
   e: Employee;
   private subsc: r.Subscription;
   private subsc2: r.Subscription;
   edleVerify: string = "";
+  evheVerify: string = "";
   isEdle: Boolean = false;
+  isEvhe: Boolean = false;
   isLe: Boolean = false;
   isHe: Boolean = false;
   apiResult: APIResult;
@@ -84,6 +94,11 @@ export class EmployeesComponent implements OnInit, OnDestroy {
       }
     } else {
       this.isHe = true;
+      if (this.evheVerify == "evhe") {
+        this.isEvhe = true;
+      } else {
+        this.isEvhe = false;
+      }
     }
     let em: Employee;
     em = this.getstaticEmployees();
@@ -108,6 +123,60 @@ export class EmployeesComponent implements OnInit, OnDestroy {
     //     this.swServ.showErrorMessage("Failure", this.apiResult.Message);
     //   }
     // });
+  }
+  onAccept() {
+    // // filter only checked element;
+    const cbsChecked = this.tablist._results.filter(cb => {
+      return cb.nativeElement.checked;
+    });
+
+    for (var val2 of cbsChecked) {
+      this.ledgerIds.push(val2.nativeElement.id);
+    }
+    if (this.ledgerIds.length > 0) {
+    } else {
+      this.swServ.showErrorMessage(
+        "Invalid Input!!",
+        "Please Select atleast one of the CheckBoxes!!"
+      );
+    }
+  }
+  onReject() {
+    const cbsChecked = this.tablist._results.filter(cb => {
+      return cb.nativeElement.checked;
+    });
+
+    for (var val2 of cbsChecked) {
+      this.ledgerIds.push(val2.nativeElement.id);
+    }
+    if (this.ledgerIds.length > 0) {
+    } else {
+      this.swServ.showErrorMessage(
+        "Invalid Input!!",
+        "Please Select atleast one of the CheckBoxes!!"
+      );
+    }
+  }
+  onDownload() {
+    const cbsChecked = this.tablist._results.filter(cb => {
+      return cb.nativeElement.checked;
+    });
+
+    for (var val2 of cbsChecked) {
+      this.ledgerIds.push(val2.nativeElement.id);
+    }
+    if (this.ledgerIds.length > 0) {
+    } else {
+      this.swServ.showErrorMessage(
+        "Invalid Input!!",
+        "Please Select atleast one of the CheckBoxes!!"
+      );
+    }
+  }
+  toggleEditable(event) {
+    if (event.target.checked) {
+      event.target.value = true;
+    }
   }
   ngOnDestroy() {
     this.subsc.unsubscribe();
