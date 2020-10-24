@@ -4,6 +4,7 @@ import {
   AfterViewInit,
   ViewChild,
   ElementRef,
+  Input,
   OnDestroy
 } from "@angular/core";
 import {
@@ -28,6 +29,7 @@ import * as r from "rxjs";
 })
 export class CreateEmployeeComponent
   implements OnInit, AfterViewInit, OnDestroy {
+  @Input("") userType: string;
   @ViewChild("someInput") someInput: ElementRef;
   private subsc: r.Subscription;
   private subsc2: r.Subscription;
