@@ -7,7 +7,7 @@ import { DeliveryDetails } from "../../models/deliverydetails";
 })
 export class DeliveryDetailsComponent implements OnInit {
   deliverylist: DeliveryDetails[];
-  inputs: string[];
+  inputs: string[] = [];
   list: DeliveryDetails[] = [
     {
       Id: 101,
@@ -52,7 +52,7 @@ export class DeliveryDetailsComponent implements OnInit {
       this.inputs.push(id + "-incent-" + val);
     }
   }
-  Onsub(){
+  Onsub() {
     console.log(this.inputs);
   }
 }
