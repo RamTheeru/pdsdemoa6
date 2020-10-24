@@ -9,7 +9,7 @@ import { SweetService } from "../../sweet.service";
   styleUrls: ["./employees.component.css"]
 })
 export class EmployeesComponent implements OnInit {
-  employees: Employee[];
+  employees: Employee[] = [];
   e: Employee;
   apiResult: APIResult;
   constructor(private api: PdsApiService, private swServ: SweetService) {}
@@ -53,8 +53,13 @@ export class EmployeesComponent implements OnInit {
     return emp;
   }
   ngOnInit() {
-    this.e = this.getstaticEmployees();
+    let em: Employee;
+    em = this.getstaticEmployees();
+    this.e = em;
+    console.log(em);
     this.employees.push(this.e);
+    em = this.getstaticEmployees();
+    this.e = em;
     this.e = this.getstaticEmployees();
     this.employees.push(this.e);
     // this.api.getEmployees().subscribe(data => {
