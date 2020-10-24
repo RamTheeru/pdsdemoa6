@@ -109,5 +109,8 @@ export class EmployeesComponent implements OnInit, OnDestroy {
     //   }
     // });
   }
-  
+  ngOnDestroy() {
+    this.subsc.unsubscribe();
+    this.subsc2.unsubscribe();
+  }
 }
