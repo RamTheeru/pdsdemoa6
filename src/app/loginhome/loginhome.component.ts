@@ -138,5 +138,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
   onLogout() {
     this.vServ.removeValue("storedProp");
     this.vServ.removeValue("fheverify");
+    this.vServ.removeValue("edleverify");
+    //
   }
 }

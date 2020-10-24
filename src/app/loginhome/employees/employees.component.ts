@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, OnDestroy } from "@angular/core";
 import { Employee } from "../../models/employee";
 import { APIResult } from "../../models/apiresult";
 import { PdsApiService } from "../../pds-api.service";
@@ -10,7 +10,7 @@ import * as r from "rxjs";
   templateUrl: "./employees.component.html",
   styleUrls: ["./employees.component.css"]
 })
-export class EmployeesComponent implements OnInit {
+export class EmployeesComponent implements OnInit, OnDestroy {
   @Input("") userType: string;
   employees: Employee[] = [];
   e: Employee;
@@ -109,4 +109,5 @@ export class EmployeesComponent implements OnInit {
     //   }
     // });
   }
+  
 }
