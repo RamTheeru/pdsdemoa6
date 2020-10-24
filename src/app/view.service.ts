@@ -18,6 +18,7 @@ export class ViewService {
     else this.setValue(storedProp, false);
   }
   setValue(val: string, storeProp: boolean = true) {
+    this.data = new r.BehaviorSubject<string>("");
     if (storeProp) localStorage.setItem("storedProp", val);
     this.data.next(val);
   }
@@ -25,7 +26,6 @@ export class ViewService {
     localStorage.removeItem(key);
     if (key == "fheverify") this.verify.next(null);
     else if (key == "storedProp") this.data.next(null);
-
   }
   setVerify(val: string, storeProp: boolean = true) {
     if (storeProp) localStorage.setItem("fheverify", val);
