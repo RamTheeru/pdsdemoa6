@@ -25,6 +25,7 @@ import { UserreadingsComponent } from "./loginhome/userreadings/userreadings.com
 import { CreateEmployeeComponent } from "./loginhome/create-employee/create-employee.component";
 import { IndividualviewComponent } from "./loginhome/individualview/individualview.component";
 import { EmployeelistComponent } from "./loginhome/employeelist/employeelist.component";
+import { EmployeesComponent } from "./loginhome/employees/employees.component";
 import { LogindefaulthomeComponent } from "./loginhome/logindefaulthome/logindefaulthome.component";
 import { EntercreditdetailsComponent } from "./loginhome/entercreditdetails/entercreditdetails.component";
 import { VoucherComponent } from "./loginhome/voucher/voucher.component";
@@ -60,6 +61,7 @@ import { SweetService } from "./sweet.service";
     CreateEmployeeComponent,
     IndividualviewComponent,
     EmployeelistComponent,
+    EmployeesComponent,
     LogindefaulthomeComponent,
     EntercreditdetailsComponent,
     VoucherComponent,

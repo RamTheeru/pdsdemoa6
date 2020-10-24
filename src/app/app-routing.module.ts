@@ -13,6 +13,7 @@ import { IndividualviewComponent } from "./loginhome/individualview/individualvi
 import { EmployeelistComponent } from "./loginhome/employeelist/employeelist.component";
 import { LogindefaulthomeComponent } from "./loginhome/logindefaulthome/logindefaulthome.component";
 import { EntercreditdetailsComponent } from "./loginhome/entercreditdetails/entercreditdetails.component";
+import { EmployeesComponent } from "./loginhome/employees/employees.component";
 import { VoucherComponent } from "./loginhome/voucher/voucher.component";
 import { ViewledgerComponent } from "./loginhome/viewledger/viewledger.component";
 const appRoutes: Routes = [
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
       { path: "entervoucher", component: VoucherComponent },
       { path: "editvoucher/:id", component: VoucherComponent },
       { path: "viewledger", component: ViewledgerComponent },
-      { path: "verifyvouchers", component: ViewledgerComponent }
+      { path: "verifyvouchers", component: ViewledgerComponent },
+      { path: "employees", component: EmployeesComponent }
       //  {path : 'new',component: RecipeEditComponent ,canActivate:[AuthGuard]},
       //  {path : ':id',component: RecipeDetailComponent },
 
