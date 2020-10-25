@@ -89,7 +89,7 @@ export class EmployeesComponent implements OnInit, OnChanges, OnDestroy {
     this.subsc2 = this.vServ.verify.subscribe((val: string) => {
       this.edleVerify = val;
     });
-    this.subsc2 = this.vServ.verify.subscribe((val: string) => {
+    this.subsc2 = this.vServ.verify2.subscribe((val: string) => {
       this.evheVerify = val;
     });
     var index = this.userType.indexOf("le");

@@ -6,6 +6,7 @@ export class ViewService {
   //view = new r.Subject<Boolean>();
   data = new r.BehaviorSubject<string>("");
   verify = new r.BehaviorSubject<string>("");
+  verify2 = new r.BehaviorSubject<string>("");
   constructor() {
     let verifyval = localStorage.getItem("fheverify");
     if (verifyval == "undefined" || verifyval == "" || verifyval == null)
@@ -32,24 +33,27 @@ export class ViewService {
     if (storeProp) localStorage.setItem("storedProp", val);
     this.data.next(val);
   }
-  getValue() {
-    return localStorage.getItem("storedProp");
+  getValue(key) {
+    return localStorage.getItem(key);
   }
   removeValue(key: string) {
     localStorage.removeItem(key);
     if (key == "fheverify") this.verify.next(null);
     else if (key == "edleverify") this.verify.next(null);
-    else if (key == "evheverify") this.verify.next(null);
+    else if (key == "evheverify") this.verify2.next(null);
     else if (key == "storedProp") this.data.next(null);
   }
   setVerify(val: string, storeProp: boolean = true) {
     // this.verify = new r.BehaviorSubject<string>("");
     if (storeProp && val == "fhe") localStorage.setItem("fheverify", val);
-    else if (storeProp && val == "edle")
+    else if (storeProp && val == "edle") {
       localStorage.setItem("edleverify", val);
-    else if (storeProp && val == "evhe")
+      this.verify.next(val);
+    } else if (storeProp && val == "evhe") {
       localStorage.setItem("evheverify", val);
-    this.verify.next(val);
+      this.verify2.next(val);
+    }
+
     //hkugk
   }
 
