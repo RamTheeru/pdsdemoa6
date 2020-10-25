@@ -19,7 +19,8 @@ import * as r from "rxjs";
   templateUrl: "./employees.component.html",
   styleUrls: ["./employees.component.css"]
 })
-export class EmployeesComponent implements OnInit, OnChanges, OnDestroy {
+export class EmployeesComponent
+  implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   @Input("") userType: string;
   @ViewChildren("tablist") tablist;
   ledgerIds = [];
@@ -46,13 +47,11 @@ export class EmployeesComponent implements OnInit, OnChanges, OnDestroy {
     //   return false;
     //
     // };
-    this.evheVerify = this.vServ.getValue("evheVerify");
-    console.log("evheverify :" + this.evheVerify);
-    // route.params.subscribe(val => {
-    // dgdshshhsd 
-    //   this.ngOnInit();
-    //   // put the code  When you want to router navigate on the same page and want to call ngOnInit()
-    // });
+
+    route.paramMap.subscribe(val => {
+      this.ngOnInit();
+      // put the code  When you want to router navigate on the same page and want to call ngOnInit()
+    });
   }
   getstaticEmployees() {
     const emp: Employee = new Employee();
@@ -94,12 +93,12 @@ export class EmployeesComponent implements OnInit, OnChanges, OnDestroy {
 
     return emp;
   }
-  //     ngAfterViewInit() {
-  //   this.ngOnInit();
-  // }
+  ngAfterViewInit() {
+    this.ngOnInit();
+  }
   ngOnChanges() {
     console.log("page reloading");
-    this.ngOnInit();
+    //this.ngOnInit();
     //sfsagdsh
   }
   ngOnInit() {
@@ -125,7 +124,10 @@ export class EmployeesComponent implements OnInit, OnChanges, OnDestroy {
       }
     } else {
       this.isHe = true;
-
+      this.isLe = false;
+      this.isEdle = false;
+      //this.evheVerify = this.vServ.getValue("evheVerify");
+      console.log("verify ehe :" + this.evheVerify);
       if (this.evheVerify == "evhe") {
         this.isEvhe = true;
       } else {

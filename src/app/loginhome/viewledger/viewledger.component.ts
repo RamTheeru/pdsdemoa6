@@ -75,9 +75,10 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
   ) {
     // console.log(this.route.snapshot["_routerState"].url);
     //this.ngOnInit();
-    // this.route.params.subscribe(params => {
-    //   console.log(params);
-    // });
+    route.paramMap.subscribe(val => {
+      this.ngOnInit();
+      // put the code  When you want to router navigate on the same page and want to call ngOnInit()
+    });
   }
 
   ngOnInit() {
