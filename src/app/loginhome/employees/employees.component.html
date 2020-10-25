@@ -41,11 +41,11 @@
 			</thead>
 			<tbody>
 				<tr *ngFor="let emp of employees;">
-					<td [hidden]="isHide">{{emp.employeeId}}</td>
+					<td [hidden]="isHide">{{emp.EmployeeId}}</td>
 					<td>{{emp.FirstName}}</td>
 					<td>{{emp.LastName}}</td>
 					<div *ngIf="isHe">
-						<td><input  #tablist id="{{emp.employeeId}}" (click)="toggleEditable($event)" type="checkbox" value=""/>
+						<td><input  #tablist id="{{emp.EmployeeId}}" (click)="toggleEditable($event)" type="checkbox" value=""/>
 				</div>
 						<td>{{emp.Guard_FullName}}</td>
 						<td>{{emp.DOB}}</td>

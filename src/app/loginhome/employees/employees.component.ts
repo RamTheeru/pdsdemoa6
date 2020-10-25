@@ -39,7 +39,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   getstaticEmployees() {
     const emp: Employee = new Employee();
     const errorTitle: string = "INVALID INPUT!!!";
-  emp.mployeeId =1;
+    emp.EmployeeId = 1;
     emp.FirstName = "Ram";
     emp.LastName = "k";
     emp.MiddleName = "";
@@ -106,7 +106,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
     let em: Employee;
     em = this.getstaticEmployees();
     this.e = em;
-    console.log(em);
+    //  console.log(em);
     this.employees.push(this.e);
     em = this.getstaticEmployees();
     this.e = em;
@@ -136,6 +136,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
     for (var val2 of cbsChecked) {
       this.ledgerIds.push(val2.nativeElement.id);
     }
+   // console.log(this.ledgerIds);
     if (this.ledgerIds.length > 0) {
     } else {
       this.swServ.showErrorMessage(
