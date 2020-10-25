@@ -107,7 +107,7 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
   }
   ngOnChanges() {
     console.log("page reloading");
-    this.ngOnInit();
+    // this.ngOnInit();
   }
   ngOnDestroy() {
     this.subsc.unsubscribe();

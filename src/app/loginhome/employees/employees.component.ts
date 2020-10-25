@@ -3,9 +3,11 @@ import {
   Input,
   OnInit,
   OnChanges,
+  AfterViewInit,
   ViewChildren,
   OnDestroy
 } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { Employee } from "../../models/employee";
 import { APIResult } from "../../models/apiresult";
 import { PdsApiService } from "../../pds-api.service";
@@ -25,6 +27,7 @@ export class EmployeesComponent implements OnInit, OnChanges, OnDestroy {
   e: Employee;
   private subsc: r.Subscription;
   private subsc2: r.Subscription;
+  private subsc3: r.Subscription;
   @Input("") edleVerify: string = "";
   @Input("") evheVerify: string = "";
   isEdle: Boolean = false;
@@ -33,10 +36,16 @@ export class EmployeesComponent implements OnInit, OnChanges, OnDestroy {
   isHe: Boolean = false;
   apiResult: APIResult;
   constructor(
+    private route: ActivatedRoute,
     private api: PdsApiService,
     private swServ: SweetService,
     private vServ: ViewService
-  ) {}
+  ) {
+    route.params.subscribe(val => {
+      // put the code from `ngOnInit` here
+      this.ngOnInit();
+    });
+  }
   getstaticEmployees() {
     const emp: Employee = new Employee();
     const errorTitle: string = "INVALID INPUT!!!";
@@ -76,9 +85,12 @@ export class EmployeesComponent implements OnInit, OnChanges, OnDestroy {
 
     return emp;
   }
+  // ngAfterViewInit() {
+  //   this.ngOnInit();
+  // }
   ngOnChanges() {
     console.log("page reloading");
-    this.ngOnInit();
+    // this.ngOnInit();
     //sfsagdsh
   }
   ngOnInit() {
@@ -89,7 +101,7 @@ export class EmployeesComponent implements OnInit, OnChanges, OnDestroy {
     this.subsc2 = this.vServ.verify.subscribe((val: string) => {
       this.edleVerify = val;
     });
-    this.subsc2 = this.vServ.verify2.subscribe((val: string) => {
+    this.subsc3 = this.vServ.verify2.subscribe((val: string) => {
       this.evheVerify = val;
     });
     var index = this.userType.indexOf("le");
@@ -193,5 +205,6 @@ export class EmployeesComponent implements OnInit, OnChanges, OnDestroy {
   ngOnDestroy() {
     this.subsc.unsubscribe();
     this.subsc2.unsubscribe();
+    this.subsc3.unsubscribe();
   }
 }
