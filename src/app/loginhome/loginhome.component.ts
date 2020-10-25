@@ -78,6 +78,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
     this.shoesidenav = !this.shoesidenav;
   }
   oncreateclk(tab = "") {
+    //fdhfgjf
     this.shownotify = false;
     if (tab == "si") {
       this.act1SubMenu = true;
@@ -98,7 +99,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.vServ.removeValue("fheverify");
       this.vServ.removeValue("evheverify");
       this.vServ.removeValue("edleverify");
-      //  this.router.navigate["/loginhome"];
+      // this.router.navigate["/loginhome"];
     } else if (tab == "fhe") {
       this.shownotify = false;
       this.act1SubMenu = false;
@@ -155,15 +156,6 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.vServ.setVerify("edle");
       this.router.onSameUrlNavigation = "reload";
       this.router.navigate(["/loginhome/createdeliveryassociate"]);
-    } else if (tab == "eehe") {
-      this.shownotify = false;
-      this.act1SubMenu = false;
-      this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(["/loginhome/employees"]);
     } else if (tab == "evhe") {
       this.shownotify = false;
       this.act1SubMenu = false;
@@ -173,6 +165,15 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.vServ.setVerify("evhe");
       this.router.onSameUrlNavigation = "reload";
       this.router.navigate(["/loginhome/employees"]);
+    } else if (tab == "eehe") {
+      this.shownotify = false;
+      this.act1SubMenu = false;
+      this.act2SubMenu = false;
+      this.vServ.removeValue("fheverify");
+      this.vServ.removeValue("evheverify");
+      this.vServ.removeValue("edleverify");
+      this.router.onSameUrlNavigation = "reload";
+      this.router.navigate(["/loginhome/employees"]);
     } else {
       this.shownotify = true;
       this.act1SubMenu = false;
@@ -180,7 +181,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.vServ.removeValue("fheverify");
       this.vServ.removeValue("evheverify");
       this.vServ.removeValue("edleverify");
-      //
+      //sfc  gds
     }
   }
   ngOnDestroy() {
