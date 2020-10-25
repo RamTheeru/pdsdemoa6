@@ -20,6 +20,9 @@ import { ViewService } from "../view.service";
 export class LoginhomeComponent implements OnInit, OnDestroy {
   @Input("") user: string;
   private subsc: r.Subscription;
+  firstTab: Boolean = true;
+  evheTab: Boolean = false;
+  eeheTab: Boolean = false;
   loginInfo: string = "";
   userType: number = 0;
   isFle: Boolean = false;
@@ -136,6 +139,9 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
+      this.firstTab = true;
+      this.eeheTab = false;
+      this.evheTab = false;
       this.vServ.removeValue("evheverify");
       this.vServ.removeValue("edleverify");
       this.vServ.removeValue("fheverify");
@@ -160,6 +166,9 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
+      this.firstTab = false;
+      this.eeheTab = false;
+      this.evheTab = true;
       this.vServ.removeValue("edleverify");
       this.vServ.removeValue("fheverify");
       this.vServ.setVerify("evhe");
@@ -169,6 +178,9 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
+      this.firstTab = false;
+      this.eeheTab = true;
+      this.evheTab = false;
       this.vServ.removeValue("fheverify");
       this.vServ.removeValue("evheverify");
       this.vServ.removeValue("edleverify");

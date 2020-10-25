@@ -7,7 +7,7 @@ import {
   ViewChildren,
   OnDestroy
 } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Employee } from "../../models/employee";
 import { APIResult } from "../../models/apiresult";
 import { PdsApiService } from "../../pds-api.service";
@@ -36,15 +36,15 @@ export class EmployeesComponent implements OnInit, OnChanges, OnDestroy {
   isHe: Boolean = false;
   apiResult: APIResult;
   constructor(
-    private route: ActivatedRoute,
+    private router: Router,
     private api: PdsApiService,
     private swServ: SweetService,
     private vServ: ViewService
   ) {
-    route.params.subscribe(val => {
-      // put the code from `ngOnInit` here
-      this.ngOnInit();
-    });
+    // override the route reuse strategy
+    this.router.routeReuseStrategy.shouldReuseRoute = function() {
+      return false;
+    };
   }
   getstaticEmployees() {
     const emp: Employee = new Employee();
