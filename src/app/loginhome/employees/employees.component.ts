@@ -2,6 +2,7 @@ import {
   Component,
   Input,
   OnInit,
+  OnChanges,
   ViewChildren,
   OnDestroy
 } from "@angular/core";
@@ -16,7 +17,7 @@ import * as r from "rxjs";
   templateUrl: "./employees.component.html",
   styleUrls: ["./employees.component.css"]
 })
-export class EmployeesComponent implements OnInit, OnDestroy {
+export class EmployeesComponent implements OnInit, OnChanges, OnDestroy {
   @Input("") userType: string;
   @ViewChildren("tablist") tablist;
   ledgerIds = [];
@@ -78,6 +79,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   ngOnChanges() {
     console.log("page reloading");
     this.ngOnInit();
+    //sfsagdsh
   }
   ngOnInit() {
     this.subsc = this.vServ.data.subscribe((val: string) => {
@@ -141,7 +143,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
     for (var val2 of cbsChecked) {
       this.ledgerIds.push(val2.nativeElement.id);
     }
-    // console.log(this.ledgerIds);
+    // console.log(this.ledgerIds)
     if (this.ledgerIds.length > 0) {
     } else {
       this.swServ.showErrorMessage(
