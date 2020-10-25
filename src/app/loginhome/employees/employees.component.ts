@@ -104,6 +104,7 @@ export class EmployeesComponent implements OnInit, OnChanges, OnDestroy {
       }
     } else {
       this.isHe = true;
+      console.log("evheverify :" + this.evheVerify);
       if (this.evheVerify == "evhe") {
         this.isEvhe = true;
       } else {
