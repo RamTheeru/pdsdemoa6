@@ -39,7 +39,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   getstaticEmployees() {
     const emp: Employee = new Employee();
     const errorTitle: string = "INVALID INPUT!!!";
-
+  emp.mployeeId =1;
     emp.FirstName = "Ram";
     emp.LastName = "k";
     emp.MiddleName = "";
