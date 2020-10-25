@@ -50,7 +50,7 @@ export class ViewService {
     else if (storeProp && val == "evhe")
       localStorage.setItem("evheverify", val);
     this.verify.next(val);
-    //hkugk 
+    //hkugk
   }
 
   // setValue(value: string) {

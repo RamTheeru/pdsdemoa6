@@ -83,6 +83,9 @@ export class EmployeesComponent implements OnInit, OnDestroy {
     this.subsc2 = this.vServ.verify.subscribe((val: string) => {
       this.edleVerify = val;
     });
+    this.subsc2 = this.vServ.verify.subscribe((val: string) => {
+      this.evheVerify = val;
+    });
     var index = this.userType.indexOf("le");
     if (index !== -1) {
       this.isLe = true;
