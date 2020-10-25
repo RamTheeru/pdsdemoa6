@@ -24,8 +24,8 @@ export class EmployeesComponent implements OnInit, OnDestroy {
   e: Employee;
   private subsc: r.Subscription;
   private subsc2: r.Subscription;
-  edleVerify: string = "";
-  evheVerify: string = "";
+  @Input("") edleVerify: string = "";
+  @Input("") evheVerify: string = "";
   isEdle: Boolean = false;
   isEvhe: Boolean = false;
   isLe: Boolean = false;
@@ -75,6 +75,10 @@ export class EmployeesComponent implements OnInit, OnDestroy {
 
     return emp;
   }
+  ngOnChanges() {
+    console.log("page reloading");
+    this.ngOnInit();
+  }
   ngOnInit() {
     this.subsc = this.vServ.data.subscribe((val: string) => {
       this.userType = val;
@@ -90,6 +94,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
     if (index !== -1) {
       this.isLe = true;
       this.isHe = false;
+      this.isEvhe = false;
       if (this.edleVerify == "edle") {
         this.isEdle = true;
       } else {
@@ -136,7 +141,7 @@ export class EmployeesComponent implements OnInit, OnDestroy {
     for (var val2 of cbsChecked) {
       this.ledgerIds.push(val2.nativeElement.id);
     }
-   // console.log(this.ledgerIds);
+    // console.log(this.ledgerIds);
     if (this.ledgerIds.length > 0) {
     } else {
       this.swServ.showErrorMessage(

@@ -43,7 +43,7 @@ export class ViewService {
     else if (key == "storedProp") this.data.next(null);
   }
   setVerify(val: string, storeProp: boolean = true) {
-    this.verify = new r.BehaviorSubject<string>("");
+    // this.verify = new r.BehaviorSubject<string>("");
     if (storeProp && val == "fhe") localStorage.setItem("fheverify", val);
     else if (storeProp && val == "edle")
       localStorage.setItem("edleverify", val);
