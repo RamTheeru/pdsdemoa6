@@ -91,11 +91,15 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.act1SubMenu = false;
       this.act2SubMenu = false;
       this.vServ.removeValue("fheverify");
+      this.vServ.removeValue("evheverify");
+      this.vServ.removeValue("edleverify");
       // this.router.navigate["/loginhome"];
     } else if (tab == "fhe") {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
+      this.vServ.removeValue("evheverify");
+      this.vServ.removeValue("edleverify");
       this.vServ.setVerify("fhe");
       this.router.onSameUrlNavigation = "reload";
       this.router.navigate(["/loginhome/verifyvouchers"]);
@@ -104,18 +108,22 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.act1SubMenu = false;
       this.act2SubMenu = false;
       this.vServ.removeValue("fheverify");
-
+      this.vServ.removeValue("evheverify");
+      this.vServ.removeValue("edleverify");
       this.router.onSameUrlNavigation = "reload";
       this.router.navigate(["/loginhome/viewledger"]);
     } else if (tab == "fle") {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
+      this.vServ.removeValue("evheverify");
+      this.vServ.removeValue("edleverify");
       this.vServ.removeValue("fheverify");
     } else if (tab == "ele") {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
+      this.vServ.removeValue("evheverify");
       this.vServ.removeValue("edleverify");
       this.vServ.removeValue("fheverify");
     } else if (tab == "ehe") {
@@ -167,6 +175,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.vServ.removeValue("fheverify");
       this.vServ.removeValue("evheverify");
       this.vServ.removeValue("edleverify");
+      //
     }
   }
   ngOnDestroy() {
