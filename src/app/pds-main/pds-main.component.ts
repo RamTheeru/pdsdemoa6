@@ -24,16 +24,16 @@ export class PdsMainComponent implements OnInit {
     this.img = Environment.MainLogo;
   }
   onLogin() {
-    if (this.user == "financele" || this.password == "1234") {
+    if (this.user == "financele" && this.password == "1234") {
       this.vServ.setValue(this.user);
       this.router.navigate(["/loginhome"]);
-    } else if (this.user == "financehe" || this.password == "1234") {
+    } else if (this.user == "financehe" && this.password == "1234") {
       this.vServ.setValue(this.user);
       this.router.navigate(["/loginhome"]);
-    } else if (this.user == "executivele" || this.password == "1234") {
+    } else if (this.user == "executivele" && this.password == "1234") {
       this.vServ.setValue(this.user);
       this.router.navigate(["/loginhome"]);
-    } else if (this.user == "executivehe" || this.password == "1234") {
+    } else if (this.user == "executivehe" && this.password == "1234") {
       this.vServ.setValue(this.user);
       this.router.navigate(["/loginhome"]);
     } else {
