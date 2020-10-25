@@ -43,7 +43,7 @@ const appRoutes: Routes = [
       { path: "verifyvouchers", component: ViewledgerComponent },
       { path: "employees", component: EmployeesComponent },
       { path: "viewdas", component: EmployeesComponent },
-       { path: "employeesinsufficientdata", component: EmployeesComponent }
+      { path: "employeesinsufficientdata", component: EmployeesComponent }
       //  {path : 'new',component: RecipeEditComponent ,canActivate:[AuthGuard]},
       //  {path : ':id',component: RecipeDetailComponent },
 
