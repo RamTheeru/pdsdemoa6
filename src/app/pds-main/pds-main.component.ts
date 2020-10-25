@@ -40,7 +40,7 @@ export class PdsMainComponent implements OnInit {
       this.sweet.showErrorMessage("Fail!!", "Ivalid Login");
     }
   }
-  
+
   // onRegister() {
   //   this.view = false;
   //     this.vServ.updateView(this.view);

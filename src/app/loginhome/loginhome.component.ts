@@ -118,10 +118,18 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.act2SubMenu = false;
       this.vServ.removeValue("edleverify");
       this.vServ.removeValue("fheverify");
+    } else if (tab == "ehe") {
+      this.shownotify = false;
+      this.act1SubMenu = false;
+      this.act2SubMenu = false;
+      this.vServ.removeValue("evheverify");
+      this.vServ.removeValue("edleverify");
+      this.vServ.removeValue("fheverify");
     } else if (tab == "eele") {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
+      this.vServ.removeValue("evheverify");
       this.vServ.removeValue("edleverify");
       this.vServ.removeValue("fheverify");
       this.router.navigate(["/loginhome/createemployee"]);
@@ -129,9 +137,20 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
+      this.vServ.removeValue("fheverify");
+      this.vServ.removeValue("evheverify");
       this.vServ.setVerify("edle");
       this.router.onSameUrlNavigation = "reload";
       this.router.navigate(["/loginhome/createdeliveryassociate"]);
+    } else if (tab == "eehe") {
+      this.shownotify = false;
+      this.act1SubMenu = false;
+      this.act2SubMenu = false;
+      this.vServ.removeValue("fheverify");
+      this.vServ.removeValue("evheverify");
+      this.vServ.removeValue("edleverify");
+      this.router.onSameUrlNavigation = "reload";
+      this.router.navigate(["/loginhome/employees"]);
     } else if (tab == "evhe") {
       this.shownotify = false;
       this.act1SubMenu = false;
@@ -140,12 +159,14 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.vServ.removeValue("fheverify");
       this.vServ.setVerify("evhe");
       this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(["/loginhome/createdeliveryassociate"]);
+      this.router.navigate(["/loginhome/employees"]);
     } else {
       this.shownotify = true;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
       this.vServ.removeValue("fheverify");
+      this.vServ.removeValue("evheverify");
+      this.vServ.removeValue("edleverify");
     }
   }
   ngOnDestroy() {
