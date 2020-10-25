@@ -36,15 +36,23 @@ export class EmployeesComponent implements OnInit, OnChanges, OnDestroy {
   isHe: Boolean = false;
   apiResult: APIResult;
   constructor(
-    private router: Router,
+    private route: ActivatedRoute,
     private api: PdsApiService,
     private swServ: SweetService,
     private vServ: ViewService
   ) {
-    // override the route reuse strategy
-    this.router.routeReuseStrategy.shouldReuseRoute = function() {
-      return false;
-    };
+    // override the        route reuse strategy
+    // this.router.routeReuseStrategy.shouldReuseRoute =    function() {
+    //   return false;
+    //
+    // };
+    this.evheVerify = this.vServ.getValue("evheVerify");
+    console.log("evheverify :" + this.evheVerify);
+    // route.params.subscribe(val => {
+    // dgdshshhsd 
+    //   this.ngOnInit();
+    //   // put the code  When you want to router navigate on the same page and want to call ngOnInit()
+    // });
   }
   getstaticEmployees() {
     const emp: Employee = new Employee();
@@ -56,6 +64,7 @@ export class EmployeesComponent implements OnInit, OnChanges, OnDestroy {
     emp.Phone = "62463732424";
 
     emp.Age = 29;
+
     emp.BloodGroup = "O+";
     emp.Gender = "m";
     emp.Marital = "married";
@@ -85,12 +94,12 @@ export class EmployeesComponent implements OnInit, OnChanges, OnDestroy {
 
     return emp;
   }
-  // ngAfterViewInit() {
+  //     ngAfterViewInit() {
   //   this.ngOnInit();
   // }
   ngOnChanges() {
     console.log("page reloading");
-    // this.ngOnInit();
+    this.ngOnInit();
     //sfsagdsh
   }
   ngOnInit() {
@@ -116,7 +125,7 @@ export class EmployeesComponent implements OnInit, OnChanges, OnDestroy {
       }
     } else {
       this.isHe = true;
-      console.log("evheverify :" + this.evheVerify);
+
       if (this.evheVerify == "evhe") {
         this.isEvhe = true;
       } else {
@@ -135,7 +144,7 @@ export class EmployeesComponent implements OnInit, OnChanges, OnDestroy {
     // this.api.getEmployees().subscribe(data => {
     //   console.log(data);
     //   this.apiResult = data;
-    //   console.log("" + this.apiResult.Status);
+    //   console.log("" +      this.apiResult.Status);
     //   this.apiResult.Status = data.status;
     //   this.apiResult.Message = data.message;
 
@@ -148,7 +157,7 @@ export class EmployeesComponent implements OnInit, OnChanges, OnDestroy {
     // });
   }
   onAccept() {
-    // // filter only checked element;
+    // /   / filter    only checked    element;
     const cbsChecked = this.tablist._results.filter(cb => {
       return cb.nativeElement.checked;
     });
