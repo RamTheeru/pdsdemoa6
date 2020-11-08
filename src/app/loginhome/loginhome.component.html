@@ -162,8 +162,40 @@
 				</ng-container>
 			</ng-template>
 			<ng-template #elseif4>
-				<ng-container *ngIf="userType === 5; else else1">
+				<ng-container *ngIf="userType === 5; else elseif5">
 					<!-- <p>EHE menu</p> -->
+					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+						<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home"
+							role="tab" aria-controls="v-pills-home" aria-selected="true" (click)="onloghomeclk('ehe')"
+							routerLink="/loginhome">Home</a>
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="onloghomeclk('evhe')">Verify Staff</a>
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="onloghomeclk('eehe')">View Das</a>
+					</div>
+				</ng-container>
+			</ng-template>
+			<ng-template #elseif5>
+				<ng-container *ngIf="userType === 6; else elseif6">
+					<!-- <p>HRLE menu</p> -->
+					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+						<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home"
+							role="tab" aria-controls="v-pills-home" aria-selected="true" (click)="onloghomeclk('ehe')"
+							routerLink="/loginhome">Home</a>
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="onloghomeclk('hrle')">Enroll Employee</a>
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							routerLink="/loginhome/submitattendance">Submit Attendence</a>
+					</div>
+				</ng-container>
+			</ng-template>
+			<ng-template #elseif6>
+				<ng-container *ngIf="userType === 6; else else1">
+					<!-- <p>HRHE menu</p> -->
 					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 						<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home"
 							role="tab" aria-controls="v-pills-home" aria-selected="true" (click)="onloghomeclk('ehe')"

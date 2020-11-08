@@ -31,6 +31,7 @@ import { LogindefaulthomeComponent } from "./loginhome/logindefaulthome/logindef
 import { EntercreditdetailsComponent } from "./loginhome/entercreditdetails/entercreditdetails.component";
 import { VoucherComponent } from "./loginhome/voucher/voucher.component";
 import { ViewledgerComponent } from "./loginhome/viewledger/viewledger.component";
+import { SubmitattendanceComponent } from "./loginhome/submitattendance/submitattendance.component";
 import { ViewService } from "./view.service";
 import { PdsApiService } from "./pds-api.service";
 import { SweetService } from "./sweet.service";
@@ -68,6 +69,7 @@ import { SweetService } from "./sweet.service";
     VoucherComponent,
     ViewledgerComponent,
     DeliveryDetailsComponent,
+    SubmitattendanceComponent,
     NopageComponent
   ],
   bootstrap: [AppComponent],

@@ -70,6 +70,10 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.userType = 5;
       this.shownotify = false;
       this.loginInfo = "Executive HE Login";
+    } else if (this.user === "hrle") {
+      this.userType = 6;
+      this.shownotify = false;
+      this.loginInfo = "HR LE Login";
     } else {
       //
     }
@@ -175,6 +179,15 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.vServ.removeValue("edleverify");
       this.router.onSameUrlNavigation = "reload";
       this.router.navigate(["/loginhome/viewdas"]);
+    } else if (tab == "hrle") {
+      this.shownotify = false;
+      this.act1SubMenu = false;
+      this.act2SubMenu = false;
+      this.vServ.removeValue("fheverify");
+      this.vServ.removeValue("evheverify");
+      this.vServ.removeValue("edleverify");
+      //this.router.onSameUrlNavigation = "reload";
+      this.router.navigate(["/loginhome/createemployee"]);
     } else {
       this.shownotify = true;
       this.act1SubMenu = false;
