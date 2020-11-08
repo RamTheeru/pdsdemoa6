@@ -36,6 +36,9 @@ export class PdsMainComponent implements OnInit {
     } else if (this.user == "executivehe" && this.password == "1234") {
       this.vServ.setValue(this.user);
       this.router.navigate(["/loginhome"]);
+    } else if (this.user == "hrle" && this.password == "1234") {
+      this.vServ.setValue(this.user);
+      this.router.navigate(["/loginhome"]);
     } else {
       this.sweet.showErrorMessage("Fail!!", "Ivalid Login");
     }

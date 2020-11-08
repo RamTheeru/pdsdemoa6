@@ -17,6 +17,7 @@ import { EmployeesComponent } from "./loginhome/employees/employees.component";
 import { DeliveryDetailsComponent } from "./loginhome/delivery-details/delivery-details.component";
 import { VoucherComponent } from "./loginhome/voucher/voucher.component";
 import { SubmitattendanceComponent } from "./loginhome/submitattendance/submitattendance.component";
+import { SalaryslipComponent } from "./loginhome/salaryslip/salaryslip.component";
 import { ViewledgerComponent } from "./loginhome/viewledger/viewledger.component";
 const appRoutes: Routes = [
   { path: "", redirectTo: "/home", pathMatch: "full" },
@@ -45,6 +46,7 @@ const appRoutes: Routes = [
       { path: "employees", component: EmployeesComponent },
       { path: "viewdas", component: EmployeesComponent },
       { path: "submitattendance", component: SubmitattendanceComponent },
+      { path: "salaryslips", component: SalaryslipComponent },
       { path: "employeesinsufficientdata", component: EmployeesComponent }
       //  {path : 'new',component: RecipeEditComponent ,canActivate:[AuthGuard]},
       //  {path : ':id',component: RecipeDetailComponent },
