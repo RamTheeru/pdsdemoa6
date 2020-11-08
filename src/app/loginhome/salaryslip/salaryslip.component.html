@@ -1,19 +1,25 @@
 <div class="container-fluid">
 	<div class="row">
-		<!-- <label>Select Location:</label> -->
-
-		<!-- <mat-form-field class="inpt">
-
-					<input type="text" formControlName="lmcredit" class="form-control" matInput placeholder="Last Month's Credit*">
-					<mat-error>This field is mandatory</mat-error>
-				</mat-form-field> -->
-
-		<!-- <mat-form-field class="inpt">
-			<mat-select [(ngModel)]="location" name="location" aria-placeholder="Select Location" class="form-control">
-				<mat-option value="">Select Location</mat-option>
-				<mat-option value="atp">Anantapur</mat-option>
-				<mat-option value="gtk">Guntakal</mat-option>
+		<label>Select Month:</label>
+		<mat-form-field class="inpt">
+			<!-- <mat-label>Select Month</mat-label> -->
+			<mat-select [(ngModel)]="month" name="month" aria-placeholder="Select Month" class="form-control">
+				<!-- <mat-option value=""></mat-option> -->
+				<!-- <mat-option value="atp">Anantapur</mat-option>
+				<mat-option value="gtk">Guntakal</mat-option> -->
+				<mat-option *ngFor=" let m of months;let i = index;" [value]="i">{{m}}</mat-option>
 			</mat-select>
-		</mat-form-field> -->
+		</mat-form-field>
+	</div>
+	<div class="row">
+		<label>Select Employee:</label>
+		<mat-form-field class="inpt">
+			<!-- <mat-label>Select Employee</mat-label> -->
+			<mat-select [(ngModel)]="emp" name="emp" aria-placeholder="Select Employee" class="form-control">
+				<!-- <mat-option value="">Select Employee</mat-option> -->
+				<mat-option value="atp">Ram</mat-option>
+				<mat-option value="gtk">Ravi</mat-option>
+			</mat-select>
+		</mat-form-field>
 	</div>
 </div>
