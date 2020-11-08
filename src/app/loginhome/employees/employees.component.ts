@@ -29,6 +29,7 @@ export class EmployeesComponent
   private subsc: r.Subscription;
   private subsc2: r.Subscription;
   private subsc3: r.Subscription;
+  private subsc4: r.Subscription;
   @Input("") edleVerify: string = "";
   @Input("") evheVerify: string = "";
   isEdle: Boolean = false;
@@ -36,6 +37,8 @@ export class EmployeesComponent
   isLe: Boolean = false;
   isHe: Boolean = false;
   apiResult: APIResult;
+  ishrvhe: Boolean = false;
+  @Input("") hrvheVerify: string = "";
   constructor(
     private route: ActivatedRoute,
     private api: PdsApiService,
@@ -112,8 +115,12 @@ export class EmployeesComponent
     this.subsc3 = this.vServ.verify2.subscribe((val: string) => {
       this.evheVerify = val;
     });
+    this.subsc4 = this.vServ.verify3.subscribe((val: string) => {
+      this.hrvheVerify = val;
+    });
     var index = this.userType.indexOf("le");
     if (index !== -1) {
+      this.ishrvhe = false;
       this.isLe = true;
       this.isHe = false;
       this.isEvhe = false;
@@ -126,12 +133,20 @@ export class EmployeesComponent
       this.isHe = true;
       this.isLe = false;
       this.isEdle = false;
-      //this.evheVerify = this.vServ.getValue("evheVerify");
-      console.log("verify ehe :" + this.evheVerify);
-      if (this.evheVerify == "evhe") {
-        this.isEvhe = true;
-      } else {
+      console.log("verify hrvhe :" + this.hrvheVerify);
+      if (this.hrvheVerify == "hrvhe") {
+        this.ishrvhe = true;
+
         this.isEvhe = false;
+      } else {
+        this.ishrvhe = false;
+        //this.evheVerify = this.vServ.getValue("evheVerify");
+        console.log("verify ehe :" + this.evheVerify);
+        if (this.evheVerify == "evhe") {
+          this.isEvhe = true;
+        } else {
+          this.isEvhe = false;
+        }
       }
     }
     let em: Employee;

@@ -200,6 +200,7 @@
 							role="tab" aria-controls="v-pills-profile" routerLink="/loginhome/salaryslips"
 							aria-selected="false">Salary
 							Slips</a>
+
 					</div>
 				</ng-container>
 			</ng-template>
@@ -212,12 +213,15 @@
 							routerLink="/loginhome">Home</a>
 						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
 							role="tab" aria-controls="v-pills-profile" aria-selected="false"
-							(click)="onloghomeclk('evhe')">Verify
-							Staff</a>
+							routerLink="/loginhome/uploadattendance" (click)="onloghomeclk('hruahe')">Upload Attendance
+						</a>
 						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
 							role="tab" aria-controls="v-pills-profile" aria-selected="false"
-							(click)="onloghomeclk('eehe')">View
-							Das</a>
+							(click)="onloghomeclk('hrhe')">Confirm Employment
+						</a>
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="onloghomeclk('hrvhe')">View Employees</a>
 					</div>
 				</ng-container>
 			</ng-template>

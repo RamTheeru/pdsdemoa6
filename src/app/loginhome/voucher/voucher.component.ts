@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import {
   FormGroup,
@@ -14,7 +14,7 @@ import { ViewService } from "../../view.service";
   templateUrl: "./voucher.component.html",
   styleUrls: ["./voucher.component.css"]
 })
-export class VoucherComponent implements OnInit {
+export class VoucherComponent implements OnInit, OnDestroy {
   userType: string;
   private subsc: r.Subscription;
   isLe: Boolean = false;
@@ -107,6 +107,9 @@ export class VoucherComponent implements OnInit {
       this.voucherForm.controls.taxamnt.setValue(txamnt);
       this.voucherForm.controls.totalamnt.setValue(txamnt);
     }
+  }
+  ngOnDestroy() {
+    this.subsc.unsubscribe();
   }
   onSubmit() {}
 }

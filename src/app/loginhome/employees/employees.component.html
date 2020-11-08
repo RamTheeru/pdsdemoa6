@@ -91,10 +91,24 @@
 			</div>
 		</div>
 		<ng-template #ehe>
-			<div class="col">
-				<button (click)="onDownload()"  type="button" mat-raised-button color="warn" >Download</button></div>
-			<div class="col">
-				<button  type="button" mat-raised-button color="warn" style="margin-right:10px;" >Cancel</button></div>
+			<div class="row" *ngIf="!ishrvhe; else hrhhe">
+				<div class="col">
+					<button (click)="onDownload()"  type="button" mat-raised-button color="warn" >Download</button>
+				</div>
+				<div class="col">
+					<button  type="button" mat-raised-button color="warn" style="margin-right:10px;" >Cancel</button>
+				</div>
+			</div>
+		</ng-template>
+		<ng-template #hrhhe>
+			<div class="row">
+				<div class="col">
+					<button  type="button" mat-raised-button color="warn" >Submit</button>
+				</div>
+				<div class="col">
+					<button  type="button" mat-raised-button color="warn" style="margin-right:10px;" >Cancel</button>
+				</div>
+			</div>
 		</ng-template>
 
 	</div>

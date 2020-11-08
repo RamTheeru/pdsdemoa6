@@ -46,7 +46,10 @@ const appRoutes: Routes = [
       { path: "employees", component: EmployeesComponent },
       { path: "viewdas", component: EmployeesComponent },
       { path: "submitattendance", component: SubmitattendanceComponent },
+      { path: "uploadattendance", component: SubmitattendanceComponent },
       { path: "salaryslips", component: SalaryslipComponent },
+      { path: "viewemployees", component: EmployeesComponent },
+      { path: "confirmemployment", component: EmployeesComponent },
       { path: "employeesinsufficientdata", component: EmployeesComponent }
       //  {path : 'new',component: RecipeEditComponent ,canActivate:[AuthGuard]},
       //  {path : ':id',component: RecipeDetailComponent },

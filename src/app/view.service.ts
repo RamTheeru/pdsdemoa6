@@ -7,6 +7,7 @@ export class ViewService {
   data = new r.BehaviorSubject<string>("");
   verify = new r.BehaviorSubject<string>("");
   verify2 = new r.BehaviorSubject<string>("");
+  verify3 = new r.BehaviorSubject<string>("");
   constructor() {
     let verifyval = localStorage.getItem("fheverify");
     if (verifyval == "undefined" || verifyval == "" || verifyval == null)
@@ -22,6 +23,11 @@ export class ViewService {
     if (verifyval3 == "undefined" || verifyval3 == "" || verifyval3 == null)
       this.setVerify(verifyval3, true);
     else this.setVerify(verifyval3, false);
+
+    let verifyval4 = localStorage.getItem("hrvheverify");
+    if (verifyval4 == "undefined" || verifyval4 == "" || verifyval4 == null)
+      this.setVerify(verifyval4, true);
+    else this.setVerify(verifyval4, false);
 
     let storedProp = localStorage.getItem("storedProp");
     if (storedProp == "undefined" || storedProp == "" || storedProp == null)
@@ -41,6 +47,7 @@ export class ViewService {
     if (key == "fheverify") this.verify.next(null);
     else if (key == "edleverify") this.verify.next(null);
     else if (key == "evheverify") this.verify2.next(null);
+    else if (key == "hrvheverify") this.verify3.next(null);
     else if (key == "storedProp") this.data.next(null);
   }
   setVerify(val: string, storeProp: boolean = true) {
@@ -54,6 +61,9 @@ export class ViewService {
     } else if (storeProp && val == "evhe") {
       localStorage.setItem("evheverify", val);
       this.verify2.next(val);
+    } else if (storeProp && val == "hrvhe") {
+      localStorage.setItem("hrvheverify", val);
+      this.verify3.next(val);
     }
 
     //hkugk

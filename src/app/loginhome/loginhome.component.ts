@@ -74,6 +74,10 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.userType = 6;
       this.shownotify = false;
       this.loginInfo = "HR LE Login";
+    } else if (this.user === "hrhe") {
+      this.userType = 7;
+      this.shownotify = false;
+      this.loginInfo = "HR HE Login";
     } else {
       //
     }
@@ -103,6 +107,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.vServ.removeValue("fheverify");
       this.vServ.removeValue("evheverify");
       this.vServ.removeValue("edleverify");
+      this.vServ.removeValue("hrvheverify");
       // this.router.navigate["/loginhome"];
     } else if (tab == "fhe") {
       this.shownotify = false;
@@ -110,6 +115,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.act2SubMenu = false;
       this.vServ.removeValue("evheverify");
       this.vServ.removeValue("edleverify");
+      this.vServ.removeValue("hrvheverify");
       this.vServ.setVerify("fhe");
       this.router.onSameUrlNavigation = "reload";
       this.router.navigate(["/loginhome/verifyvouchers"]);
@@ -120,6 +126,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.vServ.removeValue("fheverify");
       this.vServ.removeValue("evheverify");
       this.vServ.removeValue("edleverify");
+      this.vServ.removeValue("hrvheverify");
       this.router.onSameUrlNavigation = "reload";
       this.router.navigate(["/loginhome/viewledger"]);
     } else if (tab == "fle") {
@@ -129,10 +136,12 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.vServ.removeValue("evheverify");
       this.vServ.removeValue("edleverify");
       this.vServ.removeValue("fheverify");
+      this.vServ.removeValue("hrvheverify");
     } else if (tab == "ele") {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
+      this.vServ.removeValue("hrvheverify");
       this.vServ.removeValue("evheverify");
       this.vServ.removeValue("edleverify");
       this.vServ.removeValue("fheverify");
@@ -140,7 +149,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
-
+      this.vServ.removeValue("hrvheverify");
       this.vServ.removeValue("evheverify");
       this.vServ.removeValue("edleverify");
       this.vServ.removeValue("fheverify");
@@ -151,6 +160,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.vServ.removeValue("evheverify");
       this.vServ.removeValue("edleverify");
       this.vServ.removeValue("fheverify");
+      this.vServ.removeValue("hrvheverify");
       this.router.navigate(["/loginhome/createemployee"]);
     } else if (tab == "edle") {
       this.shownotify = false;
@@ -158,18 +168,19 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.act2SubMenu = false;
       this.vServ.removeValue("fheverify");
       this.vServ.removeValue("evheverify");
+      this.vServ.removeValue("hrvheverify");
       this.vServ.setVerify("edle");
       this.router.onSameUrlNavigation = "reload";
       this.router.navigate(["/loginhome/createdeliveryassociate"]);
     } else if (tab == "evhe") {
-      this.shownotify = false;
-      this.act1SubMenu = false;
-      this.act2SubMenu = false;
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("fheverify");
-      this.vServ.setVerify("evhe");
-      this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(["/loginhome/employees"]);
+      // this.shownotify = false;
+      // this.act1SubMenu = false;
+      // this.act2SubMenu = false;
+      // this.vServ.removeValue("edleverify");
+      // this.vServ.removeValue("fheverify");
+      // this.vServ.setVerify("evhe");
+      // this.router.onSameUrlNavigation = "reload";
+      // this.router.navigate(["/loginhome/employees"]);
     } else if (tab == "eehe") {
       this.shownotify = false;
       this.act1SubMenu = false;
@@ -177,6 +188,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.vServ.removeValue("fheverify");
       this.vServ.removeValue("evheverify");
       this.vServ.removeValue("edleverify");
+      this.vServ.removeValue("hrvheverify");
       this.router.onSameUrlNavigation = "reload";
       this.router.navigate(["/loginhome/viewdas"]);
     } else if (tab == "hrle") {
@@ -186,8 +198,41 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.vServ.removeValue("fheverify");
       this.vServ.removeValue("evheverify");
       this.vServ.removeValue("edleverify");
+      this.vServ.removeValue("hrvheverify");
       //this.router.onSameUrlNavigation = "reload";
       this.router.navigate(["/loginhome/employees"]);
+    } else if (tab == "hrhe") {
+      this.shownotify = false;
+      this.act1SubMenu = false;
+      this.act2SubMenu = false;
+      
+      this.vServ.removeValue("fheverify");
+      //this.vServ.removeValue("evheverify");
+      this.vServ.removeValue("edleverify");
+      this.vServ.setVerify("evhe");
+      this.router.onSameUrlNavigation = "reload";
+      this.router.navigate(["/loginhome/employees"]);
+    } else if (tab == "hruahe") {
+      this.shownotify = false;
+      this.act1SubMenu = false;
+      this.act2SubMenu = false;
+      this.vServ.removeValue("fheverify");
+      this.vServ.removeValue("evheverify");
+      this.vServ.removeValue("edleverify");
+      this.vServ.removeValue("hrvheverify");
+      //this.vServ.setVerify("hruahe");
+      //this.router.onSameUrlNavigation = "reload";
+      //this.router.navigate(["/loginhome/employees"]);
+    } else if (tab == "hrvhe") {
+      this.shownotify = false;
+      this.act1SubMenu = false;
+      this.act2SubMenu = false;
+      this.vServ.removeValue("fheverify");
+      this.vServ.removeValue("evheverify");
+      this.vServ.removeValue("edleverify");
+      this.vServ.setVerify("hrvhe");
+      //this.router.onSameUrlNavigation = "reload";
+      this.router.navigate(["/loginhome/viewemployees"]);
     } else {
       this.shownotify = true;
       this.act1SubMenu = false;
@@ -195,6 +240,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.vServ.removeValue("fheverify");
       this.vServ.removeValue("evheverify");
       this.vServ.removeValue("edleverify");
+      this.vServ.removeValue("hrvheverify");
       //sfc  gds
     }
   }
@@ -206,6 +252,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
     this.vServ.removeValue("fheverify");
     this.vServ.removeValue("edleverify");
     this.vServ.removeValue("evheverify");
+    this.vServ.removeValue("hrvheverify");
     //
   }
 }
