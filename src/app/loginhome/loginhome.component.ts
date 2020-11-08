@@ -205,7 +205,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
-      
+      this.vServ.removeValue("hrvheverify");
       this.vServ.removeValue("fheverify");
       //this.vServ.removeValue("evheverify");
       this.vServ.removeValue("edleverify");

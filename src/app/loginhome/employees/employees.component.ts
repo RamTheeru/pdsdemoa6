@@ -133,7 +133,7 @@ export class EmployeesComponent
       this.isHe = true;
       this.isLe = false;
       this.isEdle = false;
-      console.log("verify hrvhe :" + this.hrvheVerify);
+      // console.log("verify hrvhe :" + this.hrvheVerify);
       if (this.hrvheVerify == "hrvhe") {
         this.ishrvhe = true;
 
@@ -141,7 +141,7 @@ export class EmployeesComponent
       } else {
         this.ishrvhe = false;
         //this.evheVerify = this.vServ.getValue("evheVerify");
-        console.log("verify ehe :" + this.evheVerify);
+     //   console.log("verify ehe :" + this.evheVerify);
         if (this.evheVerify == "evhe") {
           this.isEvhe = true;
         } else {
