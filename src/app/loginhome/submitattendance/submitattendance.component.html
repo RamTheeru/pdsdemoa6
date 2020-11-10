@@ -1,15 +1,27 @@
 <div class="container-fluid">
+	<h1 class="text-primary"><u><b >Attendence:</b></u></h1>
 	<div class="row" *ngIf="isLe">
-		<div class="row">
-			<div class="col">
-				<p>{{filename}}</p>
-			</div>
-			<div class="col">
-				<input type="button" class="btn btn-primary" value="Download"/>
-        </div>
-			</div>
+		<div class="container-fluid">
 			<div class="row">
+				<div class="col-sm-4">
+					<h3 ><u><b>Download available file:</b></u></h3>
+				</div>
+				<div class="col-sm-2">
 
+					<p>{{filename}}</p>
+				</div>
+				<div class="col-sm-2">
+
+					<input type="button" class="btn btn-primary" value="Download"/>
+        </div>
+					<div class="col"></div>
+				</div>
+				<div class="row">
+					<hr class="hline">
+				</div>
+				<div class="row">
+					<file-input></file-input>
+				</div>
 			</div>
 		</div>
 		<div class="row">
