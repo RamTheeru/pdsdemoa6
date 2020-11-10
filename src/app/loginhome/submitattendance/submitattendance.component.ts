@@ -13,7 +13,7 @@ export class SubmitattendanceComponent implements OnInit, OnDestroy {
   isHe: Boolean = false;
   isUpload: Boolean = false;
   filename: string = "nov-2020.xlx"; // private subsc2: r.Subscription;
-  // hruaheVerify: string = "";
+  // hruaheVerify: string = ""
   constructor(private vServ: ViewService) {}
 
   ngOnInit() {
