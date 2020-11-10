@@ -1,19 +1,18 @@
 <div class="container-fluid">
-	<div class="row">
-		<!-- <label>Select Location:</label> -->
+	<div class="row" *ngIf="isLe">
+		<div class="row">
+			<div class="col">
+				<p>{{filename}}</p>
+			</div>
+			<div class="col">
+				<input type="button" class="btn btn-primary" value="Download"/>
+        </div>
+			</div>
+			<div class="row">
 
-		<!-- <mat-form-field class="inpt">
+			</div>
+		</div>
+		<div class="row">
 
-					<input type="text" formControlName="lmcredit" class="form-control" matInput placeholder="Last Month's Credit*">
-					<mat-error>This field is mandatory</mat-error>
-				</mat-form-field> -->
-
-		<!-- <mat-form-field class="inpt">
-			<mat-select [(ngModel)]="location" name="location" aria-placeholder="Select Location" class="form-control">
-				<mat-option value="">Select Location</mat-option>
-				<mat-option value="atp">Anantapur</mat-option>
-				<mat-option value="gtk">Guntakal</mat-option>
-			</mat-select>
-		</mat-form-field> -->
+		</div>
 	</div>
-</div>

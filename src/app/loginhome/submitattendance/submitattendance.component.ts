@@ -12,7 +12,7 @@ export class SubmitattendanceComponent implements OnInit, OnDestroy {
   isLe: Boolean = false;
   isHe: Boolean = false;
   isUpload: Boolean = false;
-  // private subsc2: r.Subscription;
+  filename: string = "nov-2020.xlx"; // private subsc2: r.Subscription;
   // hruaheVerify: string = "";
   constructor(private vServ: ViewService) {}
 
