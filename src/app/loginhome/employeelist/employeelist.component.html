@@ -1,31 +1,40 @@
 <div class="container-fluid">
-         <form class="form-inline" >
-    <input class="form-control mr-sm-2" type="text"  placeholder="StationCode">
-    <button class="btn btn-success" (click)="getemployeesbyStation($event)"  type="submit">Search</button>
-  </form>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Phone</th>
-        <th>LoginType</th>
-        <th>Designation</th>
-        <th>StateCode</th>
-        <th>LocationName</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let emp of employees;">
-        <td [hidden]="isHide">{{emp.employeeId}}</td>
-        <td>{{emp.firstName}}</td>
-        <td>{{emp.phone}}</td>
-         <td>{{emp.loginType}}</td>
-          <td>{{emp.designation}}</td>
-           <td>{{emp.stationCode}}</td>
-            <td>{{emp.locationName}}</td>
-             <td> <button type="button" (click)="approveUser(emp)" class="btn btn-primary" ><b class="text-light" >Approve</b></button> </td>
-      </tr>
-    </tbody>
-  </table>
+	<form class="form-inline">
+		<input class="form-control mr-sm-2" type="text"  placeholder="StationCode">
+		<button class="btn btn-success" (click)="getemployeesbyStation($event)"  type="submit">Search</button>
+	</form>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Phone</th>
+				<th>LoginType</th>
+				<th>Designation</th>
+				<th>StateCode</th>
+				<th>LocationName</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let emp of employees;">
+				<td [hidden]="isHide">{{emp.EmployeeId}}</td>
+				<td>
+					<div>
+
+
+						<button
+							(click)="onSalCreate($event)" >{{emp.FirstName}}</button>
+
+					</div>
+				</td>
+				<td>{{emp.phone}}</td>
+				<td>{{emp.loginType}}</td>
+				<td>{{emp.designation}}</td>
+				<td>{{emp.stationCode}}</td>
+				<td>{{emp.locationName}}</td>
+				<td> <button type="button" (click)="approveUser(emp)" class="btn btn-primary" ><b class="text-light" >Approve</b></button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
