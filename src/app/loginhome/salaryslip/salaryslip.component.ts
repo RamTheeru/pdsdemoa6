@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Inject, Optional } from "@angular/core";
+import { MAT_DIALOG_DATA } from "@angular/material";
 import { Employee } from "../../models/employee";
 @Component({
   selector: "app-salaryslip",
@@ -7,6 +8,7 @@ import { Employee } from "../../models/employee";
 })
 export class SalaryslipComponent implements OnInit {
   month: number;
+  empId: number = 0;
   emp: Employee;
   months = [
     "Jan",
@@ -22,7 +24,10 @@ export class SalaryslipComponent implements OnInit {
     "Nov",
     "Dec"
   ];
-  constructor() {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data) {
+    this.empId = data.empId;
+    console.log(this.empId)
+  }
 
   ngOnInit() {}
 }

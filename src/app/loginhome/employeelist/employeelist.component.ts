@@ -16,6 +16,7 @@ export class EmployeelistComponent implements OnInit {
   stationCode: string = "";
   apiResult: APIResult;
   isHide = true;
+  empId: number = 0;
   e: Employee;
   constructor(
     private dialog: MatDialog,
@@ -70,6 +71,10 @@ export class EmployeelistComponent implements OnInit {
     config.disableClose = true;
     config.autoFocus = true;
     config.width = "60%";
+
+    config.data = {
+      empId: 10001
+    };
     this.dialog.open(SalaryslipComponent, config);
   }
   getstaticEmployees() {
