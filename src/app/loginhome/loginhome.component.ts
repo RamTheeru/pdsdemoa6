@@ -199,7 +199,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.vServ.removeValue("evheverify");
       this.vServ.removeValue("edleverify");
       this.vServ.removeValue("hrvheverify");
-      //this.router.onSameUrlNavigation = "reload";
+      /this.router.onSameUrlNavigation = "reload";
       this.router.navigate(["/loginhome/employees"]);
     } else if (tab == "hrhe") {
       this.shownotify = false;
@@ -231,7 +231,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.vServ.removeValue("evheverify");
       this.vServ.removeValue("edleverify");
       this.vServ.setVerify("hrvhe");
-      //this.router.onSameUrlNavigation = "reload";
+      this.router.onSameUrlNavigation = "reload";
       this.router.navigate(["/loginhome/viewemployees"]);
     } else if (tab == "hrgshe") {
       this.shownotify = false;
@@ -241,7 +241,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.vServ.removeValue("evheverify");
       this.vServ.removeValue("edleverify");
       this.vServ.removeValue("hrvheverify");
-      //this.router.onSameUrlNavigation = "reload";
+      this.router.onSameUrlNavigation = "reload";
       this.router.navigate(["/loginhome/generatesalaryslips"]);
     } else {
       this.shownotify = true;
