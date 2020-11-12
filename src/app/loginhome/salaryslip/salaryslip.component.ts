@@ -39,7 +39,7 @@ export class SalaryslipComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    //
     this.initForm();
   }
   initForm() {
