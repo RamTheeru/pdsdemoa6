@@ -31,4 +31,6 @@ export class SalaryslipComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  focusOutFunction(val,event) {}
 }

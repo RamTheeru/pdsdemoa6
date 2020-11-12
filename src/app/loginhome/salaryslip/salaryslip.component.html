@@ -2,8 +2,15 @@
 	<div class="row">
 		<div class="col">
 			<mat-form-field>
-				<mat-label>Contact:+91-</mat-label>
-				<input type="text" name="phone" matInput (focusout)="focusOutFunction('phone',$event)" formControlName="phone" placeholder="Phone*" class="form-control">
+				<mat-label>CTC</mat-label>
+				<input type="text" name="phone" matInput (focusout)="focusOutFunction('ctc',$event)" formControlName="phone" placeholder="CTC*" class="form-control">
+				<mat-error>This field is mandatory</mat-error>
+			</mat-form-field>
+		</div>
+		<div class="col">
+			<mat-form-field>
+				<mat-label>CHRA</mat-label>
+				<input type="text" name="phone" matInput  formControlName="phone" placeholder="HRA*" class="form-control">
 				<mat-error>This field is mandatory</mat-error>
 			</mat-form-field>
 		</div>
