@@ -27,7 +27,7 @@ export class SalaryslipComponent implements OnInit {
   //sending data
   constructor(@Inject(MAT_DIALOG_DATA) public data) {
     this.empId = data.empId;
-    console.log(this.empId);
+    //console.log(this.empId);
   }
 
   ngOnInit() {}

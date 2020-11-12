@@ -28,7 +28,7 @@ export class EmployeelistComponent implements OnInit {
     let em: Employee;
     em = this.getstaticEmployees();
     this.e = em;
-    console.log(em);
+    //console.log(em);
     this.employees.push(this.e);
     // this.api.getEmployees().subscribe(data => {
     //   console.log(data);
@@ -66,21 +66,26 @@ export class EmployeelistComponent implements OnInit {
     console.log(res);
   }
   onSalCreate(val: any) {
-    console.log(val);
+    //console.log(val);
     const config = new MatDialogConfig();
     config.disableClose = true;
     config.autoFocus = true;
     config.width = "60%";
-
+    config.closeOnNavigation = true;
     config.data = {
-      empId: 10001
+      empId: val.target.id
     };
     this.dialog.open(SalaryslipComponent, config);
+    // const dialogRef = this.dialog.open(DialogContentExampleDialog);
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log(`Dialog result: ${result}`);
+    // });
   }
   getstaticEmployees() {
     const emp: Employee = new Employee();
     const errorTitle: string = "INVALID INPUT!!!";
-    emp.EmployeeId = 1;
+    emp.EmployeeId = 10001;
     emp.FirstName = "Ram";
     emp.LastName = "k";
     emp.MiddleName = "";
