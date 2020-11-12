@@ -3,12 +3,13 @@
 		<input class="form-control mr-sm-2" type="text"  placeholder="StationCode">
 		<button class="btn btn-success" (click)="getemployeesbyStation($event)"  type="submit">Search</button>
 	</form>
+	<!-- <p     ></p> -->
+
 	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th>Name</th>
 				<th>Phone</th>
-				<th>LoginType</th>
 				<th>Designation</th>
 				<th>StateCode</th>
 				<th>LocationName</th>
@@ -20,13 +21,13 @@
 				<td [hidden]="isHide">{{emp.EmployeeId}}</td>
 				<td> {{emp.FirstName}}</td>
 				<td>{{emp.Phone}}</td>
-				<td>{{emp.LoginType}}</td>
 				<td>{{emp.Designation}}</td>
 				<td>{{emp.StationCode}}</td>
 				<td>{{emp.LocationName}}</td>
 				<td>
 					<div *ngIf="isHE; else reg">
-						<button(click)="onSalCreate($event)" id="{{emp.EmployeeId}}" >Generate Salary</button>
+						<button type="button"
+            (click)="onSalCreate($event)" id="{{emp.EmployeeId}}" >Generate Salary</button>
 					</div>
 					<ng-template #reg>
 						<button type="button" (click)="approveUser(emp)" class="btn btn-primary" ><b class="text-light" >Approve</b>

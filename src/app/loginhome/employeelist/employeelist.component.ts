@@ -40,7 +40,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     let em: Employee;
     em = this.getstaticEmployees();
     this.e = em;
-    //console.log(em);
+    //  console.log(em);
     this.employees.push(this.e);
     // this.api.getEmployees().subscribe(data => {
     //   console.log(data);
