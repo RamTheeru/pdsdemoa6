@@ -26,8 +26,7 @@
 				<td>{{emp.LocationName}}</td>
 				<td>
 					<div *ngIf="isHE; else reg">
-						<button
-							(click)="onSalCreate($event)" id="{{emp.EmployeeId}}" >Generate Salary</button>
+						<button(click)="onSalCreate($event)" id="{{emp.EmployeeId}}" >Generate Salary</button>
 					</div>
 					<ng-template #reg>
 						<button type="button" (click)="approveUser(emp)" class="btn btn-primary" ><b class="text-light" >Approve</b>
