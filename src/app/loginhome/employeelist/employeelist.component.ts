@@ -1,30 +1,42 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { SalaryslipComponent } from "../salaryslip/salaryslip.component";
 import { RegisterEmployee } from "../../models/registeremployee";
 import { Employee } from "../../models/employee";
 import { APIResult } from "../../models/apiresult";
+import { ViewService } from "../../view.service";
 import { PdsApiService } from "../../pds-api.service";
 import { SweetService } from "../../sweet.service";
+import * as r from "rxjs";
 @Component({
   selector: "app-employeelist",
   templateUrl: "./employeelist.component.html",
   styleUrls: ["./employeelist.component.css"]
 })
-export class EmployeelistComponent implements OnInit {
+export class EmployeelistComponent implements OnInit, OnDestroy {
   employees: Employee[] = [];
+  userType: string = "";
+  private subsc: r.Subscription;
   stationCode: string = "";
   apiResult: APIResult;
   isHide = true;
+  isHE: Boolean = false;
   empId: number = 0;
   e: Employee;
   constructor(
     private dialog: MatDialog,
     private api: PdsApiService,
-    private swServ: SweetService
+    private swServ: SweetService,
+    private vServ: ViewService
   ) {}
 
   ngOnInit() {
+    this.subsc = this.vServ.data.subscribe((val: string) => {
+      this.userType = val;
+    });
+    if (this.userType == "hrhe") {
+      this.isHE = true;
+    }
     let em: Employee;
     em = this.getstaticEmployees();
     this.e = em;
@@ -47,6 +59,9 @@ export class EmployeelistComponent implements OnInit {
     //this.swServ.showSuccessMessage('Sucess!!','we didit');
 
     //this.swServ.showWarning('Delete it')
+  }
+  ngOnDestroy() {
+    this.subsc.unsubscribe();
   }
   getemployeesbyStation(event) {
     this.api.getEmployees(this.stationCode).subscribe(data => {

@@ -7,6 +7,9 @@
 		<thead>
 			<tr>
 				<th>Name</th>
+				<div *ngIf="isHE">
+					<th>Action</th>
+				</div>
 				<th>Phone</th>
 				<th>LoginType</th>
 				<th>Designation</th>
@@ -19,11 +22,12 @@
 			<tr *ngFor="let emp of employees;">
 				<td [hidden]="isHide">{{emp.EmployeeId}}</td>
 				<td>
-					<div>
+					<div *ngIf="isHE">
 						<button
-							(click)="onSalCreate($event)" id="{{emp.EmployeeId}}" >{{emp.FirstName}}</button>
+							(click)="onSalCreate($event)" id="{{emp.EmployeeId}}" ></button>
 					</div>
 				</td>
+				<td> {{emp.FirstName}}</td>
 				<td>{{emp.Phone}}</td>
 				<td>{{emp.LoginType}}</td>
 				<td>{{emp.Designation}}</td>

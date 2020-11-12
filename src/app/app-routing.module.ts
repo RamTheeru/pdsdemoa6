@@ -50,6 +50,7 @@ const appRoutes: Routes = [
       { path: "salaryslips", component: SalaryslipComponent },
       { path: "viewemployees", component: EmployeesComponent },
       { path: "confirmemployment", component: EmployeesComponent },
+      { path: "generatesalaryslips", component: EmployeelistComponent },
       { path: "employeesinsufficientdata", component: EmployeesComponent }
       //  {path : 'new',component: RecipeEditComponent ,canActivate:[AuthGuard]},
       //  {path : ':id',component: RecipeDetailComponent },
