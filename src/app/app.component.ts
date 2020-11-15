@@ -111,6 +111,12 @@ export class AppComponent {
     //   }
     //   }, 7000 );
   }
+  showload(): void {
+    this.load = true;
+  }
+  hideload(): void {
+    this.load = false;
+  }
   ngOnDestroy() {
     //this.subsc.unsubscribe();
   }
