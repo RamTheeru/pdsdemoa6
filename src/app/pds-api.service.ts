@@ -24,12 +24,12 @@ export class PdsApiService {
   //   getUserTypes() :  R.Observable<any>  {
   //     console.log(this.baseurl + this.userTypesUrl);
   //   return this.http.get(this.baseurl + this.userTypesUrl,this.httpOptions)
-
+  //
   // }
-  showloading(){
+  showloading() {
     this.app.showload();
   }
-  hideloading(){
+  hideloading() {
     this.app.hideload();
   }
   getConstants(): R.Observable<any> {

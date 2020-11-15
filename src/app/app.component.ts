@@ -118,6 +118,7 @@ export class AppComponent {
     this.load = false;
   }
   ngOnDestroy() {
+    // 
     //this.subsc.unsubscribe();
   }
 }
