@@ -18,6 +18,7 @@ import { DeliveryDetailsComponent } from "./loginhome/delivery-details/delivery-
 import { VoucherComponent } from "./loginhome/voucher/voucher.component";
 import { SubmitattendanceComponent } from "./loginhome/submitattendance/submitattendance.component";
 import { SalaryslipComponent } from "./loginhome/salaryslip/salaryslip.component";
+import { SalarysliplistComponent } from "./loginhome/salarysliplist/salarysliplist.component";
 import { ViewledgerComponent } from "./loginhome/viewledger/viewledger.component";
 const appRoutes: Routes = [
   { path: "", redirectTo: "/home", pathMatch: "full" },
@@ -47,7 +48,7 @@ const appRoutes: Routes = [
       { path: "viewdas", component: EmployeesComponent },
       { path: "submitattendance", component: SubmitattendanceComponent },
       { path: "uploadattendance", component: SubmitattendanceComponent },
-      { path: "salaryslips", component: SalaryslipComponent },
+      { path: "salaryslips", component: SalarysliplistComponent },
       { path: "viewemployees", component: EmployeesComponent },
       { path: "confirmemployment", component: EmployeesComponent },
       { path: "generatesalaryslips", component: EmployeelistComponent },
