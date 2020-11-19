@@ -7,12 +7,12 @@ export class PdsApiService {
   // Base url
   //baseurl = 'http://35.153.184.145/api/Employee/';
   baseurl = "https://localhost:44302/api/Employee/";
-
+  app: AppComponent;
   constantsUrl: string = "UserTypes";
   employeesUrl: string = "Employees";
   approveUrl: string = "ApproveUser";
 
-  constructor(private http: HttpClient, private app: AppComponent) {}
+  constructor(private http: HttpClient) {}
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json"
