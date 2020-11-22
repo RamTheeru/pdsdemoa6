@@ -5,20 +5,22 @@ import { AppComponent } from "./app.component";
 @Injectable()
 export class PdsApiService {
   // Base url
-  //baseurl = 'http://35.153.184.145/api/Employee/';
+  //baseurl = "http://3.128.34.183/api/Employee/";
   baseurl = "https://localhost:44302/api/Employee/";
   app: AppComponent;
-  constantsUrl: string = "UserTypes";
+  constantsUrl: string = "Constants";
   employeesUrl: string = "Employees";
   approveUrl: string = "ApproveUser";
 
   constructor(private http: HttpClient) {}
   httpOptions = {
     headers: new HttpHeaders({
-      "Content-Type": "application/json"
-      //'X-Requested-With': 'XMLHttpRequest',
-      //'Access-Control-Allow-Origin': '*'
-      //'access-Control-Allow-Methods:':'GET,POST,OPTIONS,DELETE,PUT'
+      "Content-Type": "application/json",
+      //"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "X-Requested-With": "XMLHttpRequest",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods:": "GET,POST,OPTIONS,DELETE,PUT",
+      "Access-Control-Allow-Headers": "*"
     })
   };
   //   getUserTypes() :  R.Observable<any>  {

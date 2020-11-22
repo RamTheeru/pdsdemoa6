@@ -1,4 +1,6 @@
 import { Component, VERSION, OnInit, OnDestroy } from "@angular/core";
+import { PdsApiService } from "./pds-api.service";
+import { SweetService } from "./sweet.service";
 import {
   Router,
   Event as RouterEvent,
@@ -24,22 +26,32 @@ export class AppComponent {
   load = true;
   users: any;
   //subsc : r.Subscription;
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private api: PdsApiService,
+    private swServ: SweetService
+  ) {
     this.router.events.subscribe((e: RouterEvent) => {
       this.navigationInterceptor(e);
     });
   }
   ngOnInit() {
     this.footerText = Environment.FooterText;
-    // this.api.getClients()
-    //     .subscribe(data =>{
-    //       console.log(data);
-
-    //        }
-    //        );
-    //this.swServ.showSuccessMessage('Sucess!!','we didit');
-    //this.swServ.showMessage('SomethingWent','wrong');
-    //this.swServ.showWarning('Delete it')
+    // this.api.getConstants().subscribe(
+    //   data => {
+    //     console.log(data);
+    //     // this.swServ.showSuccessMessage("Sucess!!", "we didit");
+    //     // this.swServ.showMessage("SomethingWent", "wrong");
+    //     // this.swServ.showWarning("Delete it");
+    //   },
+    //   err => {
+    //     //console.log(err.message);
+    //     this.swServ.showErrorMessage(err.message);
+    //   },
+    //   () => {
+    //     console.log("completed");
+    //   }
+    // );
   }
 
   // // Shows and hides the loading spinner during RouterEvent changes
@@ -118,7 +130,7 @@ export class AppComponent {
     this.load = false;
   }
   ngOnDestroy() {
-    // 
+    //
     //this.subsc.unsubscribe();
   }
 }
