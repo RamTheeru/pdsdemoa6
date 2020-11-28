@@ -38,7 +38,8 @@ import { FileInputComponent } from "./loginhome/file-input/file-input.component"
 import { ViewService } from "./view.service";
 import { PdsApiService } from "./pds-api.service";
 import { SweetService } from "./sweet.service";
-
+import { AuthService } from "./auth.service";
+import { AuthGuard } from "./auth-guard.service";
 @NgModule({
   imports: [
     BrowserModule,
@@ -80,6 +81,6 @@ import { SweetService } from "./sweet.service";
   ],
   entryComponents: [SalaryslipComponent],
   bootstrap: [AppComponent],
-  providers: [ViewService, PdsApiService, SweetService]
+  providers: [ViewService, PdsApiService, SweetService,AuthService,AuthGuard]
 })
 export class AppModule {}

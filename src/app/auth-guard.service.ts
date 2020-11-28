@@ -11,7 +11,9 @@ export class AuthGuard implements CanActivate {
   constructor(private auth: AuthService, private swServ: SweetService) {}
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (!this.auth.isAuth()) {
-      this.swServ.showErrorMessage("You are not authorized to see this page!!!");
+      this.swServ.showErrorMessage(
+        "You are not authorized to see this page!!!"
+      );
     }
     return this.auth.isAuth();
   }
