@@ -5,7 +5,8 @@ import { AppComponent } from "./app.component";
 export const CurrentUrls = {
   constantsUrl: "Constants",
   approveUrl: "ApproveUser",
-  employeelist: "employees"
+  employeelist: "employees",
+  loginUrl: "Login"
 };
 @Injectable()
 export class PdsApiService {
@@ -43,6 +44,14 @@ export class PdsApiService {
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.constantsUrl);
     return this.http.get(
       this.baseurl + this.employeesUrl + CurrentUrls.constantsUrl,
+      this.httpOptions
+    );
+  }
+  loginuser(username: string, password: string) {
+    console.log(this.baseurl + this.employeesUrl + CurrentUrls.loginUrl);
+    let input = "?username=" + username + "&password=" + password;
+    return this.http.get(
+      this.baseurl + this.employeesUrl + CurrentUrls.loginUrl + input,
       this.httpOptions
     );
   }
