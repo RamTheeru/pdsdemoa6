@@ -2,15 +2,20 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import * as R from "rxjs";
 import { AppComponent } from "./app.component";
+export const CurrentUrls = {
+  constantsUrl: "Constants",
+  approveUrl: "ApproveUser",
+  employeelist: "employees"
+};
 @Injectable()
 export class PdsApiService {
   // Base url
-  //baseurl = "http://3.128.34.183/api/Employee/";
-  baseurl = "https://localhost:44302/api/";
+  baseurl = "http://www.kleenandshine.com/api/";
+  //baseurl = "https://localhost:44302/api/";
   app: AppComponent;
-  constantsUrl: string = "Constants";
-  employeesUrl: string = "/Employee";
-  approveUrl: string = "ApproveUser";
+  //constantsUrl: string = "Constants";
+  financeUrl: string = "Finance/";
+  employeesUrl: string = "Employee/";
 
   constructor(private http: HttpClient) {}
   httpOptions = {
@@ -35,15 +40,25 @@ export class PdsApiService {
     this.app.hideload();
   }
   getConstants(): R.Observable<any> {
-    console.log(this.baseurl + this.constantsUrl);
-    return this.http.get(this.baseurl + this.constantsUrl, this.httpOptions);
+    console.log(this.baseurl + this.employeesUrl + CurrentUrls.constantsUrl);
+    return this.http.get(
+      this.baseurl + this.employeesUrl + CurrentUrls.constantsUrl,
+      this.httpOptions
+    );
   }
   getEmployees(stationCode: string = ""): R.Observable<any> {
-    console.log(this.baseurl + this.employeesUrl);
-    return this.http.get(this.baseurl + this.employeesUrl, this.httpOptions);
+    console.log(this.baseurl + this.employeesUrl + CurrentUrls.employeelist);
+    return this.http.get(
+      this.baseurl + this.employeesUrl + CurrentUrls.employeelist,
+      this.httpOptions
+    );
   }
   approveUser(id: any): R.Observable<any> {
-    console.log(this.baseurl + this.approveUrl);
-    return this.http.get(this.baseurl + this.approveUrl, this.httpOptions);
+    //k
+    console.log(this.baseurl + this.employeesUrl + CurrentUrls.approveUrl);
+    return this.http.get(
+      this.baseurl + this.employeesUrl + CurrentUrls.approveUrl,
+      this.httpOptions
+    );
   }
 }
