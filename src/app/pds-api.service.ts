@@ -6,10 +6,10 @@ import { AppComponent } from "./app.component";
 export class PdsApiService {
   // Base url
   //baseurl = "http://3.128.34.183/api/Employee/";
-  baseurl = "https://localhost:44302/api/Employee/";
+  baseurl = "https://localhost:44302/api/";
   app: AppComponent;
   constantsUrl: string = "Constants";
-  employeesUrl: string = "Employees";
+  employeesUrl: string = "/Employee";
   approveUrl: string = "ApproveUser";
 
   constructor(private http: HttpClient) {}

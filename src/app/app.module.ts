@@ -78,6 +78,7 @@ import { SweetService } from "./sweet.service";
     FileInputComponent,
     NopageComponent
   ],
+  entryComponents: [SalaryslipComponent],
   bootstrap: [AppComponent],
   providers: [ViewService, PdsApiService, SweetService]
 })
