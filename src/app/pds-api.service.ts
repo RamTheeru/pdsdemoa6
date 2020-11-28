@@ -11,7 +11,7 @@ export const CurrentUrls = {
 @Injectable()
 export class PdsApiService {
   // Base url
-  baseurl = "http://www.kleenandshine.com/api/";
+  baseurl = "https://www.kleenandshine.com/api/";
   //baseurl = "https://localhost:44302/api/";
   app: AppComponent;
   //constantsUrl: string = "Constants";
@@ -25,7 +25,7 @@ export class PdsApiService {
       //"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
       "X-Requested-With": "XMLHttpRequest",
       "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods:": "GET,POST,OPTIONS,DELETE,PUT",
+      // "Access-Control-Allow-Methods:": "GET,POST,OPTIONS,DELETE,PUT",
       "Access-Control-Allow-Headers": "*"
     })
   };
@@ -48,8 +48,10 @@ export class PdsApiService {
     );
   }
   loginuser(username: string, password: string) {
-    console.log(this.baseurl + this.employeesUrl + CurrentUrls.loginUrl);
     let input = "?username=" + username + "&password=" + password;
+    console.log(
+      this.baseurl + this.employeesUrl + CurrentUrls.loginUrl + input
+    );
     return this.http.get(
       this.baseurl + this.employeesUrl + CurrentUrls.loginUrl + input,
       this.httpOptions

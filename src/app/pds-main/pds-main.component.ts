@@ -28,7 +28,7 @@ export class PdsMainComponent implements OnInit {
     this.img = Environment.MainLogo;
   }
   onLogin() {
-    //this.autServ.signInuser(this.user, this.password);
+   // this.autServ.signInuser(this.user, this.password);
     if (this.user == "financele" && this.password == "1234") {
       this.vServ.setValue(this.user);
       this.router.navigate(["/loginhome"]);

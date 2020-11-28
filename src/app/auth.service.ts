@@ -2,11 +2,13 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { PdsApiService } from "./pds-api.service";
 import { UserType } from "./models/usertype";
+import { APIResult } from "./models/apiresult";
 import { SweetService } from "./sweet.service";
 @Injectable()
 export class AuthService {
   token: string;
   user: UserType;
+  result: APIResult;
   constructor(
     private router: Router,
     private api: PdsApiService,
@@ -15,8 +17,13 @@ export class AuthService {
 
   signInuser(username: string, password: string) {
     this.api.loginuser(username, password).subscribe(
-      data => {
+      (data: APIResult) => {
         console.log(data);
+        let status: Boolean = data.Status;
+        if (status) {
+          this.user = data.userInfo;
+        }
+
         // this.router.navigate(["/loginhome"]);
         //this.token = token;
         // this.swServ.showSuccessMessage("Sucess!!", "we didit");
