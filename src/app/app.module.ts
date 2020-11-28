@@ -81,6 +81,6 @@ import { AuthGuard } from "./auth-guard.service";
   ],
   entryComponents: [SalaryslipComponent],
   bootstrap: [AppComponent],
-  providers: [ViewService, PdsApiService, SweetService,AuthService,AuthGuard]
+  providers: [ViewService, PdsApiService, SweetService, AuthService, AuthGuard]
 })
 export class AppModule {}

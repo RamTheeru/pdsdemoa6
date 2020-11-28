@@ -28,28 +28,28 @@ export class PdsMainComponent implements OnInit {
     this.img = Environment.MainLogo;
   }
   onLogin() {
-    this.autServ.signInuser(this.user, this.password);
-    // if (this.user == "financele" && this.password == "1234") {
-    //   this.vServ.setValue(this.user);
-    //   this.router.navigate(["/loginhome"]);
-    // } else if (this.user == "financehe" && this.password == "1234") {
-    //   this.vServ.setValue(this.user);
-    //   this.router.navigate(["/loginhome"]);
-    // } else if (this.user == "executivele" && this.password == "1234") {
-    //   this.vServ.setValue(this.user);
-    //   this.router.navigate(["/loginhome"]);
-    // } else if (this.user == "executivehe" && this.password == "1234") {
-    //   this.vServ.setValue(this.user);
-    //   this.router.navigate(["/loginhome"]);
-    // } else if (this.user == "hrle" && this.password == "1234") {
-    //   this.vServ.setValue(this.user);
-    //   this.router.navigate(["/loginhome"]);
-    // } else if (this.user == "hrhe" && this.password == "1234") {
-    //   this.vServ.setValue(this.user);
-    //   this.router.navigate(["/loginhome"]);
-    // } else {
-    //   this.sweet.showErrorMessage("Fail!!", "Ivalid Login");
-    // }
+    //this.autServ.signInuser(this.user, this.password);
+    if (this.user == "financele" && this.password == "1234") {
+      this.vServ.setValue(this.user);
+      this.router.navigate(["/loginhome"]);
+    } else if (this.user == "financehe" && this.password == "1234") {
+      this.vServ.setValue(this.user);
+      this.router.navigate(["/loginhome"]);
+    } else if (this.user == "executivele" && this.password == "1234") {
+      this.vServ.setValue(this.user);
+      this.router.navigate(["/loginhome"]);
+    } else if (this.user == "executivehe" && this.password == "1234") {
+      this.vServ.setValue(this.user);
+      this.router.navigate(["/loginhome"]);
+    } else if (this.user == "hrle" && this.password == "1234") {
+      this.vServ.setValue(this.user);
+      this.router.navigate(["/loginhome"]);
+    } else if (this.user == "hrhe" && this.password == "1234") {
+      this.vServ.setValue(this.user);
+      this.router.navigate(["/loginhome"]);
+    } else {
+      this.sweet.showErrorMessage("Fail!!", "Ivalid Login");
+    }
   }
 
   // onRegister() {
