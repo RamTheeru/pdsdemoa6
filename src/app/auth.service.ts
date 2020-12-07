@@ -20,8 +20,11 @@ export class AuthService {
       (data: APIResult) => {
         console.log(data);
         let status: Boolean = data.Status;
+        let m: string = data.Message;
         if (status) {
           this.user = data.userInfo;
+        } else {
+          this.swServ.showErrorMessage(m);
         }
 
         // this.router.navigate(["/loginhome"]);
@@ -32,7 +35,7 @@ export class AuthService {
       },
       err => {
         //console.log(err.message);
-        this.swServ.showErrorMessage(err.message);
+        this.swServ.showErrorMessage("Network Error!!!", err.message);
       }
     );
     // firebase

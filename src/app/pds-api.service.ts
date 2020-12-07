@@ -1,11 +1,13 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import * as R from "rxjs";
+import { APIResult } from "./models/apiresult";
 import { AppComponent } from "./app.component";
 export const CurrentUrls = {
   constantsUrl: "Constants",
   approveUrl: "ApproveUser",
   employeelist: "employees",
+  registeremployeeUrl: "RegisterEmployee",
   loginUrl: "Login"
 };
 @Injectable()
@@ -58,6 +60,7 @@ export class PdsApiService {
       this.httpOptions
     );
   }
+
   getEmployees(stationCode: string = ""): R.Observable<any> {
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.employeelist);
     return this.http.get(
@@ -70,6 +73,18 @@ export class PdsApiService {
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.approveUrl);
     return this.http.get(
       this.baseurl + this.employeesUrl + CurrentUrls.approveUrl,
+      this.httpOptions
+    );
+  }
+  // POST
+
+  registeremployee(input): R.Observable<APIResult> {
+    console.log(
+      this.baseurl + this.employeesUrl + CurrentUrls.registeremployeeUrl
+    );
+    return this.http.post<APIResult>(
+      this.baseurl + this.employeesUrl + CurrentUrls.registeremployeeUrl,
+      JSON.stringify(input),
       this.httpOptions
     );
   }
