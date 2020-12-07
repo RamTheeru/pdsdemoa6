@@ -1,4 +1,4 @@
-export class Designation{
-  DesignationId : number;
-    DesginationName : string;
+export class Designation {
+  designationId: number;
+  desginationName: string;
 }

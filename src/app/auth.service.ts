@@ -24,7 +24,7 @@ export class AuthService {
         if (status) {
           this.user = data.userInfo;
         } else {
-          this.swServ.showErrorMessage(m);
+          this.swServ.showErrorMessage("Error!!!", m);
         }
 
         // this.router.navigate(["/loginhome"]);

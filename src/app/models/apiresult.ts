@@ -6,13 +6,13 @@ export class APIResult {
   registerEmployees: RegisterEmployee[];
   employees: Employee[];
   userInfo: UserType;
-  Usertypes: UserType[];
-  Designations: Designation[];
-  EmployeeName: string;
-  CommandType: string;
+  usertypes: UserType[];
+  designations: Designation[];
+  employeeName: string;
+  commandType: string;
   employee: Employee;
   registerEmployee: RegisterEmployee;
-  Status: boolean;
-  Message: string;
-  Id: number;
+  status: boolean;
+  message: string;
+  id: number;
 }

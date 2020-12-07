@@ -132,17 +132,19 @@
 					<mat-form-field>
 						<mat-select formControlName="desg" aria-placeholder="Designation">
 							<mat-option value="">Select Designation</mat-option>
-							<mat-option value="Ka">KeyAccountsManager</mat-option>
+							<mat-option *ngFor="let d of designatons" [value]="d.desginationName">{{d.desginationName}}
+							</mat-option>
+							<!-- <mat-option value="Ka">KeyAccountsManager</mat-option>
 							<mat-option value="Su">Supervisor</mat-option>
 							<mat-option value="Sr">Sr. Manager</mat-option>
 							<mat-option value="Ast">Asst. Manager</mat-option>
-							<mat-option value="Su">Office Assistant</mat-option>
+							<mat-option value="Su">Office Assistant</mat-option> -->
 						</mat-select>
 					</mat-form-field>
 					<mat-form-field>
 						<mat-select formControlName="ut" aria-placeholder="User Type">
 							<mat-option value="">Select Login Type</mat-option>
-							<mat-option *ngFor="let u of userTypes" [value]="u.UserTypeId">{{u.User}}
+							<mat-option *ngFor="let u of userTypes" [value]="u.userTypeId">{{u.user}}
 							</mat-option>
 							<!-- <mat-option value="hrle">HR (HE)</mat-option>
 							<mat-option value="female">HR (LE)</mat-option>

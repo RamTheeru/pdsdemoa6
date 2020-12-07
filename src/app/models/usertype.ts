@@ -1,13 +1,13 @@
 export class UserType {
-  UserTypeId: number;
-  User: string;
-  EmployeeId: number;
-  Role: string;
-  Token: string;
-  Valid: Boolean;
-  StartDate: string;
-  SessionStartDate: Date;
-  EndDate: string;
-  SessionEndDate: Date;
-  IsAlreadySession: Boolean;
+  userTypeId: number;
+  user: string;
+  employeeId: number;
+  role: string;
+  token: string;
+  valid: Boolean;
+  startDate: string;
+  sessionStartDate: Date;
+  endDate: string;
+  sessionEndDate: Date;
+  isAlreadySession: Boolean;
 }

@@ -12,7 +12,7 @@ import { SweetService } from "../sweet.service";
 import { UserType } from "../models/usertype";
 import { RegisterEmployee } from "../models/registeremployee";
 import { APIResult } from "../models/apiresult";
-
+import { Designation } from "../models/designation";
 @Component({
   selector: "app-register",
   templateUrl: "./register.component.html",
@@ -57,6 +57,7 @@ export class RegisterComponent implements OnInit {
     31
   ];
   userTypes: UserType[];
+  designatons: Designation[];
   empForm: FormGroup;
   maritals = ["married", "unmarried"];
 
@@ -76,12 +77,14 @@ export class RegisterComponent implements OnInit {
     this.result = new APIResult();
     this.api.getConstants().subscribe(
       (data: APIResult) => {
-        let status: Boolean = data.Status;
-        let m: string = data.Message;
+        //console.log(data);
+        let status: Boolean = data.status;
+        let m: string = data.message;
         if (status) {
-          this.userTypes = data.Usertypes;
+          this.userTypes = data.usertypes;
+          this.designatons = data.designations;
         } else {
-          this._swServ.showErrorMessage(m);
+          this._swServ.showErrorMessage("Error!!", m);
         }
       },
       err => {
