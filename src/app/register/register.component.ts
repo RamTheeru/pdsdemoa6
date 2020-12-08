@@ -6,7 +6,16 @@ import {
   FormArray,
   Validators
 } from "@angular/forms";
-
+import * as _moment from "moment";
+import { default as _rollupMoment } from "moment";
+const moment = _rollupMoment || _moment;
+import { MY_FORMATS } from "../models/dateformats";
+import { MomentDateAdapter } from "@angular/material-moment-adapter";
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE
+} from "@angular/material/core";
 import { PdsApiService } from "../pds-api.service";
 import { SweetService } from "../sweet.service";
 import { UserType } from "../models/usertype";
@@ -17,7 +26,16 @@ import { Designation } from "../models/designation";
   selector: "app-register",
   templateUrl: "./register.component.html",
   styleUrls: ["./register.component.css"],
-  providers: [SweetService]
+  providers: [
+    SweetService,
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE]
+    },
+
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
+  ]
 })
 export class RegisterComponent implements OnInit {
   //employee
@@ -68,12 +86,13 @@ export class RegisterComponent implements OnInit {
     private api: PdsApiService,
     private _swServ: SweetService
   ) {
-    this.initForm();
+    
     //this.addCheckboxes();
     //this.addCheckboxes_t();
   }
 
   ngOnInit() {
+    this.initForm();
     this.result = new APIResult();
     this.api.getConstants().subscribe(
       (data: APIResult) => {
@@ -101,8 +120,8 @@ export class RegisterComponent implements OnInit {
       firstName: new FormControl(),
       lastName: new FormControl(),
       middleName: new FormControl(),
-      birthdate: new FormControl(),
-      joindate: new FormControl(),
+      birthdate: new FormControl(moment()),
+      joindate: new FormControl(moment()),
       //  day: new FormControl(),
       //   month: new FormControl(''),
       //    year: new FormControl(),
@@ -171,9 +190,11 @@ export class RegisterComponent implements OnInit {
     emp.LastName = this.empForm.value["lastName"];
     emp.MiddleName = this.empForm.value["middleName"];
     emp.Phone = this.empForm.value["phone"];
-    emp.Day = this.empForm.value["day"];
-    emp.Month = this.empForm.value["month"];
-    emp.Year = this.empForm.value["year"];
+    emp.DOB = this.empForm.value["birthdate"];
+    emp.DOJ = this.empForm.value["joindate"];
+    // emp.Day = this.empForm.value["day"];
+    // emp.Month = this.empForm.value["month"];
+    // emp.Year = this.empForm.value["year"];
 
     emp.Age = this.empForm.value["age"];
     emp.BloodGroup = this.empForm.value["bg"];
@@ -221,9 +242,9 @@ export class RegisterComponent implements OnInit {
     emp.Guard_LastName = this.empForm.value["glastName"];
     emp.Guard_MiddleName = this.empForm.value["gmiddleName"];
     emp.Guard_Phone = this.empForm.value["gphone"];
-    emp.Day2 = this.empForm.value["day2"];
-    emp.Month2 = this.empForm.value["month2"];
-    emp.Year2 = this.empForm.value["year2"];
+    // emp.Day2 = this.empForm.value["day2"];
+    // emp.Month2 = this.empForm.value["month2"];
+    // emp.Year2 = this.empForm.value["year2"];
     emp.LoginType = this.empForm.value["ut"];
     emp.Designation = this.empForm.value["desg"];
     emp.StationCode = this.empForm.value["station"];
@@ -232,7 +253,24 @@ export class RegisterComponent implements OnInit {
     //console.log('on submit.....');
 
     console.log(emp);
-
+    this.api.registeremployee(emp).subscribe(
+      (data: APIResult) => {
+        //console.log(data);
+        let status: Boolean = data.status;
+        let m: string = data.message;
+        if (status) {
+          this.userTypes = data.usertypes;
+          this.designatons = data.designations;
+          this._swServ.showSuccessMessage("Success!!!", m);
+        } else {
+          this._swServ.showErrorMessage("Error!!", m);
+        }
+      },
+      err => {
+        //console.log(err.message);
+        this._swServ.showErrorMessage("Network Error!!!", err.message);
+      }
+    );
     //  setTimeout(function(){
     //     this.loaded=false;
 
