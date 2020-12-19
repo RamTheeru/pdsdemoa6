@@ -19,12 +19,14 @@ export class PdsApiService {
   //constantsUrl: string = "Constants";
   financeUrl: string = "Finance/";
   employeesUrl: string = "Employee/";
-
+  config = new HttpHeaders()
+    .set("Content-Type", "application/json")
+    .set("Accept", "application/json");
   constructor(private http: HttpClient) {}
   posthttpOptions = {
     headers: new HttpHeaders({
-      "Content-Type": "application/json"
-      //'Authorization': 'my-auth-token'
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*"
     })
   };
   httpOptions = {
@@ -85,9 +87,11 @@ export class PdsApiService {
   // POST
 
   registeremployee(input): R.Observable<any> {
+    console.log(JSON.stringify(input));
     console.log(
       this.baseurl + this.employeesUrl + CurrentUrls.registeremployeeUrl
     );
+    console.log(JSON.stringify(input));
     return this.http.post<any>(
       this.baseurl + this.employeesUrl + CurrentUrls.registeremployeeUrl,
       JSON.stringify(input),

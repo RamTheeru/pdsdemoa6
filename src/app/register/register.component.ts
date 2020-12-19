@@ -86,7 +86,6 @@ export class RegisterComponent implements OnInit {
     private api: PdsApiService,
     private _swServ: SweetService
   ) {
-    
     //this.addCheckboxes();
     //this.addCheckboxes_t();
   }
@@ -196,7 +195,7 @@ export class RegisterComponent implements OnInit {
     // emp.Month = this.empForm.value["month"];
     // emp.Year = this.empForm.value["year"];
 
-    emp.Age = this.empForm.value["age"];
+    emp.EmpAge = this.empForm.value["age"];
     emp.BloodGroup = this.empForm.value["bg"];
     emp.Gender = this.empForm.value["gender"];
     //  if(selectedmaritals.length>0)
@@ -252,7 +251,6 @@ export class RegisterComponent implements OnInit {
 
     //console.log('on submit.....');
 
-    console.log(emp);
     this.api.registeremployee(emp).subscribe(
       (data: APIResult) => {
         //console.log(data);
@@ -267,7 +265,7 @@ export class RegisterComponent implements OnInit {
         }
       },
       err => {
-        //console.log(err.message);
+        console.log(err);
         this._swServ.showErrorMessage("Network Error!!!", err.message);
       }
     );
