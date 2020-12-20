@@ -130,16 +130,13 @@
 					</mat-form-field>
 
 					<mat-form-field>
-						<mat-select formControlName="desg" aria-placeholder="Designation">
+						<!-- <mat-select formControlName="desg" aria-placeholder="Designation">
 							<mat-option value="">Select Designation</mat-option>
 							<mat-option *ngFor="let d of designatons" [value]="d.desginationName">{{d.desginationName}}
-							</mat-option>
-							<!-- <mat-option value="Ka">KeyAccountsManager</mat-option>
-							<mat-option value="Su">Supervisor</mat-option>
-							<mat-option value="Sr">Sr. Manager</mat-option>
-							<mat-option value="Ast">Asst. Manager</mat-option>
-							<mat-option value="Su">Office Assistant</mat-option> -->
-						</mat-select>
+							</mat-option> -->
+						<!-- </mat-select> -->
+						<input type="text" name="usrname" formControlName="usr" matInput placeholder="User Name" class="form-control">
+						<mat-error>This field is mandatory</mat-error>
 					</mat-form-field>
 					<mat-form-field>
 						<mat-select formControlName="ut" aria-placeholder="User Type">
@@ -156,8 +153,20 @@
 					</mat-form-field>
 					<legend>Location Details</legend>
 					<mat-form-field>
-						<input type="text" name="StationCode" formControlName="station" matInput placeholder="Station Code" class="form-control">
-						<mat-error>This field is mandatory</mat-error>
+						<mat-select formControlName="station" aria-placeholder="Station">
+							<mat-option value="">Select Station</mat-option>
+							<mat-option *ngFor="let s of stations" [value]="s.stationId-s.stationCode">
+								{{s.stationName}}
+							</mat-option>
+							<!-- <mat-option value="hrle">HR (HE)</mat-option>
+							<mat-option value="female">HR (LE)</mat-option>
+							<mat-option value="hrle">Executive (HE)</mat-option>
+							<mat-option value="female">Executive (LE)</mat-option>
+							<mat-option value="hrle">Finance (HE)</mat-option>
+							<mat-option value="female">Finance (LE)</mat-option> -->
+						</mat-select>
+						<!-- <input type="text" name="StationCode" formControlName="station" matInput placeholder="Station Code" class="form-control">
+						<mat-error>This field is mandatory</mat-error> -->
 					</mat-form-field>
 					<mat-form-field>
 						<input type="text" name="location" formControlName="location" matInput placeholder="Location Name" class="form-control">

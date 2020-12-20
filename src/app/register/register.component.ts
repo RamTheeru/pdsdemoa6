@@ -22,19 +22,20 @@ import { UserType } from "../models/usertype";
 import { RegisterEmployee } from "../models/registeremployee";
 import { APIResult } from "../models/apiresult";
 import { Designation } from "../models/designation";
+import { Station } from "../models/station";
 @Component({
   selector: "app-register",
   templateUrl: "./register.component.html",
   styleUrls: ["./register.component.css"],
   providers: [
-    SweetService,
-    {
-      provide: DateAdapter,
-      useClass: MomentDateAdapter,
-      deps: [MAT_DATE_LOCALE]
-    },
+    SweetService
+    // {
+    //   provide: DateAdapter,
+    //   useClass: MomentDateAdapter,
+    //   deps: [MAT_DATE_LOCALE]
+    // },
 
-    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
+    // { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
   ]
 })
 export class RegisterComponent implements OnInit {
@@ -76,6 +77,7 @@ export class RegisterComponent implements OnInit {
   ];
   userTypes: UserType[];
   designatons: Designation[];
+  stations: Station[];
   empForm: FormGroup;
   maritals = ["married", "unmarried"];
 
@@ -101,6 +103,8 @@ export class RegisterComponent implements OnInit {
         if (status) {
           this.userTypes = data.usertypes;
           this.designatons = data.designations;
+          this.stations = data.stations;
+          console.log(this.stations);
         } else {
           this._swServ.showErrorMessage("Error!!", m);
         }
@@ -126,6 +130,7 @@ export class RegisterComponent implements OnInit {
       //    year: new FormControl(),
       age: new FormControl(),
       bg: new FormControl(),
+      usr: new FormControl(),
       gender: new FormControl(""),
       married: new FormControl(),
       unmarried: new FormControl(),
@@ -149,8 +154,8 @@ export class RegisterComponent implements OnInit {
       month2: new FormControl(""),
       year2: new FormControl(),
       ut: new FormControl(""),
-      desg: new FormControl(""),
-      station: new FormControl(),
+      // desg: new FormControl(""),
+      station: new FormControl(""),
       location: new FormControl()
     });
   }
@@ -172,6 +177,9 @@ export class RegisterComponent implements OnInit {
   }
   onSubmit() {
     const emp: RegisterEmployee = new RegisterEmployee();
+    let st: string = this.empForm.value["station"];
+    console.log(st);
+    let stationInfo: string[] = st.split("-", 2);
     const errorTitle: string = "INVALID INPUT!!!";
     //this.loaded = true;
     // const selectedmaritals = this.empForm.value.mars
@@ -229,7 +237,7 @@ export class RegisterComponent implements OnInit {
     //     this.showrequiredMessage(f,'',errorTitle);
 
     //    }
-
+    emp.UserName = this.empForm.value["usr"];
     emp.Address1 = this.empForm.value["ad1"];
     emp.Adress2 = this.empForm.value["ad2"];
     emp.Place = this.empForm.value["place"];
@@ -245,30 +253,31 @@ export class RegisterComponent implements OnInit {
     // emp.Month2 = this.empForm.value["month2"];
     // emp.Year2 = this.empForm.value["year2"];
     emp.LoginType = this.empForm.value["ut"];
-    emp.Designation = this.empForm.value["desg"];
-    emp.StationCode = this.empForm.value["station"];
+    // emp.Designation = this.empForm.value["desg"];
+    emp.StationId = stationInfo[0];
+    emp.StationCode = stationInfo[1];
     emp.LocationName = this.empForm.value["location"];
 
     //console.log('on submit.....');
-
-    this.api.registeremployee(emp).subscribe(
-      (data: APIResult) => {
-        //console.log(data);
-        let status: Boolean = data.status;
-        let m: string = data.message;
-        if (status) {
-          this.userTypes = data.usertypes;
-          this.designatons = data.designations;
-          this._swServ.showSuccessMessage("Success!!!", m);
-        } else {
-          this._swServ.showErrorMessage("Error!!", m);
-        }
-      },
-      err => {
-        console.log(err);
-        this._swServ.showErrorMessage("Network Error!!!", err.message);
-      }
-    );
+    console.log(emp);
+    // this.api.registeremployee(emp).subscribe(
+    //   (data: APIResult) => {
+    //     //console.log(data);
+    //     let status: Boolean = data.status;
+    //     let m: string = data.message;
+    //     if (status) {
+    //       this.userTypes = data.usertypes;
+    //       this.designatons = data.designations;
+    //       this._swServ.showSuccessMessage("Success!!!", m);
+    //     } else {
+    //       this._swServ.showErrorMessage("Error!!", m);
+    //     }
+    //   },
+    //   err => {
+    //     console.log(err);
+    //     this._swServ.showErrorMessage("Network Error!!!", err.message);
+    //   }
+    // );
     //  setTimeout(function(){
     //     this.loaded=false;
 

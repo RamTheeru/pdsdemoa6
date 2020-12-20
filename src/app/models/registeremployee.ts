@@ -25,7 +25,7 @@ export class RegisterEmployee {
   PAN: string;
   Employeetype: string;
   IsPermanent: boolean;
-
+  UserName: string;
   Guard_FirstName: string;
   Guard_MiddleName: string;
   Guard_LastName: string;
@@ -37,5 +37,6 @@ export class RegisterEmployee {
   LoginType: string;
   Designation: string;
   StationCode: string;
+  StationId: number;
   LocationName: string;
 }
