@@ -155,7 +155,7 @@
 					<mat-form-field>
 						<mat-select formControlName="station" aria-placeholder="Station">
 							<mat-option value="">Select Station</mat-option>
-							<mat-option *ngFor="let s of stations" [value]="s.stationId-s.stationCode">
+							<mat-option *ngFor="let s of stations" [value]="s">
 								{{s.stationName}}
 							</mat-option>
 							<!-- <mat-option value="hrle">HR (HE)</mat-option>

@@ -28,14 +28,14 @@ import { Station } from "../models/station";
   templateUrl: "./register.component.html",
   styleUrls: ["./register.component.css"],
   providers: [
-    SweetService
-    // {
-    //   provide: DateAdapter,
-    //   useClass: MomentDateAdapter,
-    //   deps: [MAT_DATE_LOCALE]
-    // },
+    SweetService,
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE]
+    },
 
-    // { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
   ]
 })
 export class RegisterComponent implements OnInit {
@@ -104,7 +104,6 @@ export class RegisterComponent implements OnInit {
           this.userTypes = data.usertypes;
           this.designatons = data.designations;
           this.stations = data.stations;
-          console.log(this.stations);
         } else {
           this._swServ.showErrorMessage("Error!!", m);
         }
@@ -123,8 +122,8 @@ export class RegisterComponent implements OnInit {
       firstName: new FormControl(),
       lastName: new FormControl(),
       middleName: new FormControl(),
-      birthdate: new FormControl(moment()),
-      joindate: new FormControl(moment()),
+      birthdate: new FormControl(),
+      joindate: new FormControl(),
       //  day: new FormControl(),
       //   month: new FormControl(''),
       //    year: new FormControl(),
@@ -175,11 +174,17 @@ export class RegisterComponent implements OnInit {
   get typsFormArray() {
     return this.empForm.controls.typs as FormArray;
   }
+  convert(str) {
+    var date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return [date.getFullYear(), mnth, day].join("-");
+  }
   onSubmit() {
     const emp: RegisterEmployee = new RegisterEmployee();
-    let st: string = this.empForm.value["station"];
-    console.log(st);
-    let stationInfo: string[] = st.split("-", 2);
+    let st = this.empForm.value["station"];
+    let db = this.convert(this.empForm.value["birthdate"]);
+    let dj =this.convert(this.empForm.value["joindate"]);
     const errorTitle: string = "INVALID INPUT!!!";
     //this.loaded = true;
     // const selectedmaritals = this.empForm.value.mars
@@ -197,8 +202,8 @@ export class RegisterComponent implements OnInit {
     emp.LastName = this.empForm.value["lastName"];
     emp.MiddleName = this.empForm.value["middleName"];
     emp.Phone = this.empForm.value["phone"];
-    emp.DOB = this.empForm.value["birthdate"];
-    emp.DOJ = this.empForm.value["joindate"];
+    emp.DOB = db;
+    emp.DOJ = d;
     // emp.Day = this.empForm.value["day"];
     // emp.Month = this.empForm.value["month"];
     // emp.Year = this.empForm.value["year"];
@@ -254,12 +259,11 @@ export class RegisterComponent implements OnInit {
     // emp.Year2 = this.empForm.value["year2"];
     emp.LoginType = this.empForm.value["ut"];
     // emp.Designation = this.empForm.value["desg"];
-    emp.StationId = stationInfo[0];
-    emp.StationCode = stationInfo[1];
+    emp.StationId = st.stationId;
+    emp.StationCode = st.stationCode;
     emp.LocationName = this.empForm.value["location"];
-
-    //console.log('on submit.....');
     console.log(emp);
+    //console.log('on submit.....');
     // this.api.registeremployee(emp).subscribe(
     //   (data: APIResult) => {
     //     //console.log(data);
