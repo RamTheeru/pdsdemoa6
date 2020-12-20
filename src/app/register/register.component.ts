@@ -181,17 +181,20 @@ export class RegisterComponent implements OnInit {
     return [date.getFullYear(), mnth, day].join("-");
   }
   onSubmit() {
+    //gjh
     const emp: RegisterEmployee = new RegisterEmployee();
     let st = this.empForm.value["station"];
     let db = this.convert(this.empForm.value["birthdate"]);
-    let dj =this.convert(this.empForm.value["joindate"]);
+    let dj = this.convert(this.empForm.value["joindate"]);
+    let marit = this.empForm.value["married"];
+    console.log(marit);
     const errorTitle: string = "INVALID INPUT!!!";
     //this.loaded = true;
     // const selectedmaritals = this.empForm.value.mars
-    //   .map((checked, i) => checked ? this.maritals[i].name : null)
+    //   .map((checked, i) => (checked ? this.maritals[i] : null))
     //   .filter(v => v !== null);
-    //   console.log('checkboxes')
-    //   console.log(selectedmaritals);
+    // console.log("checkboxes");
+    // console.log(selectedmaritals);
 
     //   const selectempTypes = this.empForm.value.typs
     //   .map((checked, i) => checked ? this.empTypes[i].name : null)
@@ -203,7 +206,8 @@ export class RegisterComponent implements OnInit {
     emp.MiddleName = this.empForm.value["middleName"];
     emp.Phone = this.empForm.value["phone"];
     emp.DOB = db;
-    emp.DOJ = d;
+    emp.DOJ = dj;
+    //emp.Marital = marit;
     // emp.Day = this.empForm.value["day"];
     // emp.Month = this.empForm.value["month"];
     // emp.Year = this.empForm.value["year"];
