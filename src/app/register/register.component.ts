@@ -186,7 +186,7 @@ export class RegisterComponent implements OnInit {
     let db = this.convert(this.empForm.value["birthdate"]);
     let dj = this.convert(this.empForm.value["joindate"]);
 
-let loginusr = this.empForm.value["ut"];
+    let loginusr = this.empForm.value["ut"];
     // let marit = this.empForm.value["married"];
 
     //this.loaded = true;
@@ -217,7 +217,7 @@ let loginusr = this.empForm.value["ut"];
     emp.BloodGroup = this.empForm.value["bg"];
     emp.Gender = this.empForm.value["gender"];
     emp.LoginType = loginusr.user;
-    emp.UserTypeId = loginusr.userTypeId
+    emp.UserTypeId = loginusr.userTypeId;
     //  if(selectedmaritals.length>0)
     //  {
     //   emp.Marital = selectedmaritals[0];
@@ -297,8 +297,11 @@ let loginusr = this.empForm.value["ut"];
     }
     if (
       emp.LoginType == "" ||
+      emp.UserTypeId == 0 ||
       emp.LoginType == null ||
-      emp.LoginType == undefined
+      emp.UserTypeId == null ||
+      emp.LoginType == undefined ||
+      emp.UserTypeId == undefined
     ) {
       this.fvalid = false;
       this.showrequiredMessage("Employee Login Type", "", errorTitle);
