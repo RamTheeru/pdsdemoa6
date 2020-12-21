@@ -118,7 +118,7 @@
 					</mat-form-field>
 					<legend>Employee Type</legend>
 					<div class="add-bottom-padding" *ngFor="let c of empTypes; let i = index;">
-						<mat-checkbox (change)="checkValue($event,'m')" name="{{c}}" value="{{c}}"
+						<mat-checkbox (change)="checkValue($event,'e')" name="{{c}}" value="{{c}}"
 							[formControlName]="c">{{c}}</mat-checkbox>
 					</div>
 

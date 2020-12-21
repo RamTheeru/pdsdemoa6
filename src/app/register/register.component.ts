@@ -23,25 +23,22 @@ import { RegisterEmployee } from "../models/registeremployee";
 import { APIResult } from "../models/apiresult";
 import { Designation } from "../models/designation";
 import { Station } from "../models/station";
+const emp: RegisterEmployee = new RegisterEmployee();
+
 @Component({
   selector: "app-register",
   templateUrl: "./register.component.html",
-  styleUrls: ["./register.component.css"],
-  providers: [
-    SweetService,
-    {
-      provide: DateAdapter,
-      useClass: MomentDateAdapter,
-      deps: [MAT_DATE_LOCALE]
-    },
-
-    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
-  ]
+  styleUrls: ["./register.component.css"]
 })
 export class RegisterComponent implements OnInit {
   //employee
+  fvalid: boolean = true;
   loaded: boolean = false;
   result: APIResult;
+  checkMarried: boolean = false;
+  checkUnMarried: boolean = false;
+  checkPermanent: boolean = false;
+  checkContract: boolean = false;
   dates = [
     1,
     2,
@@ -182,13 +179,15 @@ export class RegisterComponent implements OnInit {
   }
   onSubmit() {
     //gjh
-    const emp: RegisterEmployee = new RegisterEmployee();
+    // const emp: RegisterEmployee = new RegisterEmployee();
+    const errorTitle: string = "INVALID INPUT!!!";
+
     let st = this.empForm.value["station"];
     let db = this.convert(this.empForm.value["birthdate"]);
     let dj = this.convert(this.empForm.value["joindate"]);
-    let marit = this.empForm.value["married"];
-    console.log(marit);
-    const errorTitle: string = "INVALID INPUT!!!";
+
+    // let marit = this.empForm.value["married"];
+
     //this.loaded = true;
     // const selectedmaritals = this.empForm.value.mars
     //   .map((checked, i) => (checked ? this.maritals[i] : null))
@@ -207,6 +206,7 @@ export class RegisterComponent implements OnInit {
     emp.Phone = this.empForm.value["phone"];
     emp.DOB = db;
     emp.DOJ = dj;
+
     //emp.Marital = marit;
     // emp.Day = this.empForm.value["day"];
     // emp.Month = this.empForm.value["month"];
@@ -215,6 +215,7 @@ export class RegisterComponent implements OnInit {
     emp.EmpAge = this.empForm.value["age"];
     emp.BloodGroup = this.empForm.value["bg"];
     emp.Gender = this.empForm.value["gender"];
+
     //  if(selectedmaritals.length>0)
     //  {
     //   emp.Marital = selectedmaritals[0];
@@ -247,13 +248,20 @@ export class RegisterComponent implements OnInit {
 
     //    }
     emp.UserName = this.empForm.value["usr"];
+
     emp.Address1 = this.empForm.value["ad1"];
     emp.Adress2 = this.empForm.value["ad2"];
+
     emp.Place = this.empForm.value["place"];
+
     emp.State = this.empForm.value["state"];
+
     emp.PostalCode = this.empForm.value["postal"];
+
     emp.AAdharNumber = this.empForm.value["aad"];
+
     emp.PAN = this.empForm.value["pan"];
+
     emp.Guard_FirstName = this.empForm.value["gfirstName"];
     emp.Guard_LastName = this.empForm.value["glastName"];
     emp.Guard_MiddleName = this.empForm.value["gmiddleName"];
@@ -262,34 +270,167 @@ export class RegisterComponent implements OnInit {
     // emp.Month2 = this.empForm.value["month2"];
     // emp.Year2 = this.empForm.value["year2"];
     emp.LoginType = this.empForm.value["ut"];
+
     // emp.Designation = this.empForm.value["desg"];
     emp.StationId = st.stationId;
     emp.StationCode = st.stationCode;
+
     emp.LocationName = this.empForm.value["location"];
-    console.log(emp);
+    if (
+      emp.LocationName == "" ||
+      emp.LocationName == null ||
+      emp.LocationName == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee LocationName Name", "", errorTitle);
+    }
+    if (
+      emp.StationId == 0 ||
+      emp.StationCode == "" ||
+      emp.StationId == null ||
+      emp.StationCode == "" ||
+      emp.StationId == undefined ||
+      emp.StationCode == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Station", "", errorTitle);
+    }
+    if (
+      emp.LoginType == "" ||
+      emp.LoginType == null ||
+      emp.LoginType == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Login Type", "", errorTitle);
+    }
+    if (
+      emp.UserName == "" ||
+      emp.UserName == null ||
+      emp.UserName == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee User Name", "", errorTitle);
+    }
+    if (emp.DOJ == "" || emp.DOJ == null || emp.DOJ == undefined) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Date Of Join", "", errorTitle);
+    }
+
+    this.showrequiredMessage("Employee Contact Number", emp.Phone, errorTitle);
+    if (
+      emp.Employeetype == "" ||
+      emp.Employeetype == null ||
+      emp.Employeetype == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Type Status", "", errorTitle);
+    }
+    if (emp.Marital == "" || emp.Marital == null || emp.Marital == undefined) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Marital Status", "", errorTitle);
+    }
+    if (this.checkContract == true && this.checkPermanent == true) {
+      this.fvalid = false;
+      this.showrequiredMessage(
+        "Employee Type Status",
+        "Please Select Proper option",
+        errorTitle
+      );
+    }
+    if (this.checkMarried == true && this.checkUnMarried == true) {
+      this.fvalid = false;
+      this.showrequiredMessage(
+        "Employee Marital Status",
+        "Please Select Proper option",
+        errorTitle
+      );
+    }
+    if (emp.PAN == "" || emp.PAN == null || emp.PAN == undefined) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee PAN", "", errorTitle);
+    }
+    if (
+      emp.AAdharNumber == "" ||
+      emp.AAdharNumber == null ||
+      emp.AAdharNumber == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee AAdhar", "", errorTitle);
+    }
+    if (
+      emp.PostalCode == "" ||
+      emp.PostalCode == null ||
+      emp.PostalCode == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee State", "", errorTitle);
+    }
+    if (emp.State == "" || emp.State == null || emp.State == undefined) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee State", "", errorTitle);
+    }
+    if (emp.Place == "" || emp.Place == null || emp.Place == undefined) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Place", "", errorTitle);
+    }
+    if (
+      emp.Address1 == "" ||
+      emp.Adress2 == "" ||
+      emp.Address1 == null ||
+      emp.Adress2 == null ||
+      emp.Address1 == undefined ||
+      emp.Adress2 == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Address", "", errorTitle);
+    }
+    this.showrequiredMessage("Employee AGE", emp.EmpAge, errorTitle);
+    if (emp.DOB == "" || emp.DOB == null || emp.DOB == undefined) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Date Of Birth", "", errorTitle);
+    }
+    if (emp.Gender == "" || emp.Gender == null || emp.Gender == undefined) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Gender", "", errorTitle);
+    }
+    if (
+      emp.FirstName == "" ||
+      emp.FirstName == null ||
+      emp.FirstName == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee First Name", "", errorTitle);
+    }
+
+    console.log(JSON.stringify(emp));
     //console.log('on submit.....');
-    // this.api.registeremployee(emp).subscribe(
-    //   (data: APIResult) => {
-    //     //console.log(data);
-    //     let status: Boolean = data.status;
-    //     let m: string = data.message;
-    //     if (status) {
-    //       this.userTypes = data.usertypes;
-    //       this.designatons = data.designations;
-    //       this._swServ.showSuccessMessage("Success!!!", m);
-    //     } else {
-    //       this._swServ.showErrorMessage("Error!!", m);
-    //     }
-    //   },
-    //   err => {
-    //     console.log(err);
-    //     this._swServ.showErrorMessage("Network Error!!!", err.message);
-    //   }
-    // );
+    if (this.fvalid) {
+      this.submittoAPI(emp);
+    }
     //  setTimeout(function(){
     //     this.loaded=false;
 
     //  },2000);
+  }
+  submittoAPI(regemploy): void {
+    this.api.registeremployee(regemploy).subscribe(
+      (data: APIResult) => {
+        //console.log(data);
+        let status: Boolean = data.status;
+        let m: string = data.message;
+        if (status) {
+          this.userTypes = data.usertypes;
+          this.designatons = data.designations;
+          this._swServ.showSuccessMessage("Success!!!", m);
+        } else {
+          this._swServ.showErrorMessage("Error!!", m);
+        }
+      },
+      err => {
+        console.log(err);
+        this._swServ.showErrorMessage("Network Error!!!", err.message);
+      }
+    );
   }
   focusOutFunction(field, event: any): void {
     const errorTitle: string = "INVALID INPUT!!!";
@@ -297,23 +438,29 @@ export class RegisterComponent implements OnInit {
     if (field == "fname") {
       var f = "First Name";
       this.showrequiredMessage(f, txt, errorTitle);
-    }
-    if (field == "phone") {
+    } else if (field == "phone") {
       var f = "Employee Contact Number";
       this.showrequiredMessage(f, txt, errorTitle);
+    } else {
+      this.fvalid = true;
     }
   }
   showrequiredMessage(field, txt, title) {
     var test = false;
     if (txt == "" || txt == null) {
       var msg = field + " " + " field required!!";
+      this.fvalid = false;
       this._swServ.showErrorMessage(title, msg);
-    } else if (field == "Employee Contact Number") {
+    } else if (field == "Employee Contact Number" || field == "Employee AGE") {
       var msg = field + " " + " contains Only Numbers!!";
       test = this.ValidateNumbers(txt);
       if (!test) {
+        this.fvalid = false;
         this._swServ.showErrorMessage(title, msg);
       }
+    } else {
+      this.fvalid = false;
+      this._swServ.showErrorMessage(title, txt);
     }
   }
 
@@ -324,48 +471,46 @@ export class RegisterComponent implements OnInit {
     return val;
   }
   checkValue(event: any, field) {
-    const emp: RegisterEmployee = new RegisterEmployee();
+    // console.log(event.checked);
+    // console.log(event.source.value);
+
     const errorTitle: string = "INVALID INPUT!!!";
-    if (field == "mars") {
-      // const selectedmaritals = this.empForm.value.mars
-      //     .map((checked, i) => checked ? this.maritals[i].name : null)
-      //     .filter(v => v !== null);
-      //   if(selectedmaritals.length>0)
-      //   {
-      //     emp.Marital = selectedmaritals[0];
-      //     if(emp.Marital == "Married"){
-      //       emp.MaritalStatus = true;
-      //     }
-      //     else{
-      //       emp.MaritalStatus= false;
-      //       }
-      //   }
-      //   else
-      //   {
-      //     emp.MaritalStatus= false;
-      //       var txt = '';
-      //       var f = 'Employee Marital Status';
-      //       this.showrequiredMessage(f,'',errorTitle);
-      //   }
-    } else {
-      //     const selectempTypes = this.empForm.value.typs
-      // .map((checked, i) => checked ? this.empTypes[i].name : null)
-      // .filter(v => v !== null);
-      // if(selectempTypes.length>0)
-      // {
-      //   emp.Employeetype = selectempTypes[0];
-      //     if(emp.Employeetype == "Permanent"){
-      //     emp.IsPermanent = true;
-      //   }
-      //   else{emp.IsPermanent= false;}
-      // }
-      // else
-      // {
-      //   emp.IsPermanent= false;
-      //     var txt = '';
-      //     var f = 'Employee Type ';
-      //     this.showrequiredMessage(f,'',errorTitle);
-      // }
+    if (field == "m") {
+      let v = event.source.value;
+      if (!event.checked) {
+        var txt = "";
+        this.checkMarried = false;
+        this.checkUnMarried = false;
+        var f = "Employee Marital Status";
+        this.showrequiredMessage(f, "", errorTitle);
+      } else {
+        emp.Marital = v;
+        if (v == "married") {
+          this.checkMarried = true;
+          emp.MaritalStatus = true;
+        } else if (v == "unmarried") {
+          this.checkUnMarried = true;
+          emp.MaritalStatus = false;
+        }
+      }
+    } else if (field == "e") {
+      let v = event.source.value;
+      if (!event.checked) {
+        var txt = "";
+        this.checkPermanent = false;
+        this.checkContract = false;
+        var f = "Employee Type Status";
+        this.showrequiredMessage(f, "", errorTitle);
+      } else {
+        emp.Employeetype = v;
+        if (v == "permanent") {
+          this.checkPermanent = true;
+          emp.IsPermanent = true;
+        } else if (v == "contract") {
+          this.checkContract = true;
+          emp.IsPermanent = false;
+        }
+      }
     }
   }
 }
