@@ -402,6 +402,7 @@ export class RegisterComponent implements OnInit {
     }
 
     console.log(JSON.stringify(emp));
+    this.fvalid = false;
     //console.log('on submit.....');
     if (this.fvalid) {
       this.submittoAPI(emp);
@@ -484,7 +485,10 @@ export class RegisterComponent implements OnInit {
         this.fvalid = false;
         this._swServ.showErrorMessage(title, msg);
       }
-    } else {
+    } else if (
+      field == "Employee Type Status" ||
+      field == "Employee Marital Status"
+    ) {
       this.fvalid = false;
       this._swServ.showErrorMessage(title, txt);
     }
