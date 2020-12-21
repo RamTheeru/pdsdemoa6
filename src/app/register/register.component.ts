@@ -186,6 +186,7 @@ export class RegisterComponent implements OnInit {
     let db = this.convert(this.empForm.value["birthdate"]);
     let dj = this.convert(this.empForm.value["joindate"]);
 
+let loginusr = this.empForm.value["ut"];
     // let marit = this.empForm.value["married"];
 
     //this.loaded = true;
@@ -215,7 +216,8 @@ export class RegisterComponent implements OnInit {
     emp.EmpAge = this.empForm.value["age"];
     emp.BloodGroup = this.empForm.value["bg"];
     emp.Gender = this.empForm.value["gender"];
-
+    emp.LoginType = loginusr.user;
+    emp.UserTypeId = loginusr.userTypeId
     //  if(selectedmaritals.length>0)
     //  {
     //   emp.Marital = selectedmaritals[0];
@@ -269,7 +271,6 @@ export class RegisterComponent implements OnInit {
     // emp.Day2 = this.empForm.value["day2"];
     // emp.Month2 = this.empForm.value["month2"];
     // emp.Year2 = this.empForm.value["year2"];
-    emp.LoginType = this.empForm.value["ut"];
 
     emp.StationId = st.stationId;
     emp.StationCode = st.stationCode;
