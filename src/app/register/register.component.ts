@@ -201,6 +201,7 @@ export class RegisterComponent implements OnInit {
     //   .filter(v => v !== null);
     //   console.log('checkboxes')
     //   console.log(selectempTypes);
+    emp.EmpCode = "";
     emp.FirstName = this.empForm.value["firstName"];
     emp.LastName = this.empForm.value["lastName"];
     emp.MiddleName = this.empForm.value["middleName"];
