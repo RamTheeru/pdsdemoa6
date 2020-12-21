@@ -271,7 +271,6 @@ export class RegisterComponent implements OnInit {
     // emp.Year2 = this.empForm.value["year2"];
     emp.LoginType = this.empForm.value["ut"];
 
-    // emp.Designation = this.empForm.value["desg"];
     emp.StationId = st.stationId;
     emp.StationCode = st.stationCode;
 
@@ -282,7 +281,7 @@ export class RegisterComponent implements OnInit {
       emp.LocationName == undefined
     ) {
       this.fvalid = false;
-      this.showrequiredMessage("Employee LocationName Name", "", errorTitle);
+      this.showrequiredMessage("Employee Location Name", "", errorTitle);
     }
     if (
       emp.StationId == 0 ||
@@ -440,6 +439,33 @@ export class RegisterComponent implements OnInit {
       this.showrequiredMessage(f, txt, errorTitle);
     } else if (field == "phone") {
       var f = "Employee Contact Number";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "age") {
+      var f = "Employee AGE";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "ad1") {
+      var f = "Employee Address";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "place") {
+      var f = "Employee Place";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "state") {
+      var f = "Employee State";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "post") {
+      var f = "Employee Postal Code";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "aad") {
+      var f = "Employee AAdhar Code";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "pan") {
+      var f = "Employee PAN Number";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "usr") {
+      var f = "Employee User Name";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "loc") {
+      var f = "Employee Location Name";
       this.showrequiredMessage(f, txt, errorTitle);
     } else {
       this.fvalid = true;
