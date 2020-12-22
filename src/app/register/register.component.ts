@@ -262,7 +262,7 @@ export class RegisterComponent implements OnInit {
 
     emp.AAdharNumber = this.empForm.value["aad"];
 
-    emp.PAN = this.empForm.value["pan"];
+    emp.PANNumber = this.empForm.value["pan"];
 
     emp.Gaurd_FirstName = this.empForm.value["gfirstName"];
     emp.Gaurd_LastName = this.empForm.value["glastName"];
@@ -351,7 +351,11 @@ export class RegisterComponent implements OnInit {
         errorTitle
       );
     }
-    if (emp.PAN == "" || emp.PAN == null || emp.PAN == undefined) {
+    if (
+      emp.PANNumber == "" ||
+      emp.PANNumber == null ||
+      emp.PANNumber == undefined
+    ) {
       this.fvalid = false;
       this.showrequiredMessage("Employee PAN", "", errorTitle);
     }

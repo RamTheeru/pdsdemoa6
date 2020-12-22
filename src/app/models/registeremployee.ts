@@ -24,7 +24,7 @@ export class RegisterEmployee {
   State: string;
   PostalCode: string;
   AAdharNumber: string;
-  PAN: string;
+  PANNumber: string;
   Employeetype: string;
   IsPermanent: boolean;
   UserName: string;
