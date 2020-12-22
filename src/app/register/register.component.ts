@@ -311,9 +311,10 @@ export class RegisterComponent implements OnInit {
     ) {
       this.fvalid = false;
       this.showrequiredMessage("Employee User Name", "", errorTitle);
-    } else {
-      this.showrequiredMessage("Employee User Name", emp.UserName, errorTitle);
     }
+    // else {
+    //   this.showrequiredMessage("Employee User Name", emp.UserName, errorTitle);
+    // }
     if (emp.DOJ == "" || emp.DOJ == null || emp.DOJ == undefined) {
       this.fvalid = false;
       this.showrequiredMessage("Employee Date Of Join", "", errorTitle);
