@@ -373,7 +373,7 @@ export class RegisterComponent implements OnInit {
       emp.PostalCode == undefined
     ) {
       this.fvalid = false;
-      this.showrequiredMessage("Employee State", "", errorTitle);
+      this.showrequiredMessage("Employee PostalCode", "", errorTitle);
     }
     if (emp.State == "" || emp.State == null || emp.State == undefined) {
       this.fvalid = false;
@@ -474,7 +474,7 @@ export class RegisterComponent implements OnInit {
       var f = "Employee State";
       this.showrequiredMessage(f, txt, errorTitle);
     } else if (field == "post") {
-      var f = "Employee Postal Code";
+      var f = "Employee PostalCode";
       this.showrequiredMessage(f, txt, errorTitle);
     } else if (field == "aad") {
       var f = "Employee AAdhar Code";
