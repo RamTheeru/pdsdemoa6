@@ -6,6 +6,7 @@ import {
   FormArray,
   Validators
 } from "@angular/forms";
+import { Router } from "@angular/router";
 import * as _moment from "moment";
 import { default as _rollupMoment } from "moment";
 const moment = _rollupMoment || _moment;
@@ -83,7 +84,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private api: PdsApiService,
-    private _swServ: SweetService
+    private _swServ: SweetService,
+    private router: Router
   ) {
     //this.addCheckboxes();
     //this.addCheckboxes_t();
@@ -411,6 +413,7 @@ export class RegisterComponent implements OnInit {
     //console.log('on submit.....');
     if (this.fvalid) {
       this.submittoAPI(emp);
+      this.router.navigate(["/login"]);
     } else {
       this._swServ.showErrorMessage(
         "Invalid Form!!",
@@ -494,6 +497,8 @@ export class RegisterComponent implements OnInit {
       if (!test) {
         this.fvalid = false;
         this._swServ.showErrorMessage(title, msg);
+      } else {
+        this.fvalid = true;
       }
     } else if (
       field == "Employee Type Status" ||
@@ -520,6 +525,8 @@ export class RegisterComponent implements OnInit {
           this._swServ.showErrorMessage("Network Error!!!", err.message);
         }
       );
+    } else {
+      this.fvalid = true;
     }
   }
 
