@@ -250,7 +250,7 @@ export class RegisterComponent implements OnInit {
     emp.UserName = this.empForm.value["usr"];
 
     emp.Address1 = this.empForm.value["ad1"];
-    emp.Adress2 = this.empForm.value["ad2"];
+    emp.Address2 = this.empForm.value["ad2"];
 
     emp.Place = this.empForm.value["place"];
 
@@ -311,6 +311,8 @@ export class RegisterComponent implements OnInit {
     ) {
       this.fvalid = false;
       this.showrequiredMessage("Employee User Name", "", errorTitle);
+    } else {
+      this.showrequiredMessage("Employee User Name", emp.UserName, errorTitle);
     }
     if (emp.DOJ == "" || emp.DOJ == null || emp.DOJ == undefined) {
       this.fvalid = false;
@@ -376,11 +378,11 @@ export class RegisterComponent implements OnInit {
     }
     if (
       emp.Address1 == "" ||
-      emp.Adress2 == "" ||
+      emp.Address2 == "" ||
       emp.Address1 == null ||
-      emp.Adress2 == null ||
+      emp.Address2 == null ||
       emp.Address1 == undefined ||
-      emp.Adress2 == undefined
+      emp.Address2 == undefined
     ) {
       this.fvalid = false;
       this.showrequiredMessage("Employee Address", "", errorTitle);

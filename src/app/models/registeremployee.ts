@@ -19,7 +19,7 @@ export class RegisterEmployee {
   MaritalStatus: boolean;
   Marital: string;
   Address1: string;
-  Adress2: string;
+  Address2: string;
   Place: string;
   State: string;
   PostalCode: string;
