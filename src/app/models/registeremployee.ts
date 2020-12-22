@@ -28,10 +28,10 @@ export class RegisterEmployee {
   Employeetype: string;
   IsPermanent: boolean;
   UserName: string;
-  Guard_FirstName: string;
-  Guard_MiddleName: string;
-  Guard_LastName: string;
-  Guard_Phone: string;
+  Gaurd_FirstName: string;
+  Gaurd_MiddleName: string;
+  Gaurd_LastName: string;
+  Gaurd_PhoneNumber: string;
   Day2: string;
   Month2: string;
   Year2: string;

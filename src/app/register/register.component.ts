@@ -262,10 +262,10 @@ export class RegisterComponent implements OnInit {
 
     emp.PAN = this.empForm.value["pan"];
 
-    emp.Guard_FirstName = this.empForm.value["gfirstName"];
-    emp.Guard_LastName = this.empForm.value["glastName"];
-    emp.Guard_MiddleName = this.empForm.value["gmiddleName"];
-    emp.Guard_Phone = this.empForm.value["gphone"];
+    emp.Gaurd_FirstName = this.empForm.value["gfirstName"];
+    emp.Gaurd_LastName = this.empForm.value["glastName"];
+    emp.Gaurd_MiddleName = this.empForm.value["gmiddleName"];
+    emp.Gaurd_PhoneNumber = this.empForm.value["gphone"];
     // emp.Day2 = this.empForm.value["day2"];
     // emp.Month2 = this.empForm.value["month2"];
     // emp.Year2 = this.empForm.value["year2"];
@@ -403,11 +403,16 @@ export class RegisterComponent implements OnInit {
       this.showrequiredMessage("Employee First Name", "", errorTitle);
     }
 
-    console.log(JSON.stringify(emp));
-    this.fvalid = false;
+    //console.log(JSON.stringify(emp));
+
     //console.log('on submit.....');
     if (this.fvalid) {
       this.submittoAPI(emp);
+    } else {
+      this._swServ.showErrorMessage(
+        "Invalid Form!!",
+        "Please Check Provided Details."
+      );
     }
     //  setTimeout(function(){
     //     this.loaded=false;
