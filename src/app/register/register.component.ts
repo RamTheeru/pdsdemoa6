@@ -488,8 +488,6 @@ export class RegisterComponent implements OnInit {
     } else if (field == "loc") {
       var f = "Employee Location Name";
       this.showrequiredMessage(f, txt, errorTitle);
-    } else {
-      this.fvalid = true;
     }
   }
   showrequiredMessage(field, txt, title) {
@@ -516,7 +514,7 @@ export class RegisterComponent implements OnInit {
     } else if (field == "Employee User Name") {
       this.api.checkUserName(txt).subscribe(
         (data: APIResult) => {
-          //console.log(data);
+          //   console.log(data);
           let status: Boolean = data.status;
           let m: string = data.message;
           if (status) {
