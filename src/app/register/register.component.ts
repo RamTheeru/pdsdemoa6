@@ -283,8 +283,7 @@ export class RegisterComponent implements OnInit {
     ) {
       this.fvalid = false;
       this.showrequiredMessage("Employee Location Name", "", errorTitle);
-    }
-    if (
+    } else if (
       emp.StationId == 0 ||
       emp.StationCode == "" ||
       emp.StationId == null ||
@@ -294,8 +293,7 @@ export class RegisterComponent implements OnInit {
     ) {
       this.fvalid = false;
       this.showrequiredMessage("Employee Station", "", errorTitle);
-    }
-    if (
+    } else if (
       emp.LoginType == "" ||
       emp.UserTypeId == 0 ||
       emp.LoginType == null ||
@@ -305,8 +303,7 @@ export class RegisterComponent implements OnInit {
     ) {
       this.fvalid = false;
       this.showrequiredMessage("Employee Login Type", "", errorTitle);
-    }
-    if (
+    } else if (
       emp.UserName == "" ||
       emp.UserName == null ||
       emp.UserName == undefined
@@ -317,73 +314,65 @@ export class RegisterComponent implements OnInit {
     // else {
     //   this.showrequiredMessage("Employee User Name", emp.UserName, errorTitle);
     // }
-    if (emp.DOJ == "" || emp.DOJ == null || emp.DOJ == undefined) {
+    else if (emp.DOJ == "" || emp.DOJ == null || emp.DOJ == undefined) {
       this.fvalid = false;
       this.showrequiredMessage("Employee Date Of Join", "", errorTitle);
-    }
-
-    this.showrequiredMessage("Employee Contact Number", emp.Phone, errorTitle);
-    if (
+    } else if (
       emp.Employeetype == "" ||
       emp.Employeetype == null ||
       emp.Employeetype == undefined
     ) {
       this.fvalid = false;
       this.showrequiredMessage("Employee Type Status", "", errorTitle);
-    }
-    if (emp.Marital == "" || emp.Marital == null || emp.Marital == undefined) {
+    } else if (
+      emp.Marital == "" ||
+      emp.Marital == null ||
+      emp.Marital == undefined
+    ) {
       this.fvalid = false;
       this.showrequiredMessage("Employee Marital Status", "", errorTitle);
-    }
-    if (this.checkContract == true && this.checkPermanent == true) {
+    } else if (this.checkContract == true && this.checkPermanent == true) {
       this.fvalid = false;
       this.showrequiredMessage(
         "Employee Type Status",
         "Please Select Proper option",
         errorTitle
       );
-    }
-    if (this.checkMarried == true && this.checkUnMarried == true) {
+    } else if (this.checkMarried == true && this.checkUnMarried == true) {
       this.fvalid = false;
       this.showrequiredMessage(
         "Employee Marital Status",
         "Please Select Proper option",
         errorTitle
       );
-    }
-    if (
+    } else if (
       emp.PANNumber == "" ||
       emp.PANNumber == null ||
       emp.PANNumber == undefined
     ) {
       this.fvalid = false;
       this.showrequiredMessage("Employee PAN", "", errorTitle);
-    }
-    if (
+    } else if (
       emp.AAdharNumber == "" ||
       emp.AAdharNumber == null ||
       emp.AAdharNumber == undefined
     ) {
       this.fvalid = false;
       this.showrequiredMessage("Employee AAdhar", "", errorTitle);
-    }
-    if (
+    } else if (
       emp.PostalCode == "" ||
       emp.PostalCode == null ||
       emp.PostalCode == undefined
     ) {
       this.fvalid = false;
       this.showrequiredMessage("Employee PostalCode", "", errorTitle);
-    }
-    if (emp.State == "" || emp.State == null || emp.State == undefined) {
+    } else if (emp.State == "" || emp.State == null || emp.State == undefined) {
       this.fvalid = false;
       this.showrequiredMessage("Employee State", "", errorTitle);
-    }
-    if (emp.Place == "" || emp.Place == null || emp.Place == undefined) {
+    } else if (emp.Place == "" || emp.Place == null || emp.Place == undefined) {
       this.fvalid = false;
       this.showrequiredMessage("Employee Place", "", errorTitle);
-    }
-    if (
+    } else if (
       emp.Address1 == "" ||
       emp.Address2 == "" ||
       emp.Address1 == null ||
@@ -393,29 +382,32 @@ export class RegisterComponent implements OnInit {
     ) {
       this.fvalid = false;
       this.showrequiredMessage("Employee Address", "", errorTitle);
-    }
-    this.showrequiredMessage("Employee AGE", emp.EmpAge, errorTitle);
-    if (emp.DOB == "" || emp.DOB == null || emp.DOB == undefined) {
+    } else if (emp.DOB == "" || emp.DOB == null || emp.DOB == undefined) {
       this.fvalid = false;
       this.showrequiredMessage("Employee Date Of Birth", "", errorTitle);
-    }
-    if (emp.Gender == "" || emp.Gender == null || emp.Gender == undefined) {
+    } else if (
+      emp.Gender == "" ||
+      emp.Gender == null ||
+      emp.Gender == undefined
+    ) {
       this.fvalid = false;
       this.showrequiredMessage("Employee Gender", "", errorTitle);
-    }
-    if (
+    } else if (
       emp.FirstName == "" ||
       emp.FirstName == null ||
       emp.FirstName == undefined
     ) {
       this.fvalid = false;
       this.showrequiredMessage("Employee First Name", "", errorTitle);
-    }
-
-    //console.log(JSON.stringify(emp));
-
-    //console.log('on submit.....');
-    if (this.fvalid) {
+    } else if (emp.Phone != "") {
+      this.showrequiredMessage(
+        "Employee Contact Number",
+        emp.Phone,
+        errorTitle
+      );
+    } else if (emp.EmpAge != "") {
+      this.showrequiredMessage("Employee AGE", emp.EmpAge, errorTitle);
+    } else if (this.fvalid) {
       this.submittoAPI(emp);
     } else {
       this._swServ.showErrorMessage(
