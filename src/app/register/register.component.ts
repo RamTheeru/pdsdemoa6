@@ -201,19 +201,16 @@ export class RegisterComponent implements OnInit {
     //   .filter(v => v !== null);
     //   console.log('checkboxes')
     //   console.log(selectempTypes);
-    emp.EmpCode = "-";
     emp.FirstName = this.empForm.value["firstName"];
     emp.LastName = this.empForm.value["lastName"];
     emp.MiddleName = this.empForm.value["middleName"];
     emp.Phone = this.empForm.value["phone"];
     emp.DOB = db;
     emp.DOJ = dj;
-    emp.EmpCode = emp.Phone;
     //emp.Marital = marit;
     // emp.Day = this.empForm.value["day"];
     // emp.Month = this.empForm.value["month"];
     // emp.Year = this.empForm.value["year"];
-
     emp.EmpAge = this.empForm.value["age"];
     emp.BloodGroup = this.empForm.value["bg"];
     emp.Gender = this.empForm.value["gender"];
