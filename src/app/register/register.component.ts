@@ -399,14 +399,17 @@ export class RegisterComponent implements OnInit {
     ) {
       this.fvalid = false;
       this.showrequiredMessage("Employee First Name", "", errorTitle);
-    } else if (emp.Phone != "") {
-      this.showrequiredMessage(
-        "Employee Contact Number",
-        emp.Phone,
-        errorTitle
-      );
-    } else if (emp.EmpAge != "") {
-      this.showrequiredMessage("Employee AGE", emp.EmpAge, errorTitle);
+    } else if (emp.Phone == "" || emp.Phone == null || emp.Phone == undefined) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Contact Number", "", errorTitle);
+    } else if (
+      emp.EmpAge == "" ||
+      emp.EmpAge == null ||
+      emp.EmpAge == undefined
+    ) {
+      //
+      this.fvalid = false;
+      this.showrequiredMessage("Employee AGE", "", errorTitle);
     } else if (this.fvalid) {
       this.submittoAPI(emp);
     } else {
@@ -415,12 +418,13 @@ export class RegisterComponent implements OnInit {
         "Please Check Provided Details."
       );
     }
-    //  setTimeout(function(){
-    //     this.loaded=false;
+    //      setTimeout(function(){
+    //     this.loaded=false   ;
 
     //  },2000);
   }
   onCancel() {
+    //
     this.initForm();
   }
   submittoAPI(regemploy): void {
