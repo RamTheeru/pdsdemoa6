@@ -498,6 +498,25 @@ export class RegisterComponent implements OnInit {
     ) {
       this.fvalid = false;
       this._swServ.showErrorMessage(title, txt);
+    } else if (field == "Employee User Name") {
+      this.api.checkUserName(txt).subscribe(
+        (data: APIResult) => {
+          //console.log(data);
+          let status: Boolean = data.status;
+          let m: string = data.message;
+          if (status) {
+            this.fvalid = true;
+            this._swServ.showSuccessMessage("Success!!!", m);
+          } else {
+            this.fvalid = false;
+            this._swServ.showErrorMessage("Error!!", m);
+          }
+        },
+        err => {
+          this.fvalid = false;
+          this._swServ.showErrorMessage("Network Error!!!", err.message);
+        }
+      );
     }
   }
 

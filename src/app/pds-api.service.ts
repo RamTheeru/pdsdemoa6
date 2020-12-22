@@ -4,11 +4,12 @@ import * as R from "rxjs";
 import { APIResult } from "./models/apiresult";
 import { AppComponent } from "./app.component";
 export const CurrentUrls = {
-  constantsUrl: "Constants",
-  approveUrl: "ApproveUser",
+  constants: "Constants",
+  approve: "ApproveUser",
   employeelist: "employees",
-  registeremployeeUrl: "RegisterEmployee",
-  loginUrl: "Login"
+  registeremployee: "RegisterEmployee",
+  login: "Login",
+  checkUsername: "CheckUserName"
 };
 @Injectable()
 export class PdsApiService {
@@ -52,48 +53,61 @@ export class PdsApiService {
     this.app.hideload();
   }
   getConstants(): R.Observable<any> {
-    console.log(this.baseurl + this.employeesUrl + CurrentUrls.constantsUrl);
+    console.log(this.baseurl + this.employeesUrl + CurrentUrls.constants);
     return this.http.get(
-      this.baseurl + this.employeesUrl + CurrentUrls.constantsUrl,
+      this.baseurl + this.employeesUrl + CurrentUrls.constants,
       this.httpOptions
     );
   }
+  //Employee login
   loginuser(username: string, password: string) {
     let input = "?username=" + username + "&password=" + password;
-    console.log(
-      this.baseurl + this.employeesUrl + CurrentUrls.loginUrl + input
-    );
+    console.log(this.baseurl + this.employeesUrl + CurrentUrls.login + input);
     return this.http.get(
-      this.baseurl + this.employeesUrl + CurrentUrls.loginUrl + input,
+      this.baseurl + this.employeesUrl + CurrentUrls.login + input,
       this.httpOptions
     );
   }
 
   getEmployees(stationCode: string = ""): R.Observable<any> {
-    console.log(this.baseurl + this.employeesUrl + CurrentUrls.employeelist);
+    let input = "?stationCode=" + stationCode;
+    console.log(
+      this.baseurl + this.employeesUrl + CurrentUrls.employeelist + input
+    );
     return this.http.get(
-      this.baseurl + this.employeesUrl + CurrentUrls.employeelist,
+      this.baseurl + this.employeesUrl + CurrentUrls.employeelist + input,
       this.httpOptions
     );
   }
+  //approve registered user
   approveUser(id: any): R.Observable<any> {
-    //k
-    console.log(this.baseurl + this.employeesUrl + CurrentUrls.approveUrl);
+    console.log(this.baseurl + this.employeesUrl + CurrentUrls.approve);
     return this.http.get(
-      this.baseurl + this.employeesUrl + CurrentUrls.approveUrl,
+      this.baseurl + this.employeesUrl + CurrentUrls.approve,
       this.httpOptions
     );
   }
-  // POST
+  //check user name for employee registration
+  checkUserName(userName: string): R.Observable<any> {
+    let input = "?userName=" + userName;
+    console.log(
+      this.baseurl + this.employeesUrl + CurrentUrls.checkUsername + input
+    );
+    return this.http.get(
+      this.baseurl + this.employeesUrl + CurrentUrls.checkUsername + input,
+      this.httpOptions
+    );
+  }
+  //register employee POST
 
   registeremployee(input): R.Observable<any> {
     console.log(JSON.stringify(input));
     console.log(
-      this.baseurl + this.employeesUrl + CurrentUrls.registeremployeeUrl
+      this.baseurl + this.employeesUrl + CurrentUrls.registeremployee
     );
     console.log(JSON.stringify(input));
     return this.http.post<any>(
-      this.baseurl + this.employeesUrl + CurrentUrls.registeremployeeUrl,
+      this.baseurl + this.employeesUrl + CurrentUrls.registeremployee,
       JSON.stringify(input),
       this.posthttpOptions
     );
