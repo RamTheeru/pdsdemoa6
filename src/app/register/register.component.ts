@@ -417,7 +417,6 @@ export class RegisterComponent implements OnInit {
     //console.log('on submit.....');
     if (this.fvalid) {
       this.submittoAPI(emp);
-      this.router.navigate(["/login"]);
     } else {
       this._swServ.showErrorMessage(
         "Invalid Form!!",
@@ -429,6 +428,9 @@ export class RegisterComponent implements OnInit {
 
     //  },2000);
   }
+  onCancel() {
+    this.initForm();
+  }
   submittoAPI(regemploy): void {
     this.api.registeremployee(regemploy).subscribe(
       (data: APIResult) => {
@@ -439,6 +441,7 @@ export class RegisterComponent implements OnInit {
           this.userTypes = data.usertypes;
           this.designatons = data.designations;
           this._swServ.showSuccessMessage("Success!!!", m);
+          this.router.navigate(["/login"]);
         } else {
           this._swServ.showErrorMessage("Error!!", m);
         }
