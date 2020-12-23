@@ -5,9 +5,10 @@ import { UserType } from "./models/usertype";
 import { APIResult } from "./models/apiresult";
 import { SweetService } from "./sweet.service";
 import { ViewService } from "./view.service";
+
 @Injectable()
 export class AuthService {
-  token: string = "";
+  token: string = "" ;
   user: UserType;
   result: APIResult;
   constructor(
@@ -16,15 +17,15 @@ export class AuthService {
     private swServ: SweetService,
     private vServ: ViewService
   ) {}
-
+  ////////
   // signInuser(username: string, password: string): Promise<APIResult> {
   //   this.api.loginuser(username, password).subscribe(
   //     (data: APIResult) => {
   //       this.result = data;
   //       let status: Boolean = data.status;
   //       let m: string = data.message;
-  //       this.user = data.userInfo;
-  //       if (status) {
+  //       this.user     = data.userInfo;
+  //    ///   if (status) {
   //         //this.user = data.userInfo;
   //         this.token = this.user.token;
   //       } else {
@@ -60,18 +61,6 @@ export class AuthService {
   //   return new Promise(() => {
   //     return this.result;
   //   });
-  // firebase
-  //   .auth()
-  //   .signInWithEmailAndPassword(email, password)
-  //   .then(response => {
-  //     this.router.navigate(["/"]);
-  //     firebase
-  //       .auth()
-  //       .currentUser.getToken()
-  //       .then((token: string) => (this.token = token));
-  //   })
-  //   .catch(error => console.log(error));
-  // }
   setToken(tkn: string) {
     this.vServ.setToken(tkn);
     this.token = tkn;
@@ -79,17 +68,13 @@ export class AuthService {
   getToken() {
     this.token = this.vServ.getValue("usrtoken");
     return this.token;
-    // firebase
-    //   .auth()
-    //   .currentUser.getToken()
-    //   .then((token: string) => (this.token = token));
-    // return this.token;
   }
   isAuth() {
-    return this.token != "";
+    this.token = this.vServ.getValue("usrtoken");
+    return this.token != "" || this.token != null;
   }
   logout() {
-    // firebase.auth().signOut();
+    // firebase.auth().signOut()    ;
     // this.token = null;
   }
 }
