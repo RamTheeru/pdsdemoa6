@@ -23,7 +23,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
   @Input("") user: string;
   private subsc: r.Subscription;
   private subsc2: r.Subscription;
-  userInfo: UserType = new UserType();
+  userInfo: UserType ;
   loginInfo: string = "";
   loginUsername: string = "";
   userType: number = 0;
@@ -62,6 +62,13 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
     this.subsc2 = this.vServ.userInfo.subscribe((res: UserType) => {
       this.userInfo = res;
     });
+    if (this.user == "" || this.user == null || this.user == undefined) {
+      this.user = this.vServ.getValue("storedProp");
+    }
+    if (this.userInfo == null || this.userInfo == undefined) {
+      var u = localStorage.getItem("userProp");
+      this.userInfo = JSON.parse(u);
+    }
     this.loginUsername = this.userInfo.user;
     //this.user = "fle"
     if (this.user === "admin") {

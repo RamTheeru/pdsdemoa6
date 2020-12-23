@@ -8,7 +8,7 @@ import { ViewService } from "./view.service";
 
 @Injectable()
 export class AuthService {
-  token: string = "" ;
+  token: string = "";
   user: UserType;
   result: APIResult;
   constructor(
