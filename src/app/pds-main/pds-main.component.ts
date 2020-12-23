@@ -90,7 +90,6 @@ export class PdsMainComponent implements OnInit {
                     "Error!!",
                     "Login failed, Please try again."
                   );
-
                 }
               } else {
                 this.sweet.showErrorMessage(

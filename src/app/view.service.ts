@@ -1,13 +1,16 @@
 import { Injectable } from "@angular/core";
+import { UserType } from "./models/usertype";
 import * as r from "rxjs";
 
 @Injectable()
 export class ViewService {
   //view = new r.Subject<Boolean>();
+  usr: UserType = new UserType();
   data = new r.BehaviorSubject<string>("");
   verify = new r.BehaviorSubject<string>("");
   verify2 = new r.BehaviorSubject<string>("");
   verify3 = new r.BehaviorSubject<string>("");
+  userInfo = new r.BehaviorSubject<UserType>(this.usr);
   constructor() {
     let verifyval = localStorage.getItem("fheverify");
     if (verifyval == "undefined" || verifyval == "" || verifyval == null)
@@ -33,11 +36,26 @@ export class ViewService {
     if (storedProp == "undefined" || storedProp == "" || storedProp == null)
       this.setValue(storedProp, true);
     else this.setValue(storedProp, false);
+
+    let u: any = localStorage.getItem("userProp");
+    this.usr = JSON.parse(u);
+    if (
+      this.usr.userTypeId == undefined ||
+      this.usr.userTypeId == 0 ||
+      this.usr.userTypeId == null
+    )
+      this.setUser(this.usr, true);
+    else this.setUser(this.usr, false);
   }
   setValue(val: string, storeProp: boolean = true) {
     this.data = new r.BehaviorSubject<string>("");
     if (storeProp) localStorage.setItem("storedProp", val);
     this.data.next(val);
+  }
+  setUser(obj: UserType, val: boolean = true) {
+    this.userInfo = new r.BehaviorSubject<UserType>(this.usr);
+    if (val) localStorage.setItem("userProp", JSON.stringify(obj));
+    this.userInfo.next(obj);
   }
   getValue(key) {
     return localStorage.getItem(key);
@@ -49,6 +67,7 @@ export class ViewService {
     else if (key == "evheverify") this.verify2.next(null);
     else if (key == "hrvheverify") this.verify3.next(null);
     else if (key == "storedProp") this.data.next(null);
+    else if (key == "userProp") this.userInfo.next(null);
   }
   setVerify(val: string, storeProp: boolean = true) {
     // this.verify = new r.BehaviorSubject<string>("");

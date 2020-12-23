@@ -4,6 +4,7 @@ import { MatSidenav } from "@angular/material";
 import * as r from "rxjs";
 import { ViewledgerComponent } from "./viewledger/viewledger.component";
 import { ViewService } from "../view.service";
+import { UserType } from "../models/usertype";
 // const navigationExtras: NavigationExtras = {
 //   state: {
 //     transd: 'TRANS001',
@@ -20,7 +21,10 @@ import { ViewService } from "../view.service";
 export class LoginhomeComponent implements OnInit, OnDestroy {
   @Input("") user: string;
   private subsc: r.Subscription;
+  private subsc2: r.Subscription;
+  userInfo: UserType = new UserType();
   loginInfo: string = "";
+  loginUsername: string = "";
   userType: number = 0;
   isFle: Boolean = false;
   shoesidenav: Boolean = false;
@@ -50,7 +54,10 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
     this.subsc = this.vServ.data.subscribe((val: string) => {
       this.user = val;
     });
-
+    this.subsc2 = this.vServ.userInfo.subscribe((res: UserType) => {
+      this.userInfo = res;
+    });
+    this.loginUsername = this.userInfo.user;
     //this.user = "fle"
     if (this.user === "admin") {
       this.userType = 1;
@@ -256,6 +263,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     this.subsc.unsubscribe();
+    this.subsc2.unsubscribe();
   }
   onLogout() {
     this.vServ.removeValue("storedProp");
