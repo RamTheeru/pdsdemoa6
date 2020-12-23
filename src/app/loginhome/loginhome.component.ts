@@ -266,11 +266,13 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
     this.subsc2.unsubscribe();
   }
   onLogout() {
+    this.vServ.removeValue("userProp");
     this.vServ.removeValue("storedProp");
     this.vServ.removeValue("fheverify");
     this.vServ.removeValue("edleverify");
     this.vServ.removeValue("evheverify");
     this.vServ.removeValue("hrvheverify");
+    this.router.navigate(["/login"]);
     //
   }
 }
