@@ -443,7 +443,7 @@ export class RegisterComponent implements OnInit {
         }
       },
       err => {
-        console.log(err);
+        //console.log(err);
         this._swServ.showErrorMessage("Network Error!!!", err.message);
       }
     );

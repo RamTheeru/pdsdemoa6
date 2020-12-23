@@ -15,47 +15,63 @@ export class AuthService {
     private swServ: SweetService
   ) {}
 
-  signInuser(username: string, password: string): Promise<UserType> {
-    this.api.loginuser(username, password).subscribe(
-      (data: APIResult) => {
-        //console.log(data);
-        let status: Boolean = data.status;
-        let m: string = data.message;
-        if (status) {
-          this.user = data.userInfo;
-          this.token = this.user.token;
-          console.log(this.user);
-        } else {
-          this.token = "";
-          this.swServ.showErrorMessage("Error!!!", m);
-        }
-        //return this.user;
-        // this.router.navigate(["/loginhome"]);
-        //this.token = token;
-        // this.swServ.showSuccessMessage("Sucess!!", "we didit");
-        // this.swServ.showMessage("SomethingWent", "wrong");
-        // this.swServ.showWarning("Delete it");
-      },
-      err => {
-        this.token = "";
-        //console.log(err.message);
-        this.swServ.showErrorMessage("Network Error!!!", err.message);
-      }
-    );
-    return new Promise(() => {
-      return this.user;
-    });
-    // firebase
-    //   .auth()
-    //   .signInWithEmailAndPassword(email, password)
-    //   .then(response => {
-    //     this.router.navigate(["/"]);
-    //     firebase
-    //       .auth()
-    //       .currentUser.getToken()
-    //       .then((token: string) => (this.token = token));
-    //   })
-    //   .catch(error => console.log(error));
+  // signInuser(username: string, password: string): Promise<APIResult> {
+  //   this.api.loginuser(username, password).subscribe(
+  //     (data: APIResult) => {
+  //       this.result = data;
+  //       let status: Boolean = data.status;
+  //       let m: string = data.message;
+  //       this.user = data.userInfo;
+  //       if (status) {
+  //         //this.user = data.userInfo;
+  //         this.token = this.user.token;
+  //       } else {
+  //         this.token = "";
+  //         this.swServ.showErrorMessage("Error!!!", m);
+  //       }
+  //     },
+  //     // (data: APIResult) => {
+  //     //   console.log(data);
+  //     //   let status: Boolean = data.status;
+  //     //   let m: string = data.message;
+  //     //   if (status) {
+  //     //     this.user = data.userInfo;
+  //     //     this.token = this.user.token;
+  //     //     console.log(this.user);
+  //     //   } else {
+  //     //     this.token = "";
+  //     //     this.swServ.showErrorMessage("Error!!!", m);
+  //     //   }
+  //     //return this.user;
+  //     // this.router.navigate(["/loginhome"]);
+  //     //this.token = token;
+  //     // this.swServ.showSuccessMessage("Sucess!!", "we didit");
+  //     // this.swServ.showMessage("SomethingWent", "wrong");
+  //     // this.swServ.showWarning("Delete it");
+  //     // },
+  //     err => {
+  //       this.token = "";
+  //       //console.log(err.message);
+  //       this.swServ.showErrorMessage("Network Error!!!", err.message);
+  //     }
+  //   );
+  //   return new Promise(() => {
+  //     return this.result;
+  //   });
+  // firebase
+  //   .auth()
+  //   .signInWithEmailAndPassword(email, password)
+  //   .then(response => {
+  //     this.router.navigate(["/"]);
+  //     firebase
+  //       .auth()
+  //       .currentUser.getToken()
+  //       .then((token: string) => (this.token = token));
+  //   })
+  //   .catch(error => console.log(error));
+  // }
+  setToken(tkn: string) {
+    this.token = tkn;
   }
   getToken() {
     return this.token;
