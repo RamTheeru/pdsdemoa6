@@ -1,17 +1,19 @@
 import { Injectable } from "@angular/core";
 import { UserType } from "./models/usertype";
+import { AuthService } from "./auth.service";
 import * as r from "rxjs";
 
 @Injectable()
 export class ViewService {
   //view = new r.Subject<Boolean>();
   usr: UserType;
+  utoken = new r.BehaviorSubject<string>("");
   data = new r.BehaviorSubject<string>("");
   verify = new r.BehaviorSubject<string>("");
   verify2 = new r.BehaviorSubject<string>("");
   verify3 = new r.BehaviorSubject<string>("");
   userInfo = new r.BehaviorSubject<UserType>(new UserType());
-  constructor() {
+  constructor(private auth: AuthService) {
     let verifyval = localStorage.getItem("fheverify");
     if (verifyval == "undefined" || verifyval == "" || verifyval == null)
       this.setVerify(verifyval, true);
@@ -37,6 +39,11 @@ export class ViewService {
       this.setValue(storedProp, true);
     else this.setValue(storedProp, false);
 
+    let usrtoken = localStorage.getItem("usrtoken");
+    if (usrtoken == "undefined" || usrtoken == "" || usrtoken == null)
+      this.setValue(usrtoken, true);
+    else this.setValue(usrtoken, false);
+
     var u = localStorage.getItem("userProp");
     this.usr = JSON.parse(u);
     if (this.usr == null || this.usr == undefined) this.setUser(this.usr, true);
@@ -46,6 +53,12 @@ export class ViewService {
     this.data = new r.BehaviorSubject<string>("");
     if (storeProp) localStorage.setItem("storedProp", val);
     this.data.next(val);
+  }
+  setToken(val: string, urtoken: boolean = true) {
+    this.utoken = new r.BehaviorSubject<string>("");
+    if (urtoken) localStorage.setItem("usrtoken", val);
+    this.auth.setToken(val);
+    this.utoken.next(val);
   }
   setUser(obj: UserType, val: boolean = true) {
     // sfdg fsaf
@@ -58,11 +71,13 @@ export class ViewService {
   }
   removeValue(key: string) {
     localStorage.removeItem(key);
+    this.auth.setToken("");
     if (key == "fheverify") this.verify.next(null);
     else if (key == "edleverify") this.verify.next(null);
     else if (key == "evheverify") this.verify2.next(null);
     else if (key == "hrvheverify") this.verify3.next(null);
     else if (key == "storedProp") this.data.next(null);
+    else if (key == "usrtoken") this.utoken.next(null);
     else if (key == "userProp") this.userInfo.next(new UserType());
   }
   setVerify(val: string, storeProp: boolean = true) {
