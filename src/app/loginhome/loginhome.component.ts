@@ -66,6 +66,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
     //this.user = "fle"
     if (this.user === "admin") {
       this.userType = 1;
+      this.loginInfo = "Admin Login";
     } else if (this.user === "financele") {
       this.userType = 2;
       this.shownotify = false;
