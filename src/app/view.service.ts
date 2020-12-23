@@ -13,7 +13,7 @@ export class ViewService {
   verify2 = new r.BehaviorSubject<string>("");
   verify3 = new r.BehaviorSubject<string>("");
   userInfo = new r.BehaviorSubject<UserType>(new UserType());
-  constructor(private auth: AuthService) {
+  constructor() {
     let verifyval = localStorage.getItem("fheverify");
     if (verifyval == "undefined" || verifyval == "" || verifyval == null)
       this.setVerify(verifyval, true);
@@ -57,11 +57,10 @@ export class ViewService {
   setToken(val: string, urtoken: boolean = true) {
     this.utoken = new r.BehaviorSubject<string>("");
     if (urtoken) localStorage.setItem("usrtoken", val);
-    this.auth.setToken(val);
     this.utoken.next(val);
   }
   setUser(obj: UserType, val: boolean = true) {
-    // sfdg fsaf
+    // sfdgfsaf
     this.userInfo = new r.BehaviorSubject<UserType>(new UserType());
     if (val) localStorage.setItem("userProp", JSON.stringify(obj));
     this.userInfo.next(obj);
@@ -71,7 +70,6 @@ export class ViewService {
   }
   removeValue(key: string) {
     localStorage.removeItem(key);
-    this.auth.setToken("");
     if (key == "fheverify") this.verify.next(null);
     else if (key == "edleverify") this.verify.next(null);
     else if (key == "evheverify") this.verify2.next(null);
