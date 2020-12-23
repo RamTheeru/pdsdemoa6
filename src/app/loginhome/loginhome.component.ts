@@ -5,6 +5,7 @@ import * as r from "rxjs";
 import { ViewledgerComponent } from "./viewledger/viewledger.component";
 import { ViewService } from "../view.service";
 import { UserType } from "../models/usertype";
+import { AuthService } from "../auth.service";
 // const navigationExtras: NavigationExtras = {
 //   state: {
 //     transd: 'TRANS001',
@@ -48,7 +49,11 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
     }
   }
   //shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
-  constructor(private vServ: ViewService, private router: Router) {}
+  constructor(
+    private vServ: ViewService,
+    private auth: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.subsc = this.vServ.data.subscribe((val: string) => {
@@ -272,6 +277,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
     this.vServ.removeValue("edleverify");
     this.vServ.removeValue("evheverify");
     this.vServ.removeValue("hrvheverify");
+    this.auth.setToken("");
     this.router.navigate(["/login"]);
     //
   }
