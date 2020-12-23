@@ -4,6 +4,7 @@ import { PdsApiService } from "./pds-api.service";
 import { UserType } from "./models/usertype";
 import { APIResult } from "./models/apiresult";
 import { SweetService } from "./sweet.service";
+import { ViewService } from "./view.service";
 @Injectable()
 export class AuthService {
   token: string = "";
@@ -12,7 +13,8 @@ export class AuthService {
   constructor(
     private router: Router,
     private api: PdsApiService,
-    private swServ: SweetService
+    private swServ: SweetService,
+    private vServ: ViewService
   ) {}
 
   // signInuser(username: string, password: string): Promise<APIResult> {
@@ -74,6 +76,7 @@ export class AuthService {
     this.token = tkn;
   }
   getToken() {
+    this.token = this.vServ.getValue("usrtoken");
     return this.token;
     // firebase
     //   .auth()
