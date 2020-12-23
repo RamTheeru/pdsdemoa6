@@ -61,7 +61,7 @@ export class PdsApiService {
   }
   //Employee login
   loginuser(username: string, password: string) {
-    let input = "?username=" + username + "&password=" + password;
+    let input: string = "?username=" + username + "&password=" + password;
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.login + input);
     return this.http.get(
       this.baseurl + this.employeesUrl + CurrentUrls.login + input,

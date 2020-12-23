@@ -15,7 +15,7 @@ export class AuthService {
     private swServ: SweetService
   ) {}
 
-  signInuser(username: string, password: string) {
+  signInuser(username: string, password: string): Promise<UserType> {
     this.api.loginuser(username, password).subscribe(
       (data: APIResult) => {
         //console.log(data);
@@ -23,13 +23,13 @@ export class AuthService {
         let m: string = data.message;
         if (status) {
           this.user = data.userInfo;
-          console.log(this.user);
           this.token = this.user.token;
+          console.log(this.user);
         } else {
           this.token = "";
           this.swServ.showErrorMessage("Error!!!", m);
         }
-
+        //return this.user;
         // this.router.navigate(["/loginhome"]);
         //this.token = token;
         // this.swServ.showSuccessMessage("Sucess!!", "we didit");
@@ -37,10 +37,14 @@ export class AuthService {
         // this.swServ.showWarning("Delete it");
       },
       err => {
+        this.token = "";
         //console.log(err.message);
         this.swServ.showErrorMessage("Network Error!!!", err.message);
       }
     );
+    return new Promise(() => {
+      return this.user;
+    });
     // firebase
     //   .auth()
     //   .signInWithEmailAndPassword(email, password)
@@ -52,7 +56,6 @@ export class AuthService {
     //       .then((token: string) => (this.token = token));
     //   })
     //   .catch(error => console.log(error));
-    return this.user;
   }
   getToken() {
     return this.token;
