@@ -36,9 +36,9 @@ export class PdsMainComponent implements OnInit {
         let userInfo = this.user.role;
         let userTypeId = this.user.userTypeId;
         if (userTypeId == 1) {
+        } else if (userTypeId == 2) {
+          
         }
-        else if(userTypeId == 2)
-        {}
       } else {
         this.sweet.showErrorMessage(
           "Failed!!",
