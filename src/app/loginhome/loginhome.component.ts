@@ -23,7 +23,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
   @Input("") user: string;
   private subsc: r.Subscription;
   private subsc2: r.Subscription;
-  userInfo: UserType ;
+  userInfo: UserType;
   loginInfo: string = "";
   loginUsername: string = "";
   userType: number = 0;
@@ -70,7 +70,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.userInfo = JSON.parse(u);
     }
     this.loginUsername = this.userInfo.user;
-    //this.user = "fle"
+    //this.user =    "   fle"
     if (this.user === "admin") {
       this.userType = 1;
       this.loginInfo = "Admin Login";
