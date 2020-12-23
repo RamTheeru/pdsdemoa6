@@ -37,14 +37,34 @@ export class PdsMainComponent implements OnInit {
         let m: string = data.message;
         this.user = data.userInfo;
         var index = m.indexOf("already");
+        let userInfo = this.user.role;
+        let tkn: string = this.user.token;
         if (status) {
           if (index !== -1) {
+            this.autServ.setToken(tkn);
+            let userTypeId = this.user.userTypeId;
+            if (userTypeId == 1) {
+              userInfo = "admin";
+            } else if (userTypeId == 2) {
+              userInfo = "financele";
+            } else if (userTypeId == 3) {
+              userInfo = "financehe";
+            } else if (userTypeId == 4) {
+              userInfo = "executivele";
+            } else if (userTypeId == 5) {
+              userInfo = "executivehe";
+            } else if (userTypeId == 6) {
+              userInfo = "hrle";
+            } else if (userTypeId == 7) {
+              userInfo = "hrhe";
+            }
+            //sfa  tysd
+            this.vServ.setValue(userInfo);
             this.sweet.showErrorMessage("Warning!!", m);
+            this.router.navigate(["/loginhome"]);
           } else {
             if (this.user != null && this.user != undefined) {
               if (this.user.token != "" && this.user.userTypeId > 0) {
-                let userInfo = this.user.role;
-                let tkn: string = this.user.token;
                 if (tkn != null && tkn != "") {
                   this.autServ.setToken(tkn);
                   let userTypeId = this.user.userTypeId;
@@ -70,7 +90,7 @@ export class PdsMainComponent implements OnInit {
                     "Error!!",
                     "Login failed, Please try again."
                   );
-                  // this.router.navigate(["/login"]);
+
                 }
               } else {
                 this.sweet.showErrorMessage(
