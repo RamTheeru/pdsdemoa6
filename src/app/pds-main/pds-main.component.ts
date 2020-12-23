@@ -58,7 +58,7 @@ export class PdsMainComponent implements OnInit {
             } else if (userTypeId == 7) {
               userInfo = "hrhe";
             }
-            //sfa  tysd
+            //sf  tysd
             this.vServ.setToken(tkn);
             this.vServ.setValue(userInfo);
             this.vServ.setUser(this.user);
@@ -69,7 +69,7 @@ export class PdsMainComponent implements OnInit {
               if (this.user.token != "" && this.user.userTypeId > 0) {
                 if (tkn != null && tkn != "") {
                   this.autServ.setToken(tkn);
-                  
+                  this.vServ.setToken(tkn);
                   let userTypeId = this.user.userTypeId;
                   if (userTypeId == 1) {
                     userInfo = "admin";
