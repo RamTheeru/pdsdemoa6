@@ -20,6 +20,7 @@ import { SubmitattendanceComponent } from "./loginhome/submitattendance/submitat
 import { SalaryslipComponent } from "./loginhome/salaryslip/salaryslip.component";
 import { SalarysliplistComponent } from "./loginhome/salarysliplist/salarysliplist.component";
 import { ViewledgerComponent } from "./loginhome/viewledger/viewledger.component";
+import { AuthGuard } from "./auth-guard.service";
 const appRoutes: Routes = [
   { path: "", redirectTo: "/home", pathMatch: "full" },
   { path: "home", component: HomeComponent },
@@ -30,6 +31,7 @@ const appRoutes: Routes = [
   {
     path: "loginhome",
     component: LoginhomeComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: "", component: LogindefaulthomeComponent },
       { path: "userreadings", component: UserreadingsComponent },
