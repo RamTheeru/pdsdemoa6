@@ -40,7 +40,7 @@ export class PdsMainComponent implements OnInit {
         let userInfo = this.user.role;
         let tkn: string = this.user.token;
         if (status) {
-          if (index !== -1) {
+          if (index !== -1 && this.user != null && this.user != undefined) {
             this.autServ.setToken(tkn);
             let userTypeId = this.user.userTypeId;
             if (userTypeId == 1) {
@@ -60,6 +60,7 @@ export class PdsMainComponent implements OnInit {
             }
             //sfa  tysd
             this.vServ.setValue(userInfo);
+            this.vServ.setUser(this.user);
             this.sweet.showErrorMessage("Warning!!", m);
             this.router.navigate(["/loginhome"]);
           } else {
@@ -84,6 +85,7 @@ export class PdsMainComponent implements OnInit {
                     userInfo = "hrhe";
                   }
                   this.vServ.setValue(userInfo);
+                  this.vServ.setUser(this.user);
                   this.router.navigate(["/loginhome"]);
                 } else {
                   this.sweet.showErrorMessage(
