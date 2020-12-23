@@ -272,6 +272,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
     this.subsc2.unsubscribe();
   }
   onLogout() {
+    this.vServ.removeValue("usrtoken");
     this.vServ.removeValue("userProp");
     this.vServ.removeValue("storedProp");
     this.vServ.removeValue("fheverify");
