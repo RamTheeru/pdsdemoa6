@@ -5,12 +5,12 @@ import * as r from "rxjs";
 @Injectable()
 export class ViewService {
   //view = new r.Subject<Boolean>();
-  usr: UserType = new UserType();
+  usr: UserType;
   data = new r.BehaviorSubject<string>("");
   verify = new r.BehaviorSubject<string>("");
   verify2 = new r.BehaviorSubject<string>("");
   verify3 = new r.BehaviorSubject<string>("");
-  userInfo = new r.BehaviorSubject<UserType>(this.usr);
+  userInfo = new r.BehaviorSubject<UserType>(new UserType());
   constructor() {
     let verifyval = localStorage.getItem("fheverify");
     if (verifyval == "undefined" || verifyval == "" || verifyval == null)
@@ -37,14 +37,9 @@ export class ViewService {
       this.setValue(storedProp, true);
     else this.setValue(storedProp, false);
 
-    let u: any = localStorage.getItem("userProp");
+    var u = localStorage.getItem("userProp");
     this.usr = JSON.parse(u);
-    if (
-      this.usr.userTypeId == undefined ||
-      this.usr.userTypeId == 0 ||
-      this.usr.userTypeId == null
-    )
-      this.setUser(this.usr, true);
+    if (this.usr == null || this.usr == undefined) this.setUser(this.usr, true);
     else this.setUser(this.usr, false);
   }
   setValue(val: string, storeProp: boolean = true) {
@@ -53,7 +48,8 @@ export class ViewService {
     this.data.next(val);
   }
   setUser(obj: UserType, val: boolean = true) {
-    this.userInfo = new r.BehaviorSubject<UserType>(this.usr);
+    // sfdg fsaf
+    this.userInfo = new r.BehaviorSubject<UserType>(new UserType());
     if (val) localStorage.setItem("userProp", JSON.stringify(obj));
     this.userInfo.next(obj);
   }
@@ -67,7 +63,7 @@ export class ViewService {
     else if (key == "evheverify") this.verify2.next(null);
     else if (key == "hrvheverify") this.verify3.next(null);
     else if (key == "storedProp") this.data.next(null);
-    else if (key == "userProp") this.userInfo.next(null);
+    else if (key == "userProp") this.userInfo.next(new UserType());
   }
   setVerify(val: string, storeProp: boolean = true) {
     // this.verify = new r.BehaviorSubject<string>("");
