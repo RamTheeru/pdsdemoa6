@@ -73,6 +73,7 @@ export class AuthService {
   //   .catch(error => console.log(error));
   // }
   setToken(tkn: string) {
+    this.vServ.setToken(tkn);
     this.token = tkn;
   }
   getToken() {
