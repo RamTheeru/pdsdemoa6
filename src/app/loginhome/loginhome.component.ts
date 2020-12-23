@@ -48,7 +48,8 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.isShowing = false;
     }
   }
-  //shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
+  //should   Run = [/(^|\.)plnkr\.co$/,    /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
+  //
   constructor(
     private vServ: ViewService,
     private auth: AuthService,
@@ -66,7 +67,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.user = this.vServ.getValue("storedProp");
     }
     if (this.userInfo == null || this.userInfo == undefined) {
-      var u = localStorage.getItem("userProp");
+      var u = this.vServ.getValue("userProp");
       this.userInfo = JSON.parse(u);
     }
     this.loginUsername = this.userInfo.user;
