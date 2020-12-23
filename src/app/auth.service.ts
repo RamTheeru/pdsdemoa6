@@ -6,7 +6,7 @@ import { APIResult } from "./models/apiresult";
 import { SweetService } from "./sweet.service";
 @Injectable()
 export class AuthService {
-  token: string;
+  token: string = "";
   user: UserType;
   result: APIResult;
   constructor(
@@ -18,12 +18,15 @@ export class AuthService {
   signInuser(username: string, password: string) {
     this.api.loginuser(username, password).subscribe(
       (data: APIResult) => {
-        console.log(data);
-        let status: Boolean = data.Status;
-        let m: string = data.Message;
+        //console.log(data);
+        let status: Boolean = data.status;
+        let m: string = data.message;
         if (status) {
           this.user = data.userInfo;
+          console.log(this.user);
+          this.token = this.user.token;
         } else {
+          this.token = "";
           this.swServ.showErrorMessage("Error!!!", m);
         }
 
@@ -49,8 +52,10 @@ export class AuthService {
     //       .then((token: string) => (this.token = token));
     //   })
     //   .catch(error => console.log(error));
+    return this.user;
   }
   getToken() {
+    return this.token;
     // firebase
     //   .auth()
     //   .currentUser.getToken()
@@ -58,7 +63,7 @@ export class AuthService {
     // return this.token;
   }
   isAuth() {
-    return this.token != null;
+    return this.token != "";
   }
   logout() {
     // firebase.auth().signOut();

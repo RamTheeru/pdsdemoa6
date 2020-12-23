@@ -183,7 +183,7 @@ export class RegisterComponent implements OnInit {
     //gjh
     // const emp: RegisterEmployee = new RegisterEmployee();
     const errorTitle: string = "INVALID INPUT!!!";
-    this.fvalid = false;
+    //  this.fvalid = false;
     let st = this.empForm.value["station"];
     let db = this.convert(this.empForm.value["birthdate"]);
     let dj = this.convert(this.empForm.value["joindate"]);
