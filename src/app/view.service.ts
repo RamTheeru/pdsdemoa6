@@ -41,8 +41,8 @@ export class ViewService {
 
     let usrtoken = localStorage.getItem("usrtoken");
     if (usrtoken == undefined || usrtoken == "" || usrtoken == null)
-      this.setValue(usrtoken, true);
-    else this.setValue(usrtoken, false);
+      this.setToken(usrtoken, true);
+    else this.setToken(usrtoken, false);
 
     var u = localStorage.getItem("userProp");
     this.usr = JSON.parse(u);
