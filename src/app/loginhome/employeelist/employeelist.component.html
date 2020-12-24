@@ -1,6 +1,14 @@
 <div class="container-fluid">
 	<form class="form-inline">
-		<input class="form-control mr-sm-2" type="text"  placeholder="StationCode">
+		<!-- <input class="form-control mr-sm-2" type="text"  placeholder="StationCode"> -->
+		<select name="station" id="stat">
+							<option value="" selected>Select Station</option>
+              	<option *ngFor="let s of stations" [value]="s.stationId">
+								{{s.stationName}}
+							</option>
+							<!-- <option value="male">male</option>
+							<option value="female">female</option> -->
+    </select>
 		<button class="btn btn-success" (click)="getemployeesbyStation($event)"  type="submit">Search</button>
 	</form>
 	<!-- <p  ></p> -->
@@ -13,6 +21,9 @@
 				<th>Designation</th>
 				<th>StateCode</th>
 				<th>LocationName</th>
+				<div *ngIf="!isHE">
+					<th>EmployeeCode</th>
+				</div>
 				<th>Action</th>
 			</tr>
 		</thead>
@@ -24,6 +35,9 @@
 				<td>{{emp.Designation}}</td>
 				<td>{{emp.StationCode}}</td>
 				<td>{{emp.LocationName}}</td>
+				<div *ngIf="!isHE">
+					<td><input [(ngModel)]="empCode"  id="{{emp.EmployeeId}}"  type="checkbox" value=""/></td>
+				</div>
 				<td>
 					<div *ngIf="isHE; else reg">
 						<button type="button"

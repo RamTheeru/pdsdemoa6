@@ -7,6 +7,7 @@ import { APIResult } from "../../models/apiresult";
 import { ViewService } from "../../view.service";
 import { PdsApiService } from "../../pds-api.service";
 import { SweetService } from "../../sweet.service";
+import { Station } from "../../models/station";
 import * as r from "rxjs";
 @Component({
   selector: "app-employeelist",
@@ -15,7 +16,9 @@ import * as r from "rxjs";
 })
 export class EmployeelistComponent implements OnInit, OnDestroy {
   employees: Employee[] = [];
+  stations: Station[];
   userType: string = "";
+  empCode: string = "";
   private subsc: r.Subscription;
   stationCode: string = "";
   apiResult: APIResult;
@@ -38,6 +41,22 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     if (this.userType == "hrhe") {
       this.isHE = true;
     }
+    this.api.getConstants().subscribe(
+      (data: APIResult) => {
+        //console.log(data);
+        let status: Boolean = data.status;
+        let m: string = data.message;
+        if (status) {
+          this.stations = data.stations;
+        } else {
+          this.swServ.showErrorMessage("Error!!", m);
+        }
+      },
+      err => {
+        //console.log(err.message);
+        this.swServ.showErrorMessage("Network Error!!!", err.message);
+      }
+    );
     let em: Employee;
     em = this.getstaticEmployees();
     this.e = em;
@@ -65,16 +84,17 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     this.subsc.unsubscribe();
   }
   getemployeesbyStation(event) {
-    this.api.getEmployees(this.stationCode).subscribe(data => {
-      console.log(data);
-      let status = data.Status;
-      let message = data.Message;
-      if (status) {
-        this.employees = data.employees;
-      } else {
-        this.swServ.showErrorMessage("Failure", message);
-      }
-    });
+    console.log(event);
+    // this.api.getEmployees(this.stationCode).subscribe(data => {
+    //   console.log(data);
+    //   let status = data.Status;
+    //   let message = data.Message;
+    //   if (status) {
+    //     this.employees = data.employees;
+    //   } else {
+    //     this.swServ.showErrorMessage("Failure", message);
+    //   }
+    // });
   }
   approveUser(emp: Employee) {
     var id = emp.EmployeeId;
@@ -114,15 +134,15 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     emp.Marital = "married";
 
     emp.Address1 = "D.NO2-65";
-    emp.Adress2 = "pragathi nagar";
+    emp.Address2 = "pragathi nagar";
     emp.Place = "atp";
     emp.State = "AP";
     // emp.PostalCode = ;
     emp.AAdharNumber = "236264657";
-    emp.PAN = "Aj24u23985";
+    emp.PANNumber = "Aj24u23985";
     emp.Guard_FullName = "Ramdas";
 
-    emp.Guard_Phone = "5353463473";
+    emp.Gaurd_PhoneNumber = "5353463473";
     emp.DOB = "09-09-1990";
     emp.DOJ = "09-09-2020";
     emp.Designation = "Office Assisstnat";

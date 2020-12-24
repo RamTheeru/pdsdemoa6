@@ -40,7 +40,7 @@ const appRoutes: Routes = [
       { path: "updatedeliverydetails", component: DeliveryDetailsComponent },
       { path: "employeeedit/:id", component: CreateEmployeeComponent },
       { path: "individualview/:id", component: IndividualviewComponent },
-      { path: "employeelist", component: EmployeelistComponent },
+      { path: "registeremployees", component: EmployeelistComponent },
       { path: "entercreditdetails", component: EntercreditdetailsComponent },
       { path: "entervoucher", component: VoucherComponent },
       { path: "editvoucher/:id", component: VoucherComponent },
