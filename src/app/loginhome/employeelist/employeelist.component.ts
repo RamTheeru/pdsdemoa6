@@ -17,9 +17,12 @@ import * as r from "rxjs";
 export class EmployeelistComponent implements OnInit, OnDestroy {
   employees: Employee[] = [];
   stations: Station[];
+  selectedStation: string = "";
   userType: string = "";
-  empCode: string = "";
+  usrToken: string = "";
+  emCode: string = "";
   private subsc: r.Subscription;
+  private subsc2: r.Subscription;
   stationCode: string = "";
   apiResult: APIResult;
   isHide = true;
@@ -38,6 +41,12 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     this.subsc = this.vServ.data.subscribe((val: string) => {
       this.userType = val;
     });
+    this.subsc2 = this.vServ.utoken.subscribe((val: string) => {
+      this.usrToken = val;
+    });
+    if (this.userType == "" || this.userType == undefined) {
+      this.userType = this.vServ.getValue("storedProp");
+    }
     if (this.userType == "hrhe") {
       this.isHE = true;
     }
@@ -82,24 +91,59 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     this.subsc.unsubscribe();
+    this.subsc2.unsubscribe();
   }
   getemployeesbyStation(event) {
-    console.log(event);
-    // this.api.getEmployees(this.stationCode).subscribe(data => {
-    //   console.log(data);
-    //   let status = data.Status;
-    //   let message = data.Message;
-    //   if (status) {
-    //     this.employees = data.employees;
-    //   } else {
-    //     this.swServ.showErrorMessage("Failure", message);
-    //   }
-    // });
+    //console.log(this.selectedStation);
+    if (this.usrToken == "") {
+      this.usrToken = this.vServ.getToken();
+    }
+    if (this.selectedStation == "") {
+      this.swServ.showErrorMessage("Invalid Input!!!", "Please Select Station");
+    } else if (this.usrToken == "" || this.usrToken == undefined) {
+      this.handleUnauthorizedrequest();
+    } else {
+      // this.api
+      //   .getRegisteredEmployees(this.stationCode, this.usrToken)
+      //   .subscribe(data => {
+      //     //  console.log(data);
+      //     let status = data.Status;
+      //     let message = data.Message;
+      //     if (status) {
+      //       this.employees = data.employees;
+      //     } else {
+      //       this.swServ.showErrorMessage("Failure!!!", message);
+      //     }
+      //   });
+    }
+  }
+  handleUnauthorizedrequest() {
+    this.swServ.showErrorMessage(
+      "Invalid Request!!!",
+      "Unable to process request, Please login again!!!"
+    );
   }
   approveUser(emp: Employee) {
     var id = emp.EmployeeId;
-    var res = this.swServ.showWarning("Do you want to approve this user?");
-    console.log(res);
+    let e: Employee = new Employee();
+    e.EmpCode = this.emCode;
+    e.EmployeeId = Number(id);
+    if (this.usrToken == "") {
+      this.usrToken = this.vServ.getToken();
+    }
+    if (
+      this.emCode == "" ||
+      this.emCode == undefined ||
+      emp.EmployeeId == 0 ||
+      emp.EmployeeId == undefined
+    ) {
+      this.swServ.showErrorMessage("Invalid Input!!!", "Please try again!!!");
+    } else if (this.usrToken == "" || this.usrToken == undefined) {
+      this.handleUnauthorizedrequest();
+    } else {
+      var res = this.swServ.showWarning("Do you want to approve this user?");
+      console.log(res);
+    }
   }
   onSalCreate(val: any) {
     //console.log(val);

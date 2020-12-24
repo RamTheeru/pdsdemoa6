@@ -72,15 +72,15 @@ export class EmployeesComponent
     emp.Marital = "married";
 
     emp.Address1 = "D.NO2-65";
-    emp.Adress2 = "pragathi nagar";
+    emp.Address2 = "pragathi nagar";
     emp.Place = "atp";
     emp.State = "AP";
     // emp.PostalCode = ;
     emp.AAdharNumber = "236264657";
-    emp.PAN = "Aj24u23985";
+    emp.PANNumber = "Aj24u23985";
     emp.Guard_FullName = "Ramdas";
 
-    emp.Guard_Phone = "5353463473";
+    emp.Gaurd_PhoneNumber = "5353463473";
     emp.DOB = "09-09-1990";
     emp.DOJ = "09-09-2020";
     emp.Designation = "Office Assisstnat";
@@ -141,7 +141,7 @@ export class EmployeesComponent
       } else {
         this.ishrvhe = false;
         //this.evheVerify = this.vServ.getValue("evheVerify");
-     //   console.log("verify ehe :" + this.evheVerify);
+        //   console.log("verify ehe :" + this.evheVerify);
         if (this.evheVerify == "evhe") {
           this.isEvhe = true;
         } else {

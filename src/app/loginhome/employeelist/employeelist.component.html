@@ -1,9 +1,9 @@
 <div class="container-fluid">
 	<form class="form-inline">
 		<!-- <input class="form-control mr-sm-2" type="text"  placeholder="StationCode"> -->
-		<select name="station" id="stat">
+		<select [(ngModel)]="selectedStation" name="station" id="stat">
 							<option value="" selected>Select Station</option>
-              	<option *ngFor="let s of stations" [value]="s.stationId">
+              	<option *ngFor="let s of stations" [ngValue]="s.stationId">
 								{{s.stationName}}
 							</option>
     </select>

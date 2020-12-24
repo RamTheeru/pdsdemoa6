@@ -65,17 +65,22 @@ export class ViewService {
     if (val) localStorage.setItem("userProp", JSON.stringify(obj));
     this.userInfo.next(obj);
   }
+  getToken() {
+    let tkn: string = "";
+    tkn = localStorage.getItem("usrtoken");
+    return tkn;
+  }
   getValue(key) {
     return localStorage.getItem(key);
   }
   removeValue(key: string) {
     localStorage.removeItem(key);
-    if (key == "fheverify") this.verify.next(null);
-    else if (key == "edleverify") this.verify.next(null);
-    else if (key == "evheverify") this.verify2.next(null);
-    else if (key == "hrvheverify") this.verify3.next(null);
-    else if (key == "storedProp") this.data.next(null);
-    else if (key == "usrtoken") this.utoken.next(null);
+    if (key == "fheverify") this.verify.next("");
+    else if (key == "edleverify") this.verify.next("");
+    else if (key == "evheverify") this.verify2.next("");
+    else if (key == "hrvheverify") this.verify3.next("");
+    else if (key == "storedProp") this.data.next("");
+    else if (key == "usrtoken") this.utoken.next("");
     else if (key == "userProp") this.userInfo.next(new UserType());
   }
   setVerify(val: string, storeProp: boolean = true) {

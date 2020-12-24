@@ -8,6 +8,7 @@ export const CurrentUrls = {
   approve: "ApproveUser",
   employeelist: "employees",
   registeremployee: "RegisterEmployee",
+  registeremployees: "RegisteredUsers",
   login: "Login",
   checkUsername: "CheckUserName"
 };
@@ -16,7 +17,7 @@ export class PdsApiService {
   // Base url
   baseurl = "https://www.kleenandshine.com/api/";
   //baseurl = "https://localhost:44302/api/";
-  app: AppComponent;
+  usrToken: string = "";
   //constantsUrl: string = "Constants";
   financeUrl: string = "Finance/";
   employeesUrl: string = "Employee/";
@@ -45,13 +46,13 @@ export class PdsApiService {
   //   return this.http.get(this.baseurl + this.userTypesUrl,this.httpOptions)
   //
   // }
-  showloading() {
-    this.app.showload();
-  }
-  hideloading() {
-    //
-    this.app.hideload();
-  }
+  // showloading() {
+  //   this.app.showload();
+  // }
+  // hideloading() {
+  //   //
+  //   this.app.hideload();
+  // }
   getConstants(): R.Observable<any> {
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.constants);
     return this.http.get(
@@ -65,6 +66,21 @@ export class PdsApiService {
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.login + input);
     return this.http.get(
       this.baseurl + this.employeesUrl + CurrentUrls.login + input,
+      this.httpOptions
+    );
+  }
+  //registered employees
+  getRegisteredEmployees(
+    stationCode: string = "",
+    tkn: string
+  ): R.Observable<any> {
+    let input = "?stationCode=" + stationCode;
+    this.httpOptions.headers.append("Authorization", "Bearer " + tkn);
+    console.log(
+      this.baseurl + this.employeesUrl + CurrentUrls.registeremployees + input
+    );
+    return this.http.get(
+      this.baseurl + this.employeesUrl + CurrentUrls.registeremployees + input,
       this.httpOptions
     );
   }
