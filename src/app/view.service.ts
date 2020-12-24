@@ -15,32 +15,32 @@ export class ViewService {
   userInfo = new r.BehaviorSubject<UserType>(new UserType());
   constructor() {
     let verifyval = localStorage.getItem("fheverify");
-    if (verifyval == "undefined" || verifyval == "" || verifyval == null)
+    if (verifyval == undefined || verifyval == "" || verifyval == null)
       this.setVerify(verifyval, true);
     else this.setVerify(verifyval, false);
 
     let verifyval2 = localStorage.getItem("edleverify");
-    if (verifyval2 == "undefined" || verifyval2 == "" || verifyval2 == null)
+    if (verifyval2 == undefined || verifyval2 == "" || verifyval2 == null)
       this.setVerify(verifyval2, true);
     else this.setVerify(verifyval2, false);
 
     let verifyval3 = localStorage.getItem("evheverify");
-    if (verifyval3 == "undefined" || verifyval3 == "" || verifyval3 == null)
+    if (verifyval3 == undefined || verifyval3 == "" || verifyval3 == null)
       this.setVerify(verifyval3, true);
     else this.setVerify(verifyval3, false);
 
     let verifyval4 = localStorage.getItem("hrvheverify");
-    if (verifyval4 == "undefined" || verifyval4 == "" || verifyval4 == null)
+    if (verifyval4 == undefined || verifyval4 == "" || verifyval4 == null)
       this.setVerify(verifyval4, true);
     else this.setVerify(verifyval4, false);
 
     let storedProp = localStorage.getItem("storedProp");
-    if (storedProp == "undefined" || storedProp == "" || storedProp == null)
+    if (storedProp == undefined || storedProp == "" || storedProp == null)
       this.setValue(storedProp, true);
     else this.setValue(storedProp, false);
 
     let usrtoken = localStorage.getItem("usrtoken");
-    if (usrtoken == "undefined" || usrtoken == "" || usrtoken == null)
+    if (usrtoken == undefined || usrtoken == "" || usrtoken == null)
       this.setValue(usrtoken, true);
     else this.setValue(usrtoken, false);
 
