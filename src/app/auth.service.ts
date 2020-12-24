@@ -71,7 +71,7 @@ export class AuthService {
   }
   isAuth() {
     this.token = this.vServ.getValue("usrtoken");
-    return this.token != "" || this.token != null;
+    return this.token != "" && this.token != null;
   }
   logout() {
     // firebase.auth().signOut()    ;
