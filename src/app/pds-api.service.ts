@@ -70,7 +70,7 @@ export class PdsApiService {
       this.httpOptions
     );
   }
-  //registered    employees
+  //registered employees
   getRegisteredEmployees(
     stationCode: string = "",
     tkn: string
