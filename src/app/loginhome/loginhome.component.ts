@@ -79,6 +79,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
     //this.user =    "   fle"
     if (this.user === "admin") {
       this.userType = 1;
+      this.shownotify = false;
       this.loginInfo = "Admin Login";
     } else if (this.user === "financele") {
       this.userType = 2;
@@ -135,6 +136,15 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.vServ.removeValue("edleverify");
       this.vServ.removeValue("hrvheverify");
       // this.router.navigate["/loginhome"];
+    } else if (tab == "a") {
+      this.shownotify = false;
+      this.act1SubMenu = false;
+      this.act2SubMenu = false;
+      this.vServ.removeValue("fheverify");
+      this.vServ.removeValue("evheverify");
+      this.vServ.removeValue("edleverify");
+      this.vServ.removeValue("hrvheverify");
+      this.router.navigate["/loginhome/registeremployees"];
     } else if (tab == "fhe") {
       this.shownotify = false;
       this.act1SubMenu = false;
