@@ -106,19 +106,22 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     } else if (this.usrToken == "" || this.usrToken == undefined) {
       this.handleUnauthorizedrequest();
     } else {
-      // this.api
-      //   .getRegisteredEmployees(this.stationCode, this.usrToken)
-      //   .subscribe(data => {
-      //     //  console.log(data);
-      //     let status = data.Status;
-      //     let message = data.Message;
-      //     if (status) {
-      //       this.employees = data.employees;
-      //     } else {
-      //       this.swServ.showErrorMessage("Failure!!!", message);
-      //     }
-      //   });
+      this.apiInput = new ApiInput();
+      this.apiInput.stationId = Number(this.selectedStation);
+      this.registeredUsers(this.apiInput);
     }
+  }
+  registeredUsers(input: ApiInput) {
+    this.api.getRegisteredEmployees(input, this.usrToken).subscribe(data => {
+      //  console.log(data);
+      let status = data.Status;
+      let message = data.Message;
+      if (status) {
+        this.employees = data.employees;
+      } else {
+        this.swServ.showErrorMessage("Failure!!!", message);
+      }
+    });
   }
   handleUnauthorizedrequest() {
     this.swServ.showErrorMessage(
