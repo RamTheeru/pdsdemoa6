@@ -116,7 +116,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
       .getRegisteredEmployees(input, this.usrToken)
       .subscribe((data: APIResult) => {
         //
-        // console.log(data);
+        console.log(data);
         let status = data.status;
         let message = data.message;
         if (status) {
@@ -132,11 +132,12 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
       "Unable to process request, Please login again!!!"
     );
   }
-  approveUser(emp: Employee) {
-    var id = emp.EmployeeId;
-    let e: Employee = new Employee();
+  approveUser(emp: RegisterEmployee) {
+    console.log(emp);
+    var id = emp.RegisterId;
+    let e: RegisterEmployee = new RegisterEmployee();
     e.EmpCode = this.emCode;
-    e.EmployeeId = Number(id);
+    e.RegisterId = Number(id);
     if (this.usrToken == "") {
       this.usrToken = this.vServ.getToken();
     }

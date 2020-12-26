@@ -27,14 +27,20 @@
 		</thead>
 		<tbody>
 			<tr *ngFor="let emp of employees;">
-				<td [hidden]="isHide">{{emp.EmployeeId}}</td>
-				<td> {{emp.FirstName}}</td>
-				<td>{{emp.Phone}}</td>
-				<td>{{emp.LoginType}}</td>
-				<td>{{emp.StationCode}}</td>
-				<td>{{emp.LocationName}}</td>
+				<div *ngIf="isHE; else reg1">
+					<td [hidden]="isHide">{{emp.EmployeeId}}</td>
+				</div>
+				<ng-template #reg1>
+					<td [hidden]="isHide">{{emp.registerId}}</td>
+					</button>
+				</ng-template>
+				<td> {{emp.firstName}}</td>
+				<td>{{emp.phone}}</td>
+				<td>{{emp.loginType}}</td>
+				<td>{{emp.stationCode}}</td>
+				<td>{{emp.locationName}}</td>
 				<div *ngIf="!isHE">
-					<td><input [(ngModel)]="empCode"  id="{{emp.EmployeeId}}"  type="text" value=""/></td>
+					<td><input [(ngModel)]="empCode"  id="{{emp.registerId}}"  type="text" value=""/></td>
 				</div>
 				<td>
 					<div *ngIf="isHE; else reg">
