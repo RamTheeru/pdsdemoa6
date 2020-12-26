@@ -73,12 +73,12 @@ export class PdsApiService {
   //registered employees
   getRegisteredEmployees(input: any, tkn: string): R.Observable<any> {
     this.httpOptions.headers.append("Authorization", "Bearer " + tkn);
-    this.httpOptions.headers.append("fromString", JSON.stringify(input));
     console.log(
       this.baseurl + this.employeesUrl + CurrentUrls.registeremployees
     );
-    return this.http.get(
+    return this.http.post(
       this.baseurl + this.employeesUrl + CurrentUrls.registeremployees,
+      JSON.stringify(input),
       this.httpOptions
     );
   }

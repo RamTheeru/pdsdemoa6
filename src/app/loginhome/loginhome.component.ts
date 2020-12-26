@@ -284,14 +284,6 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
     this.subsc2.unsubscribe();
   }
   onLogout() {
-    this.vServ.removeValue("usrtoken");
-    this.vServ.removeValue("userProp");
-    this.vServ.removeValue("storedProp");
-    this.vServ.removeValue("fheverify");
-    this.vServ.removeValue("edleverify");
-    this.vServ.removeValue("evheverify");
-    this.vServ.removeValue("hrvheverify");
-    this.auth.setToken("");
     this.subsc2 = this.vServ.userInfo.subscribe((res: UserType) => {
       this.userInfo = res;
     });
@@ -318,6 +310,14 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
             let m: string = data.message;
             if (status) {
               this.swServ.showSuccessMessage("Success!!", m);
+              this.vServ.removeValue("usrtoken");
+              this.vServ.removeValue("userProp");
+              this.vServ.removeValue("storedProp");
+              this.vServ.removeValue("fheverify");
+              this.vServ.removeValue("edleverify");
+              this.vServ.removeValue("evheverify");
+              this.vServ.removeValue("hrvheverify");
+              this.auth.setToken("");
               this.router.navigate(["/login"]);
             } else {
               this.swServ.showErrorMessage("Error!!", m);
