@@ -8,6 +8,7 @@ import { ViewService } from "../../view.service";
 import { PdsApiService } from "../../pds-api.service";
 import { SweetService } from "../../sweet.service";
 import { Station } from "../../models/station";
+import { ApiInput } from "../../models/apiinput";
 import * as r from "rxjs";
 @Component({
   selector: "app-employeelist",
@@ -15,8 +16,9 @@ import * as r from "rxjs";
   styleUrls: ["./employeelist.component.css"]
 })
 export class EmployeelistComponent implements OnInit, OnDestroy {
-  employees: Employee[] = [];
+  employees: RegisterEmployee[] = [];
   stations: Station[];
+  apiInput: ApiInput;
   selectedStation: string = "";
   userType: string = "";
   usrToken: string = "";
@@ -66,11 +68,12 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
         this.swServ.showErrorMessage("Network Error!!!", err.message);
       }
     );
-    let em: Employee;
-    em = this.getstaticEmployees();
-    this.e = em;
+
+    // let em: Employee;
+    // em = this.getstaticEmployees();
+    // this.e = em;
     //   console.log(em);
-    this.employees.push(this.e);
+    // this.employees.push(this.e);
     // this.api.getEmployees().subscribe(data => {
     //   console.log(data);
     //   this.apiResult = data;

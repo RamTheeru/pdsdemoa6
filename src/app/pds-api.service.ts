@@ -85,7 +85,7 @@ export class PdsApiService {
       this.httpOptions
     );
   }
-
+  // get emloyees
   getEmployees(stationCode: string = ""): R.Observable<any> {
     let input = "?stationCode=" + stationCode;
     console.log(
@@ -96,6 +96,7 @@ export class PdsApiService {
       this.httpOptions
     );
   }
+  //signout user
   signOut(userName: string, employeeId: number, usertypeId: number) {
     let input =
       "?userName=" +
