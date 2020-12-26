@@ -113,11 +113,11 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
   }
   registeredUsers(input: ApiInput) {
     this.api.getRegisteredEmployees(input, this.usrToken).subscribe(data => {
-      //  console.log(data);
+      console.log(data);
       let status = data.Status;
       let message = data.Message;
       if (status) {
-        this.employees = data.employees;
+        this.employees = data.registerEmployees;
       } else {
         this.swServ.showErrorMessage("Failure!!!", message);
       }
