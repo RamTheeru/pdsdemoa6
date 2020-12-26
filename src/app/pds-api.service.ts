@@ -72,14 +72,26 @@ export class PdsApiService {
   }
   //registered employees
   getRegisteredEmployees(input: any, tkn: string): R.Observable<any> {
-    this.httpOptions.headers.append("Authorization", "Bearer " + tkn);
+    var headers: Headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("Authorization", "Bearer " + tkn);
+    var body = JSON.stringify(input);
+    const phttpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        Authorization: "Bearer " + tkn
+      })
+    };
+    //this.posthttpOptions.headers=headers;
+    //this.httpOptions.headers.append("Authorization", "Bearer " + tkn);
     console.log(
       this.baseurl + this.employeesUrl + CurrentUrls.registeremployees
     );
     return this.http.post(
       this.baseurl + this.employeesUrl + CurrentUrls.registeremployees,
-      JSON.stringify(input),
-      this.httpOptions
+      body,
+      phttpOptions
     );
   }
   // get emloyees
@@ -98,9 +110,9 @@ export class PdsApiService {
     let input =
       "?userName=" +
       userName +
-      "employeeId=" +
+      "&employeeId=" +
       employeeId +
-      "userTypeId=" +
+      "&userTypeId=" +
       usertypeId;
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.logout + input);
     return this.http.get(
@@ -108,7 +120,7 @@ export class PdsApiService {
       this.httpOptions
     );
   }
-  //approve    registered        user
+  //approve registered        user
   approveUser(id: any): R.Observable<any> {
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.approve);
     return this.http.get(
