@@ -115,7 +115,8 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     this.api
       .getRegisteredEmployees(input, this.usrToken)
       .subscribe((data: APIResult) => {
-       // console.log(data);
+        //
+        // console.log(data);
         let status = data.status;
         let message = data.message;
         if (status) {
