@@ -4,8 +4,11 @@ import { MatSidenav } from "@angular/material";
 import * as r from "rxjs";
 import { ViewledgerComponent } from "./viewledger/viewledger.component";
 import { ViewService } from "../view.service";
+import { PdsApiService } from "../pds-api.service";
+import { SweetService } from "../sweet.service";
 import { UserType } from "../models/usertype";
 import { AuthService } from "../auth.service";
+import { APIResult } from "../models/apiresult";
 // const navigationExtras: NavigationExtras = {
 //   state: {
 //     transd: 'TRANS001',
@@ -53,7 +56,9 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
   constructor(
     private vServ: ViewService,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private api: PdsApiService,
+    private swServ: SweetService
   ) {}
 
   ngOnInit() {
@@ -272,7 +277,6 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.vServ.removeValue("evheverify");
       this.vServ.removeValue("edleverify");
       this.vServ.removeValue("hrvheverify");
-      //sfc  gds
     }
   }
   ngOnDestroy() {
@@ -288,8 +292,46 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
     this.vServ.removeValue("evheverify");
     this.vServ.removeValue("hrvheverify");
     this.auth.setToken("");
-    this
-    this.router.navigate(["/login"]);
-    //
+    this.subsc2 = this.vServ.userInfo.subscribe((res: UserType) => {
+      this.userInfo = res;
+    });
+    if (this.userInfo == null || this.userInfo == undefined) {
+      var u = this.vServ.getValue("userProp");
+      this.userInfo = JSON.parse(u);
+    }
+    if (
+      this.userInfo.employeeId > 0 &&
+      this.userInfo.userTypeId > 0 &&
+      this.userInfo.user != ""
+    ) {
+      this.api
+        .signOut(
+          this.userInfo.user,
+          this.userInfo.employeeId,
+          this.userInfo.userTypeId
+        )
+        .subscribe(
+          (data: APIResult) => {
+            //      console.log(data);
+            /
+            let status: Boolean = data.status;
+            let m: string = data.message;
+            if (status) {
+              this.swServ.showSuccessMessage("Success!!", m);
+              this.router.navigate(["/login"]);
+            } else {
+              this.swServ.showErrorMessage("Error!!", m);
+            }
+          },
+          err => {
+            this.swServ.showErrorMessage("Network Error!!!", err.message);
+          }
+        );
+    } else {
+      this.swServ.showErrorMessage(
+        "Error!!",
+        "Unable to logout,Something Went Wrong!!!"
+      );
+    }
   }
 }
