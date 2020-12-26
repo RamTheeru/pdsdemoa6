@@ -1,6 +1,7 @@
 <div class="container-fluid">
 	<form class="form-inline">
-		<!-- <input class="form-control mr-sm-2" type="text"  placeholder="StationCode"> -->
+		<!-- <input class="form-control mr-sm-2"     type="text"  placeholder="StationCode">  -->
+    <!-- <p></p> -->
 		<select [(ngModel)]="selectedStation" name="station" id="stat">
 							<option value="" selected>Select Station</option>
               	<option *ngFor="let s of stations" [ngValue]="s.stationId">
@@ -9,7 +10,7 @@
     </select>
 		<button class="btn btn-success" (click)="getemployeesbyStation($event)"  type="submit">Search</button>
 	</form>
-	<!-- <p></p> -->
+	<!-- <p>gsdhhdxzg    dggdf    </p> -->
 
 	<table class="table table-striped">
 		<thead>
@@ -32,7 +33,6 @@
 				</div>
 				<ng-template #reg1>
 					<td [hidden]="isHide">{{emp.registerId}}</td>
-					</button>
 				</ng-template>
 				<td> {{emp.firstName}}</td>
 				<td>{{emp.phone}}</td>
