@@ -288,6 +288,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
     this.vServ.removeValue("evheverify");
     this.vServ.removeValue("hrvheverify");
     this.auth.setToken("");
+    this
     this.router.navigate(["/login"]);
     //
   }

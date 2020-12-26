@@ -10,7 +10,8 @@ export const CurrentUrls = {
   registeremployee: "RegisterEmployee",
   registeremployees: "RegisteredUsers",
   login: "Login",
-  checkUsername: "CheckUserName"
+  checkUsername: "CheckUserName",
+  logout: "DeleteSession"
 };
 @Injectable()
 export class PdsApiService {
@@ -69,7 +70,7 @@ export class PdsApiService {
       this.httpOptions
     );
   }
-  //registered employees
+  //registered    employees
   getRegisteredEmployees(
     stationCode: string = "",
     tkn: string
@@ -95,7 +96,21 @@ export class PdsApiService {
       this.httpOptions
     );
   }
-  //approve registered user
+  signOut(userName: string, employeeId: number, usertypeId: number) {
+    let input =
+      "?userName=" +
+      userName +
+      "employeeId=" +
+      employeeId +
+      "userTypeId=" +
+      usertypeId;
+    console.log(this.baseurl + this.employeesUrl + CurrentUrls.logout + input);
+    return this.http.get(
+      this.baseurl + this.employeesUrl + CurrentUrls.logout + input,
+      this.httpOptions
+    );
+  }
+  //approve    registered        user
   approveUser(id: any): R.Observable<any> {
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.approve);
     return this.http.get(
