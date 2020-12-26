@@ -112,16 +112,18 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     }
   }
   registeredUsers(input: ApiInput) {
-    this.api.getRegisteredEmployees(input, this.usrToken).subscribe(data => {
-      console.log(data);
-      let status = data.Status;
-      let message = data.Message;
-      if (status) {
-        this.employees = data.registerEmployees;
-      } else {
-        this.swServ.showErrorMessage("Failure!!!", message);
-      }
-    });
+    this.api
+      .getRegisteredEmployees(input, this.usrToken)
+      .subscribe((data: APIResult) => {
+       // console.log(data);
+        let status = data.status;
+        let message = data.message;
+        if (status) {
+          this.employees = data.registerEmployees;
+        } else {
+          this.swServ.showErrorMessage("Failure!!!", message);
+        }
+      });
   }
   handleUnauthorizedrequest() {
     this.swServ.showErrorMessage(
