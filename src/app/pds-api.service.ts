@@ -104,13 +104,13 @@ export class PdsApiService {
       )
       .pipe(catchError((error, caught) => {
         this.handleAuthError(error);
-        return oferror);
+        return error;
       }) as any);
   }
   //unauthorized error display
   private handleAuthError(err: HttpErrorResponse) {
     //handle your auth error or rethrow
-    if (err.status === 401) {
+    if (err.status === 401 || err.status === 400) {
       //navigate /delete cookies or whatever
       console.log("handled error " + err.status);
       swal(
