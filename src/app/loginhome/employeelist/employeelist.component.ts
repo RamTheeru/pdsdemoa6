@@ -163,7 +163,6 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
             this.api.approveUser(e.RegisterId, status);
           });
       }
-
     }
   }
   onSalCreate(val: any) {
