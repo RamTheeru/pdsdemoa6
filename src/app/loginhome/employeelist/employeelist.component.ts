@@ -148,21 +148,22 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     } else if (this.usrToken == "" || this.usrToken == undefined) {
       this.handleUnauthorizedrequest();
     } else {
-      var res = false;
       if (status == "a") {
         this.swServ
           .showWarning("Do you want to approve this user?")
           .then((data: boolean) => {
-            res = data;
+            console.log(data);
+            this.api.approveUser(e.RegisterId, status);
           });
       } else {
         this.swServ
           .showWarning("Do you want to remove this user?")
           .then((data: boolean) => {
-            res = data;
+            console.log(data);
+            this.api.approveUser(e.RegisterId, status);
           });
       }
-      console.log(res);
+
     }
   }
   onSalCreate(val: any) {

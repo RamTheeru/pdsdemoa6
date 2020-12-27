@@ -121,10 +121,11 @@ export class PdsApiService {
     );
   }
   //approve registered        user
-  approveUser(id: any): R.Observable<any> {
+  approveUser(id: any, status: string): R.Observable<any> {
+    let input = "?registerId=" + id + "&status=" + status;
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.approve);
-    return this.http.get(
-      this.baseurl + this.employeesUrl + CurrentUrls.approve,
+    return this.http.put(
+      this.baseurl + this.employeesUrl + CurrentUrls.approve + input,
       this.httpOptions
     );
   }

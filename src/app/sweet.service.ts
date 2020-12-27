@@ -16,6 +16,7 @@ export class SweetService {
 
   showWarning(text, obj?: any): Promise<boolean> {
     let r: Promise<boolean>;
+    let result = false;
     swal({
       title: "Are you sure?",
       text: text,
@@ -23,16 +24,23 @@ export class SweetService {
       showConfirmButton: true,
       showCancelButton: true
     }).then(willDelete => {
+      // r = new Promise<boolean>((resolve,reject) => {
+      //   if (willDelete.value) {
+      // resolve(true);
+      // }else{
+      //   reject(false);
+      // });
       if (willDelete.value) {
-        // swal("Success");
-        r = new Promise<boolean>(d => {
-          return true;
-        });
+        result = true;
       } else {
-        // swal("Fail");
-        r = new Promise<boolean>(d => {
-          return false;
-        });
+        result = false;
+      }
+    });
+    r = new Promise<boolean>((resolve, reject) => {
+      if (result) {
+        resolve(result);
+      } else {
+        reject(result);
       }
     });
     return r;
