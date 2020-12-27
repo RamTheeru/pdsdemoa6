@@ -1,4 +1,4 @@
-export class CreditDetails {
+export class Voucher {
   VoucherId: number;
   Location: string;
   VoucherDate: string;
