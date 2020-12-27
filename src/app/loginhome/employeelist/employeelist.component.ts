@@ -55,7 +55,6 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     }
     this.api.getConstants().subscribe(
       (data: APIResult) => {
-        //console.log(data);
         let status: Boolean = data.status;
         let m: string = data.message;
         if (status) {
@@ -65,33 +64,9 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
         }
       },
       err => {
-        //console.log(err.message);
         this.swServ.showErrorMessage("Network Error!!!", err.message);
       }
     );
-
-    // let em: Employee;
-    // em = this.getstaticEmployees();
-    // this.e = em;
-    //   console.log(em);
-    // this.employees.push(this.e);
-    // this.api.getEmployees().subscribe(data => {
-    //   console.log(data);
-    //   this.apiResult = data;
-    //   console.log("" + this.apiResult.Status);
-    //   this.apiResult.Status = data.status;
-    //   this.apiResult.Message = data.message;
-
-    //   if (this.apiResult.Status) {
-    //     this.employees = this.apiResult.employees;
-    //     console.log(this.employees);
-    //   } else {
-    //     this.swServ.showErrorMessage("Failure", this.apiResult.Message);
-    //   }
-    // });
-    //this.swServ.showSuccessMessage('Sucess!!','we didit');
-
-    //this.swServ.showWarning('Delete it')
   }
   ngOnDestroy() {
     this.subsc.unsubscribe();
@@ -145,12 +120,21 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
       this.usrToken = this.vServ.getToken();
     }
     if (
-      emp.EmployeeId == 0 ||
-      emp.EmployeeId == undefined ||
-      this.emCode == "" ||
-      this.emCode == undefined
+      status == "a" &&
+      (emp.RegisterId == 0 ||
+        emp.RegisterId == undefined ||
+        this.emCode == "" ||
+        this.emCode == undefined)
     ) {
       this.swServ.showErrorMessage("Invalid Input!!!", "Please try again!!!");
+    } else if (
+      status == "r" &&
+      (emp.RegisterId == 0 || emp.RegisterId == undefined)
+    ) {
+      this.swServ.showErrorMessage(
+        "Invalid Operation!!!",
+        "Please try again!!!"
+      );
     } else if (this.usrToken == "" || this.usrToken == undefined) {
       this.handleUnauthorizedrequest();
     } else {
@@ -160,6 +144,9 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
           .then((data: boolean) => {
             console.log(data);
             // this.api.approveUser(e.RegisterId, status);
+            this.apiInput = new ApiInput();
+            this.apiInput.stationId = Number(this.selectedStation);
+            this.registeredUsers(this.apiInput);
           });
       } else {
         this.swServ
@@ -167,12 +154,14 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
           .then((data: boolean) => {
             console.log(data);
             // this.api.approveUser(e.RegisterId, status);
+            this.apiInput = new ApiInput();
+            this.apiInput.stationId = Number(this.selectedStation);
+            this.registeredUsers(this.apiInput);
           });
       }
     }
   }
   onSalCreate(val: any) {
-    //console.log(val);
     const config = new MatDialogConfig();
     config.disableClose = true;
     config.autoFocus = true;
@@ -188,44 +177,44 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     //   console.log(`Dialog result: ${result}`);
     // });
   }
-  getstaticEmployees() {
-    const emp: Employee = new Employee();
-    const errorTitle: string = "INVALID INPUT!!!";
-    emp.EmployeeId = 10001;
-    emp.FirstName = "Ram";
-    emp.LastName = "k";
-    emp.MiddleName = "";
-    emp.Phone = "62463732424";
+  // getstaticEmployees() {
+  //   const emp: Employee = new Employee();
+  //   const errorTitle: string = "INVALID INPUT!!!";
+  //   emp.EmployeeId = 10001;
+  //   emp.FirstName = "Ram";
+  //   emp.LastName = "k";
+  //   emp.MiddleName = "";
+  //   emp.Phone = "62463732424";
 
-    emp.Age = 29;
+  //   emp.Age = 29;
 
-    emp.BloodGroup = "O+";
-    emp.Gender = "m";
-    emp.Marital = "married";
+  //   emp.BloodGroup = "O+";
+  //   emp.Gender = "m";
+  //   emp.Marital = "married";
 
-    emp.Address1 = "D.NO2-65";
-    emp.Address2 = "pragathi nagar";
-    emp.Place = "atp";
-    emp.State = "AP";
-    // emp.PostalCode = ;
-    emp.AAdharNumber = "236264657";
-    emp.PANNumber = "Aj24u23985";
-    emp.Guard_FullName = "Ramdas";
+  //   emp.Address1 = "D.NO2-65";
+  //   emp.Address2 = "pragathi nagar";
+  //   emp.Place = "atp";
+  //   emp.State = "AP";
+  //   // emp.PostalCode = ;
+  //   emp.AAdharNumber = "236264657";
+  //   emp.PANNumber = "Aj24u23985";
+  //   emp.Guard_FullName = "Ramdas";
 
-    emp.Gaurd_PhoneNumber = "5353463473";
-    emp.DOB = "09-09-1990";
-    emp.DOJ = "09-09-2020";
-    emp.Designation = "Office Assisstnat";
-    emp.StationCode = "gtkl";
-    emp.LocationName = "Guntakal";
-    emp.DLLRStatus = "NO";
-    emp.VehicleNumber = "";
-    emp.DLLRNumber = "";
-    emp.BankAccountNumber = "35643637537";
-    emp.BankName = "Kotak";
-    emp.IFSCCode = "KTKB43523";
-    emp.BranchName = "Madhapur";
+  //   emp.Gaurd_PhoneNumber = "5353463473";
+  //   emp.DOB = "09-09-1990";
+  //   emp.DOJ = "09-09-2020";
+  //   emp.Designation = "Office Assisstnat";
+  //   emp.StationCode = "gtkl";
+  //   emp.LocationName = "Guntakal";
+  //   emp.DLLRStatus = "NO";
+  //   emp.VehicleNumber = "";
+  //   emp.DLLRNumber = "";
+  //   emp.BankAccountNumber = "35643637537";
+  //   emp.BankName = "Kotak";
+  //   emp.IFSCCode = "KTKB43523";
+  //   emp.BranchName = "Madhapur";
 
-    return emp;
-  }
+  //   return emp;
+  // }
 }
