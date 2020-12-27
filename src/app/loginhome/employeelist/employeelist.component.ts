@@ -136,6 +136,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
   approveUser(emp: RegisterEmployee, status: string) {
     console.log(emp);
     console.log(this.empCode.first.nativeElement.value);
+    this.emCode = this.empCode.first.nativeElement.value;
     var id = emp.RegisterId;
     let e: RegisterEmployee = new RegisterEmployee();
     e.EmpCode = this.emCode;
@@ -143,7 +144,12 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     if (this.usrToken == "") {
       this.usrToken = this.vServ.getToken();
     }
-    if (emp.EmployeeId == 0 || emp.EmployeeId == undefined) {
+    if (
+      emp.EmployeeId == 0 ||
+      emp.EmployeeId == undefined ||
+      this.emCode == "" ||
+      this.emCode == undefined
+    ) {
       this.swServ.showErrorMessage("Invalid Input!!!", "Please try again!!!");
     } else if (this.usrToken == "" || this.usrToken == undefined) {
       this.handleUnauthorizedrequest();
@@ -153,14 +159,14 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
           .showWarning("Do you want to approve this user?")
           .then((data: boolean) => {
             console.log(data);
-            this.api.approveUser(e.RegisterId, status);
+            // this.api.approveUser(e.RegisterId, status);
           });
       } else {
         this.swServ
           .showWarning("Do you want to remove this user?")
           .then((data: boolean) => {
             console.log(data);
-            this.api.approveUser(e.RegisterId, status);
+            // this.api.approveUser(e.RegisterId, status);
           });
       }
     }
