@@ -14,8 +14,8 @@ export class SweetService {
     swal(title, text, "error");
   }
 
-  showWarning(text, obj?: any): R.Observable<any> {
-    let r: R.Observable<any>;
+  showWarning(text, obj?: any): Promise<boolean> {
+    let r: Promise<boolean>;
     swal({
       title: "Are you sure?",
       text: text,
@@ -24,10 +24,15 @@ export class SweetService {
       showCancelButton: true
     }).then(willDelete => {
       if (willDelete.value) {
-        swal("Success");
-        // r = this.api.approveUser(obj);
+        // swal("Success");
+        r = new Promise<boolean>(d => {
+          return true;
+        });
       } else {
-        swal("Fail");
+        // swal("Fail");
+        r = new Promise<boolean>(d => {
+          return false;
+        });
       }
     });
     return r;

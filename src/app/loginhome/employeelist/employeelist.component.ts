@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, ViewChildren, OnDestroy } from "@angular/core";
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { SalaryslipComponent } from "../salaryslip/salaryslip.component";
 import { RegisterEmployee } from "../../models/registeremployee";
@@ -16,6 +16,7 @@ import * as r from "rxjs";
   styleUrls: ["./employeelist.component.css"]
 })
 export class EmployeelistComponent implements OnInit, OnDestroy {
+  @ViewChildren("empCode") empCode;
   employees: RegisterEmployee[] = [];
   stations: Station[];
   apiInput: ApiInput;
@@ -132,8 +133,9 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
       "Unable to process request, Please login again!!!"
     );
   }
-  approveUser(emp: RegisterEmployee) {
+  approveUser(emp: RegisterEmployee, status: string) {
     console.log(emp);
+    console.log(this.empCode.first.nativeElement.value);
     var id = emp.RegisterId;
     let e: RegisterEmployee = new RegisterEmployee();
     e.EmpCode = this.emCode;
@@ -141,17 +143,25 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     if (this.usrToken == "") {
       this.usrToken = this.vServ.getToken();
     }
-    if (
-      this.emCode == "" ||
-      this.emCode == undefined ||
-      emp.EmployeeId == 0 ||
-      emp.EmployeeId == undefined
-    ) {
+    if (emp.EmployeeId == 0 || emp.EmployeeId == undefined) {
       this.swServ.showErrorMessage("Invalid Input!!!", "Please try again!!!");
     } else if (this.usrToken == "" || this.usrToken == undefined) {
       this.handleUnauthorizedrequest();
     } else {
-      var res = this.swServ.showWarning("Do you want to approve this user?");
+      var res = false;
+      if (status == "a") {
+        this.swServ
+          .showWarning("Do you want to approve this user?")
+          .then((data: boolean) => {
+            res = data;
+          });
+      } else {
+        this.swServ
+          .showWarning("Do you want to remove this user?")
+          .then((data: boolean) => {
+            res = data;
+          });
+      }
       console.log(res);
     }
   }

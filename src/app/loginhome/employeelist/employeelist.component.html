@@ -1,7 +1,7 @@
 <div class="container-fluid">
 	<form class="form-inline">
 		<!-- <input class="form-control mr-sm-2"     type="text"  placeholder="StationCode">  -->
-    <!-- <p></p> -->
+		<!-- <p></p> -->
 		<select [(ngModel)]="selectedStation" name="station" id="stat">
 							<option value="" selected>Select Station</option>
               	<option *ngFor="let s of stations" [ngValue]="s.stationId">
@@ -40,7 +40,7 @@
 				<td>{{emp.stationCode}}</td>
 				<td>{{emp.locationName}}</td>
 				<div *ngIf="!isHE">
-					<td><input [(ngModel)]="empCode"  id="{{emp.registerId}}"  type="text" value=""/></td>
+					<td><input #empCode  id="{{emp.registerId}}"  type="text" value=""/></td>
 				</div>
 				<td>
 					<div *ngIf="isHE; else reg">
@@ -48,7 +48,8 @@
             (click)="onSalCreate($event)" id="{{emp.EmployeeId}}" >Generate Salary</button>
 					</div>
 					<ng-template #reg>
-						<button type="button" (click)="approveUser(emp)" class="btn btn-primary" ><b class="text-light" >Approve</b>
+						<button type="button" (click)="approveUser(emp,'a')" class="btn btn-primary" ><b class="text-light" >Approve</b>
+          </button>| <button type="button" (click)="approveUser(emp,)" class="btn btn-primary" ><b class="text-light" >Approve</b>
           </button>
 					</ng-template>
 				</td>
