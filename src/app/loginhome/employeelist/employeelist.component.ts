@@ -108,11 +108,11 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
       "Unable to process request, Please login again!!!"
     );
   }
-  approveUser(emp: RegisterEmployee, status: string) {
-    console.log(emp.RegisterId);
+  approveUser(evt: any, status: string) {
+    console.log(evt.target.id);
     console.log(this.empCode.first.nativeElement.value);
     this.emCode = this.empCode.first.nativeElement.value;
-    var id = emp.RegisterId;
+    var id = evt.target.id;
     let e: RegisterEmployee = new RegisterEmployee();
     e.EmpCode = this.emCode;
     e.RegisterId = Number(id);
@@ -121,15 +121,15 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     }
     if (
       status == "a" &&
-      (emp.RegisterId == 0 ||
-        emp.RegisterId == undefined ||
+      (e.RegisterId == 0 ||
+        e.RegisterId == undefined ||
         this.emCode == "" ||
         this.emCode == undefined)
     ) {
       this.swServ.showErrorMessage("Invalid Input!!!", "Please try again!!!");
     } else if (
       status == "r" &&
-      (emp.RegisterId == 0 || emp.RegisterId == undefined)
+      (e.RegisterId == 0 || e.RegisterId == undefined)
     ) {
       this.swServ.showErrorMessage(
         "Invalid Operation!!!",

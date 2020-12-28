@@ -48,8 +48,8 @@
             (click)="onSalCreate($event)" id="{{emp.EmployeeId}}" >Generate Salary</button>
 					</div>
 					<ng-template #reg>
-						<button type="button" (click)="approveUser(emp,'a')" class="btn btn-primary" ><b class="text-light" >Approve</b>
-          </button>| <button type="button" (click)="approveUser(emp,'r')" class="btn btn-primary" ><b class="text-light" >Reject</b>
+						<button type="button"   (click)="approveUser($event,'a')" class="btn btn-primary" ><b  id="{{emp.registerId}}"  class="text-light" >Approve</b>
+          </button>| <button type="button"   (click)="approveUser($event,'r')" class="btn btn-primary" ><b  id="{{emp.registerId}}"  class="text-light" >Reject</b>
           </button>
 					</ng-template>
 				</td>
