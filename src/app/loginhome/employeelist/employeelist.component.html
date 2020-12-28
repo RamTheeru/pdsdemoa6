@@ -21,7 +21,7 @@
 				<th>StateCode</th>
 				<th>LocationName</th>
 				<div *ngIf="!isHE">
-					<th>EmployeeCode</th>
+					<!-- <th>EmployeeCode</th> -->
 				</div>
 				<th>Action</th>
 			</tr>
@@ -40,7 +40,7 @@
 				<td>{{emp.stationCode}}</td>
 				<td>{{emp.locationName}}</td>
 				<div *ngIf="!isHE">
-					<td><input #empCode  id="{{emp.registerId}}"  type="text" value=""/></td>
+					<!-- <td><input #empCode  id="{{emp.registerId}}"  type="text" value=""/></td> -->
 				</div>
 				<td>
 					<div *ngIf="isHE; else reg">

@@ -115,45 +115,44 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     );
   }
   approveUser(evt: any, status: string) {
-    console.log(evt.target.id);
-    console.log(this.empCode._results);
-    let elements: ElementRef[] = this.empCode._results;
+    //console.log(evt.target.id);
+    // console.log(this.empCode._results);
+    // let elements: ElementRef[] = this.empCode._results;
     var id = evt.target.id;
     let e: RegisterEmployee = new RegisterEmployee();
-    e.EmpCode = this.emCode;
+    //e.EmpCode = this.emCode;
     e.RegisterId = Number(id);
     if (this.usrToken == "") {
       this.usrToken = this.vServ.getToken();
     }
-    if (elements.length > 0) {
-      elements.forEach(el => {
-        if (Number(el.nativeElement.id) === e.RegisterId) {
-          // console.log(e.nativeElement.value);
-          this.emCode = el.nativeElement.value;
-        } else {
-          this.emCode = "";
-        }
-      });
-    } else {
-      this.swServ.showErrorMessage("Something Went Wrong!!!", "Please refresh the page or login again!!!");
-    }
-    if (
-      status == "a" &&
-      (e.RegisterId == 0 ||
-        e.RegisterId == undefined ||
-        this.emCode == "" ||
-        this.emCode == undefined)
-    ) {
+    // if (elements.length > 0) {
+    //   elements.forEach(el => {
+    //     if (Number(el.nativeElement.id) === e.RegisterId) {
+    //       console.log(el.nativeElement.value);
+    //       this.emCode = el.nativeElement.value as string;
+    //     } else {
+    //       this.emCode = "";
+    //     }
+    //   });
+    // } else {
+    //   this.swServ.showErrorMessage(
+    //     "Something Went Wrong!!!",
+    //     "Please refresh the page or login again!!!"
+    //   );
+    // }
+    if ( (e.RegisterId == 0 || e.RegisterId == undefined)) {
       this.swServ.showErrorMessage("Invalid Input!!!", "Please try again!!!");
-    } else if (
-      status == "r" &&
-      (e.RegisterId == 0 || e.RegisterId == undefined)
-    ) {
-      this.swServ.showErrorMessage(
-        "Invalid Operation!!!",
-        "Please try again!!!"
-      );
-    } else if (this.usrToken == "" || this.usrToken == undefined) {
+    }
+    // } else if (
+    //   status == "r" &&
+    //   (e.RegisterId == 0 || e.RegisterId == undefined)
+    // ) {
+    //   this.swServ.showErrorMessage(
+    //     "Invalid Operation!!!",
+    //     "Please try again!!!"
+    //   );
+    // }
+    else if (this.usrToken == "" || this.usrToken == undefined) {
       this.handleUnauthorizedrequest();
     } else {
       if (status == "a") {
@@ -161,6 +160,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
           .showWarning("Do you want to approve this user?")
           .then((data: boolean) => {
             console.log(data);
+            this.openApproveForm(e.RegisterId);
             // this.api.approveUser(e.RegisterId, status);
             this.apiInput = new ApiInput();
             this.apiInput.stationId = Number(this.selectedStation);
@@ -184,6 +184,17 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
           });
       }
     }
+  }
+  openApproveForm(regId: number) {
+    const config = new MatDialogConfig();
+    config.disableClose = true;
+    config.autoFocus = true;
+    config.width = "60%";
+    config.closeOnNavigation = true;
+    config.data = {
+      registerId: regId
+    };
+    this.dialog.open(SalaryslipComponent, config);
   }
   onSalCreate(val: any) {
     const config = new MatDialogConfig();
