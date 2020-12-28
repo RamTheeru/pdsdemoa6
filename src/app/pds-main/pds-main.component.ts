@@ -28,6 +28,14 @@ export class PdsMainComponent implements OnInit {
 
   ngOnInit() {
     //
+    this.vServ.removeValue("usrtoken");
+    this.vServ.removeValue("userProp");
+    this.vServ.removeValue("storedProp");
+    this.vServ.removeValue("fheverify");
+    this.vServ.removeValue("edleverify");
+    this.vServ.removeValue("evheverify");
+    this.vServ.removeValue("hrvheverify");
+    this.autServ.setToken("");
     this.img = Environment.MainLogo;
   }
   onLogin() {
