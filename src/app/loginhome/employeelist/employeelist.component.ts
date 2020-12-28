@@ -109,7 +109,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     );
   }
   approveUser(emp: RegisterEmployee, status: string) {
-    console.log(emp);
+    console.log(emp.RegisterId);
     console.log(this.empCode.first.nativeElement.value);
     this.emCode = this.empCode.first.nativeElement.value;
     var id = emp.RegisterId;

@@ -27,7 +27,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr *ngFor="let emp of employees;">
+			<tr *ngFor="let emp of employees">
 				<div *ngIf="isHE; else reg1">
 					<td [hidden]="isHide">{{emp.EmployeeId}}</td>
 				</div>
