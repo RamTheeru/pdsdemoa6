@@ -135,7 +135,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
         }
       });
     } else {
-      this.swServ.showErrorMessage("Something Went Wrong!!!", "Please refresh the page or login  again!!!");
+      this.swServ.showErrorMessage("Something Went Wrong!!!", "Please refresh the page or login again!!!");
     }
     if (
       status == "a" &&

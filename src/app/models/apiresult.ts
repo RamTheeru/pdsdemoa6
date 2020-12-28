@@ -4,6 +4,7 @@ import { UserType } from "../models/usertype";
 import { Station } from "../models/station";
 import { Voucher } from "../models/voucher";
 import { Ledger } from "../models/ledger";
+import { Profession } from "../models/profession";
 import { Designation } from "../models/designation";
 export class APIResult {
         employees : Employee[];
@@ -16,6 +17,7 @@ export class APIResult {
          stations : Station[];
          voucher : Voucher;
          ledger : Ledger;
+         professions : Profession[]
          employeeName :string;
          queryTotalCount : number;
         queryPages : number;
