@@ -91,7 +91,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     this.api
       .getRegisteredEmployees(input, this.usrToken)
       .subscribe((data: APIResult) => {
-        //
+        // dgdsh    hs
         console.log(data);
         let status = data.status;
         let message = data.message;
@@ -110,7 +110,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
   }
   approveUser(evt: any, status: string) {
     console.log(evt.target.id);
-    console.log(this.empCode.first.nativeElement.value);
+    console.log(this.empCode);
     this.emCode = this.empCode.first.nativeElement.value;
     var id = evt.target.id;
     let e: RegisterEmployee = new RegisterEmployee();
@@ -147,6 +147,9 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
             this.apiInput = new ApiInput();
             this.apiInput.stationId = Number(this.selectedStation);
             this.registeredUsers(this.apiInput);
+          })
+          .catch(() => {
+            this.swServ.showErrorMessage("Canelled", "");
           });
       } else {
         this.swServ
@@ -157,6 +160,9 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
             this.apiInput = new ApiInput();
             this.apiInput.stationId = Number(this.selectedStation);
             this.registeredUsers(this.apiInput);
+          })
+          .catch(() => {
+            this.swServ.showErrorMessage("Canelled", "");
           });
       }
     }
@@ -171,11 +177,6 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
       empId: val.target.id
     };
     this.dialog.open(SalaryslipComponent, config);
-    // const dialogRef = this.dialog.open(DialogContentExampleDialog);
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log(`Dialog result: ${result}`);
-    // });
   }
   // getstaticEmployees() {
   //   const emp: Employee = new Employee();
