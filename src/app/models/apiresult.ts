@@ -6,6 +6,7 @@ import { Voucher } from "../models/voucher";
 import { Ledger } from "../models/ledger";
 import { Profession } from "../models/profession";
 import { Designation } from "../models/designation";
+import { CommercialConstant } from "../models/commercialconstant";
 export class APIResult {
   employees: Employee[];
   userInfo: UserType;
@@ -14,6 +15,7 @@ export class APIResult {
   designations: Designation[];
   vouchers: Voucher[];
   ledgers: Ledger[];
+  commercialConstants:CommercialConstant[];
   stations: Station[];
   voucher: Voucher;
   ledger: Ledger;
