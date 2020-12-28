@@ -17,7 +17,7 @@ export class AuthService {
     private swServ: SweetService,
     private vServ: ViewService
   ) {}
-  ////////
+  ///
   // signInuser(username: string, password: string): Promise<APIResult> {
   //   this.api.loginuser(username, password).subscribe(
   //     (data: APIResult) => {
@@ -66,11 +66,11 @@ export class AuthService {
     this.token = tkn;
   }
   getToken() {
-    this.token = this.vServ.getValue("usrtoken");
+    this.token = this.vServ.getToken();
     return this.token;
   }
   isAuth() {
-    this.token = this.vServ.getValue("usrtoken");
+    this.token = this.vServ.getToken();
     return this.token != "" && this.token != null;
   }
   logout() {
