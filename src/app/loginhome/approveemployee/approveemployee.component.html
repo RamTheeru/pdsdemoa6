@@ -7,7 +7,7 @@
 					<mat-label>Profession</mat-label>
 					<mat-select formControlName="prof" aria-placeholder="Profession Type">
 						<mat-option value="" selected>Select Profession Type</mat-option>
-						<mat-option *ngFor="let p of professions" [value]="p">{{p.profession}}
+						<mat-option *ngFor="let p of professions" [value]="p">{{p.professionName}}
 						</mat-option>
 					</mat-select>
 				</mat-form-field>
