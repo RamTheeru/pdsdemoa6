@@ -2,6 +2,8 @@ export class RegisterEmployee {
   RegisterId: number;
   EmployeeId: number;
   EmpId: string;
+  PId: number;
+  ProfessionName: string;
   EmpCode: string;
   UserTypeId: number;
   FirstName: string;
