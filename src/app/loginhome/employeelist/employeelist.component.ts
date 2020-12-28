@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChildren, OnDestroy } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewChildren,
+  ElementRef,
+  OnDestroy
+} from "@angular/core";
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { SalaryslipComponent } from "../salaryslip/salaryslip.component";
 import { RegisterEmployee } from "../../models/registeremployee";
@@ -110,14 +116,26 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
   }
   approveUser(evt: any, status: string) {
     console.log(evt.target.id);
-    console.log(this.empCode);
-    this.emCode = this.empCode.first.nativeElement.value;
+    console.log(this.empCode._results);
+    let elements: ElementRef[] = this.empCode._results;
     var id = evt.target.id;
     let e: RegisterEmployee = new RegisterEmployee();
     e.EmpCode = this.emCode;
     e.RegisterId = Number(id);
     if (this.usrToken == "") {
       this.usrToken = this.vServ.getToken();
+    }
+    if (elements.length > 0) {
+      elements.forEach(el => {
+        if (Number(el.nativeElement.id) === e.RegisterId) {
+          // console.log(e.nativeElement.value);
+          this.emCode = el.nativeElement.value;
+        } else {
+          this.emCode = "";
+        }
+      });
+    } else {
+      this.swServ.showErrorMessage("Something Went Wrong!!!", "Please refresh the page or login  again!!!");
     }
     if (
       status == "a" &&

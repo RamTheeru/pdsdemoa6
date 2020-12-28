@@ -32,17 +32,21 @@ export class SweetService {
       // });
       if (willDelete.value) {
         result = true;
+        r = new Promise<boolean>((resolve, reject) => {
+          if (result) {
+            resolve(result);
+          }
+        });
       } else {
         result = false;
+        r = new Promise<boolean>((resolve, reject) => {
+          if (result) {
+            reject(result);
+          }
+        });
       }
     });
-    r = new Promise<boolean>((resolve, reject) => {
-      if (result) {
-        resolve(result);
-      } else {
-        reject(result);
-      }
-    });
+
     return r;
   }
 }
