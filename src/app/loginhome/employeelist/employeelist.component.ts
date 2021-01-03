@@ -140,7 +140,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     //     "Please refresh the page or login again!!!"
     //   );
     // }
-    if ( (e.RegisterId == 0 || e.RegisterId == undefined)) {
+    if (e.RegisterId == 0 || e.RegisterId == undefined) {
       this.swServ.showErrorMessage("Invalid Input!!!", "Please try again!!!");
     }
     // } else if (
@@ -156,32 +156,36 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
       this.handleUnauthorizedrequest();
     } else {
       if (status == "a") {
-        this.swServ
-          .showWarning("Do you want to approve this user?")
-          .then((data: boolean) => {
-            console.log(data);
-            this.openApproveForm(e.RegisterId);
-            // this.api.approveUser(e.RegisterId, status);
-            this.apiInput = new ApiInput();
-            this.apiInput.stationId = Number(this.selectedStation);
-            this.registeredUsers(this.apiInput);
-          })
-          .catch(() => {
-            this.swServ.showErrorMessage("Canelled", "");
-          });
+        async () => {
+           this.swServ.showWarning("Do you want to approve this user?");
+         await this.swServ.r
+            .then((data: boolean) => {
+              console.log(data);
+              this.openApproveForm(e.RegisterId);
+              // this.api.approveUser(e.RegisterId, status);
+              this.apiInput = new ApiInput();
+              this.apiInput.stationId = Number(this.selectedStation);
+              this.registeredUsers(this.apiInput);
+            })
+            .catch(() => {
+              this.swServ.showErrorMessage("Canelled", "");
+            });
+        };
       } else {
-        this.swServ
-          .showWarning("Do you want to remove this user?")
-          .then((data: boolean) => {
-            console.log(data);
-            // this.api.approveUser(e.RegisterId, status);
-            this.apiInput = new ApiInput();
-            this.apiInput.stationId = Number(this.selectedStation);
-            this.registeredUsers(this.apiInput);
-          })
-          .catch(() => {
-            this.swServ.showErrorMessage("Canelled", "");
-          });
+        async () => {
+           this.swServ.showWarning("Do you want to remove this user?");
+         await this.swServ.r
+            .then((data: boolean) => {
+              console.log(data);
+              // this.api.approveUser(e.RegisterId, status);
+              this.apiInput = new ApiInput();
+              this.apiInput.stationId = Number(this.selectedStation);
+              this.registeredUsers(this.apiInput);
+            })
+            .catch(() => {
+              this.swServ.showErrorMessage("Canelled", "");
+            });
+        };
       }
     }
   }

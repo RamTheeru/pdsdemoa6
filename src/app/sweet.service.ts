@@ -5,6 +5,7 @@ import { PdsApiService } from "./pds-api.service";
 
 @Injectable()
 export class SweetService {
+  r: Promise<boolean>;
   constructor() {}
 
   showSuccessMessage(title, text = "") {
@@ -14,7 +15,7 @@ export class SweetService {
     swal(title, text, "error");
   }
 
-  showWarning(text, obj?: any): Promise<boolean> {
+  async showWarning(text, obj?: any) {
     let r: Promise<boolean>;
     let result = false;
     swal({
@@ -24,29 +25,51 @@ export class SweetService {
       showConfirmButton: true,
       showCancelButton: true
     }).then(willDelete => {
-      // r = new Promise<boolean>((resolve,reject) => {
-      //   if (willDelete.value) {
-      // resolve(true);
-      // }else{
-      //   reject(false);
-      // });
       if (willDelete.value) {
         result = true;
-        r = new Promise<boolean>((resolve, reject) => {
-          if (result) {
-            resolve(result);
-          }
-        });
+        // r = new Promise<boolean>((resolve,reject) => {
+        //   if (willDelete.value) {
+        // resolve(true);
+        // }else{
+        //   reject(false);
+        // });
+        // if (willDelete.value) {
+        //   result = true;
+        //   this.r = new Promise<boolean>((resolve, reject) => {
+        //     if (result) {
+        //       resolve(result);
+        //     } else {
+        //       reject(result);
+        //     }
+        //   });
       } else {
         result = false;
-        r = new Promise<boolean>((resolve, reject) => {
-          if (result) {
-            reject(result);
-          }
-        });
+        // this.r = new Promise<boolean>((resolve, reject) => {
+        //   if (result) {
+        //     reject(result);
+        //   }
+        // });
       }
     });
-
-    return r;
+    await this.setpromise(result);
+    // this.r = new Promise<boolean>((resolve, reject) => {
+    //   if (result) {
+    //     resolve(result);
+    //   } else {
+    //     reject(result);
+    //   }
+    // });
+    // return this.r;
+  }
+  async setpromise(val: boolean) {
+    await (() => {
+      this.r = new Promise<boolean>((resolve, reject) => {
+        if (val) {
+          resolve(val);
+        } else {
+          reject(val);
+        }
+      });
+    });
   }
 }
