@@ -39,7 +39,7 @@ export class ApproveemployeeComponent implements OnInit {
           // this.userTypes = data.usertypes;
           // this.designatons = data.designations;
           // this.stations = data.stations;
-          this.professions = data.professions;
+          this._swServ.showSuccessMessage("Success!!", m);
         } else {
           this._swServ.showErrorMessage("Error!!", m);
         }
@@ -59,5 +59,37 @@ export class ApproveemployeeComponent implements OnInit {
   onSubmit() {
     var p = this.aprvForm.value["prof"];
     let empCode = this.aprvForm.value["empc"];
+
+    if (
+      this.registerId == 0 ||
+      p == "" ||
+      p == undefined ||
+      empCode == "" ||
+      empCode == undefined ||
+      empCode == null
+    ) {
+      this._swServ.showErrorMessage("Error!!", "Invalid Input!!!");
+    } else {
+      let pid = Number(p);
+      this.api.approveUser(this.registerId, "a", pid, empCode).subscribe(
+        (data: APIResult) => {
+          //console.log(data);
+          let status: Boolean = data.status;
+          let m: string = data.message;
+          if (status) {
+            // this.userTypes = data.usertypes;
+            // this.designatons = data.designations;
+            // this.stations = data.stations;
+            this.professions = data.professions;
+          } else {
+            this._swServ.showErrorMessage("Error!!", m);
+          }
+        },
+        err => {
+          //console.log(err.message);
+          this._swServ.showErrorMessage("Network Error!!!", err.message);
+        }
+      );
+    }
   }
 }
