@@ -16,6 +16,7 @@ import { SweetService } from "../../sweet.service";
 import { Station } from "../../models/station";
 import { ApiInput } from "../../models/apiinput";
 import * as r from "rxjs";
+import swal from "sweetalert2";
 @Component({
   selector: "app-employeelist",
   templateUrl: "./employeelist.component.html",
@@ -97,8 +98,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     this.api
       .getRegisteredEmployees(input, this.usrToken)
       .subscribe((data: APIResult) => {
-        // dgdsh    hs
-        console.log(data);
+        // console.log(data)     ;
         let status = data.status;
         let message = data.message;
         if (status) {
@@ -115,8 +115,10 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     );
   }
   approveUser(evt: any, status: string) {
-    //console.log(evt.target.id);
-    // console.log(this.empCode._results);
+    // fsgsdhdhdfhdf nsgshg
+    //fjgffhfh fjyfjyf
+    //console.log(evt.target.id); safasfasf
+    // console.log(this.empCode._results); 
     // let elements: ElementRef[] = this.empCode._results;
     var id = evt.target.id;
     let e: RegisterEmployee = new RegisterEmployee();
@@ -156,49 +158,67 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
       this.handleUnauthorizedrequest();
     } else {
       if (status == "a") {
-        this.swServ
-          .showWarning("Do you want to approve this user?")
-          .subscribe((data: boolean) => {
-            console.log(data);
-            if(data){
+        swal({
+          title: "Are you sure?",
+          text: "Do you want to approve this user?",
+          type: "warning",
+          showConfirmButton: true,
+          showCancelButton: true
+        }).then(willDelete => {
+          if (willDelete.value) {
+            //   this.openApproveForm(e.RegisterId);
             // this.api.approveUser(e.RegisterId, status);
             this.apiInput = new ApiInput();
             this.apiInput.stationId = Number(this.selectedStation);
             this.registeredUsers(this.apiInput);
-            }else{
-                this.swServ.showErrorMessage("Canelled", "");
-            }
-          });
-        // this.swServ.showWarning("Do you want to approve this user?");
+          } else {
+            this.swServ.showErrorMessage("Canelled", "");
+          }
+        });
         // this.swServ
-        //   .getpromise()
-        //   .then((data: boolean) => {
+        //   .showWarning("Do you want to approve this user?")
+        //   .subscribe((data: boolean) => {
         //     console.log(data);
-        //     this.openApproveForm(e.RegisterId);
+        //     if(data){
         //     // this.api.approveUser(e.RegisterId, status);
         //     this.apiInput = new ApiInput();
         //     this.apiInput.stationId = Number(this.selectedStation);
         //     this.registeredUsers(this.apiInput);
-        //   })
-        //   .catch(() => {
-        //     this.swServ.showErrorMessage("Canelled", "");
+        //     }else{
+        //         this.swServ.showErrorMessage("Canelled", "");
+        //     }
         //   });
       } else {
-        this.swServ
-          .showWarning("Do you want to remove this user?")
-          .subscribe((data: boolean) => {
-            console.log(data);
-            if(data)
-            {
+        swal({
+          title: "Are you sure?",
+          text: "Do you want to remove this user?",
+          type: "warning",
+          showConfirmButton: true,
+          showCancelButton: true
+        }).then(willDelete => {
+          if (willDelete.value) {
+            //   this.openApproveForm(e.RegisterId);
             // this.api.approveUser(e.RegisterId, status);
             this.apiInput = new ApiInput();
             this.apiInput.stationId = Number(this.selectedStation);
             this.registeredUsers(this.apiInput);
-            }
-            else{
-              this.swServ.showErrorMessage("Canelled", "");
-            }
-          });
+          } else {
+            this.swServ.showErrorMessage("Canelled", "");
+          }
+        });
+        // this.swServ
+        //   .showWarning("Do you want to remove this user?")
+        //   .subscribe((data: boolean) => {
+        //     console.log(data);
+        //     if (data) {
+        //       // this.api.approveUser(e.RegisterId, status);
+        //       this.apiInput = new ApiInput();
+        //       this.apiInput.stationId = Number(this.selectedStation);
+        //       this.registeredUsers(this.apiInput);
+        //     } else {
+        //       this.swServ.showErrorMessage("Canelled", "");
+        //     }
+        //   });
 
         // async () => {
         //   await this.swServ
