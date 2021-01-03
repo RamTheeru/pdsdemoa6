@@ -73,17 +73,16 @@ export class ApproveemployeeComponent implements OnInit {
       let pid = Number(p);
       this.api.approveUser(this.registerId, "a", pid, empCode).subscribe(
         (data: APIResult) => {
-          //console.log(data);
+          //
+          //     console.log(data)     ;
           let status: Boolean = data.status;
           let m: string = data.message;
           if (status) {
-            // this.userTypes = data.usertypes;
-            // this.designatons = data.designations;
-            // this.stations = data.stations;
             this.professions = data.professions;
           } else {
             this._swServ.showErrorMessage("Error!!", m);
           }
+          this.initForm();
         },
         err => {
           //console.log(err.message);
