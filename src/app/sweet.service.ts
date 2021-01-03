@@ -15,7 +15,7 @@ export class SweetService {
     swal(title, text, "error");
   }
 
-  async showWarning(text, obj?: any) {
+  showWarning = async function(text, obj?: any) {
     let r: Promise<boolean>;
     let result = false;
     swal({
@@ -51,7 +51,8 @@ export class SweetService {
         // });
       }
     });
-    await this.setpromise(result);
+    this.r = await this.setpromise(result);
+    // await this.setpromise(result);
     // await (() => {
     //   return result;
     // });
@@ -63,19 +64,18 @@ export class SweetService {
     //   }
     // });
     // return this.r;
-  }
-  async setpromise(val: boolean) {
-    await (() => {
-      this.r = new Promise<boolean>((resolve, reject) => {
-        if (val) {
-          resolve(val);
-        } else {
-          reject(val);
-        }
-      });
+  };
+  setpromise = function(val: boolean) {
+    // console.log("Entered first function");
+    return new Promise((resolve, reject) => {
+      if (val) {
+        resolve(val);
+      } else {
+        reject(val);
+      }
     });
-  }
-  getpromise() {
-    return this.r;
-  }
+  };
+  // getpromise() {
+  //   return this.r;
+  // }
 }
