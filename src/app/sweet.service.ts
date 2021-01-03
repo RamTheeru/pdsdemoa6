@@ -52,6 +52,9 @@ export class SweetService {
       }
     });
     await this.setpromise(result);
+    // await (() => {
+    //   return result;
+    // });
     // this.r = new Promise<boolean>((resolve, reject) => {
     //   if (result) {
     //     resolve(result);

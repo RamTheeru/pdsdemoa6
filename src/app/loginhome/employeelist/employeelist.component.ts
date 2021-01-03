@@ -157,7 +157,8 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     } else {
       if (status == "a") {
         this.swServ.showWarning("Do you want to approve this user?");
-        this.swServ.getpromise()
+        this.swServ
+          .getpromise()
           .then((data: boolean) => {
             console.log(data);
             this.openApproveForm(e.RegisterId);
@@ -170,20 +171,22 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
             this.swServ.showErrorMessage("Canelled", "");
           });
       } else {
-        // async () => {
         this.swServ.showWarning("Do you want to remove this user?");
-        this.swServ.getpromise
-          .then((data: boolean) => {
-            console.log(data);
-            // this.api.approveUser(e.RegisterId, status);
-            this.apiInput = new ApiInput();
-            this.apiInput.stationId = Number(this.selectedStation);
-            this.registeredUsers(this.apiInput);
-          })
-          .catch(() => {
-            this.swServ.showErrorMessage("Canelled", "");
-          });
-        // };
+
+        async () => {
+          await this.swServ
+            .getpromise()
+            .then((data: boolean) => {
+              console.log(data);
+              // this.api.approveUser(e.RegisterId, status);
+              this.apiInput = new ApiInput();
+              this.apiInput.stationId = Number(this.selectedStation);
+              this.registeredUsers(this.apiInput);
+            })
+            .catch(() => {
+              this.swServ.showErrorMessage("Canelled", "");
+            });
+        };
       }
     }
   }
