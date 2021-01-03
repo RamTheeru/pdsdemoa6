@@ -156,36 +156,34 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
       this.handleUnauthorizedrequest();
     } else {
       if (status == "a") {
-        async () => {
-           this.swServ.showWarning("Do you want to approve this user?");
-         await this.swServ.r
-            .then((data: boolean) => {
-              console.log(data);
-              this.openApproveForm(e.RegisterId);
-              // this.api.approveUser(e.RegisterId, status);
-              this.apiInput = new ApiInput();
-              this.apiInput.stationId = Number(this.selectedStation);
-              this.registeredUsers(this.apiInput);
-            })
-            .catch(() => {
-              this.swServ.showErrorMessage("Canelled", "");
-            });
-        };
+        this.swServ.showWarning("Do you want to approve this user?");
+        this.swServ.getpromise()
+          .then((data: boolean) => {
+            console.log(data);
+            this.openApproveForm(e.RegisterId);
+            // this.api.approveUser(e.RegisterId, status);
+            this.apiInput = new ApiInput();
+            this.apiInput.stationId = Number(this.selectedStation);
+            this.registeredUsers(this.apiInput);
+          })
+          .catch(() => {
+            this.swServ.showErrorMessage("Canelled", "");
+          });
       } else {
-        async () => {
-           this.swServ.showWarning("Do you want to remove this user?");
-         await this.swServ.r
-            .then((data: boolean) => {
-              console.log(data);
-              // this.api.approveUser(e.RegisterId, status);
-              this.apiInput = new ApiInput();
-              this.apiInput.stationId = Number(this.selectedStation);
-              this.registeredUsers(this.apiInput);
-            })
-            .catch(() => {
-              this.swServ.showErrorMessage("Canelled", "");
-            });
-        };
+        // async () => {
+        this.swServ.showWarning("Do you want to remove this user?");
+        this.swServ.getpromise
+          .then((data: boolean) => {
+            console.log(data);
+            // this.api.approveUser(e.RegisterId, status);
+            this.apiInput = new ApiInput();
+            this.apiInput.stationId = Number(this.selectedStation);
+            this.registeredUsers(this.apiInput);
+          })
+          .catch(() => {
+            this.swServ.showErrorMessage("Canelled", "");
+          });
+        // };
       }
     }
   }

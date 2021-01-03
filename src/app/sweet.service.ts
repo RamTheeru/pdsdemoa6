@@ -72,4 +72,7 @@ export class SweetService {
       });
     });
   }
+  getpromise() {
+    return this.r;
+  }
 }
