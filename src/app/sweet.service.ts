@@ -15,7 +15,7 @@ export class SweetService {
     swal(title, text, "error");
   }
 
-  showWarning = async function(text, obj?: any) {
+   showWarning(text, obj?: any) : R.Observable<boolean>{
     let r: Promise<boolean>;
     let result = false;
     swal({
@@ -51,7 +51,15 @@ export class SweetService {
         // });
       }
     });
-    this.r = await this.setpromise(result);
+       return R.Observable.create(observer => {
+
+
+             observer.next(result);
+             observer.complete();
+
+
+          });
+    //this.r = await this.setpromise(result);
     // await this.setpromise(result);
     // await (() => {
     //   return result;
@@ -64,8 +72,8 @@ export class SweetService {
     //   }
     // });
     // return this.r;
-  };
-  setpromise = function(val: boolean) {
+  }
+  setpromise(val: boolean) {
     // console.log("Entered first function");
     return new Promise((resolve, reject) => {
       if (val) {
@@ -74,7 +82,7 @@ export class SweetService {
         reject(val);
       }
     });
-  };
+  }
   // getpromise() {
   //   return this.r;
   // }
