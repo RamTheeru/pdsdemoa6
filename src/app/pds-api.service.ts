@@ -149,15 +149,26 @@ export class PdsApiService {
     );
   }
   //approve registered        user
-  approveUser(id: any, status: string): R.Observable<any> {
-    let input = "?registerId=" + id + "&status=" + status;
+  approveUser(
+    id: any,
+    status: string,
+    pId: number,
+    empCode: string
+  ): R.Observable<any> {
+    let input =
+      "?registerId=" +
+      id +
+      "&status=" +
+      status +
+      "&pId=" +
+      pId +
+      "empCode=" +
+      empCode;
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.approve);
-    return this.http
-      .put(
-        this.baseurl + this.employeesUrl + CurrentUrls.approve + input,
-        this.httpOptions
-      )
-      .pipe();
+    return this.http.put(
+      this.baseurl + this.employeesUrl + CurrentUrls.approve + input,
+      this.httpOptions
+    );
   }
   //check user name for employee registration
   checkUserName(userName: string): R.Observable<any> {
