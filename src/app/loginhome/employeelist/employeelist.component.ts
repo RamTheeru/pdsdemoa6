@@ -118,7 +118,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     // fsgsdhdhdfhdf nsgshg
     //fjgffhfh fjyfjyf
     //console.log(evt.target.id); safasfasf
-    // console.log(this.empCode._results); 
+    // console.log(this.empCode._results);
     // let elements: ElementRef[] = this.empCode._results;
     var id = evt.target.id;
     let e: RegisterEmployee = new RegisterEmployee();
@@ -166,11 +166,9 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
           showCancelButton: true
         }).then(willDelete => {
           if (willDelete.value) {
-            //   this.openApproveForm(e.RegisterId);
+            this.openApproveForm(e.RegisterId);
+            
             // this.api.approveUser(e.RegisterId, status);
-            this.apiInput = new ApiInput();
-            this.apiInput.stationId = Number(this.selectedStation);
-            this.registeredUsers(this.apiInput);
           } else {
             this.swServ.showErrorMessage("Canelled", "");
           }
@@ -198,10 +196,28 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
         }).then(willDelete => {
           if (willDelete.value) {
             //   this.openApproveForm(e.RegisterId);
-            // this.api.approveUser(e.RegisterId, status);
-            this.apiInput = new ApiInput();
-            this.apiInput.stationId = Number(this.selectedStation);
-            this.registeredUsers(this.apiInput);
+            this.api.approveUser(e.RegisterId, status, 0, "").subscribe(
+              (data: APIResult) => {
+                //console.log(data);
+                let status: Boolean = data.status;
+                let m: string = data.message;
+                if (status) {
+                  // this.userTypes = data.usertypes;
+                  // this.designatons = data.designations;
+                  // this.stations = data.stations;
+                  this.swServ.showSuccessMessage("Success!!", m);
+                } else {
+                  this.swServ.showErrorMessage("Error!!", m);
+                }
+                this.apiInput = new ApiInput();
+                this.apiInput.stationId = Number(this.selectedStation);
+                this.registeredUsers(this.apiInput);
+              },
+              err => {
+                //console.log(err.message);
+                this.swServ.showErrorMessage("Network Error!!!", err.message);
+              }
+            );
           } else {
             this.swServ.showErrorMessage("Canelled", "");
           }

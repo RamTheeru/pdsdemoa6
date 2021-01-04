@@ -1,7 +1,9 @@
 <div class="container-fluid">
+	<button type="submit" style="float:right;background-color:blue;" ><a routerLink="/loginhome"><b class="text-light" >Go to Home >></b></a></button>
 	<form class="form-inline">
 		<!-- <input class="form-control mr-sm-2"     type="text"  placeholder="StationCode">  -->
 		<!-- <p></p> -->
+
 		<select [(ngModel)]="selectedStation" name="station" id="stat">
 							<option value="" selected>Select Station</option>
               	<option *ngFor="let s of stations" [ngValue]="s.stationId">

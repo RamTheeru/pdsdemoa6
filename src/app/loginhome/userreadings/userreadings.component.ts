@@ -21,13 +21,16 @@ export class UserreadingsComponent implements OnInit {
     this.blck1Text = Environment.Block1Text;
     this.blck2Text = Environment.Block2Text;
     this.blck3Text = Environment.Block3Text;
-    this.api.getConstants().subscribe(
+    this.api.getadmindetails().subscribe(
       (data: APIResult) => {
         //console.log(data);
         let status: Boolean = data.status;
         let m: string = data.message;
         if (status) {
           this.detailrequests = data.requests;
+          for (var index in this.detailrequests) {
+            this.registeredUsersCount = this.detailrequests[index].count; // prints indexes: 0, 1, 2, 3
+          }
         } else {
           this._swServ.showErrorMessage("Error!!", m);
         }
@@ -37,8 +40,5 @@ export class UserreadingsComponent implements OnInit {
         this._swServ.showErrorMessage("Network Error!!!", err.message);
       }
     );
-    for (var index in this.detailrequests) {
-      console.log(index); // prints indexes: 0, 1, 2, 3
-    }
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { MatDialog, MatDialogConfig } from "@angular/material";
 import {
   FormGroup,
   FormBuilder,
@@ -24,31 +25,39 @@ export class ApproveemployeeComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data,
     private _fb: FormBuilder,
     private api: PdsApiService,
-    private _swServ: SweetService
+    private _swServ: SweetService,
+    private matDialog: MatDialog
   ) {
     this.registerId = data.registerId;
   }
 
   ngOnInit() {
-    this.api.getConstants().subscribe(
-      (data: APIResult) => {
-        //console.log(data);
-        let status: Boolean = data.status;
-        let m: string = data.message;
-        if (status) {
-          // this.userTypes = data.usertypes;
-          // this.designatons = data.designations;
-          // this.stations = data.stations;
-          this._swServ.showSuccessMessage("Success!!", m);
-        } else {
-          this._swServ.showErrorMessage("Error!!", m);
+    if (this.registerId > 0) {
+      this.api.getConstants().subscribe(
+        (data: APIResult) => {
+          //console.log(data);
+          let status: Boolean = data.status;
+          let m: string = data.message;
+          if (status) {
+            // this.userTypes = data.usertypes;
+            // this.designatons = data.designations;
+            // this.stations = data.stations;
+            this._swServ.showSuccessMessage("Success!!", m);
+          } else {
+            this._swServ.showErrorMessage("Error!!", m);
+          }
+        },
+        err => {
+          //console.log(err.message);
+          this._swServ.showErrorMessage("Network Error!!!", err.message);
         }
-      },
-      err => {
-        //console.log(err.message);
-        this._swServ.showErrorMessage("Network Error!!!", err.message);
-      }
-    );
+      );
+    } else {
+      this._swServ.showErrorMessage(
+        "Error!!!",
+        "Please close it and try again!!!!"
+      );
+    }
   }
   initForm() {
     this.aprvForm = this._fb.group({
@@ -83,6 +92,8 @@ export class ApproveemployeeComponent implements OnInit {
             this._swServ.showErrorMessage("Error!!", m);
           }
           this.initForm();
+          let dialogRef = this.matDialog.open(ApproveemployeeComponent);
+          dialogRef.close();
         },
         err => {
           //console.log(err.message);
