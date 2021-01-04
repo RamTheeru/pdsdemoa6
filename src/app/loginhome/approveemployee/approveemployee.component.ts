@@ -41,7 +41,7 @@ export class ApproveemployeeComponent implements OnInit {
           if (status) {
             // this.userTypes = data.usertypes;
             // this.designatons = data.designations;
-            this.professions = data.professions
+            this.professions = data.professions;
             // this.stations = data.stations;
             // this._swServ.showSuccessMessage("Success!!", m);
           } else {
