@@ -34,7 +34,7 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: "", component: LogindefaulthomeComponent },
-      { path: "userreadings", component: UserreadingsComponent },
+      { path: "adminhome", component: UserreadingsComponent },
       { path: "createemployee", component: CreateEmployeeComponent },
       { path: "createdeliveryassociate", component: CreateEmployeeComponent },
       { path: "updatedeliverydetails", component: DeliveryDetailsComponent },

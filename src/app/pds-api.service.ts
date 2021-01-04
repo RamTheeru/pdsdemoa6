@@ -22,6 +22,7 @@ export const CurrentUrls = {
   registeremployees: "RegisteredUsers",
   login: "Login",
   checkUsername: "CheckUserName",
+  adminDetails: "AdminDetails",
   logout: "DeleteSession"
 };
 @Injectable()
@@ -69,6 +70,14 @@ export class PdsApiService {
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.constants);
     return this.http.get(
       this.baseurl + this.employeesUrl + CurrentUrls.constants,
+      this.httpOptions
+    );
+  }
+  //get admin details
+  getadmindetails(): R.Observable<any> {
+    console.log(this.baseurl + this.employeesUrl + CurrentUrls.adminDetails);
+    return this.http.get(
+      this.baseurl + this.employeesUrl + CurrentUrls.adminDetails,
       this.httpOptions
     );
   }

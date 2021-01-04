@@ -145,6 +145,15 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.vServ.removeValue("edleverify");
       this.vServ.removeValue("hrvheverify");
       this.router.navigate(["/loginhome/registeremployees"]);
+    } else if (tab == "ar") {
+      this.shownotify = false;
+      this.act1SubMenu = false;
+      this.act2SubMenu = false;
+      this.vServ.removeValue("fheverify");
+      this.vServ.removeValue("evheverify");
+      this.vServ.removeValue("edleverify");
+      this.vServ.removeValue("hrvheverify");
+      this.router.navigate(["/loginhome/adminhome"]);
     } else if (tab == "fhe") {
       this.shownotify = false;
       this.act1SubMenu = false;

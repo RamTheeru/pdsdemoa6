@@ -31,5 +31,5 @@ export class APIResult {
   status: boolean;
   message: string;
   id: number;
-   requests : RequestDetail[];
+  requests: RequestDetail[];
 }
