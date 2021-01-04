@@ -167,7 +167,16 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
           showCancelButton: true
         }).then(willDelete => {
           if (willDelete.value) {
-            this.openApproveForm(e.RegisterId);
+            //  this.openApproveForm(e.RegisterId);
+            const config2 = new MatDialogConfig();
+            config2.disableClose = true;
+            config2.autoFocus = true;
+            config2.width = "30%";
+            config2.closeOnNavigation = true;
+            config2.data = {
+              registerId: e.RegisterId
+            };
+            this.dialog.open(ApproveemployeeComponent, config2);
             this.apiInput = new ApiInput();
             this.apiInput.stationId = Number(this.selectedStation);
             this.registeredUsers(this.apiInput);
