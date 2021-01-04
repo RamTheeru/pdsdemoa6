@@ -7,6 +7,7 @@ import {
 } from "@angular/core";
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { SalaryslipComponent } from "../salaryslip/salaryslip.component";
+import { ApproveemployeeComponent } from "../approveemployee/approveemployee.component";
 import { RegisterEmployee } from "../../models/registeremployee";
 import { Employee } from "../../models/employee";
 import { APIResult } from "../../models/apiresult";
@@ -167,7 +168,9 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
         }).then(willDelete => {
           if (willDelete.value) {
             this.openApproveForm(e.RegisterId);
-            
+            this.apiInput = new ApiInput();
+            this.apiInput.stationId = Number(this.selectedStation);
+            this.registeredUsers(this.apiInput);
             // this.api.approveUser(e.RegisterId, status);
           } else {
             this.swServ.showErrorMessage("Canelled", "");
@@ -262,7 +265,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     config.data = {
       registerId: regId
     };
-    this.dialog.open(SalaryslipComponent, config);
+    this.dialog.open(ApproveemployeeComponent, config);
   }
   onSalCreate(val: any) {
     const config = new MatDialogConfig();
