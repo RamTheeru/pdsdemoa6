@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from "@angular/core";
-import { MatDialog, MatDialogConfig } from "@angular/material";
+//import { MatDialog, MatDialogRef, MatDialogConfig } from "@angular/material";
 import {
   FormGroup,
   FormBuilder,
@@ -41,7 +41,7 @@ export class ApproveemployeeComponent implements OnInit {
           if (status) {
             // this.userTypes = data.usertypes;
             // this.designatons = data.designations;
-            //
+            this.professions = data.professions
             // this.stations = data.stations;
             // this._swServ.showSuccessMessage("Success!!", m);
           } else {

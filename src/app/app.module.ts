@@ -34,6 +34,7 @@ import { ViewledgerComponent } from "./loginhome/viewledger/viewledger.component
 import { SubmitattendanceComponent } from "./loginhome/submitattendance/submitattendance.component";
 import { SalaryslipComponent } from "./loginhome/salaryslip/salaryslip.component";
 import { SalarysliplistComponent } from "./loginhome/salarysliplist/salarysliplist.component";
+import { ApproveemployeeComponent } from "./loginhome/approveemployee/approveemployee.component";
 import { FileInputComponent } from "./loginhome/file-input/file-input.component";
 import { ViewService } from "./view.service";
 import { PdsApiService } from "./pds-api.service";
@@ -75,11 +76,12 @@ import { AuthGuard } from "./auth-guard.service";
     DeliveryDetailsComponent,
     SubmitattendanceComponent,
     SalaryslipComponent,
+    ApproveemployeeComponent,
     SalarysliplistComponent,
     FileInputComponent,
     NopageComponent
   ],
-  entryComponents: [SalaryslipComponent],
+  entryComponents: [SalaryslipComponent, ApproveemployeeComponent],
   bootstrap: [AppComponent],
   providers: [ViewService, PdsApiService, SweetService, AuthService, AuthGuard]
 })
