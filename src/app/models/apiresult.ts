@@ -6,6 +6,7 @@ import { Voucher } from "../models/voucher";
 import { Ledger } from "../models/ledger";
 import { Profession } from "../models/profession";
 import { Designation } from "../models/designation";
+import { RequestDetail } from "../models/requestdetail";
 import { CommercialConstant } from "../models/commercialconstant";
 export class APIResult {
   employees: Employee[];
@@ -30,4 +31,5 @@ export class APIResult {
   status: boolean;
   message: string;
   id: number;
+   requests : RequestDetail[];
 }
