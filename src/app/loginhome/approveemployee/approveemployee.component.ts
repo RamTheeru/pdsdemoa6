@@ -25,9 +25,9 @@ export class ApproveemployeeComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data,
     private _fb: FormBuilder,
     private api: PdsApiService,
-    private _swServ: SweetService,
-    private matDialog: MatDialog
-  ) {
+    private _swServ: SweetService
+  ) // private matDialog: MatDialog
+  {
     this.registerId = data.registerId;
   }
 
@@ -44,7 +44,7 @@ export class ApproveemployeeComponent implements OnInit {
             // this.designatons = data.designations;
             //
             // this.stations = data.stations;
-            this._swServ.showSuccessMessage("Success!!", m);
+           // this._swServ.showSuccessMessage("Success!!", m);
           } else {
             this._swServ.showErrorMessage("Error!!", m);
           }
@@ -94,8 +94,8 @@ export class ApproveemployeeComponent implements OnInit {
             this._swServ.showErrorMessage("Error!!", m);
           }
           this.initForm();
-          let dialogRef = this.matDialog.open(ApproveemployeeComponent);
-          dialogRef.close();
+          // let dialogRef = this.matDialog.open(ApproveemployeeComponent);
+          //dialogRef.close();
         },
         err => {
           //console.log(err.message);

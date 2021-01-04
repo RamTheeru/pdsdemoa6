@@ -257,15 +257,15 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     }
   }
   openApproveForm(regId: number) {
-    const config = new MatDialogConfig();
-    config.disableClose = true;
-    config.autoFocus = true;
-    config.width = "60%";
-    config.closeOnNavigation = true;
-    config.data = {
+    const config2 = new MatDialogConfig();
+    config2.disableClose = true;
+    config2.autoFocus = true;
+    config2.width = "30%";
+    config2.closeOnNavigation = true;
+    config2.data = {
       registerId: regId
     };
-    this.dialog.open(ApproveemployeeComponent, config);
+    this.dialog.open(ApproveemployeeComponent, config2);
   }
   onSalCreate(val: any) {
     const config = new MatDialogConfig();
