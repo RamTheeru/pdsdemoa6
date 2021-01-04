@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import {
   FormGroup,
@@ -35,12 +35,14 @@ export class ApproveemployeeComponent implements OnInit {
     if (this.registerId > 0) {
       this.api.getConstants().subscribe(
         (data: APIResult) => {
+          // ,jbgkgg
           //console.log(data);
           let status: Boolean = data.status;
           let m: string = data.message;
           if (status) {
             // this.userTypes = data.usertypes;
             // this.designatons = data.designations;
+            //
             // this.stations = data.stations;
             this._swServ.showSuccessMessage("Success!!", m);
           } else {
