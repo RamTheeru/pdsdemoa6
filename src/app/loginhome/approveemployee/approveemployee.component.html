@@ -2,6 +2,11 @@
 	<h1 class="text-primary"><u>Approve Form</u></h1>
 	<form>
 		<div class="row">
+			<button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+    <mat-icon>X</mat-icon>
+  </button>
+		</div>
+		<div class="row">
 			<div class="col">
 				<!-- <mat-form-field>
 					<mat-label>Profession</mat-label>
@@ -38,7 +43,7 @@
 			<div class="row">
 				<mat-dialog-actions align="end">
 					<button type="submit" mat-dialog-close (click)="onCancel()" mat-raised-button color="warn">Cancel</button>
-					<button type="submit" mat-dialog-close(click)="onSubmit()" mat-raised-button color="primary">Submit</button>
+					<button type="submit" mat-dialog-close (click)="onSubmit()" mat-raised-button color="primary">Submit</button>
 				</mat-dialog-actions>
 			</div>
 	</form>

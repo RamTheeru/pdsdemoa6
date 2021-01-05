@@ -28,7 +28,8 @@ export class ApproveemployeeComponent implements OnInit {
     private _fb: FormBuilder,
     private api: PdsApiService,
     private _swServ: SweetService,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    public dialogRef: MatDialogRef<ApproveemployeeComponent>
   ) {
     this.registerId = data.registerId;
   }
@@ -63,6 +64,10 @@ export class ApproveemployeeComponent implements OnInit {
         "Please close it and try again!!!!"
       );
     }
+  }
+  onClose() {
+    this.initForm();
+    this.dialogRef.close();
   }
   initForm() {
     // this.aprvForm = this._fb.group({
@@ -118,16 +123,8 @@ export class ApproveemployeeComponent implements OnInit {
       //     this._swServ.showErrorMessage("Network Error!!!", err.message);
       //   }
       // );
-      const config2 = new MatDialogConfig();
-      config2.disableClose = true;
-      config2.autoFocus = true;
-      config2.width = "60%";
-      config2.closeOnNavigation = true;
-      config2.data = {
-        registerId: this.registerId
-      };
-      let dialogRef = this.matDialog.open(ApproveemployeeComponent, config2);
-      dialogRef.close();
+
+      this.dialogRef.close();
     }
   }
 }
