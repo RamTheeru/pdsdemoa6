@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from "@angular/core";
-//import { MatDialog, MatDialogRef, MatDialogConfig } from "@angular/material";
+import { MatDialog, MatDialogRef, MatDialogConfig } from "@angular/material";
 import {
   FormGroup,
   FormBuilder,
@@ -21,11 +21,14 @@ export class ApproveemployeeComponent implements OnInit {
   registerId: number = 0;
   aprvForm: FormGroup;
   professions: Profession[];
+  empCode: string;
+  profid: number;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
     private _fb: FormBuilder,
     private api: PdsApiService,
-    private _swServ: SweetService // private matDialog: MatDialog
+    private _swServ: SweetService,
+    private matDialog: MatDialog
   ) {
     this.registerId = data.registerId;
   }
@@ -65,25 +68,31 @@ export class ApproveemployeeComponent implements OnInit {
     //   prof: new FormControl(""),
     //   empc: new FormControl()
     // });
-    this.aprvForm = new FormGroup({
-      prof: new FormControl(""),
-      empc: new FormControl()
-    });
+    // this.aprvForm = new FormGroup({
+    //   prof: new FormControl(""),
+    //   empc: new FormControl()
+    // });
+    //
+    this.profid = 0;
+    this.empCode = "";
   }
   onCancel() {
     this.initForm();
+    let dialogRef = this.matDialog.open(ApproveemployeeComponent);
+    dialogRef.close();
   }
   onSubmit() {
-    var p = this.aprvForm.value["prof"];
-    let empCode = this.aprvForm.value["empc"];
+    // var p = this.aprvForm.value["prof"];
+    // let empCode = this.aprvForm.value["empc"];
+    let p = this.profid;
 
     if (
       this.registerId == 0 ||
-      p == "" ||
+      p == 0 ||
       p == undefined ||
-      empCode == "" ||
-      empCode == undefined ||
-      empCode == null
+      this.empCode == "" ||
+      this.empCode == undefined ||
+      this.empCode == null
     ) {
       this._swServ.showErrorMessage("Error!!", "Invalid Input!!!");
     } else {
