@@ -13,6 +13,7 @@ import { SweetService } from "../../sweet.service";
 import { Profession } from "../../models/profession";
 import { APIResult } from "../../models/apiresult";
 import { ApiInput } from "../../models/apiinput";
+import { RegisterEmployee } from "../../models/registeremployee";
 @Component({
   selector: "app-approveemployee",
   templateUrl: "./approveemployee.component.html",
@@ -21,6 +22,7 @@ import { ApiInput } from "../../models/apiinput";
 export class ApproveemployeeComponent implements OnInit {
   registerId: number = 0;
   stationId: number = 0;
+  employees: RegisterEmployee[] = [];
   apiInput: ApiInput;
   aprvForm: FormGroup;
   usrToken: string = "";
@@ -122,7 +124,18 @@ export class ApproveemployeeComponent implements OnInit {
             //   this.professions = data.professions;
             this.apiInput = new ApiInput();
             this.apiInput.stationId = Number(this.stationId);
-            this.api.getRegisteredEmployees(this.apiInput, this.usrToken);
+            this.api
+              .getRegisteredEmployees(this.apiInput, this.usrToken)
+              .subscribe((data: APIResult) => {
+                // console.log(data)     ;
+                let status = data.status;
+                let message = data.message;
+                if (status) {
+                  this.employees = data.registerEmployees;
+                } else {
+                  this._swServ.showErrorMessage("Failure!!!", message);
+                }
+              });
           } else {
             this._swServ.showErrorMessage("Error!!", m);
           }
