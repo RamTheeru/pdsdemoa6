@@ -91,7 +91,7 @@ export class ApproveemployeeComponent implements OnInit {
     // var p = this.aprvForm.value["prof"];
     // let empCode = this.aprvForm.value["empc"];
     let p = this.profid;
-    console.log(this.registerId, this.empCode, p);
+    //console.log(this.registerId, this.empCode, p);
     if (
       this.registerId == 0 ||
       p == 0 ||
