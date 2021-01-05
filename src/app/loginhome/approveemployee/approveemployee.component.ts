@@ -122,24 +122,24 @@ export class ApproveemployeeComponent implements OnInit {
           if (status) {
             this._swServ.showSuccessMessage("Success!!", m);
             //   this.professions = data.professions;
-            this.apiInput = new ApiInput();
-            this.apiInput.stationId = Number(this.stationId);
-            this.api
-              .getRegisteredEmployees(this.apiInput, this.usrToken)
-              .subscribe((data: APIResult) => {
-                // console.log(data)     ;
-                let status = data.status;
-                let message = data.message;
-                if (status) {
-                  this.employees = data.registerEmployees;
-                } else {
-                  this._swServ.showErrorMessage("Failure!!!", message);
-                }
-              });
+            // this.apiInput = new ApiInput();
+            // this.apiInput.stationId = Number(this.stationId);
+            // this.api
+            //   .getRegisteredEmployees(this.apiInput, this.usrToken)
+            //   .subscribe((data: APIResult) => {
+            //     // console.log(data)     ;
+            //     let status = data.status;
+            //     let message = data.message;
+            //     if (status) {
+            //       this.employees = data.registerEmployees;
+            //     } else {
+            //       this._swServ.showErrorMessage("Failure!!!", message);
+            //     }
+            //   });
           } else {
             this._swServ.showErrorMessage("Error!!", m);
           }
-
+          this.dialogRef.close({ status: status, message: m });
           // let dialogRef = this.matDialog.open(ApproveemployeeComponent);
           //dialogRef.close();
         },
@@ -149,7 +149,6 @@ export class ApproveemployeeComponent implements OnInit {
         }
       );
       this.initForm();
-      this.dialogRef.close();
     }
   }
 }

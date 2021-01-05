@@ -172,9 +172,6 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
         }).then(willDelete => {
           if (willDelete.value) {
             this.openApproveForm(e.RegisterId, Number(this.selectedStation));
-            this.apiInput = new ApiInput();
-            this.apiInput.stationId = Number(this.selectedStation);
-            this.registeredUsers(this.apiInput);
             // this.api.approveUser(e.RegisterId, status);
           } else {
             this.swServ.showErrorMessage("Canelled", "");
@@ -271,7 +268,17 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
       stationId: stationId,
       token: this.usrToken
     };
-    this.dialog.open(ApproveemployeeComponent, config2);
+    const dialogRef = this.dialog.open(ApproveemployeeComponent, config2);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("dialog result....");
+      console.log(result);
+      this.apiInput = new ApiInput();
+      this.apiInput.stationId = Number(stationId);
+      this.registeredUsers(this.apiInput);
+      // if (result.status) {
+      // } else {
+      // }
+    });
   }
   onSalCreate(val: any) {
     const config = new MatDialogConfig();
