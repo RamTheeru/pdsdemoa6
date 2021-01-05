@@ -12,6 +12,7 @@ import { PdsApiService } from "../../pds-api.service";
 import { SweetService } from "../../sweet.service";
 import { Profession } from "../../models/profession";
 import { APIResult } from "../../models/apiresult";
+import { ApiInput } from "../../models/apiinput";
 @Component({
   selector: "app-approveemployee",
   templateUrl: "./approveemployee.component.html",
@@ -19,7 +20,10 @@ import { APIResult } from "../../models/apiresult";
 })
 export class ApproveemployeeComponent implements OnInit {
   registerId: number = 0;
+  stationId: number = 0;
+  apiInput: ApiInput;
   aprvForm: FormGroup;
+  usrToken: string = "";
   professions: Profession[];
   empCode: string;
   profid: number = 0;
@@ -32,6 +36,8 @@ export class ApproveemployeeComponent implements OnInit {
     public dialogRef: MatDialogRef<ApproveemployeeComponent>
   ) {
     this.registerId = data.registerId;
+    this.stationId = data.stationId;
+    this.usrToken = data.token;
   }
 
   ngOnInit() {
@@ -98,7 +104,9 @@ export class ApproveemployeeComponent implements OnInit {
       p == undefined ||
       this.empCode == "" ||
       this.empCode == undefined ||
-      this.empCode == null
+      this.empCode == null ||
+      this.usrToken == "" ||
+      this.stationId == 0
     ) {
       this._swServ.showErrorMessage("Error!!", "Invalid Input!!!");
     } else {
@@ -112,6 +120,9 @@ export class ApproveemployeeComponent implements OnInit {
           if (status) {
             this._swServ.showSuccessMessage("Success!!", m);
             //   this.professions = data.professions;
+            this.apiInput = new ApiInput();
+            this.apiInput.stationId = Number(this.stationId);
+            this.api.getRegisteredEmployees(this.apiInput, this.usrToken);
           } else {
             this._swServ.showErrorMessage("Error!!", m);
           }

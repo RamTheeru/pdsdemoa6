@@ -87,7 +87,11 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     }
     if (this.selectedStation == "") {
       this.swServ.showErrorMessage("Invalid Input!!!", "Please Select Station");
-    } else if (this.usrToken == "" || this.usrToken == undefined) {
+    } else if (
+      this.usrToken == "" ||
+      this.usrToken == undefined ||
+      this.usrToken == null
+    ) {
       this.handleUnauthorizedrequest();
     } else {
       this.apiInput = new ApiInput();
@@ -167,7 +171,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
           showCancelButton: true
         }).then(willDelete => {
           if (willDelete.value) {
-            this.openApproveForm(e.RegisterId);
+            this.openApproveForm(e.RegisterId, Number(this.selectedStation));
             this.apiInput = new ApiInput();
             this.apiInput.stationId = Number(this.selectedStation);
             this.registeredUsers(this.apiInput);
@@ -256,14 +260,16 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
       }
     }
   }
-  openApproveForm(regId: number) {
+  openApproveForm(regId: number, stationId: number) {
     const config2 = new MatDialogConfig();
     config2.disableClose = true;
     config2.autoFocus = true;
     config2.width = "60%";
     config2.closeOnNavigation = true;
     config2.data = {
-      registerId: regId
+      registerId: regId,
+      stationId: stationId,
+      token: this.usrToken
     };
     this.dialog.open(ApproveemployeeComponent, config2);
   }
