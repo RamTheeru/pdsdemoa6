@@ -171,7 +171,7 @@ export class PdsApiService {
       status +
       "&pId=" +
       pId +
-      "empCode=" +
+      "&empCode=" +
       empCode;
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.approve);
     return this.http.put(
