@@ -22,7 +22,7 @@ export class ApproveemployeeComponent implements OnInit {
   aprvForm: FormGroup;
   professions: Profession[];
   empCode: string;
-  profid: number;
+  profid: number = 0;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
     private _fb: FormBuilder,
@@ -79,8 +79,8 @@ export class ApproveemployeeComponent implements OnInit {
   }
   onCancel() {
     this.initForm();
-    let dialogRef = this.matDialog.open(ApproveemployeeComponent);
-    dialogRef.close();
+    // let dialogRef = this.matDialog.open(ApproveemployeeComponent);
+    // dialogRef.close();
   }
   onSubmit() {
     // var p = this.aprvForm.value["prof"];
@@ -118,6 +118,16 @@ export class ApproveemployeeComponent implements OnInit {
       //     this._swServ.showErrorMessage("Network Error!!!", err.message);
       //   }
       // );
+      const config2 = new MatDialogConfig();
+      config2.disableClose = true;
+      config2.autoFocus = true;
+      config2.width = "60%";
+      config2.closeOnNavigation = true;
+      config2.data = {
+        registerId: this.registerId
+      };
+      let dialogRef = this.matDialog.open(ApproveemployeeComponent, config2);
+      dialogRef.close();
     }
   }
 }

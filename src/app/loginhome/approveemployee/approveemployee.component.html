@@ -11,9 +11,9 @@
 						</mat-option>
 					</mat-select>
 				</mat-form-field> -->
-				<select [(ngModel)]="profid" name="station" id="stat">
+				<select [(ngModel)]="profid" name="prof" id="prof">
 							<option value="0" selected>Select Profession Type</option>
-              	<option *ngFor="let p of professions" [ngValue]="p.pd">
+              	<option *ngFor="let p of professions" [ngValue]="p.pid">
 								{{p.professionName}}
 							</option>
     </select>
@@ -37,8 +37,8 @@
 			</div>
 			<div class="row">
 				<mat-dialog-actions align="end">
-					<button type="submit" (click)="onCancel()" mat-raised-button color="warn">Cancel</button>
-					<button type="submit" (click)="onSubmit()" mat-raised-button color="primary">Submit</button>
+					<button type="submit" mat-dialog-close (click)="onCancel()" mat-raised-button color="warn">Cancel</button>
+					<button type="submit" mat-dialog-close(click)="onSubmit()" mat-raised-button color="primary">Submit</button>
 				</mat-dialog-actions>
 			</div>
 	</form>
