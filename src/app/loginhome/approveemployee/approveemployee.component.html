@@ -13,7 +13,7 @@
 				</mat-form-field> -->
 				<select [(ngModel)]="profid" name="station" id="stat">
 							<option value="0" selected>Select Profession Type</option>
-              	<option *ngFor="let p of professions" [ngValue]="p.pId">
+              	<option *ngFor="let p of professions" [ngValue]="p.pd">
 								{{p.professionName}}
 							</option>
     </select>
@@ -24,7 +24,7 @@
 					<input type="text" name="empc" matInput  formControlName="empc" placeholder="Employee Code*" class="form-control">
 					<mat-error>This field is mandatory</mat-error>
 				</mat-form-field> -->
-				<input type="text" name="empc" [(ngModel)]="empCode"   formControlName="empc" placeholder="Employee Code*" class="form-control">
+				<input type="text" name="empc" [(ngModel)]="empCode"    placeholder="Employee Code*" class="form-control">
 			</div>
 				<!-- <div class="col">
 				<mat-form-field>
@@ -38,7 +38,7 @@
 			<div class="row">
 				<mat-dialog-actions align="end">
 					<button type="submit" (click)="onCancel()" mat-raised-button color="warn">Cancel</button>
-					<button type="submit" (click)="$" mat-raised-button color="primary">Submit</button>
+					<button type="submit" (click)="onSubmit()" mat-raised-button color="primary">Submit</button>
 				</mat-dialog-actions>
 			</div>
 	</form>

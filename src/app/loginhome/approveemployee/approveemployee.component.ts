@@ -45,6 +45,7 @@ export class ApproveemployeeComponent implements OnInit {
             // this.userTypes = data.usertypes;
             // this.designatons = data.designations;
             this.professions = data.professions;
+            console.log(this.professions);
             // this.stations = data.stations;
             // this._swServ.showSuccessMessage("Success!!", m);
           } else {
@@ -85,7 +86,7 @@ export class ApproveemployeeComponent implements OnInit {
     // var p = this.aprvForm.value["prof"];
     // let empCode = this.aprvForm.value["empc"];
     let p = this.profid;
-
+    console.log(this.registerId, this.empCode, p);
     if (
       this.registerId == 0 ||
       p == 0 ||
