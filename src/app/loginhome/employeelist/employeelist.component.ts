@@ -261,7 +261,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     config2.disableClose = true;
     config2.autoFocus = true;
     config2.width = "60%";
-    config2.closeOnNavigation = f;
+    config2.closeOnNavigation = t;
     config2.data = {
       registerId: regId
     };

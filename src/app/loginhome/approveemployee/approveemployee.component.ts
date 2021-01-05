@@ -66,7 +66,7 @@ export class ApproveemployeeComponent implements OnInit {
       empc: new FormControl()
     });
   }
-  onCancel(){
+  onCancel() {
     this.initForm();
   }
   onSubmit() {
