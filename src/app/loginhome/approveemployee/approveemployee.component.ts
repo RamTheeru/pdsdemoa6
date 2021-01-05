@@ -66,6 +66,9 @@ export class ApproveemployeeComponent implements OnInit {
       empc: new FormControl()
     });
   }
+  onCancel(){
+    this.initForm();
+  }
   onSubmit() {
     var p = this.aprvForm.value["prof"];
     let empCode = this.aprvForm.value["empc"];
