@@ -61,7 +61,11 @@ export class ApproveemployeeComponent implements OnInit {
     }
   }
   initForm() {
-    this.aprvForm = this._fb.group({
+    // this.aprvForm = this._fb.group({
+    //   prof: new FormControl(""),
+    //   empc: new FormControl()
+    // });
+    this.aprvForm = new FormGroup({
       prof: new FormControl(""),
       empc: new FormControl()
     });
@@ -84,26 +88,26 @@ export class ApproveemployeeComponent implements OnInit {
       this._swServ.showErrorMessage("Error!!", "Invalid Input!!!");
     } else {
       let pid = Number(p);
-      this.api.approveUser(this.registerId, "a", pid, empCode).subscribe(
-        (data: APIResult) => {
-          //
-          //     console.log(data)     ;
-          let status: Boolean = data.status;
-          let m: string = data.message;
-          if (status) {
-            this.professions = data.professions;
-          } else {
-            this._swServ.showErrorMessage("Error!!", m);
-          }
-          this.initForm();
-          // let dialogRef = this.matDialog.open(ApproveemployeeComponent);
-          //dialogRef.close();
-        },
-        err => {
-          //console.log(err.message);
-          this._swServ.showErrorMessage("Network Error!!!", err.message);
-        }
-      );
+      // this.api.approveUser(this.registerId, "a", pid, empCode).subscribe(
+      //   (data: APIResult) => {
+      //     //
+      //     //     console.log(data)     ;
+      //     let status: Boolean = data.status;
+      //     let m: string = data.message;
+      //     if (status) {
+      //       this.professions = data.professions;
+      //     } else {
+      //       this._swServ.showErrorMessage("Error!!", m);
+      //     }
+      //     this.initForm();
+      //     // let dialogRef = this.matDialog.open(ApproveemployeeComponent);
+      //     //dialogRef.close();
+      //   },
+      //   err => {
+      //     //console.log(err.message);
+      //     this._swServ.showErrorMessage("Network Error!!!", err.message);
+      //   }
+      // );
     }
   }
 }
