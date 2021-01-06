@@ -21,6 +21,7 @@ export const CurrentUrls = {
   registeremployee: "RegisterEmployee",
   registeremployees: "RegisteredUsers",
   login: "Login",
+  employeelogins: "Logins",
   checkUsername: "CheckUserName",
   adminDetails: "AdminDetails",
   logout: "DeleteSession"
@@ -96,6 +97,28 @@ export class PdsApiService {
       this.baseurl + this.employeesUrl + CurrentUrls.login + input,
       this.httpOptions
     );
+  }
+  //logins list of   employees
+  getemployeelogins(input: any, tkn: string): R.Observable<any> {
+    var body = JSON.stringify(input);
+    const phttpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        Authorization: "Bearer " + tkn
+      })
+    };
+    console.log(this.baseurl + this.employeesUrl + CurrentUrls.employeelogins);
+    return this.http
+      .post(
+        this.baseurl + this.employeesUrl + CurrentUrls.employeelogins,
+        body,
+        phttpOptions
+      )
+      .pipe(catchError((error, caught) => {
+        this.handleAuthError(error);
+        return error;
+      }) as any);
   }
   //registered employees
   getRegisteredEmployees(input: any, tkn: string): R.Observable<any> {
