@@ -484,6 +484,9 @@ export class RegisterComponent implements OnInit {
     } else if (field == "loc") {
       var f = "Employee Location Name";
       this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "g") {
+      var f = "Employee Location Name";
+      this.fvalid=t;
     }
   }
   showrequiredMessage(field, txt, title) {

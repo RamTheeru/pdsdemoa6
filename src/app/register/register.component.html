@@ -67,20 +67,20 @@
 					</mat-form-field>
 					<legend>Parent/Guadian Information</legend>
 					<mat-form-field>
-						<input type="text" name="pFistName" formControlName="gfirstName" matInput placeholder="First Name" class="form-control">
+						<input type="text" name="pFistName" (focusout)="focusOutFunction('g',$event)" formControlName="gfirstName" matInput placeholder="First Name" class="form-control">
 						<mat-error>This field is mandatory</mat-error>
 					</mat-form-field>
 					<mat-form-field>
-						<input type="text" name="pMiddleName" formControlName="gmiddleName" matInput placeholder="Middle Name" class="form-control">
+						<input type="text" name="pMiddleName" (focusout)="focusOutFunction('g',$event)" formControlName="gmiddleName" matInput placeholder="Middle Name" class="form-control">
 						<mat-error>This field is mandatory</mat-error>
 					</mat-form-field>
 					<mat-form-field>
-						<input type="text" name="pLastName" formControlName="glastName" matInput placeholder="Last Name" class="form-control">
+						<input type="text" name="pLastName" (focusout)="focusOutFunction('g',$event)" formControlName="glastName" matInput placeholder="Last Name" class="form-control">
 						<mat-error>This field is mandatory</mat-error>
 					</mat-form-field>
 					<mat-form-field>
 						<mat-label>Alternate Contact:+91-</mat-label>
-						<input type="text" name="gphone"  formControlName="gphone" matInput placeholder="Phone" class="form-control">
+						<input type="text" name="gphone" (focusout)="focusOutFunction('g',$event)" formControlName="gphone" matInput placeholder="Phone" class="form-control">
       </mat-form-field>
 				</div>
 			</mat-grid-tile>
