@@ -101,6 +101,12 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
       this.registeredUsers(this.apiInput);
     }
   }
+  getdata(val: number) {
+    this.apiInput = new ApiInput();
+    this.apiInput.page = val;
+    this.apiInput.stationId = Number(this.selectedStation);
+    this.registeredUsers(this.apiInput);
+  }
   registeredUsers(input: ApiInput) {
     this.api
       .getRegisteredEmployees(input, this.usrToken)

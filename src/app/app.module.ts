@@ -18,6 +18,7 @@ import { AboutusComponent } from "./aboutus/aboutus.component";
 import { LogintabComponent } from "./logintab/logintab.component";
 import { ScrollingComponent } from "./scrolling/scrolling.component";
 import { RegisterComponent } from "./register/register.component";
+import { PaginationComponent } from "./pagination/pagination.component";
 import { AbtusComponent } from "./abtus/abtus.component";
 import { NopageComponent } from "./nopage/nopage.component";
 import { LoginhomeComponent } from "./loginhome/loginhome.component";
@@ -79,6 +80,7 @@ import { AuthGuard } from "./auth-guard.service";
     ApproveemployeeComponent,
     SalarysliplistComponent,
     FileInputComponent,
+    PaginationComponent,
     NopageComponent
   ],
   entryComponents: [SalaryslipComponent, ApproveemployeeComponent],
