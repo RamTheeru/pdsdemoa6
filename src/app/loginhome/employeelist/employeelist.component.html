@@ -74,15 +74,11 @@
 			<tbody>
 				<tr *ngFor="let emp of employees">
 					<td [hidden]="isHide">{{emp.EmployeeId}}</td>
+					<td> {{emp.empCode}}</td>
 					<td> {{emp.firstName}}</td>
-					<td>{{emp.phone}}</td>
 					<td>{{emp.loginType}}</td>
-					<td>{{emp.stationCode}}</td>
-					<td>{{emp.locationName}}</td>
-					<div *ngIf="!isHE">
-						<!-- <td><input #empCode  id="{{emp.registerId}}"  type="text" value=""/></td> -->
-					</div>
-					<td>
+					<td>{{emp.isActive==true?'Active':'Inactive'}}</td>
+					<!-- <td>
 						<div *ngIf="isHE; else reg">
 							<button type="button"
             (click)="onSalCreate($event)" id="{{emp.EmployeeId}}" >Generate Salary</button>
@@ -92,7 +88,7 @@
           </button>| <button type="button"   (click)="approveUser($event,'r')" class="btn btn-primary" ><b  id="{{emp.registerId}}"  class="text-light" >Reject</b>
           </button>
 						</ng-template>
-					</td>
+					</td> -->
 				</tr>
 			</tbody>
 		</table>

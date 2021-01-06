@@ -63,7 +63,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
       this.isreguser = false;
     } else {
       this.isreguser = true;
-    
+    }
     this.subsc = this.vServ.data.subscribe((val: string) => {
       this.userType = val;
     });
@@ -90,7 +90,6 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
         this.swServ.showErrorMessage("Network Error!!!", err.message);
       }
     );
-    }
   }
   ngOnDestroy() {
     this.subsc.unsubscribe();
@@ -124,22 +123,41 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
   }
 
   registeredUsers(input: ApiInput) {
-    this.api
-      .getRegisteredEmployees(input, this.usrToken)
-      .subscribe((data: APIResult) => {
-        // console.log(data)     ;
-        let status = data.status;
-        let message = data.message;
-        if (status) {
-          this.employees = data.registerEmployees;
-          this.pageCount = data.queryPages;
-          this.totalCount = data.queryTotalCount;
-          this.pages = this.api.transform(this.pageCount);
-          console.log(data);
-        } else {
-          this.swServ.showErrorMessage("Failure!!!", message);
-        }
-      });
+    if (this.isreguser) {
+      this.api
+        .getRegisteredEmployees(input, this.usrToken)
+        .subscribe((data: APIResult) => {
+          // console.log(data)     ;
+          let status = data.status;
+          let message = data.message;
+          if (status) {
+            this.employees = data.registerEmployees;
+            this.pageCount = data.queryPages;
+            this.totalCount = data.queryTotalCount;
+            this.pages = this.api.transform(this.pageCount);
+            console.log(data);
+          } else {
+            this.swServ.showErrorMessage("Failure!!!", message);
+          }
+        });
+    } else {
+      this.api
+        .getemployeelogins(input, this.usrToken)
+        .subscribe((data: APIResult) => {
+          // console.log(data)     ;
+          let status = data.status;
+          let message = data.message;
+          if (status) {
+            this.employees = data.employees;
+            this.pageCount = data.queryPages;
+            this.totalCount = data.queryTotalCount;
+            this.pages = this.api.transform(this.pageCount);
+            console.log(data);
+          } else {
+            this.swServ.showErrorMessage("Failure!!!", message);
+          }
+        });
+    }
   }
   handleUnauthorizedrequest() {
     this.swServ.showErrorMessage(

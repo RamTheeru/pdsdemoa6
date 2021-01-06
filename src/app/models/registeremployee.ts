@@ -43,4 +43,5 @@ export class RegisterEmployee {
   StationCode: string;
   StationId: number;
   LocationName: string;
+  IsActive: boolean;
 }
