@@ -26,6 +26,8 @@ import swal from "sweetalert2";
 export class EmployeelistComponent implements OnInit, OnDestroy {
   @ViewChildren("empCode") empCode;
   employees: RegisterEmployee[] = [];
+  pages: number = 1;
+  totalCount: number = 0;
   stations: Station[];
   apiInput: ApiInput;
   selectedStation: string = "";
@@ -108,6 +110,9 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
         let message = data.message;
         if (status) {
           this.employees = data.registerEmployees;
+          this.pages = data.queryPages;
+          this.totalCount = data.queryTotalCount;
+          console.log(data);
         } else {
           this.swServ.showErrorMessage("Failure!!!", message);
         }
