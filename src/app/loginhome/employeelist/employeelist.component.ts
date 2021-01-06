@@ -5,6 +5,7 @@ import {
   ElementRef,
   OnDestroy
 } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { SalaryslipComponent } from "../salaryslip/salaryslip.component";
 import { ApproveemployeeComponent } from "../approveemployee/approveemployee.component";
@@ -28,6 +29,8 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
   employees: RegisterEmployee[] = [];
   pageCount: number = 1;
   pages = [];
+  url: string = "";
+  isreguser: boolean = true;
   totalCount: number = 0;
   stations: Station[];
   apiInput: ApiInput;
@@ -48,10 +51,19 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private api: PdsApiService,
     private swServ: SweetService,
-    private vServ: ViewService
+    private vServ: ViewService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
+    this.url = this.route["_routerState"].snapshot.url;
+
+    var index = this.url.indexOf("logins");
+    if (index !== -1) {
+      this.isreguser = false;
+    } else {
+      this.isreguser = true;
+    
     this.subsc = this.vServ.data.subscribe((val: string) => {
       this.userType = val;
     });
@@ -78,6 +90,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
         this.swServ.showErrorMessage("Network Error!!!", err.message);
       }
     );
+    }
   }
   ngOnDestroy() {
     this.subsc.unsubscribe();

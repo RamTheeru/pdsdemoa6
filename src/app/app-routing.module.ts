@@ -41,6 +41,7 @@ const appRoutes: Routes = [
       { path: "employeeedit/:id", component: CreateEmployeeComponent },
       { path: "individualview/:id", component: IndividualviewComponent },
       { path: "registeremployees", component: EmployeelistComponent },
+      { path: "employeelogins", component: EmployeelistComponent },
       { path: "entercreditdetails", component: EntercreditdetailsComponent },
       { path: "entervoucher", component: VoucherComponent },
       { path: "editvoucher/:id", component: VoucherComponent },
