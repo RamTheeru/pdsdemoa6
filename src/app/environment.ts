@@ -47,7 +47,7 @@ opportunity.`,
               actively pursuing the develop an array of
               logistics services to be offered across India`,
 
-  Block1Text: "Registered users",
+  Block1Text: "Registration Approval",
   Block2Text: "Approved users",
   Block3Text: "Inactive Users"
 
