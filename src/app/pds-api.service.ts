@@ -66,6 +66,13 @@ export class PdsApiService {
   //   //
   //   this.app.hideload();
   // }
+  transform(value): any {
+    let res = [];
+    for (let i = 1; i <= value; i++) {
+      res.push(i);
+    }
+    return res;
+  }
   getConstants(): R.Observable<any> {
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.constants);
     return this.http.get(
