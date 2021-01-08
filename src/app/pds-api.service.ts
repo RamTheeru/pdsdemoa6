@@ -12,6 +12,11 @@ import { Router } from "@angular/router";
 import * as R from "rxjs";
 import { catchError } from "rxjs/internal/operators";
 import swal from "sweetalert2";
+import "rxjs/add/operator/catch";
+import "rxjs/add/observable/of";
+import "rxjs/add/observable/empty";
+import "rxjs/add/operator/retry"; // don't forget the imports
+import { Observable, EMPTY, throwError, of } from "rxjs";
 import { APIResult } from "./models/apiresult";
 import { AppComponent } from "./app.component";
 export const CurrentUrls = {
@@ -115,10 +120,29 @@ export class PdsApiService {
         body,
         phttpOptions
       )
-      .pipe(catchError((error, caught) => {
-        this.handleAuthError(error);
-        return error;
-      }) as any);
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.error instanceof Error) {
+            // A client-side or network error occurred. Handle it accordingly.
+            console.error("An error occurred:", error.error.message);
+          } else {
+            // The backend returned an unsuccessful response code.
+            // The response body may contain clues as to what went wrong,
+            console.error(
+              `Backend returned code ${error.status}, body was: ${error.error}`
+            );
+          }
+
+          // If you want to return a new response:
+          //return of(new HttpResponse({body: [{name: "Default value..."}]}));
+
+          // If you want to return the error on the upper level:
+          //return throwError(error);
+
+          // or just return nothing:
+          return error.error;
+        })
+      );
   }
   //registered employees
   getRegisteredEmployees(input: any, tkn: string): R.Observable<any> {
@@ -149,7 +173,7 @@ export class PdsApiService {
   //unauthorized error display
   private handleAuthError(err: HttpErrorResponse) {
     //handle your auth error or rethrow
-    if (err.status === 401 ) {
+    if (err.status === 401) {
       //navigate /delete cookies or whatever
       console.log("handled error " + err.status);
       swal(
@@ -159,7 +183,7 @@ export class PdsApiService {
       );
       this.router.navigate([`/login`]);
       // if you've caught / handled the error, you don't want to rethrow it unless you also want downstream consumers to have to handle it as well.
-    } else if (err.status === 40) {
+    } else if (err.status === 400) {
     }
   }
   // get emloyees
