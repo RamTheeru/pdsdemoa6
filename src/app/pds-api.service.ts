@@ -35,8 +35,9 @@ export const CurrentUrls = {
 export class PdsApiService {
   // Base url
   baseurl = "https://www.kleenandshine.com/api/";
-  //baseurl = "https://localhost:44302/api/";
+  //baseurl = "https://localhost:9900/api/";
   usrToken: string = "";
+  apiResult: APIResult;
   //constantsUrl: string = "Constants";
   financeUrl: string = "Finance/";
   employeesUrl: string = "Employee/";
@@ -122,25 +123,12 @@ export class PdsApiService {
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          if (error.error instanceof Error) {
-            // A client-side or network error occurred. Handle it accordingly.
-            console.error("An error occurred:", error.error.message);
-          } else {
-            // The backend returned an unsuccessful response code.
-            // The response body may contain clues as to what went wrong,
-            console.error(
-              `Backend returned code ${error.status}, body was: ${error.error}`
-            );
-          }
-
-          // If you want to return a new response:
-          //return of(new HttpResponse({body: [{name: "Default value..."}]}));
-
-          // If you want to return the error on the upper level:
-          //return throwError(error);
-
-          // or just return nothing:
-          return error.error;
+          let obj = this.handlehttpError(error);
+          console.log("return obj");
+          console.log(obj);
+          return new Observable(function(x) {
+            x.next(obj);
+          });
         })
       );
   }
@@ -170,21 +158,51 @@ export class PdsApiService {
         return error;
       }) as any);
   }
+  private handlehttpError(err: HttpErrorResponse) {
+    let obj = {};
+    if (err.status === 401) {
+      this.handleAuthError(err);
+    } else {
+      if (err.error instanceof Error) {
+        // A client-side or network error occurred. Handle it accordingly.
+
+        swal(
+          "Client Side Error!!!",
+          "An error occurred :" + err.error.message.toString(),
+          "error"
+        );
+      } else {
+        // The backend returned an unsuccessful response code.
+        // The response body may contain clues as to what went wrong,
+        console.error(
+          `Backend returned code ${err.status}, body was: ${err.error}`
+        );
+        obj = err.error;
+      }
+
+      // ...optionally return a default fallback value so app can continue (pick one)
+      // which could be a default value
+      // return Observable.of<any>({my: "default value..."});
+      // or simply an empty observable
+      //return Observable.empty<T>();
+    }
+    return obj;
+  }
+  //other errors display
+  private handleOtherError(err: HttpErrorResponse) {}
   //unauthorized error display
   private handleAuthError(err: HttpErrorResponse) {
     //handle your auth error or rethrow
-    if (err.status === 401) {
-      //navigate /delete cookies or whatever
-      console.log("handled error " + err.status);
-      swal(
-        "UnAuthorized Request!!!",
-        "Session Expired, please login again!!!",
-        "error"
-      );
-      this.router.navigate([`/login`]);
-      // if you've caught / handled the error, you don't want to rethrow it unless you also want downstream consumers to have to handle it as well.
-    } else if (err.status === 400) {
-    }
+
+    //navigate /delete cookies or whatever
+    console.log("handled error " + err.status);
+    swal(
+      "UnAuthorized Request!!!",
+      "Session Expired, please login again!!!",
+      "error"
+    );
+    this.router.navigate([`/login`]);
+    // if you've caught / handled the error, you don't want to rethrow it unless you also want downstream consumers to have to handle it as well.
   }
   // get emloyees
   getEmployees(stationCode: string = ""): R.Observable<any> {
