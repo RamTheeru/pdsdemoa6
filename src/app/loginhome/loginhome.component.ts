@@ -341,8 +341,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
         )
         .subscribe(
           (data: APIResult) => {
-            //      console.log(data);
-            //
+
             let status: Boolean = data.status;
             let m: string = data.message;
             if (status) {
@@ -370,5 +369,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
         "Unable to logout,Something Went Wrong!!!"
       );
     }
+    //bkgk jhk   ugk
+    this.router.navigate(["/login"]);
   }
 }
