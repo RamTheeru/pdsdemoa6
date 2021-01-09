@@ -124,8 +124,6 @@ export class PdsApiService {
       .pipe(
         catchError((error: HttpErrorResponse) => {
           let obj = this.handlehttpError(error);
-          console.log("return obj");
-          console.log(obj);
           return new Observable(function(x) {
             x.next(obj);
           });
@@ -153,10 +151,14 @@ export class PdsApiService {
         body,
         phttpOptions
       )
-      .pipe(catchError((error, caught) => {
-        this.handleAuthError(error);
-        return error;
-      }) as any);
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let obj = this.handlehttpError(error);
+          return new Observable(function(x) {
+            x.next(obj);
+          });
+        })
+      );
   }
   private handlehttpError(err: HttpErrorResponse) {
     let obj = {};
@@ -188,8 +190,7 @@ export class PdsApiService {
     }
     return obj;
   }
-  //other errors display
-  private handleOtherError(err: HttpErrorResponse) {}
+
   //unauthorized error display
   private handleAuthError(err: HttpErrorResponse) {
     //handle your auth error or rethrow
@@ -210,10 +211,19 @@ export class PdsApiService {
     console.log(
       this.baseurl + this.employeesUrl + CurrentUrls.employeelist + input
     );
-    return this.http.get(
-      this.baseurl + this.employeesUrl + CurrentUrls.employeelist + input,
-      this.httpOptions
-    );
+    return this.http
+      .get(
+        this.baseurl + this.employeesUrl + CurrentUrls.employeelist + input,
+        this.httpOptions
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let obj = this.handlehttpError(error);
+          return new Observable(function(x) {
+            x.next(obj);
+          });
+        })
+      );
   }
   //signout user
   signOut(userName: string, employeeId: number, usertypeId: number) {
@@ -225,10 +235,20 @@ export class PdsApiService {
       "&userTypeId=" +
       usertypeId;
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.logout + input);
-    return this.http.get(
-      this.baseurl + this.employeesUrl + CurrentUrls.logout + input,
-      this.httpOptions
-    );
+    return this.http
+      .get(
+        this.baseurl + this.employeesUrl + CurrentUrls.logout + input,
+        this.httpOptions
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let ob: any = {};
+          ob = this.handlehttpError(error);
+          return new Observable(function(x) {
+            x.next(ob);
+          });
+        })
+      );
   }
   //approve registered        user
   approveUser(
@@ -247,10 +267,19 @@ export class PdsApiService {
       "&empCode=" +
       empCode;
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.approve);
-    return this.http.put(
-      this.baseurl + this.employeesUrl + CurrentUrls.approve + input,
-      this.httpOptions
-    );
+    return this.http
+      .put(
+        this.baseurl + this.employeesUrl + CurrentUrls.approve + input,
+        this.httpOptions
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let obj = this.handlehttpError(error);
+          return new Observable(function(x) {
+            x.next(obj);
+          });
+        })
+      );
   }
   //check user name for employee registration
   checkUserName(userName: string): R.Observable<any> {
@@ -258,10 +287,19 @@ export class PdsApiService {
     console.log(
       this.baseurl + this.employeesUrl + CurrentUrls.checkUsername + input
     );
-    return this.http.get(
-      this.baseurl + this.employeesUrl + CurrentUrls.checkUsername + input,
-      this.httpOptions
-    );
+    return this.http
+      .get(
+        this.baseurl + this.employeesUrl + CurrentUrls.checkUsername + input,
+        this.httpOptions
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let obj = this.handlehttpError(error);
+          return new Observable(function(x) {
+            x.next(obj);
+          });
+        })
+      );
   }
   //register employee POST
 
@@ -271,10 +309,19 @@ export class PdsApiService {
       this.baseurl + this.employeesUrl + CurrentUrls.registeremployee
     );
     console.log(JSON.stringify(input));
-    return this.http.post<any>(
-      this.baseurl + this.employeesUrl + CurrentUrls.registeremployee,
-      JSON.stringify(input),
-      this.posthttpOptions
-    );
+    return this.http
+      .post<any>(
+        this.baseurl + this.employeesUrl + CurrentUrls.registeremployee,
+        JSON.stringify(input),
+        this.posthttpOptions
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let obj = this.handlehttpError(error);
+          return new Observable(function(x) {
+            x.next(obj);
+          });
+        })
+      );
   }
 }
