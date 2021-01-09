@@ -341,7 +341,6 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
         )
         .subscribe(
           (data: APIResult) => {
-
             let status: Boolean = data.status;
             let m: string = data.message;
             if (status) {

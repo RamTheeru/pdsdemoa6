@@ -99,10 +99,19 @@ export class PdsApiService {
   loginuser(username: string, password: string) {
     let input: string = "?username=" + username + "&password=" + password;
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.login + input);
-    return this.http.get(
-      this.baseurl + this.employeesUrl + CurrentUrls.login + input,
-      this.httpOptions
-    );
+    return this.http
+      .get(
+        this.baseurl + this.employeesUrl + CurrentUrls.login + input,
+        this.httpOptions
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let obj = this.handlehttpError(error);
+          return new Observable(function(x) {
+            x.next(obj);
+          });
+        })
+      );
   }
   //logins list of   employees
   getemployeelogins(input: any, tkn: string): R.Observable<any> {
