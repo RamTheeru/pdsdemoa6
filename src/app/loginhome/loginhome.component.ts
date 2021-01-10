@@ -32,7 +32,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
   userType: number = 0;
   isFle: Boolean = false;
   shoesidenav: Boolean = false;
-  shownotify: Boolean = fa;
+  shownotify: Boolean = false;
   actTab: Boolean = false;
   @ViewChild("sidenav") sidenav: MatSidenav;
   isExpanded = true;
@@ -109,6 +109,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.loginInfo = "HR HE Login";
     } else {
       //
+      this.shownotify = false;
     }
   }
   Onbtnclick() {
@@ -127,6 +128,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.act1SubMenu = false;
       this.act2SubMenu = false;
     }
+    this.shownotify = false;
   }
   onloghomeclk(tab = "") {
     if (tab == "fh") {
@@ -309,7 +311,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.router.onSameUrlNavigation = "reload";
       this.router.navigate(["/loginhome/generatesalaryslips"]);
     } else {
-      this.shownotify = true;
+      this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
       this.vServ.removeValue("fheverify");
