@@ -75,6 +75,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       var u = this.vServ.getValue("userProp");
       this.userInfo = JSON.parse(u);
     }
+    console.log(this.user);
     this.loginUsername = this.userInfo.user;
     this.userType = this.userInfo.userTypeId;
     //this.user =    "   fle"
