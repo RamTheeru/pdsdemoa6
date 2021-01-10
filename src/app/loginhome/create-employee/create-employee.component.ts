@@ -184,7 +184,7 @@ export class CreateEmployeeComponent
       }
     } else {
       this.isHe = true;
-      this.isEdle = f;
+      //this.isEdle = false;
     }
     this.route.params.subscribe((params: Params) => {
       this.empId = +params["id"];
@@ -238,7 +238,9 @@ export class CreateEmployeeComponent
         // month2: new FormControl(''),
         //  year2: new FormControl(),
         // ut: new FormControl(''),
-        desg: new FormControl("Su"),
+        // desg: new FormControl("Su"),
+        empc: new FormControl("Emp123"),
+
         station: new FormControl("teststation"),
         location: new FormControl("testloaction"),
         account: new FormControl("3242533"),
@@ -354,22 +356,23 @@ export class CreateEmployeeComponent
     //    }
 
     emp.Address1 = this.empForm2.value["ad1"];
-    emp.Adress2 = this.empForm2.value["ad2"];
+    emp.Address2 = this.empForm2.value["ad2"];
     emp.Place = this.empForm2.value["place"];
     emp.State = this.empForm2.value["state"];
     emp.PostalCode = this.empForm2.value["postal"];
     emp.AAdharNumber = this.empForm2.value["aad"];
-    emp.PAN = this.empForm2.value["pan"];
-    emp.Guard_FullName = this.empForm2.value["gName"];
+    emp.PANNumber = this.empForm2.value["pan"];
+    emp.Gaurd_FirstName = this.empForm2.value["gName"];
 
-    emp.Guard_Phone = this.empForm2.value["gphone"];
+    emp.Gaurd_PhoneNumber = this.empForm2.value["gphone"];
     emp.DOB = this.empForm2.value["birthdate"];
     emp.DOJ = this.empForm2.value["joindate"];
     // emp.Day2 = this.empForm2.value['day2'];
     // emp.Month2 = this.empForm2.value['month2'];
     // emp.Year2 = this.empForm2.value['year2'];
     emp.LoginType = this.empForm2.value["ut"];
-    emp.Designation = this.empForm2.value["desg"];
+    // emp.Designation = this.empForm2.value["desg"];empc
+    emp.EmpCode = this.empForm2.value["empc"];
     emp.StationCode = this.empForm2.value["station"];
     emp.LocationName = this.empForm2.value["location"];
     emp.DLLRStatus = this.empForm2.value["dlstat"];

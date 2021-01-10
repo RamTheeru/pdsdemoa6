@@ -17,7 +17,7 @@
 		<li class="nav-item" *ngIf="isEdle">
 			<a [ngClass]="hidTab3 ? 'nav-link' : 'nav-link active'" id="pills-profile-tab" data-toggle="pill"
 				href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"
-				(click)="showtab(3)">Address Details & Designation </a>
+				(click)="showtab(3)">Address Details & EmployeeCode </a>
 		</li>
 
 	</ul>
@@ -262,7 +262,11 @@
 
 						</div>
 						<div class="col">
-							<mat-form-field>
+              			<mat-form-field>
+								<input type="text" name="empc" formControlName="empc" matInput placeholder="Employee Code*" class="form-control">
+								<mat-error>This field is mandatory</mat-error>
+							</mat-form-field>
+							<!-- <mat-form-field>
 								<mat-select formControlName="desg" aria-placeholder="Designation">
 									<mat-option value="">Select Designation</mat-option>
 									<mat-option value="Ka">KeyAccountsManager</mat-option>
@@ -271,7 +275,7 @@
 									<mat-option value="Ast">Asst. Manager</mat-option>
 									<mat-option value="Su">Office Assistant</mat-option>
 								</mat-select>
-							</mat-form-field>
+							</mat-form-field> -->
 						</div>
 
 					</div>
