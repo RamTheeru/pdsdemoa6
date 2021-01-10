@@ -33,6 +33,7 @@ export class CreateEmployeeComponent
   @ViewChild("someInput") someInput: ElementRef;
   private subsc: r.Subscription;
   private subsc2: r.Subscription;
+  fvalid: boolean = true;
   edleVerify: string = "";
   isEdle: Boolean = true;
   isLe: Boolean = false;
