@@ -22,7 +22,7 @@ import { PdsApiService } from "../../pds-api.service";
 import { SweetService } from "../../sweet.service";
 import { ViewService } from "../../view.service";
 import * as r from "rxjs";
-
+const emp: Employee = new Employee();
 @Component({
   selector: "app-create-employee",
   templateUrl: "./create-employee.component.html",
@@ -32,9 +32,14 @@ export class CreateEmployeeComponent
   implements OnInit, AfterViewInit, OnDestroy {
   @Input("") userType: string;
   @ViewChild("someInput") someInput: ElementRef;
+
   stations: Station[];
   private subsc: r.Subscription;
   private subsc2: r.Subscription;
+  checkMarried: boolean = false;
+  checkUnMarried: boolean = false;
+  checkPermanent: boolean = false;
+  checkContract: boolean = false;
   fvalid: boolean = true;
   edleVerify: string = "";
   isEdle: Boolean = true;
@@ -317,7 +322,6 @@ export class CreateEmployeeComponent
     }
   }
   onSubmit() {
-    const emp: Employee = new Employee();
     const errorTitle: string = "INVALID INPUT!!!";
     //this.loaded = true;
     // const selectedmaritals = this.empForm.value.mars
@@ -395,7 +399,7 @@ export class CreateEmployeeComponent
     // emp.Day2 = this.empForm2.value['day2'];
     // emp.Month2 = this.empForm2.value['month2'];
     // emp.Year2 = this.empForm2.value['year2'];
-    emp.LoginType = this.empForm2.value["ut"];
+    //  emp.LoginType = this.empForm2.value["ut"];
     // emp.Designation = this.empForm2.value["desg"];empc
     emp.EmpCode = this.empForm2.value["empc"];
     emp.StationCode = this.empForm2.value["station"];
@@ -426,23 +430,6 @@ export class CreateEmployeeComponent
     ) {
       this.fvalid = false;
       this.showrequiredMessage("Employee Station", "", errorTitle);
-    } else if (
-      emp.LoginType == "" ||
-      emp.UserTypeId == 0 ||
-      emp.LoginType == null ||
-      emp.UserTypeId == null ||
-      emp.LoginType == undefined ||
-      emp.UserTypeId == undefined
-    ) {
-      this.fvalid = false;
-      this.showrequiredMessage("Employee Login Type", "", errorTitle);
-    } else if (
-      emp.UserName == "" ||
-      emp.UserName == null ||
-      emp.UserName == undefined
-    ) {
-      this.fvalid = false;
-      this.showrequiredMessage("Employee User Name", "", errorTitle);
     }
     // else {
     //   this.showrequiredMessage("Employee User Name", emp.UserName, errorTitle);
@@ -602,9 +589,70 @@ export class CreateEmployeeComponent
     } else if (field == "loc") {
       var f = "Employee Location Name";
       this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "veh") {
+      var f = "Employee Vehicle Number";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "dllr") {
+      var f = "Employee Drving or Learning Liscense";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "acc") {
+      var f = "Employee Bank Account Number";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "bank") {
+      var f = "Employee Bank Name";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "ifsc") {
+      var f = "Employee Bank IFSC Code";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "bb") {
+      var f = "Employee Bank  Branch Name";
+      this.showrequiredMessage(f, txt, errorTitle);
     } else if (field == "g") {
       var f = "Employee Location Name";
       this.fvalid = true;
+    }
+  }
+  checkValue(event: any, field) {
+    // console.log(event.checked);
+    // console.log(event.source.value);
+
+    const errorTitle: string = "INVALID INPUT!!!";
+    if (field == "m") {
+      let v = event.source.value;
+      if (!event.checked) {
+        var txt = "";
+        this.checkMarried = false;
+        this.checkUnMarried = false;
+        var f = "Employee Marital Status";
+        this.showrequiredMessage(f, "", errorTitle);
+      } else {
+        emp.Marital = v;
+        if (v == "married") {
+          this.checkMarried = true;
+          emp.MaritalStatus = true;
+        } else if (v == "unmarried") {
+          this.checkUnMarried = true;
+          emp.MaritalStatus = false;
+        }
+      }
+    } else if (field == "e") {
+      let v = event.source.value;
+      if (!event.checked) {
+        var txt = "";
+        this.checkPermanent = false;
+        this.checkContract = false;
+        var f = "Employee Type Status";
+        this.showrequiredMessage(f, "", errorTitle);
+      } else {
+        emp.Employeetype = v;
+        if (v == "permanent") {
+          this.checkPermanent = true;
+          emp.IsPermanent = true;
+        } else if (v == "contract") {
+          this.checkContract = true;
+          emp.IsPermanent = false;
+        }
+      }
     }
   }
   showrequiredMessage(field, txt, title) {

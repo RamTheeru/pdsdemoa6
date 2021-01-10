@@ -32,7 +32,7 @@
 					<div class="row">
 						<div class="col">
 							<mat-form-field>
-								<input type="text" formControlName="firstName" class="form-control" matInput placeholder="FirstName*">
+								<input type="text" formControlName="firstName" (focusout)="focusOutFunction('fname',$event)" class="form-control" matInput placeholder="FirstName*">
 								<mat-error>This field is mandatory</mat-error>
 							</mat-form-field>
 						</div>
@@ -70,7 +70,7 @@
 						</div>
 						<div class="col">
 							<mat-form-field>
-								<input type="text" formControlName="age" class="form-control" matInput placeholder="Age*">
+								<input type="text" formControlName="age" (focusout)="focusOutFunction('age',$event)" class="form-control" matInput placeholder="Age*">
 								<mat-error>This field is mandatory</mat-error>
 							</mat-form-field>
 						</div>
@@ -100,20 +100,20 @@
 					<div class="row">
 						<div class="col">
 							<mat-form-field>
-								<input type="text" name="aad" formControlName="aad" matInput placeholder="Aadhar number" class="form-control">
+								<input type="text" name="aad" formControlName="aad" (focusout)="focusOutFunction('aad',$event)" matInput placeholder="Aadhar number" class="form-control">
 								<mat-error>This field is mandatory</mat-error>
 							</mat-form-field>
 						</div>
 						<div class="col">
 							<mat-form-field>
-								<input type="text" name="pan" formControlName="pan" matInput placeholder="PAN number" class="form-control">
+								<input type="text" name="pan" formControlName="pan" (focusout)="focusOutFunction('pan',$event)"  matInput placeholder="PAN number" class="form-control">
 								<mat-error>This field is mandatory</mat-error>
 							</mat-form-field>
 						</div>
 						<div class="col">
 							<p><b>Employee Type</b></p>
 							<div class="add-bottom-padding" *ngFor="let c of empTypes; let i = index;">
-								<mat-checkbox (change)="checkValue($event,'m')" name="{{c}}" value="{{c}}"
+								<mat-checkbox (change)="checkValue($event,'e')" name="{{c}}" value="{{c}}"
 									[formControlName]="c">{{c}}</mat-checkbox>
 							</div>
 
@@ -136,14 +136,14 @@
 						<div class="col">
 
 							<mat-form-field>
-								<input type="text" name="pName" formControlName="gName" matInput placeholder=" Parent/Guardian Full Name" class="form-control">
+								<input type="text" name="pName" (focusout)="focusOutFunction('g',$event)" formControlName="gName" matInput placeholder=" Parent/Guardian Full Name" class="form-control">
 								<mat-error>This field is mandatory</mat-error>
 							</mat-form-field>
 						</div>
 						<div class="col">
 							<mat-form-field>
 								<mat-label>Alternate Contact:+91-</mat-label>
-								<input type="text" name="gphone"  formControlName="gphone" matInput placeholder="Phone" class="form-control">
+								<input type="text" name="gphone" (focusout)="focusOutFunction('g',$event)"  formControlName="gphone" matInput placeholder="Phone" class="form-control">
                             </mat-form-field>
 						</div>
 					</div>
@@ -157,7 +157,7 @@
 						</div>
 						<div class="col">
 							<mat-form-field>
-								<input type="text" name="location" formControlName="location" matInput placeholder="Location Name" class="form-control">
+								<input type="text" name="location" formControlName="location" (focusout)="focusOutFunction('loc',$event)" matInput placeholder="Location Name" class="form-control">
 								<mat-error>This field is mandatory</mat-error>
 							</mat-form-field>
 						</div>
@@ -177,13 +177,13 @@
 					<div class="row">
 						<div class="col">
 							<mat-form-field>
-								<input type="text" name="veh" formControlName="veh" matInput placeholder="Vehicle Number" class="form-control">
+								<input type="text" name="veh" formControlName="veh" (focusout)="focusOutFunction('veh',$event)" matInput placeholder="Vehicle Number" class="form-control">
 								<mat-error>This field is mandatory</mat-error>
 							</mat-form-field>
 						</div>
 						<div class="col">
 							<mat-form-field>
-								<input type="text" name="dllr" formControlName="dllr" matInput placeholder="DL/LLR Number" class="form-control">
+								<input type="text" name="dllr" formControlName="dllr" (focusout)="focusOutFunction('dllr',$event)" matInput placeholder="DL/LLR Number" class="form-control">
 								<mat-error>This field is mandatory</mat-error>
 							</mat-form-field>
 						</div>
@@ -191,7 +191,7 @@
 						<div class="col">
 
 							<mat-form-field>
-								<input type="text" name="account" formControlName="account" matInput placeholder="Account Number" class="form-control">
+								<input type="text" name="account" formControlName="account" (focusout)="focusOutFunction('acc',$event)" matInput placeholder="Account Number" class="form-control">
 								<mat-error>This field is mandatory</mat-error>
 							</mat-form-field>
 
@@ -200,14 +200,14 @@
 					<div class="row">
 						<div class="col">
 							<mat-form-field>
-								<input type="text" name="location" formControlName="bank" matInput placeholder="Bank Name" class="form-control">
+								<input type="text" name="bank" formControlName="bank" (focusout)="focusOutFunction('bank',$event)" matInput placeholder="Bank Name" class="form-control">
 								<mat-error>This field is mandatory</mat-error>
 							</mat-form-field>
 
 						</div>
 						<div class="col">
 							<mat-form-field>
-								<input type="text" name="location" formControlName="ifsc" matInput placeholder="IFSC CODE" class="form-control">
+								<input type="text" name="ifsc" formControlName="ifsc" (focusout)="focusOutFunction('ifsc',$event)" matInput placeholder="IFSC CODE" class="form-control">
 								<mat-error>This field is mandatory</mat-error>
 							</mat-form-field>
 						</div>
@@ -216,7 +216,7 @@
 
 
 							<mat-form-field>
-								<input type="text" name="location" formControlName="bbranch" matInput placeholder="Branch Name" class="form-control">
+								<input type="text" name="bb" formControlName="bbranch" (focusout)="focusOutFunction('bb',$event)" matInput placeholder="Branch Name" class="form-control">
 								<mat-error>This field is mandatory</mat-error>
 							</mat-form-field>
 
