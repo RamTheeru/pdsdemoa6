@@ -149,10 +149,11 @@
 					</div>
 					<div class="row">
 						<div class="col">
-							<mat-form-field>
-								<input type="text" name="StationCode" formControlName="station" matInput placeholder="Station Code" class="form-control">
-								<mat-error>This field is mandatory</mat-error>
-							</mat-form-field>
+							<mat-select formControlName="station" aria-placeholder="Station">
+								<mat-option value="">Select Station</mat-option>
+								<mat-option *ngFor="let s of stations" [value]="s">
+									{{s.stationName}}
+								</mat-option>
 						</div>
 						<div class="col">
 							<mat-form-field>

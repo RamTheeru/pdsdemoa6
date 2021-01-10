@@ -17,6 +17,7 @@ import {
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Employee } from "../../models/employee";
 import { APIResult } from "../../models/apiresult";
+import { Station } from "../../models/station";
 import { PdsApiService } from "../../pds-api.service";
 import { SweetService } from "../../sweet.service";
 import { ViewService } from "../../view.service";
@@ -31,6 +32,7 @@ export class CreateEmployeeComponent
   implements OnInit, AfterViewInit, OnDestroy {
   @Input("") userType: string;
   @ViewChild("someInput") someInput: ElementRef;
+  stations: Station[];
   private subsc: r.Subscription;
   private subsc2: r.Subscription;
   fvalid: boolean = true;
@@ -160,6 +162,22 @@ export class CreateEmployeeComponent
   }
 
   ngOnInit() {
+    this.api.getConstants().subscribe(
+      (data: APIResult) => {
+        //console.log(data);
+        let status: Boolean = data.status;
+        let m: string = data.message;
+        if (status) {
+          this.stations = data.stations;
+        } else {
+          this.swServ.showErrorMessage("Error!!", m);
+        }
+      },
+      err => {
+        //console.log(err.message);
+        this.swServ.showErrorMessage("Network Error!!!", err.message);
+      }
+    );
     this.hidTab1 = false;
     this.hidTab2 = true;
     this.hidTab3 = true;
@@ -326,6 +344,7 @@ export class CreateEmployeeComponent
     emp.Gender = this.empForm2.value["gender"];
     let db = this.convert(this.empForm2.value["birthdate"]);
     let dj = this.convert(this.empForm2.value["joindate"]);
+    let st = this.empForm2.value["station"];
     //  if(selectedmaritals.length>0)
     //  {
     //   emp.Marital = selectedmaritals[0];
@@ -369,7 +388,10 @@ export class CreateEmployeeComponent
 
     emp.Gaurd_PhoneNumber = this.empForm2.value["gphone"];
     emp.DOB = db;
-    emp.DOJ = dt; //this.empForm2.value["birthdate"]; //this.empForm2.value["joindate"];
+    emp.DOJ = dj;
+    emp.StationId = st.stationId;
+    emp.StationCode = st.stationCode;
+    //this.empForm2.value["birthdate"]; //this.empForm2.value["joindate"];
     // emp.Day2 = this.empForm2.value['day2'];
     // emp.Month2 = this.empForm2.value['month2'];
     // emp.Year2 = this.empForm2.value['year2'];
@@ -386,6 +408,149 @@ export class CreateEmployeeComponent
     emp.IFSCCode = this.empForm2.value["ifsc"];
     emp.IFSCCode = this.empForm2.value["bbranch"];
     console.log("on submit.....");
+
+    if (
+      emp.LocationName == "" ||
+      emp.LocationName == null ||
+      emp.LocationName == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Location Name", "", errorTitle);
+    } else if (
+      emp.StationId == 0 ||
+      emp.StationCode == "" ||
+      emp.StationId == null ||
+      emp.StationCode == "" ||
+      emp.StationId == undefined ||
+      emp.StationCode == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Station", "", errorTitle);
+    } else if (
+      emp.LoginType == "" ||
+      emp.UserTypeId == 0 ||
+      emp.LoginType == null ||
+      emp.UserTypeId == null ||
+      emp.LoginType == undefined ||
+      emp.UserTypeId == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Login Type", "", errorTitle);
+    } else if (
+      emp.UserName == "" ||
+      emp.UserName == null ||
+      emp.UserName == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee User Name", "", errorTitle);
+    }
+    // else {
+    //   this.showrequiredMessage("Employee User Name", emp.UserName, errorTitle);
+    // }
+    else if (emp.DOJ == "" || emp.DOJ == null || emp.DOJ == undefined) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Date Of Join", "", errorTitle);
+    } else if (
+      emp.Employeetype == "" ||
+      emp.Employeetype == null ||
+      emp.Employeetype == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Type Status", "", errorTitle);
+    } else if (
+      emp.Marital == "" ||
+      emp.Marital == null ||
+      emp.Marital == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Marital Status", "", errorTitle);
+    } else if (this.checkContract == true && this.checkPermanent == true) {
+      this.fvalid = false;
+      this.showrequiredMessage(
+        "Employee Type Status",
+        "Please Select Proper option",
+        errorTitle
+      );
+    } else if (this.checkMarried == true && this.checkUnMarried == true) {
+      this.fvalid = false;
+      this.showrequiredMessage(
+        "Employee Marital Status",
+        "Please Select Proper option",
+        errorTitle
+      );
+    } else if (
+      emp.PANNumber == "" ||
+      emp.PANNumber == null ||
+      emp.PANNumber == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee PAN", "", errorTitle);
+    } else if (
+      emp.AAdharNumber == "" ||
+      emp.AAdharNumber == null ||
+      emp.AAdharNumber == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee AAdhar", "", errorTitle);
+    } else if (
+      emp.PostalCode == "" ||
+      emp.PostalCode == null ||
+      emp.PostalCode == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee PostalCode", "", errorTitle);
+    } else if (emp.State == "" || emp.State == null || emp.State == undefined) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee State", "", errorTitle);
+    } else if (emp.Place == "" || emp.Place == null || emp.Place == undefined) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Place", "", errorTitle);
+    } else if (
+      emp.Address1 == "" ||
+      emp.Address2 == "" ||
+      emp.Address1 == null ||
+      emp.Address2 == null ||
+      emp.Address1 == undefined ||
+      emp.Address2 == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Address", "", errorTitle);
+    } else if (emp.DOB == "" || emp.DOB == null || emp.DOB == undefined) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Date Of Birth", "", errorTitle);
+    } else if (
+      emp.Gender == "" ||
+      emp.Gender == null ||
+      emp.Gender == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Gender", "", errorTitle);
+    } else if (
+      emp.FirstName == "" ||
+      emp.FirstName == null ||
+      emp.FirstName == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee First Name", "", errorTitle);
+    } else if (emp.Phone == "" || emp.Phone == null || emp.Phone == undefined) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Contact Number", "", errorTitle);
+    } else if (
+      emp.EmpAge == "" ||
+      emp.EmpAge == null ||
+      emp.EmpAge == undefined
+    ) {
+      //
+      this.fvalid = false;
+      this.showrequiredMessage("Employee AGE", "", errorTitle);
+    } else if (this.fvalid) {
+      //this.submittoAPI(emp);
+    } else {
+      this.swServ.showErrorMessage(
+        "Invalid Form!!",
+        "Please Check Provided Details."
+      );
+    }
 
     console.log(emp);
 
@@ -407,23 +572,83 @@ export class CreateEmployeeComponent
     if (field == "fname") {
       var f = "First Name";
       this.showrequiredMessage(f, txt, errorTitle);
-    }
-    if (field == "phone") {
+    } else if (field == "phone") {
       var f = "Employee Contact Number";
       this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "age") {
+      var f = "Employee AGE";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "ad1") {
+      var f = "Employee Address";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "place") {
+      var f = "Employee Place";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "state") {
+      var f = "Employee State";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "post") {
+      var f = "Employee PostalCode";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "aad") {
+      var f = "Employee AAdhar Code";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "pan") {
+      var f = "Employee PAN Number";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "usr") {
+      var f = "Employee User Name";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "loc") {
+      var f = "Employee Location Name";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "g") {
+      var f = "Employee Location Name";
+      this.fvalid = true;
     }
   }
   showrequiredMessage(field, txt, title) {
     var test = false;
     if (txt == "" || txt == null) {
       var msg = field + " " + " field required!!";
-      // this._swServ.showErrorMessage(title,msg);
-    } else if (field == "Employee Contact Number") {
+      this.fvalid = false;
+      this.swServ.showErrorMessage(title, msg);
+    } else if (field == "Employee Contact Number" || field == "Employee AGE") {
       var msg = field + " " + " contains Only Numbers!!";
       test = this.ValidateNumbers(txt);
       if (!test) {
-        //  this._swServ.showErrorMessage(title,msg);
+        this.fvalid = false;
+        this.swServ.showErrorMessage(title, msg);
+      } else {
+        this.fvalid = true;
       }
+    } else if (
+      field == "Employee Type Status" ||
+      field == "Employee Marital Status"
+    ) {
+      this.fvalid = false;
+      this.swServ.showErrorMessage(title, txt);
+    } else if (field == "Employee User Name") {
+      this.api.checkUserName(txt).subscribe(
+        (data: APIResult) => {
+          //   console.log(data);
+          let status: Boolean = data.status;
+          let m: string = data.message;
+          if (status) {
+            this.fvalid = true;
+            this.swServ.showSuccessMessage("Success!!!", m);
+          } else {
+            this.fvalid = false;
+            this.swServ.showErrorMessage("Error!!", m);
+          }
+        },
+        err => {
+          this.fvalid = false;
+          this.swServ.showErrorMessage("Network Error!!!", err.message);
+        }
+      );
+    } else {
+      this.fvalid = true;
     }
   }
 
