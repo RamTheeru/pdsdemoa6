@@ -184,6 +184,7 @@ export class CreateEmployeeComponent
       }
     } else {
       this.isHe = true;
+      this.isEdle = f;
     }
     this.route.params.subscribe((params: Params) => {
       this.empId = +params["id"];
