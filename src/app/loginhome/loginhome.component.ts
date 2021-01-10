@@ -76,33 +76,34 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.userInfo = JSON.parse(u);
     }
     this.loginUsername = this.userInfo.user;
+    this.userType = this.userInfo.userTypeId;
     //this.user =    "   fle"
     if (this.user === "admin") {
-      this.userType = 1;
+      // this.userType = 1;
       this.shownotify = false;
       this.loginInfo = "Admin Login";
     } else if (this.user === "financele") {
-      this.userType = 2;
+      //  this.userType = 2;
       this.shownotify = false;
       this.loginInfo = "Finance LE Login";
     } else if (this.user === "financehe") {
-      this.userType = 3;
+      //  this.userType = 3;
       this.shownotify = false;
       this.loginInfo = "Finance HE Login";
     } else if (this.user === "executivele") {
-      this.userType = 4;
+      // this.userType = 4;
       this.shownotify = false;
       this.loginInfo = "Executive LE Login";
     } else if (this.user === "executivehe") {
-      this.userType = 5;
+      // this.userType = 5;
       this.shownotify = false;
       this.loginInfo = "Executive HE Login";
     } else if (this.user === "hrle") {
-      this.userType = 6;
+      //  this.userType = 6;
       this.shownotify = false;
       this.loginInfo = "HR LE Login";
     } else if (this.user === "hrhe") {
-      this.userType = 7;
+      // this.userType = 7;
       this.shownotify = false;
       this.loginInfo = "HR HE Login";
     } else {
