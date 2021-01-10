@@ -324,6 +324,8 @@ export class CreateEmployeeComponent
     emp.Age = this.empForm2.value["age"];
     emp.BloodGroup = this.empForm2.value["bg"];
     emp.Gender = this.empForm2.value["gender"];
+    let db = this.convert(this.empForm2.value["birthdate"]);
+    let dj = this.convert(this.empForm2.value["joindate"]);
     //  if(selectedmaritals.length>0)
     //  {
     //   emp.Marital = selectedmaritals[0];
@@ -366,8 +368,8 @@ export class CreateEmployeeComponent
     emp.Gaurd_FirstName = this.empForm2.value["gName"];
 
     emp.Gaurd_PhoneNumber = this.empForm2.value["gphone"];
-    emp.DOB = this.empForm2.value["birthdate"];
-    emp.DOJ = this.empForm2.value["joindate"];
+    emp.DOB = db;
+    emp.DOJ = dt; //this.empForm2.value["birthdate"]; //this.empForm2.value["joindate"];
     // emp.Day2 = this.empForm2.value['day2'];
     // emp.Month2 = this.empForm2.value['month2'];
     // emp.Year2 = this.empForm2.value['year2'];
@@ -391,6 +393,12 @@ export class CreateEmployeeComponent
     //     this.loaded=false;
 
     //  },2000);
+  }
+  convert(str) {
+    var date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return [date.getFullYear(), mnth, day].join("-");
   }
 
   focusOutFunction(field, event: any): void {
