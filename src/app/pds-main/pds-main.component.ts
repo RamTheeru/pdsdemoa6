@@ -84,7 +84,7 @@ export class PdsMainComponent implements OnInit {
                   let userTypeId = this.user.userTypeId;
                   if (userTypeId == 1) {
                     userInfo = "admin";
-                  } 
+                  }
                   // else if (userTypeId == 2) {
                   //   userInfo = "financele";
                   // } else if (userTypeId == 3) {

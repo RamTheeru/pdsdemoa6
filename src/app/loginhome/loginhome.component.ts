@@ -32,7 +32,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
   userType: number = 0;
   isFle: Boolean = false;
   shoesidenav: Boolean = false;
-  shownotify: Boolean = true;
+  shownotify: Boolean = fa;
   actTab: Boolean = false;
   @ViewChild("sidenav") sidenav: MatSidenav;
   isExpanded = true;
