@@ -349,7 +349,7 @@ export class CreateEmployeeComponent
     //  emp.Month = this.empForm2.value['month'];
     //  emp.Year = this.empForm2.value['year'];
 
-    emp.e = this.empForm2.value["age"];
+    emp.EmpAge = this.empForm2.value["age"];
     emp.BloodGroup = this.empForm2.value["bg"];
     emp.Gender = this.empForm2.value["gender"];
     let db = this.convert(this.empForm2.value["birthdate"]);
@@ -609,7 +609,7 @@ export class CreateEmployeeComponent
       );
     }
 
-    console.log(emp);
+    console.log(JSON.str(emp));
 
     //  setTimeout(function(){
     //     this.loaded=false;
