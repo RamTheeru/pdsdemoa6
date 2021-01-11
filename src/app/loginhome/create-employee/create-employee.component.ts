@@ -473,6 +473,59 @@ export class CreateEmployeeComponent
       this.fvalid = false;
       this.showrequiredMessage("Employee PAN", "", errorTitle);
     } else if (
+      emp.BankAccountNumber == "" ||
+      emp.BankAccountNumber == null ||
+      emp.BankAccountNumber == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Account Number", "", errorTitle);
+    } else if (
+      emp.BankName == "" ||
+      emp.BankName == null ||
+      emp.BankName == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Bank Name", "", errorTitle);
+    } else if (
+      emp.IFSCCode == "" ||
+      emp.IFSCCode == null ||
+      emp.IFSCCode == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee IFSC Code", "", errorTitle);
+    } else if (
+      emp.BranchName == "" ||
+      emp.BranchName == null ||
+      emp.BranchName == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Branch Name", "", errorTitle);
+    } else if (
+      emp.DLLRStatus == "" ||
+      emp.DLLRStatus == null ||
+      emp.DLLRStatus == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee DL/LLR Status", "", errorTitle);
+    } else if (
+      emp.DLLRNumber == "" ||
+      emp.DLLRNumber == null ||
+      emp.DLLRNumber == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage(
+        "Employee Driving or Lisence Number",
+        "",
+        errorTitle
+      );
+    } else if (
+      emp.VehicleNumber == "" ||
+      emp.VehicleNumber == null ||
+      emp.VehicleNumber == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Vehicle Number", "", errorTitle);
+    } else if (
       emp.AAdharNumber == "" ||
       emp.AAdharNumber == null ||
       emp.AAdharNumber == undefined
