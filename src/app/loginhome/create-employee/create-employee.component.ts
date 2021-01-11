@@ -414,6 +414,7 @@ export class CreateEmployeeComponent
     emp.VehicleNumber = this.empForm2.value["veh"];
     emp.DLLRNumber = this.empForm2.value["dllr"];
     emp.BankAccountNumber = this.empForm2.value["account"];
+     emp.BranchName = this.empForm2.value["bb"];
     emp.BankName = this.empForm2.value["bank"];
     emp.IFSCCode = this.empForm2.value["ifsc"];
     emp.IFSCCode = this.empForm2.value["bbranch"];
