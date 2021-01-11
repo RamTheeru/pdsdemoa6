@@ -149,14 +149,14 @@
 					</div>
 					<div class="row">
 						<div class="col">
-              	<mat-form-field>
-							<mat-select formControlName="station" aria-placeholder="Station">
-								<mat-option value="">Select Station</mat-option>
-								<mat-option *ngFor="let s of stations" [value]="s">
-									{{s.stationName}}
-								</mat-option>
-							</mat-select>
-              	</mat-form-field>
+							<mat-form-field>
+								<mat-select formControlName="station" aria-placeholder="Station">
+									<mat-option value="">Select Station</mat-option>
+									<mat-option *ngFor="let s of stations" [value]="s">
+										{{s.stationName}}
+									</mat-option>
+								</mat-select>
+							</mat-form-field>
 						</div>
 						<div class="col">
 							<mat-form-field>
@@ -295,7 +295,7 @@
 	</div>
 
 	<div class="row" id="btnset">
-		<button  type="button" mat-raised-button color="warn" style="margin-right:10px;" >Cancel</button>
+		<button  type="submit" (click)="onCancel()" mat-raised-button color="warn" style="margin-right:10px;" >Cancel</button>
 		<button  type="submit" [disabled]="!fvalid" mat-raised-button color="primary" >Submit</button>
 	</div>
 

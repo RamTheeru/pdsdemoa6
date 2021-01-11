@@ -78,6 +78,10 @@ export class CreateEmployeeComponent
       this.formText = "Create Employee Form:";
     }
   }
+  onCancel() {
+    //
+    this.initForm();
+  }
   ngAfterViewInit() {
     console.log("ElementRef");
     this.childClassess = this.someInput.nativeElement.children;
