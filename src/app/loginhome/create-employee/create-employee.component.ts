@@ -349,7 +349,7 @@ export class CreateEmployeeComponent
     //  emp.Month = this.empForm2.value['month'];
     //  emp.Year = this.empForm2.value['year'];
 
-    emp.Age = this.empForm2.value["age"];
+    emp.e = this.empForm2.value["age"];
     emp.BloodGroup = this.empForm2.value["bg"];
     emp.Gender = this.empForm2.value["gender"];
     let db = this.convert(this.empForm2.value["birthdate"]);
@@ -414,7 +414,6 @@ export class CreateEmployeeComponent
     emp.VehicleNumber = this.empForm2.value["veh"];
     emp.DLLRNumber = this.empForm2.value["dllr"];
     emp.BankAccountNumber = this.empForm2.value["account"];
-
     emp.BankName = this.empForm2.value["bank"];
     emp.IFSCCode = this.empForm2.value["ifsc"];
     emp.BranchName = this.empForm2.value["bbranch"];
