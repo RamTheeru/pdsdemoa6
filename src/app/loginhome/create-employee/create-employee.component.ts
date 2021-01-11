@@ -40,6 +40,7 @@ export class CreateEmployeeComponent
   checkUnMarried: boolean = false;
   checkPermanent: boolean = false;
   checkContract: boolean = false;
+  usrToken: string = "";
   fvalid: boolean = true;
   edleVerify: string = "";
   isEdle: Boolean = true;
@@ -584,7 +585,18 @@ export class CreateEmployeeComponent
       this.fvalid = false;
       this.showrequiredMessage("Employee AGE", "", errorTitle);
     } else if (this.fvalid) {
-      //this.submittoAPI(emp);
+      if (this.usrToken == "") {
+        this.usrToken = this.vServ.getToken();
+      }
+      if (
+        this.usrToken == "" ||
+        this.usrToken == undefined ||
+        this.usrToken == null
+      ) {
+        this.handleUnauthorizedrequest();
+      } else {
+        this.submittoAPI(emp,this.usrToken);
+      }
     } else {
       this.swServ.showErrorMessage(
         "Invalid Form!!",
@@ -598,6 +610,30 @@ export class CreateEmployeeComponent
     //     this.loaded=false;
 
     //  },2000);
+  }
+  submittoAPI(employ, tkn: string): void {
+    this.api.createemployee(employ, tkn).subscribe(
+      (data: APIResult) => {
+        //console.log(data);
+        let status: Boolean = data.status;
+        let m: string = data.message;
+        if (status) {
+          this.swServ.showSuccessMessage("Success!!!", m);
+        } else {
+          this.swServ.showErrorMessage("Error!!", m);
+        }
+      },
+      err => {
+        //console.log(err);
+        this.swServ.showErrorMessage("Network Error!!!", err.message);
+      }
+    );
+  }
+  handleUnauthorizedrequest() {
+    this.swServ.showErrorMessage(
+      "Invalid Request!!!",
+      "Unable to process request with invalid token, Please login again!!!"
+    );
   }
   convert(str) {
     var date = new Date(str),

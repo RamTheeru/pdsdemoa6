@@ -25,6 +25,7 @@ export const CurrentUrls = {
   employeelist: "employees",
   registeremployee: "RegisterEmployee",
   registeremployees: "RegisteredUsers",
+  createemployee: "CreateEmployee",
   login: "Login",
   employeelogins: "Logins",
   checkUsername: "CheckUserName",
@@ -323,6 +324,33 @@ export class PdsApiService {
         this.baseurl + this.employeesUrl + CurrentUrls.registeremployee,
         JSON.stringify(input),
         this.posthttpOptions
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let obj = this.handlehttpError(error);
+          return new Observable(function(x) {
+            x.next(obj);
+          });
+        })
+      );
+  }
+
+  //Create employee POST
+
+  createemployee(input, tkn): R.Observable<any> {
+    const phttpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        Authorization: "Bearer " + tkn
+      })
+    };
+    console.log(this.baseurl + this.employeesUrl + CurrentUrls.createemployee);
+    return this.http
+      .post<any>(
+        this.baseurl + this.employeesUrl + CurrentUrls.createemployee,
+        JSON.stringify(input),
+        phttpOptions
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
