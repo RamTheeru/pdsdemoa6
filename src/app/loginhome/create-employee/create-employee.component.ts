@@ -305,6 +305,7 @@ export class CreateEmployeeComponent
         //typs : new FormArray([]),
         gName: new FormControl(),
         gphone: new FormControl(),
+        empc: new FormControl(),
         //    day2: new FormControl(),
         // month2: new FormControl(''),
         //  year2: new FormControl(),
@@ -595,7 +596,7 @@ export class CreateEmployeeComponent
       ) {
         this.handleUnauthorizedrequest();
       } else {
-        this.submittoAPI(emp,this.usrToken);
+        this.submittoAPI(emp, this.usrToken);
       }
     } else {
       this.swServ.showErrorMessage(
