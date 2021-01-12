@@ -609,7 +609,7 @@ export class CreateEmployeeComponent
       );
     }
 
-    console.log(JSON.str(emp));
+    console.log(JSON.stringify(emp));
 
     //  setTimeout(function(){
     //     this.loaded=false;
