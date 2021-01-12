@@ -194,12 +194,16 @@ export class PdsApiService {
         let m: string = "";
         if ("title" in obj) {
           m = obj.title;
-        } else if ("errors" in obj) {
-          m = m + "Reason : " + JSON.stringify(this.printObject(obj.errors));
+          apierrResult.status = false;
+          apierrResult.message = m;
+          obj = apierrResult;
         }
-        apierrResult.status = false;
-        apierrResult.message = m;
-        obj = apierrResult;
+        if ("errors" in obj) {
+          m = m + "Reason : " + JSON.stringify(this.printObject(obj.errors));
+          apierrResult.status = false;
+          apierrResult.message = m;
+          obj = apierrResult;
+        }
       }
 
       // ...optionally return a default fallback value so app can continue (pick one)
