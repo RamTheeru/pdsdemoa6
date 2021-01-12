@@ -184,12 +184,22 @@ export class PdsApiService {
           "error"
         );
       } else {
+        let apierrResult: APIResult = new APIResult();
         // The backend returned an unsuccessful response code.
         // The response body may contain clues as to what went wrong,
         console.error(
           `Backend returned code ${err.status}, body was: ${err.error}`
         );
         obj = err.error;
+        let m: string = "";
+        if ("title" in obj) {
+          m = obj.title;
+        } else if ("errors" in obj) {
+          m = m + "Reason : " + JSON.stringify(this.printObject(obj.errors));
+        }
+        apierrResult.status = false;
+        apierrResult.message = m;
+        obj = apierrResult;
       }
 
       // ...optionally return a default fallback value so app can continue (pick one)
@@ -200,7 +210,11 @@ export class PdsApiService {
     }
     return obj;
   }
-
+  printObject(obj: any) {
+    const keys = Object.keys(obj);
+    const values = keys.map(key => `${key}: ${Reflect.get(obj, key)}`);
+    return values;
+  }
   //unauthorized error display
   private handleAuthError(err: HttpErrorResponse) {
     //handle your auth error or rethrow
@@ -355,6 +369,7 @@ export class PdsApiService {
       .pipe(
         catchError((error: HttpErrorResponse) => {
           let obj = this.handlehttpError(error);
+          console.log(obj);
           return new Observable(function(x) {
             x.next(obj);
           });

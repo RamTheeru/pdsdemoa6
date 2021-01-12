@@ -408,7 +408,7 @@ export class CreateEmployeeComponent
     //  emp.LoginType = this.empForm2.value["ut"];
     // emp.Designation = this.empForm2.value["desg"];empc
     emp.EmpCode = this.empForm2.value["empc"];
-    // emp.StationCode = this.empForm2.value["station"];
+    emp.StationCode = this.empForm2.value["station"];
     emp.LocationName = this.empForm2.value["location"];
     emp.DLLRStatus = this.empForm2.value["dlstat"];
     emp.VehicleNumber = this.empForm2.value["veh"];
