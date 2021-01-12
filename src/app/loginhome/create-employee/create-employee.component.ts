@@ -395,7 +395,7 @@ export class CreateEmployeeComponent
     emp.AAdharNumber = this.empForm2.value["aad"];
     emp.PANNumber = this.empForm2.value["pan"];
     emp.Gaurd_FirstName = this.empForm2.value["gName"];
-
+    emp.UserName = emp.FirstName;
     emp.Gaurd_PhoneNumber = this.empForm2.value["gphone"];
     emp.DOB = db;
     emp.DOJ = dj;
