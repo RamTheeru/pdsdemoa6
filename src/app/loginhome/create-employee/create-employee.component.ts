@@ -624,6 +624,7 @@ export class CreateEmployeeComponent
         let m: string = data.message;
         if (status) {
           this.swServ.showSuccessMessage("Success!!!", m);
+          this.initForm();
         } else {
           this.swServ.showErrorMessage("Error!!", m);
         }
