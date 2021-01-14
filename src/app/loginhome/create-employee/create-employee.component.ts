@@ -19,6 +19,7 @@ import { Employee } from "../../models/employee";
 import { APIResult } from "../../models/apiresult";
 import { Station } from "../../models/station";
 import { PdsApiService } from "../../pds-api.service";
+import { Profession } from "../../models/profession";
 import { SweetService } from "../../sweet.service";
 import { ViewService } from "../../view.service";
 import * as r from "rxjs";
@@ -31,8 +32,9 @@ const emp: Employee = new Employee();
 export class CreateEmployeeComponent
   implements OnInit, AfterViewInit, OnDestroy {
   @Input("") userType: string;
+  professions: Profession[];
   @ViewChild("someInput") someInput: ElementRef;
-
+  url: string = "";
   stations: Station[];
   private subsc: r.Subscription;
   private subsc2: r.Subscription;
@@ -172,6 +174,14 @@ export class CreateEmployeeComponent
   }
 
   ngOnInit() {
+    this.url = this.route["_routerState"].snapshot.url;
+
+    var index = this.url.indexOf("createdelivery");
+    if (index !== -1) {
+      //  this.isreguser = false;
+    } else {
+      //this.isreguser = true;
+    }
     this.api.getConstants().subscribe(
       (data: APIResult) => {
         //console.log(data);
@@ -179,6 +189,7 @@ export class CreateEmployeeComponent
         let m: string = data.message;
         if (status) {
           this.stations = data.stations;
+          this.professions = data.professions;
         } else {
           this.swServ.showErrorMessage("Error!!", m);
         }
@@ -269,7 +280,7 @@ export class CreateEmployeeComponent
         // ut: new FormControl(''),
         // desg: new FormControl("Su"),
         empc: new FormControl("Emp123"),
-
+        prof: new FormControl("3"),
         station: new FormControl(""),
         location: new FormControl("testloaction"),
         account: new FormControl("3242533"),
@@ -292,6 +303,7 @@ export class CreateEmployeeComponent
         //    year: new FormControl(),
         age: new FormControl(),
         bg: new FormControl(),
+        prof: new FormControl(""),
         gender: new FormControl(""),
         married: new FormControl(),
         unmarried: new FormControl(),
@@ -355,6 +367,7 @@ export class CreateEmployeeComponent
     let db = this.convert(this.empForm2.value["birthdate"]);
     let dj = this.convert(this.empForm2.value["joindate"]);
     let st = this.empForm2.value["station"];
+    let prf = this.empForm2.value["prof"];
     //  if(selectedmaritals.length>0)
     //  {
     //   emp.Marital = selectedmaritals[0];
@@ -401,6 +414,7 @@ export class CreateEmployeeComponent
     emp.DOJ = dj;
     emp.StationId = st.stationId;
     emp.StationCode = st.stationCode;
+    emp.PId = Number(prf.pId);
     //this.empForm2.value["birthdate"]; //this.empForm2.value["joindate"];
     // emp.Day2 = this.empForm2.value['day2'];
     // emp.Month2 = this.empForm2.value['month2'];
@@ -436,6 +450,14 @@ export class CreateEmployeeComponent
     ) {
       this.fvalid = false;
       this.showrequiredMessage("Employee Station", "", errorTitle);
+    } else if (
+      emp.PId == 0 ||
+      emp.PId == NaN ||
+      emp.PId == null ||
+      emp.PId == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage("Employee Pro", "", errorTitle);
     }
     // else {
     //   this.showrequiredMessage("Employee User Name", emp.UserName, errorTitle);
