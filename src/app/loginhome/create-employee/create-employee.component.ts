@@ -457,7 +457,7 @@ export class CreateEmployeeComponent
       emp.PId == undefined
     ) {
       this.fvalid = false;
-      this.showrequiredMessage("Employee Pro", "", errorTitle);
+      this.showrequiredMessage("Employee Profession Type", "", errorTitle);
     }
     // else {
     //   this.showrequiredMessage("Employee User Name", emp.UserName, errorTitle);

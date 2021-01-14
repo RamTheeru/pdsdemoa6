@@ -23,6 +23,7 @@ export const CurrentUrls = {
   constants: "Constants",
   approve: "ApproveUser",
   employeelist: "employees",
+  daemployeelist: "DAEmployees",
   registeremployee: "RegisterEmployee",
   registeremployees: "RegisteredUsers",
   createemployee: "CreateEmployee",
@@ -104,6 +105,32 @@ export class PdsApiService {
       .get(
         this.baseurl + this.employeesUrl + CurrentUrls.login + input,
         this.httpOptions
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let obj = this.handlehttpError(error);
+          return new Observable(function(x) {
+            x.next(obj);
+          });
+        })
+      );
+  }
+  //get list of Delivery Associates
+  getdeliveryassociates(input: any, tkn: string): R.Observable<any> {
+    var body = JSON.stringify(input);
+    const phttpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        Authorization: "Bearer " + tkn
+      })
+    };
+    console.log(this.baseurl + this.employeesUrl + CurrentUrls.daemployeelist);
+    return this.http
+      .post(
+        this.baseurl + this.employeesUrl + CurrentUrls.daemployeelist,
+        body,
+        phttpOptions
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {

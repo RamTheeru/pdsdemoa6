@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Employee } from "../../models/employee";
 import { APIResult } from "../../models/apiresult";
 import { PdsApiService } from "../../pds-api.service";
-
+import { ApiInput } from "../../models/apiinput";
 import { SweetService } from "../../sweet.service";
 import { ViewService } from "../../view.service";
 import * as r from "rxjs";
@@ -24,6 +24,10 @@ export class EmployeesComponent
   implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   @Input("") userType: string;
   @ViewChildren("tablist") tablist;
+  usrToken: string = "";
+  pageCount: number = 1;
+  pages = [];
+  totalCount: number = 0;
   ledgerIds = [];
   employees: Employee[] = [];
   e: Employee;
@@ -31,6 +35,7 @@ export class EmployeesComponent
   private subsc2: r.Subscription;
   private subsc3: r.Subscription;
   private subsc4: r.Subscription;
+  private subsc5: r.Subscription;
   @Input("") edleVerify: string = "";
   @Input("") evheVerify: string = "";
   isEdle: Boolean = false;
@@ -39,6 +44,8 @@ export class EmployeesComponent
   isHe: Boolean = false;
   apiResult: APIResult;
   ishrvhe: Boolean = false;
+  selectedStation: string = "";
+  apiInput: ApiInput;
   @Input("") hrvheVerify: string = "";
   constructor(
     private route: ActivatedRoute,
@@ -56,6 +63,49 @@ export class EmployeesComponent
       this.ngOnInit();
       // put the code  When you want to router navigate on the same page and want to call ngOnInit()
     });
+  }
+  getemployeesbyStation(event) {
+    //console.log(this.selectedStation) ;
+    if (this.usrToken == "") {
+      this.usrToken = this.vServ.getToken();
+    }
+    if (this.selectedStation == "") {
+      this.swServ.showErrorMessage("Invalid Input!!!", "Please Select Station");
+    } else if (
+      this.usrToken == "" ||
+      this.usrToken == undefined ||
+      this.usrToken == null
+    ) {
+      this.handleUnauthorizedrequest();
+    } else {
+      this.apiInput = new ApiInput();
+      this.apiInput.stationId = Number(this.selectedStation);
+      this.getemployees(this.apiInput);
+    }
+  }
+  handleUnauthorizedrequest() {
+    this.swServ.showErrorMessage(
+      "Invalid Request!!!",
+      "Unable to process request with invalid token, Please login again!!!"
+    );
+  }
+  getemployees(input: ApiInput) {
+    this.api
+      .getRegisteredEmployees(input, this.usrToken)
+      .subscribe((data: APIResult) => {
+        // console.log(data)     ;
+        let status = data.status;
+        let message = data.message;
+        if (status) {
+          this.employees = data.employees;
+          this.pageCount = data.queryPages;
+          this.totalCount = data.queryTotalCount;
+          this.pages = this.api.transform(this.pageCount);
+          console.log(data);
+        } else {
+          this.swServ.showErrorMessage("Failure!!!", message);
+        }
+      });
   }
   getstaticEmployees() {
     const emp: Employee = new Employee();
@@ -118,6 +168,9 @@ export class EmployeesComponent
     });
     this.subsc4 = this.vServ.verify3.subscribe((val: string) => {
       this.hrvheVerify = val;
+    });
+    this.subsc5 = this.vServ.utoken.subscribe((val: string) => {
+      this.usrToken = val;
     });
     var index = this.userType.indexOf("le");
     if (index !== -1) {
@@ -233,5 +286,7 @@ export class EmployeesComponent
     this.subsc.unsubscribe();
     this.subsc2.unsubscribe();
     this.subsc3.unsubscribe();
+    this.subsc4.unsubscribe();
+    this.subsc5.unsubscribe();
   }
 }
