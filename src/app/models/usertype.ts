@@ -4,6 +4,7 @@ export class UserType {
   employeeId: number;
   role: string;
   token: string;
+  screen: string;
   valid: Boolean;
   startDate: string;
   sessionStartDate: Date;
