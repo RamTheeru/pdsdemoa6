@@ -153,7 +153,7 @@ export class CreateEmployeeComponent
       this.hidNext = false;
     }
 
-    console.log(this.activeTab);
+    // console.log(this.activeTab);
     this.showtab(this.activeTab);
   }
 
@@ -280,7 +280,7 @@ export class CreateEmployeeComponent
         // ut: new FormControl(''),
         // desg: new FormControl("Su"),
         empc: new FormControl("Emp123"),
-        prof: new FormControl("3"),
+        //prof: new FormControl("3"),
         station: new FormControl(""),
         location: new FormControl("testloaction"),
         account: new FormControl("3242533"),
@@ -303,7 +303,7 @@ export class CreateEmployeeComponent
         //    year: new FormControl(),
         age: new FormControl(),
         bg: new FormControl(),
-        prof: new FormControl(""),
+        // prof: new FormControl(""),
         gender: new FormControl(""),
         married: new FormControl(),
         unmarried: new FormControl(),
@@ -367,7 +367,7 @@ export class CreateEmployeeComponent
     let db = this.convert(this.empForm2.value["birthdate"]);
     let dj = this.convert(this.empForm2.value["joindate"]);
     let st = this.empForm2.value["station"];
-   // let prf = this.empForm2.value["prof"];
+    // let prf = this.empForm2.value["prof"];
     //  if(selectedmaritals.length>0)
     //  {
     //   emp.Marital = selectedmaritals[0];
