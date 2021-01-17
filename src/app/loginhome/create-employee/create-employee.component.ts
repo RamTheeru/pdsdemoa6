@@ -367,7 +367,7 @@ export class CreateEmployeeComponent
     let db = this.convert(this.empForm2.value["birthdate"]);
     let dj = this.convert(this.empForm2.value["joindate"]);
     let st = this.empForm2.value["station"];
-    let prf = this.empForm2.value["prof"];
+   // let prf = this.empForm2.value["prof"];
     //  if(selectedmaritals.length>0)
     //  {
     //   emp.Marital = selectedmaritals[0];
@@ -414,7 +414,7 @@ export class CreateEmployeeComponent
     emp.DOJ = dj;
     emp.StationId = st.stationId;
     emp.StationCode = st.stationCode;
-    emp.PId = Number(prf.pId);
+    emp.PId = 3;
     //this.empForm2.value["birthdate"]; //this.empForm2.value["joindate"];
     // emp.Day2 = this.empForm2.value['day2'];
     // emp.Month2 = this.empForm2.value['month2'];
