@@ -91,7 +91,7 @@ export class EmployeesComponent
   }
   getemployees(input: ApiInput) {
     this.api
-      .getRegisteredEmployees(input, this.usrToken)
+      .getdeliveryassociates(input, this.usrToken)
       .subscribe((data: APIResult) => {
         // console.log(data)     ;
         let status = data.status;
@@ -207,11 +207,11 @@ export class EmployeesComponent
     em = this.getstaticEmployees();
     this.e = em;
     //  console.log(em);
-    this.employees.push(this.e);
+    //   this.employees.push(this.e);
     em = this.getstaticEmployees();
     this.e = em;
-    this.e = this.getstaticEmployees();
-    this.employees.push(this.e);
+    // this.e = this.getstaticEmployees();
+    //this.employees.push(this.e);
     // this.api.getEmployees().subscribe(data => {
     //   console.log(data);
     //   this.apiResult = data;
