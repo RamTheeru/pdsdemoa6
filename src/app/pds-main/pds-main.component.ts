@@ -45,7 +45,7 @@ export class PdsMainComponent implements OnInit {
         let m: string = data.message;
         this.user = data.userInfo;
         var index = m.indexOf("already");
-        let userInfo = this.user.s;
+        let userInfo = this.user.sc;
         let tkn: string = this.user.token;
         if (status) {
           if (index !== -1 && this.user != null && this.user != undefined) {
