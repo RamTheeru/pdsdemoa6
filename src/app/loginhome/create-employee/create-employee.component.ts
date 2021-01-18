@@ -125,6 +125,7 @@ export class CreateEmployeeComponent
     }
   }
   onchangetab(text: string) {
+    
     if (this.isEdle) {
       if (text == "p") {
         this.activeTab = this.activeTab - 1;
