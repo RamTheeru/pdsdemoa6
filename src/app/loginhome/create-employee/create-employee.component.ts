@@ -18,6 +18,7 @@ import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Employee } from "../../models/employee";
 import { APIResult } from "../../models/apiresult";
 import { Station } from "../../models/station";
+import { UserType } from "../../models/usertype";
 import { PdsApiService } from "../../pds-api.service";
 import { Profession } from "../../models/profession";
 import { SweetService } from "../../sweet.service";
@@ -36,13 +37,16 @@ export class CreateEmployeeComponent
   @ViewChild("someInput") someInput: ElementRef;
   url: string = "";
   stations: Station[];
+  stationId: number = 0;
   private subsc: r.Subscription;
   private subsc2: r.Subscription;
+  private subsc3: r.Subscription;
   checkMarried: boolean = false;
   checkUnMarried: boolean = false;
   checkPermanent: boolean = false;
   checkContract: boolean = false;
   usrToken: string = "";
+  userInfo: UserType;
   fvalid: boolean = true;
   edleVerify: string = "";
   isEdle: Boolean = true;
@@ -125,7 +129,6 @@ export class CreateEmployeeComponent
     }
   }
   onchangetab(text: string) {
-    
     if (this.isEdle) {
       if (text == "p") {
         this.activeTab = this.activeTab - 1;
@@ -203,6 +206,9 @@ export class CreateEmployeeComponent
     this.hidTab1 = false;
     this.hidTab2 = true;
     this.hidTab3 = true;
+    this.subsc3 = this.vServ.userInfo.subscribe((res: UserType) => {
+      this.userInfo = res;
+    });
     this.subsc = this.vServ.data.subscribe((val: string) => {
       this.userType = val;
     });
@@ -210,6 +216,11 @@ export class CreateEmployeeComponent
     this.subsc2 = this.vServ.verify.subscribe((val: string) => {
       this.edleVerify = val;
     });
+    if (this.userInfo == null || this.userInfo == undefined) {
+      var u = this.vServ.getValue("userProp");
+      this.userInfo = JSON.parse(u);
+    }
+    this.stationId=this.userInfo.st
     var index = this.userType.indexOf("le");
     if (index !== -1) {
       this.isLe = true;
@@ -827,5 +838,6 @@ export class CreateEmployeeComponent
   ngOnDestroy() {
     this.subsc.unsubscribe();
     this.subsc2.unsubscribe();
+    this.subsc3.unsubscribe();
   }
 }

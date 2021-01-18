@@ -2,6 +2,7 @@ export class UserType {
   userTypeId: number;
   user: string;
   employeeId: number;
+  stationId: number;
   role: string;
   token: string;
   screen: string;
