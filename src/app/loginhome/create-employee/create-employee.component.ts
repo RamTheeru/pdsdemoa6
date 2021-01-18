@@ -220,7 +220,7 @@ export class CreateEmployeeComponent
       var u = this.vServ.getValue("userProp");
       this.userInfo = JSON.parse(u);
     }
-    this.stationId=this.userInfo.st
+    this.stationId = this.userInfo.stationId;
     var index = this.userType.indexOf("le");
     if (index !== -1) {
       this.isLe = true;
@@ -651,7 +651,7 @@ export class CreateEmployeeComponent
     //  },2000);
   }
   submittoAPI(employ, tkn: string): void {
-    this.api.createemployee(employ, tkn).subscribe(
+    this.api.createDAemployee(employ, tkn).subscribe(
       (data: APIResult) => {
         //console.log(data);
         let status: Boolean = data.status;
