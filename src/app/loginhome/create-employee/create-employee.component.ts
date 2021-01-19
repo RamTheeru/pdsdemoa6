@@ -79,7 +79,7 @@ export class CreateEmployeeComponent
   ) {
     this.initForm();
     if (this.editMode) {
-      this.formText = "Edit CD Form:";
+      this.formText = "Edit CDA Form:";
     } else {
       this.formText = "Enroll CDA  Form:";
     }
@@ -666,7 +666,7 @@ export class CreateEmployeeComponent
         if (status) {
           this.swServ.showSuccessMessage("Success!!!", m);
           this.initForm();
-          this.showtab(1);
+          /this.ngAfterViewInit();
         } else {
           this.swServ.showErrorMessage("Error!!", m);
         }
