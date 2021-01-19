@@ -111,6 +111,13 @@ export class EmployeesComponent
         }
       });
   }
+  getdata(val: number) {
+    console.log(val);
+    this.apiInput = new ApiInput();
+    this.apiInput.page = val;
+    this.apiInput.stationId = Number(this.selectedStation);
+    this.getemployees(this.apiInput);
+  }
   getstaticEmployees() {
     const emp: Employee = new Employee();
     const errorTitle: string = "INVALID INPUT!!!";
