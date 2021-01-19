@@ -170,7 +170,6 @@ export class CreateEmployeeComponent
       this.hidTab1 = false;
       this.hidTab2 = true;
       this.hidTab3 = true;
-
     } else if (tabNum == 2) {
       this.hidTab1 = true;
       this.hidTab2 = false;
@@ -665,7 +664,10 @@ export class CreateEmployeeComponent
         if (status) {
           this.swServ.showSuccessMessage("Success!!!", m);
           this.initForm();
-          this.ngAfterViewInit();
+          this.showtab(1);
+          this.hidPrev = true;
+          this.hidNext = false;
+          // this.ngAfterViewInit();
         } else {
           this.swServ.showErrorMessage("Error!!", m);
         }
