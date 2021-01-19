@@ -129,6 +129,10 @@ export class CreateEmployeeComponent
     }
   }
   onchangetab(text: string) {
+    if (this.isLe) {
+      this.isEdle = true;
+    }
+
     if (this.isEdle) {
       if (text == "p") {
         this.activeTab = this.activeTab - 1;
@@ -220,6 +224,7 @@ export class CreateEmployeeComponent
       var u = this.vServ.getValue("userProp");
       this.userInfo = JSON.parse(u);
     }
+    //console.log(this.userInfo);
     this.stationId = this.userInfo.stationId;
     var index = this.userType.indexOf("le");
     if (index !== -1) {
