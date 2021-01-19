@@ -97,7 +97,7 @@ export class EmployeesComponent
     this.api
       .getdeliveryassociates(input, this.usrToken)
       .subscribe((data: APIResult) => {
-        // console.log(data)     ;
+
         let status = data.status;
         let message = data.message;
         if (status) {
@@ -116,6 +116,10 @@ export class EmployeesComponent
     this.apiInput = new ApiInput();
     this.apiInput.page = val;
     this.apiInput.stationId = Number(this.selectedStation);
+    if (this.isLe == true && this.isEdle === false) {
+      this.apiInput.stationId = this.stationId;
+    }
+
     this.getemployees(this.apiInput);
   }
   getstaticEmployees() {
@@ -233,7 +237,7 @@ export class EmployeesComponent
       );
     } else if (this.isLe == true && this.isEdle === false) {
       this.apiInput = new ApiInput();
-      this.apiInput.stationId = Number(this.selectedStation);
+      this.apiInput.stationId = Number(this.stationId);
       this.getemployees(this.apiInput);
     }
     let em: Employee;
