@@ -212,6 +212,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.vServ.removeValue("evheverify");
       this.vServ.removeValue("edleverify");
       this.vServ.removeValue("fheverify");
+      this.router.navigate(["/loginhome/viewdas"]);
     } else if (tab == "ehe") {
       this.shownotify = false;
       this.act1SubMenu = false;
@@ -238,7 +239,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.vServ.removeValue("hrvheverify");
       this.vServ.setVerify("edle");
       this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(["/loginhome/createdeliveryassociate"]);
+      this.router.navigate(["/loginhome/enrolldeliveryassociate"]);
     } else if (tab == "evhe") {
       // this.shownotify = false;
       // this.act1SubMenu = false;

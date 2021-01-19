@@ -36,7 +36,7 @@ const appRoutes: Routes = [
       { path: "", component: LogindefaulthomeComponent },
       { path: "approvals", component: UserreadingsComponent },
       { path: "createemployee", component: CreateEmployeeComponent },
-      { path: "createdeliveryassociate", component: CreateEmployeeComponent },
+      { path: "enrolldeliveryassociate", component: CreateEmployeeComponent },
       { path: "updatedeliverydetails", component: DeliveryDetailsComponent },
       { path: "employeeedit/:id", component: CreateEmployeeComponent },
       { path: "individualview/:id", component: IndividualviewComponent },
