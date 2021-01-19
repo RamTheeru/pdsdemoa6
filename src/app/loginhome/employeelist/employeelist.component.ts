@@ -70,6 +70,9 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     this.subsc2 = this.vServ.utoken.subscribe((val: string) => {
       this.usrToken = val;
     });
+     if (this.usrToken == "") {
+        this.usrToken = this.vServ.getToken();
+      }
     if (this.userType == "" || this.userType == undefined) {
       this.userType = this.vServ.getValue("storedProp");
     }

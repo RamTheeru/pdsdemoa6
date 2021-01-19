@@ -13,6 +13,7 @@ import { APIResult } from "../../models/apiresult";
 import { PdsApiService } from "../../pds-api.service";
 import { ApiInput } from "../../models/apiinput";
 import { SweetService } from "../../sweet.service";
+import { UserType } from "../../models/usertype";
 import { ViewService } from "../../view.service";
 import * as r from "rxjs";
 @Component({
@@ -25,8 +26,10 @@ export class EmployeesComponent
   @Input("") userType: string;
   @ViewChildren("tablist") tablist;
   usrToken: string = "";
+  userInfo: UserType;
   pageCount: number = 1;
   pages = [];
+  stationId: number = 0;
   totalCount: number = 0;
   ledgerIds = [];
   employees: Employee[] = [];
@@ -36,6 +39,7 @@ export class EmployeesComponent
   private subsc3: r.Subscription;
   private subsc4: r.Subscription;
   private subsc5: r.Subscription;
+  private subsc6: r.Subscription;
   @Input("") edleVerify: string = "";
   @Input("") evheVerify: string = "";
   isEdle: Boolean = false;
@@ -172,6 +176,18 @@ export class EmployeesComponent
     this.subsc5 = this.vServ.utoken.subscribe((val: string) => {
       this.usrToken = val;
     });
+    this.subsc6 = this.vServ.userInfo.subscribe((res: UserType) => {
+      this.userInfo = res;
+    });
+    if (this.userInfo == null || this.userInfo == undefined) {
+      var u = this.vServ.getValue("userProp");
+      this.userInfo = JSON.parse(u);
+    }
+    if (this.usrToken == "") {
+      this.usrToken = this.vServ.getToken();
+    }
+    //console.log(this.userInfo);
+    this.stationId = this.userInfo.stationId;
     var index = this.userType.indexOf("le");
     if (index !== -1) {
       this.ishrvhe = false;
@@ -202,6 +218,16 @@ export class EmployeesComponent
           this.isEvhe = false;
         }
       }
+    }
+    if (this.stationId == 0) {
+      this.swServ.showErrorMessage(
+        "Something Went Wrong!!",
+        "Unable to get Station, Please try again!!"
+      );
+    } else if (this.isLe == true && this.isEdle === false) {
+      this.apiInput = new ApiInput();
+      this.apiInput.stationId = Number(this.selectedStation);
+      this.getemployees(this.apiInput);
     }
     let em: Employee;
     em = this.getstaticEmployees();
@@ -288,5 +314,6 @@ export class EmployeesComponent
     this.subsc3.unsubscribe();
     this.subsc4.unsubscribe();
     this.subsc5.unsubscribe();
+    this.subsc6.unsubscribe();
   }
 }

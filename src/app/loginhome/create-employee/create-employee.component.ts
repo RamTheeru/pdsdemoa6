@@ -41,6 +41,7 @@ export class CreateEmployeeComponent
   private subsc: r.Subscription;
   private subsc2: r.Subscription;
   private subsc3: r.Subscription;
+  private subsc4: r.Subscription;
   checkMarried: boolean = false;
   checkUnMarried: boolean = false;
   checkPermanent: boolean = false;
@@ -219,6 +220,9 @@ export class CreateEmployeeComponent
 
     this.subsc2 = this.vServ.verify.subscribe((val: string) => {
       this.edleVerify = val;
+    });
+    this.subsc4 = this.vServ.utoken.subscribe((val: string) => {
+      this.usrToken = val;
     });
     if (this.userInfo == null || this.userInfo == undefined) {
       var u = this.vServ.getValue("userProp");
@@ -848,5 +852,6 @@ export class CreateEmployeeComponent
     this.subsc.unsubscribe();
     this.subsc2.unsubscribe();
     this.subsc3.unsubscribe();
+    this.subsc4.unsubscribe();
   }
 }
