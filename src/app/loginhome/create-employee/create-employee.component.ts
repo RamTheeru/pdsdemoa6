@@ -79,9 +79,9 @@ export class CreateEmployeeComponent
   ) {
     this.initForm();
     if (this.editMode) {
-      this.formText = "Edit Employee Form:";
+      this.formText = "Edit CD Form:";
     } else {
-      this.formText = "Create Employee Form:";
+      this.formText = "Enroll CDA  Form:";
     }
   }
   onCancel() {
@@ -170,8 +170,8 @@ export class CreateEmployeeComponent
       this.hidTab1 = false;
       this.hidTab2 = true;
       this.hidTab3 = true;
-         this.hidPrev = true;
-          this.hidNext = false;
+      this.hidPrev = true;
+      this.hidNext = false;
     } else if (tabNum == 2) {
       this.hidTab1 = true;
       this.hidTab2 = false;
