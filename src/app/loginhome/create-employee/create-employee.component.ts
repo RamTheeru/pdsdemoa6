@@ -664,6 +664,7 @@ export class CreateEmployeeComponent
         if (status) {
           this.swServ.showSuccessMessage("Success!!!", m);
           this.initForm();
+          this.showtab(1);
         } else {
           this.swServ.showErrorMessage("Error!!", m);
         }
