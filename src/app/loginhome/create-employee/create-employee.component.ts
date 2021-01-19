@@ -170,6 +170,8 @@ export class CreateEmployeeComponent
       this.hidTab1 = false;
       this.hidTab2 = true;
       this.hidTab3 = true;
+         this.hidPrev = true;
+          this.hidNext = false;
     } else if (tabNum == 2) {
       this.hidTab1 = true;
       this.hidTab2 = false;
@@ -248,7 +250,7 @@ export class CreateEmployeeComponent
       let vw = this.route.url["_value"];
       let str = vw[0].path;
       let index = str.indexOf("individual");
-      console.log(index);
+      // console.log(index);
       // if(index!=="-1")
       // {
       //   this.showbtns = true;
