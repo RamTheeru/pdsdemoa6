@@ -239,13 +239,13 @@ export class EmployeesComponent
       this.apiInput.stationId = Number(this.stationId);
       this.getemployees(this.apiInput);
     }
-    let em: Employee;
-    em = this.getstaticEmployees();
-    this.e = em;
-    //  console.log(em);
-    //   this.employees.push(this.e);
-    em = this.getstaticEmployees();
-    this.e = em;
+    // let em: Employee;
+    // em = this.getstaticEmployees();
+    // this.e = em;
+    // //  console.log(em);
+    // //   this.employees.push(this.e);
+    // em = this.getstaticEmployees();
+    // this.e = em;
     // this.e = this.getstaticEmployees();
     //this.employees.push(this.e);
     // this.api.getEmployees().subscribe(data => {
