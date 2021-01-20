@@ -29,7 +29,7 @@
 					<div *ngIf="isHe">
 						<th>Action</th>
 					</div>
-					<th>FatherName</th>
+					<th>Gaurdian Name</th>
 					<th>DOB</th>
 					<th>StateCode</th>
 					<th>LocationName</th>
@@ -46,8 +46,8 @@
 					<th>DL/LLR Number</th>
 					<th>Vehicle Number</th>
 					<th>Address ( D.No )</th>
-					<th>Town/mandal</th>
-					<th>City</th>
+					<th>Place</th>
+					<th>Employee Type</th>
 					<th>Mobile</th>
 					<th>Alternate number</th>
 					<th>Marital Status</th>
@@ -80,11 +80,11 @@
 						<td>{{emp.DLLRNumber}}</td>
 						<td>{{emp.VehicleNumber}}</td>
 						<td>{{emp.Address1}}</td>
-						<td>{{emp.Town}}</td>
-						<td>{{emp.City}}</td>
+						<td>{{emp.Place}}</td>
+						<td>{{emp.Employeetype}}</td>
 						<td>{{emp.Phone}}</td>
 						<td>{{emp.Guard_Phone}}</td>
-						<td>{{emp.Marital}}</td>
+						<td>{{emp.MaritalStatus==true?'Married':'UnMarried'}}</td>
 						<td>{{emp.BloodGroup}}</td>
 						<td>{{emp.Age}}</td>
 				</tr>
