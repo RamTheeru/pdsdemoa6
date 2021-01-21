@@ -119,22 +119,25 @@ export class PdsApiService {
   //get list of Delivery Associates
   getdeliveryassociates(input: any, tkn: string): R.Observable<any> {
     var body = JSON.stringify(input);
-    const phttpOptions = {
+    const phttpOptions2 = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "PUT,GET,POST,DELETE",
         Authorization: "Bearer " + tkn
       })
     };
+    console.log(tkn);
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.daemployeelist);
     return this.http
       .post(
         this.baseurl + this.employeesUrl + CurrentUrls.daemployeelist,
         body,
-        phttpOptions
+        phttpOptions2
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
+          console.log(error);
           let obj = this.handlehttpError(error);
           return new Observable(function(x) {
             x.next(obj);

@@ -64,7 +64,7 @@ export class EmployeesComponent
     // };
 
     route.paramMap.subscribe(val => {
-      this.ngOnInit();
+     // this.ngOnInit();
       // put the code  When you want to router navigate on the same page and want to call ngOnInit()
     });
   }
@@ -84,7 +84,7 @@ export class EmployeesComponent
     } else {
       this.apiInput = new ApiInput();
       this.apiInput.stationId = Number(this.selectedStation);
-      this.getemployees(this.apiInput);
+      //this.getemployees(this.apiInput);
     }
   }
   handleUnauthorizedrequest() {
@@ -162,7 +162,7 @@ export class EmployeesComponent
   //   return emp;
   // }
   ngAfterViewInit() {
-    this.ngOnInit();
+    //this.ngOnInit();
   }
   ngOnChanges() {
     console.log("page reloading");
