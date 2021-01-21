@@ -57,36 +57,36 @@
 			</thead>
 			<tbody>
 				<tr *ngFor="let emp of employees;">
-					<td [hidden]="isHide">{{emp.EmployeeId}}</td>
-					<td>{{emp.FirstName}}</td>
-					<td>{{emp.LastName}}</td>
+					<td [hidden]="isHide">{{emp.employeeId}}</td>
+					<td>{{emp.firstName}}</td>
+					<td>{{emp.lastName}}</td>
 					<div *ngIf="isHe">
-						<td><input  #tablist id="{{emp.EmployeeId}}" (click)="toggleEditable($event)" type="checkbox" value=""/>
+						<td><input  #tablist id="{{emp.employeeId}}" (click)="toggleEditable($event)" type="checkbox" value=""/>
 				</div>
-						<td>{{emp.Guard_FullName}}</td>
-						<td>{{emp.DOB}}</td>
+						<td>{{emp.guard_FullName}}</td>
+						<td>{{emp.dOB}}</td>
 						<td>{{emp.stationCode}}</td>
 						<td>{{emp.locationName}}</td>
 						<!-- <td>{{emp.Designation}}</td> -->
-						<td>{{emp.DOJ}}</td>
-						<td>{{emp.BankAccountNumber}}</td>
-						<td>{{emp.IFSCCode}}</td>
-						<td>{{emp.BankName}}</td>
-						<td>{{emp.BranchName}}</td>
-						<td>{{emp.Aadhar}}</td>
+						<td>{{emp.dOJ}}</td>
+						<td>{{emp.bankAccountNumber}}</td>
+						<td>{{emp.iFSCCode}}</td>
+						<td>{{emp.bankName}}</td>
+						<td>{{emp.branchName}}</td>
+						<td>{{emp.aadhar}}</td>
 						<!-- <td>{{emp.PAN==true?'Active':'Inactive'}}</td> -->
-						<td>{{emp.PAN}}</td>
-						<td>{{emp.DLLRStatus}}</td>
-						<td>{{emp.DLLRNumber}}</td>
-						<td>{{emp.VehicleNumber}}</td>
-						<td>{{emp.Address1}}</td>
-						<td>{{emp.Place}}</td>
-						<td>{{emp.Employeetype}}</td>
-						<td>{{emp.Phone}}</td>
-						<td>{{emp.Guard_Phone}}</td>
-						<td>{{emp.MaritalStatus==true?'Married':'UnMarried'}}</td>
-						<td>{{emp.BloodGroup}}</td>
-						<td>{{emp.Age}}</td>
+						<td>{{emp.pAN}}</td>
+						<td>{{emp.dLLRStatus}}</td>
+						<td>{{emp.dLLRNumber}}</td>
+						<td>{{emp.vehicleNumber}}</td>
+						<td>{{emp.address1}}</td>
+						<td>{{emp.place}}</td>
+						<td>{{emp.employeetype}}</td>
+						<td>{{emp.phone}}</td>
+						<td>{{emp.guard_Phone}}</td>
+						<td>{{emp.maritalStatus==true?'Married':'UnMarried'}}</td>
+						<td>{{emp.bloodGroup}}</td>
+						<td>{{emp.age}}</td>
 				</tr>
 			</tbody>
 		</table>
