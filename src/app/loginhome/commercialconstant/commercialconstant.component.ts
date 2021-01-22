@@ -103,7 +103,7 @@ export class CommercialconstantComponent implements OnInit, OnDestroy {
         "Please Enter PetrolAllowance Rate"
       );
     }else if(this.tkn == null || this.tkn == undefined || this.tkn == ""){
-this.handleUnauthorizedrequest()
+this.handleUnauthorizedrequest();
     } else {
       //submit      to API
       this.api.createconstant(cc, this.tkn).subscribe(
