@@ -20,6 +20,7 @@ import { SubmitattendanceComponent } from "./loginhome/submitattendance/submitat
 import { SalaryslipComponent } from "./loginhome/salaryslip/salaryslip.component";
 import { SalarysliplistComponent } from "./loginhome/salarysliplist/salarysliplist.component";
 import { ViewledgerComponent } from "./loginhome/viewledger/viewledger.component";
+import { CommercialconstantComponent } from "./loginhome/commercialconstant/commercialconstant.component";
 import { AuthGuard } from "./auth-guard.service";
 const appRoutes: Routes = [
   { path: "", redirectTo: "/home", pathMatch: "full" },
@@ -55,6 +56,7 @@ const appRoutes: Routes = [
       { path: "viewemployees", component: EmployeesComponent },
       { path: "confirmemployment", component: EmployeesComponent },
       { path: "generatesalaryslips", component: EmployeelistComponent },
+      { path: "createcommercialrates", component: CommercialconstantComponent },
       { path: "employeesinsufficientdata", component: EmployeesComponent }
       //  {path : 'new',component: RecipeEditComponent ,canActivate:[AuthGuard]},
       //  {path : ':id',component: RecipeDetailComponent },

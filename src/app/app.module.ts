@@ -36,6 +36,7 @@ import { SubmitattendanceComponent } from "./loginhome/submitattendance/submitat
 import { SalaryslipComponent } from "./loginhome/salaryslip/salaryslip.component";
 import { SalarysliplistComponent } from "./loginhome/salarysliplist/salarysliplist.component";
 import { ApproveemployeeComponent } from "./loginhome/approveemployee/approveemployee.component";
+import { CommercialconstantComponent } from "./loginhome/commercialconstant/commercialconstant.component";
 import { FileInputComponent } from "./loginhome/file-input/file-input.component";
 import { ViewService } from "./view.service";
 import { PdsApiService } from "./pds-api.service";
@@ -81,6 +82,7 @@ import { AuthGuard } from "./auth-guard.service";
     SalarysliplistComponent,
     FileInputComponent,
     PaginationComponent,
+    CommercialconstantComponent,
     NopageComponent
   ],
   entryComponents: [SalaryslipComponent, ApproveemployeeComponent],

@@ -32,6 +32,7 @@ export const CurrentUrls = {
   employeelogins: "Logins",
   checkUsername: "CheckUserName",
   adminDetails: "AdminDetails",
+  createconstant: "CreateCC",
   logout: "DeleteSession"
 };
 @Injectable()
@@ -428,6 +429,33 @@ export class PdsApiService {
     return this.http
       .post<any>(
         this.baseurl + this.employeesUrl + CurrentUrls.createDAemployee,
+        JSON.stringify(input),
+        phttpOptions
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let obj = this.handlehttpError(error);
+          console.log(obj);
+          return new Observable(function(x) {
+            x.next(obj);
+          });
+        })
+      );
+  }
+
+  //  create Constants for station by admin
+  createconstant(input, tkn): R.Observable<any> {
+    const phttpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        Authorization: "Bearer " + tkn
+      })
+    };
+    console.log(this.baseurl + this.employeesUrl + CurrentUrls.createconstant);
+    return this.http
+      .post<any>(
+        this.baseurl + this.employeesUrl + CurrentUrls.createconstant,
         JSON.stringify(input),
         phttpOptions
       )
