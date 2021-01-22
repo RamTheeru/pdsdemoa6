@@ -102,8 +102,10 @@ export class CommercialconstantComponent implements OnInit, OnDestroy {
         "Invalid Input!!",
         "Please Enter PetrolAllowance Rate"
       );
+    }else if(this.tkn == null || this.tkn == undefined || this.tkn == ""){
+this.handleUnauthorizedrequest()
     } else {
-      //submit    to API
+      //submit      to API
       this.api.createconstant(cc, this.tkn).subscribe(
         (data: APIResult) => {
           let status: Boolean = data.status;
