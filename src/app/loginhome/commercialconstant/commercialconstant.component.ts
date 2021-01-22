@@ -42,7 +42,6 @@ export class CommercialconstantComponent implements OnInit, OnDestroy {
     this.initForm();
     this.api.getConstants().subscribe(
       (data: APIResult) => {
-        //console.log(data);
         let status: Boolean = data.status;
         let m: string = data.message;
         if (status) {
@@ -52,7 +51,6 @@ export class CommercialconstantComponent implements OnInit, OnDestroy {
         }
       },
       err => {
-        //console.log(err.message);
         this._swServ.showErrorMessage("Network Error!!!", err.message);
       }
     );
@@ -105,22 +103,20 @@ export class CommercialconstantComponent implements OnInit, OnDestroy {
         "Please Enter PetrolAllowance Rate"
       );
     } else {
-      //submit to API
-      this.api.createconstant(cc, thtkn).subscribe(
+      //submit    to API
+      this.api.createconstant(cc, this.tkn).subscribe(
         (data: APIResult) => {
-          //console.log(data);
           let status: Boolean = data.status;
           let m: string = data.message;
           if (status) {
             this._swServ.showSuccessMessage("Success!!!", m);
             this.initForm();
-            // this.ngAfterViewInit();
           } else {
             this._swServ.showErrorMessage("Error!!", m);
           }
         },
         err => {
-          //console.log(err);
+          //console.log(err)      ;
           this._swServ.showErrorMessage("Network Error!!!", err.message);
         }
       );
