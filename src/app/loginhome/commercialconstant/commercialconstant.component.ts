@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import {
   FormGroup,
   FormBuilder,
@@ -7,27 +7,38 @@ import {
   Validators
 } from "@angular/forms";
 import { SweetService } from "../../sweet.service";
+import { ViewService } from "../../view.service";
 import { PdsApiService } from "../../pds-api.service";
 import { APIResult } from "../../models/apiresult";
 import { Station } from "../../models/station";
 import { CommercialConstant } from "../../models/commercialconstant";
+import { Subscription } from "rxjs";
 const cc: CommercialConstant = new CommercialConstant();
 @Component({
   selector: "app-commercialconstant",
   templateUrl: "./commercialconstant.component.html",
   styleUrls: ["./commercialconstant.component.css"]
 })
-export class CommercialconstantComponent implements OnInit {
+export class CommercialconstantComponent implements OnInit, OnDestroy {
   ccForm: FormGroup;
   stations: Station[];
+  tkn: string = "";
+  private subsc: Subscription;
   constructor(
     private _fb: FormBuilder,
     private api: PdsApiService,
+    private vServ: ViewService,
     private _swServ: SweetService
   ) {}
   apiResult: APIResult;
 
   ngOnInit() {
+    this.subsc = this.vServ.utoken.subscribe((val: string) => {
+      this.tkn = val;
+    });
+    if (this.tkn == null || this.tkn == undefined || this.tkn == "") {
+      this.tkn = this.vServ.getToken();
+    }
     this.initForm();
     this.api.getConstants().subscribe(
       (data: APIResult) => {
@@ -46,6 +57,12 @@ export class CommercialconstantComponent implements OnInit {
       }
     );
   }
+  handleUnauthorizedrequest() {
+    this._swServ.showErrorMessage(
+      "Invalid Request!!!",
+      "Unable to process request with invalid token, Please login again!!!"
+    );
+  }
   initForm() {
     this.ccForm = this._fb.group({
       station: new FormControl(""),
@@ -53,6 +70,9 @@ export class CommercialconstantComponent implements OnInit {
       petr: new FormControl(""),
       inc: new FormControl("")
     });
+  }
+  ngOnDestroy() {
+    this.subsc.unsubscribe();
   }
   onSubmit() {
     let st = this.ccForm.value["station"];
@@ -86,7 +106,7 @@ export class CommercialconstantComponent implements OnInit {
       );
     } else {
       //submit to API
-      this.api.createconstant(cc, tkn).subscribe(
+      this.api.createconstant(cc, thtkn).subscribe(
         (data: APIResult) => {
           //console.log(data);
           let status: Boolean = data.status;
