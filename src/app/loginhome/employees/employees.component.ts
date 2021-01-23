@@ -25,6 +25,7 @@ export class EmployeesComponent
   implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   @Input("") userType: string;
   @ViewChildren("tablist") tablist;
+  isHide: boolean = true;
   usrToken: string = "";
   userInfo: UserType;
   pageCount: number = 1;
@@ -64,7 +65,7 @@ export class EmployeesComponent
     // };
 
     route.paramMap.subscribe(val => {
-     // this.ngOnInit();
+      // this.ngOnInit();
       // put the code  When you want to router navigate on the same page and want to call ngOnInit()
     });
   }
