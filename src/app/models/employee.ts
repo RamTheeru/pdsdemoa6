@@ -1,4 +1,5 @@
 import { RegisterEmployee } from "../models/registeremployee";
+import { DeliveryDetails } from "../models/deliverydetails";
 export class Employee extends RegisterEmployee {
   Guard_FullName: string;
 
@@ -10,4 +11,5 @@ export class Employee extends RegisterEmployee {
   BankName: string = "";
   BranchName: string = "";
   IFSCCode: string = "";
+  DeliveryDetails: DeliveryDetails;
 }
