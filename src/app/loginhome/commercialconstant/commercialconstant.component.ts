@@ -31,7 +31,9 @@ export class CommercialconstantComponent implements OnInit, OnDestroy {
     private _swServ: SweetService
   ) {}
   apiResult: APIResult;
-
+  oncancel() {
+    this.initForm();
+  }
   ngOnInit() {
     this.subsc = this.vServ.utoken.subscribe((val: string) => {
       this.tkn = val;
@@ -102,8 +104,8 @@ export class CommercialconstantComponent implements OnInit, OnDestroy {
         "Invalid Input!!",
         "Please Enter PetrolAllowance Rate"
       );
-    }else if(this.tkn == null || this.tkn == undefined || this.tkn == ""){
-this.handleUnauthorizedrequest();
+    } else if (this.tkn == null || this.tkn == undefined || this.tkn == "") {
+      this.handleUnauthorizedrequest();
     } else {
       //submit      to API
       this.api.createconstant(cc, this.tkn).subscribe(
