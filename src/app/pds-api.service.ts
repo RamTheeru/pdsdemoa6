@@ -452,6 +452,8 @@ export class PdsApiService {
         Authorization: "Bearer " + tkn
       })
     };
+    console.log(tkn);
+    console.log(JSON.stringify(input));
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.createconstant);
     return this.http
       .post<any>(

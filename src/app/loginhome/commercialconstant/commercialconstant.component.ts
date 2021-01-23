@@ -76,10 +76,16 @@ export class CommercialconstantComponent implements OnInit, OnDestroy {
   }
   onSubmit() {
     let st = this.ccForm.value["station"];
+    let delvr = this.ccForm.value["delv"];
+    let petrl = this.ccForm.value["petr"];
+    let incen = this.ccForm.value["inc"];
     cc.stationId = st.stationId;
-    cc.deliveryRate = this.ccForm.value["delv"];
-    cc.petrolAllowance = this.ccForm.value["petr"];
-    cc.incentives = this.ccForm.value["inc"];
+    cc.deliveryRate = Number(delvr);
+    cc.petrolAllowance = Number(petrl);
+    cc.incentives = Number(incen);
+    if (cc.incentives == NaN || cc.incentives == undefined ||  cc.incentives == n) {
+      cc.incentives = 0;
+    }
     if (
       cc.stationId == 0 ||
       cc.stationId == undefined ||
@@ -88,6 +94,7 @@ export class CommercialconstantComponent implements OnInit, OnDestroy {
       this._swServ.showErrorMessage("Invalid Input!!", "Please Select Station");
     } else if (
       cc.deliveryRate == 0 ||
+      cc.deliveryRate == NaN ||
       cc.deliveryRate == undefined ||
       cc.deliveryRate == null
     ) {
@@ -97,6 +104,7 @@ export class CommercialconstantComponent implements OnInit, OnDestroy {
       );
     } else if (
       cc.petrolAllowance == 0 ||
+      cc.petrolAllowance == NaN ||
       cc.petrolAllowance == undefined ||
       cc.petrolAllowance == null
     ) {
