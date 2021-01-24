@@ -17,6 +17,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
   deliverylist: DeliveryDetails[];
   petrolallowance: number = 0;
   standardRate: number = 0;
+  isHide:boolean=true;
   currentmonth: number = 0;
   apiInput: ApiInput;
   inputs: string[] = [];

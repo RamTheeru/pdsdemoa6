@@ -13,7 +13,7 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>S.No</th>
+					<!-- <th>S.No</th> -->
 					<th>Employee Code</th>
 					<th>Employee Name</th>
 					<th>Delivery Count</th>
@@ -25,14 +25,14 @@
 			</thead>
 			<tbody>
 				<tr *ngFor="let emp of employees;">
-					<td> {{emp.Id}}</td>
-					<td>{{emp.EmployeeCode}}</td>
-					<td>{{emp.EmployeeName}}</td>
-					<td><input type="text" id="{{emp.Id}}" (focusout)="focusOutFunction('dvc',$event)" value="{{emp.DeliveryCount}}"/></td>
+					<td [disabled]="isHide"> {{emp.employeeId}}</td>
+					<td>{{emp.employeeCode}}</td>
+					<td>{{emp.employeeName}}</td>
+					<td><input type="text" id="{{emp.employeeId}}" (focusout)="focusOutFunction('dvc',$event)" value="{{emp.deliveryCount}}"/></td>
 					<td>{{standardRate}}</td>
 					<td>{{petrolallowance}}</td>
-					<td><input type="text" id="{{emp.EmployeeCode}}" (focusout)="focusOutFunction('inc',$event)" value="{{emp.Incentive}}"/></td>
-					<td>{{emp.TotalAmount}} </td>
+					<td><input type="text" id="{{emp.EmployeeCode}}" (focusout)="focusOutFunction('inc',$event)" value="{{emp.incentive}}"/></td>
+					<td>{{emp.totalAmount}} </td>
 
 				</tr>
 			</tbody>
