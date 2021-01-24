@@ -25,7 +25,7 @@
 			</thead>
 			<tbody>
 				<tr *ngFor="let emp of employees;">
-					<td [disabled]="isHide"> {{emp.employeeId}}</td>
+					<td [hidden]="isHide"> {{emp.employeeId}}</td>
 					<td>{{emp.employeeCode}}</td>
 					<td>{{emp.employeeName}}</td>
 					<td><input type="text" id="{{emp.employeeId}}" (focusout)="focusOutFunction('dvc',$event)" value="{{emp.deliveryCount}}"/></td>
