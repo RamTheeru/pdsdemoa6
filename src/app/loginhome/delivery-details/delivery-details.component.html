@@ -26,8 +26,8 @@
 			<tbody>
 				<tr *ngFor="let emp of employees;">
 					<td [hidden]="isHide"> {{emp.employeeId}}</td>
-					<td>{{emp.employeeCode}}</td>
-					<td>{{emp.employeeName}}</td>
+					<td>{{emp.empCode}}</td>
+					<td>{{emp.firstName}}</td>
 					<td><input type="text" id="{{emp.employeeId}}" (focusout)="focusOutFunction('dvc',$event)" value="{{emp.deliveryCount}}"/></td>
 					<td>{{standardRate}}</td>
 					<td>{{petrolallowance}}</td>

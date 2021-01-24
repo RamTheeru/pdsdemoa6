@@ -34,6 +34,7 @@ export const CurrentUrls = {
   adminDetails: "AdminDetails",
   createconstant: "CreateCC",
   getCDADeliverylist: "CDAGetDeiveryDetails",
+  getCDADeliveryStation: "CDAStationDeiveryDetails",
   updateCDADeliverylist: "CDAUpdateDeiveryDetails",
   logout: "DeleteSession"
 };
@@ -433,6 +434,37 @@ export class PdsApiService {
         this.baseurl + this.employeesUrl + CurrentUrls.createDAemployee,
         JSON.stringify(input),
         phttpOptions
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let obj = this.handlehttpError(error);
+          console.log(obj);
+          return new Observable(function(x) {
+            x.next(obj);
+          });
+        })
+      );
+  }
+  //Get CDA delivery deatils by station POST
+
+  getCDADeliverybyStation(stationId, tkn): R.Observable<any> {
+    let input = "?stationId=" + stationId;
+    const phttpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        Authorization: "Bearer " + tkn
+      })
+    };
+    console.log(
+      this.baseurl + this.employeesUrl + CurrentUrls.getCDADeliveryStation
+    );
+    return this.http
+      .get<any>(
+        this.baseurl +
+          this.employeesUrl +
+          CurrentUrls.getCDADeliveryStation +
+          input,phttpOptions
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
