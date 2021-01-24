@@ -194,7 +194,11 @@ export class EmployeesComponent
       var u = this.vServ.getValue("userProp");
       this.userInfo = JSON.parse(u);
     }
-    if (this.usrToken == "") {
+    if (
+      this.usrToken == "" ||
+      this.usrToken == undefined ||
+      this.usrToken == null
+    ) {
       this.usrToken = this.vServ.getToken();
     }
     //console.log(this.userInfo);
@@ -235,6 +239,12 @@ export class EmployeesComponent
         "Something Went Wrong!!",
         "Unable to get Station, Please try again!!"
       );
+    } else if (
+      this.usrToken == "" ||
+      this.usrToken == undefined ||
+      this.usrToken == null
+    ) {
+      this.handleUnauthorizedrequest();
     } else if (this.isLe == true && this.isEdle === false) {
       this.apiInput = new ApiInput();
       this.apiInput.stationId = Number(this.stationId);

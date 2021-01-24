@@ -33,6 +33,8 @@ export const CurrentUrls = {
   checkUsername: "CheckUserName",
   adminDetails: "AdminDetails",
   createconstant: "CreateCC",
+  getCDADeliverylist: "CDAGetDeiveryDetails",
+  updateCDADeliverylist: "CDAUpdateDeiveryDetails",
   logout: "DeleteSession"
 };
 @Injectable()
@@ -442,7 +444,64 @@ export class PdsApiService {
         })
       );
   }
+  //Get CDA employee list POST
 
+  getCDADeliverylist(input, tkn): R.Observable<any> {
+    const phttpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        Authorization: "Bearer " + tkn
+      })
+    };
+    console.log(
+      this.baseurl + this.employeesUrl + CurrentUrls.getCDADeliverylist
+    );
+    return this.http
+      .post<any>(
+        this.baseurl + this.employeesUrl + CurrentUrls.getCDADeliverylist,
+        JSON.stringify(input),
+        phttpOptions
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let obj = this.handlehttpError(error);
+          console.log(obj);
+          return new Observable(function(x) {
+            x.next(obj);
+          });
+        })
+      );
+  }
+  //Update CDA employee list POST
+
+  updateCDADeliverylist(input, tkn): R.Observable<any> {
+    const phttpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        Authorization: "Bearer " + tkn
+      })
+    };
+    console.log(
+      this.baseurl + this.employeesUrl + CurrentUrls.updateCDADeliverylist
+    );
+    return this.http
+      .post<any>(
+        this.baseurl + this.employeesUrl + CurrentUrls.updateCDADeliverylist,
+        JSON.stringify(input),
+        phttpOptions
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let obj = this.handlehttpError(error);
+          console.log(obj);
+          return new Observable(function(x) {
+            x.next(obj);
+          });
+        })
+      );
+  }
   //  create Constants for station by admin
   createconstant(input, tkn): R.Observable<any> {
     const phttpOptions = {

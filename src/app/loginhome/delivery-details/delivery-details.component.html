@@ -1,5 +1,15 @@
 <div class="container-fluid">
 	<div class="row">
+
+		<select     [(ngModel)]="currentmonth" name="month" id="stat">
+							<option value="0" selected>Select Month</option>
+              	<option *ngFor="let s of months" [ngValue]="s.id">
+								{{s.name}}
+							</option>
+    </select>
+		<button class="btn btn-success" (click)="getemployeesbyMonth($event)"  type="submit">Search</button>
+	</div>
+	<div class="row">
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -14,7 +24,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr *ngFor="let emp of list;">
+				<tr *ngFor="let emp of employees;">
 					<td> {{emp.Id}}</td>
 					<td>{{emp.EmployeeCode}}</td>
 					<td>{{emp.EmployeeName}}</td>

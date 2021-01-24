@@ -8,6 +8,6 @@ export class DeliveryDetails {
   DeliveryRate: number;
   Incentive: number;
   TotalAmount: number;
-  stationId:number;
-  currentMonth:number
+  stationId: number;
+  currentMonth: number;
 }
