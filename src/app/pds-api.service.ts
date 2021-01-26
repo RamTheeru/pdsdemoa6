@@ -445,7 +445,7 @@ export class PdsApiService {
         })
       );
   }
-  //Get CDA delivery deatils by station POST
+  //Get CDA delivery deatils by station GET
 
   getCDADeliverybyStation(stationId, tkn): R.Observable<any> {
     let input = "?stationId=" + stationId;

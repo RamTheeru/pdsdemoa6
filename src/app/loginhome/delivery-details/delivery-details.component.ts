@@ -6,6 +6,7 @@ import { SweetService } from "../../sweet.service";
 import { ViewService } from "../../view.service";
 import { Employee } from "../../models/employee";
 import { UserType } from "../../models/usertype";
+import { CommercialConstant } from "../../models/commercialconstant";
 import { DeliveryDetails } from "../../models/deliverydetails";
 import * as r from "rxjs";
 @Component({
@@ -17,7 +18,8 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
   deliverylist: DeliveryDetails[];
   petrolallowance: number = 0;
   standardRate: number = 0;
-  isHide:boolean=true;
+  cc: CommercialConstant;
+  isHide: boolean = true;
   currentmonth: number = 0;
   apiInput: ApiInput;
   inputs: string[] = [];
@@ -120,6 +122,20 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
     ) {
       this.handleUnauthorizedrequest();
     } else {
+      this.api
+        .getCDADeliverybyStation(this.stationId, this.usrToken)
+        .subscribe((data: APIResult) => {
+          let status = data.status;
+          let message = data.message;
+          if (status) {
+            this.cc = data.commercialConstant;
+            // console.log(data);
+            this.standardRate = this.cc.deliveryRate;
+            this.petrolallowance = this.cc.petrolAllowance;
+          } else {
+            this.swServ.showErrorMessage("Failure!!!", message);
+          }
+        });
       // this.apiInput = new ApiInput();
       // this.apiInput.stationId = Number(this.stationId);
       // this.getemployees(this.apiInput);
@@ -138,6 +154,11 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
       this.usrToken == null
     ) {
       this.handleUnauthorizedrequest();
+    }else if(this.standardRate==0||this.petrolallowance==0){
+ this.swServ.showErrorMessage(
+        "Something Went Wrong!!",
+        "Unable to get Station Delivery Details, Please try again!!"
+      );
     } else {
       this.apiInput = new ApiInput();
       this.apiInput.stationId = Number(this.stationId);

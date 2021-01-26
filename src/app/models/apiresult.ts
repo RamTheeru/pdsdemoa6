@@ -16,6 +16,7 @@ export class APIResult {
   designations: Designation[];
   vouchers: Voucher[];
   ledgers: Ledger[];
+  commercialConstant: CommercialConstant;
   commercialConstants: CommercialConstant[];
   stations: Station[];
   voucher: Voucher;
