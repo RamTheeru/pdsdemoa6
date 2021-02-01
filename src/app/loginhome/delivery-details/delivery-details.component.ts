@@ -9,13 +9,13 @@ import { UserType } from "../../models/usertype";
 import { CommercialConstant } from "../../models/commercialconstant";
 import { DeliveryDetails } from "../../models/deliverydetails";
 import * as r from "rxjs";
+const deliverylist: DeliveryDetails[] = [];
 @Component({
   selector: "app-delivery-details",
   templateUrl: "./delivery-details.component.html",
   styleUrls: ["./delivery-details.component.css"]
 })
 export class DeliveryDetailsComponent implements OnInit, OnDestroy {
-  deliverylist: DeliveryDetails[];
   petrolallowance: number = 0;
   standardRate: number = 0;
   cc: CommercialConstant;
@@ -154,8 +154,8 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
       this.usrToken == null
     ) {
       this.handleUnauthorizedrequest();
-    }else if(this.standardRate==0||this.petrolallowance==0){
- this.swServ.showErrorMessage(
+    } else if (this.standardRate == 0 || this.petrolallowance == 0) {
+      this.swServ.showErrorMessage(
         "Something Went Wrong!!",
         "Unable to get Station Delivery Details, Please try again!!"
       );
@@ -168,15 +168,25 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
   }
   focusOutFunction(val, event) {
     console.log(event);
+    let dd = new DeliveryDetails();
+    dd.stationId = this.stationId;
+    dd.DeliveryRate = this.standardRate;
+    dd.PetrolAllowance = this.petrolallowance;
     if (val == "dvc") {
       var id = event.target.id;
-      var val = event.target.value;
-      this.inputs.push(id + "-delcount-" + val);
+      var vl = event.target.value;
+      dd.DeliveryCount = vl;
+      dd.EmployeeId = id;
+       
+      //this.inputs.push(id + "-delcount-" + val);
     } else if (val == "inc") {
       var id = event.target.id;
-      var val = event.target.value;
-      this.inputs.push(id + "-incent-" + val);
+      var vl2 = event.target.value;
+      dd.Incentive = vl2;
+      dd.EmployeeId=id;
+      // this.inputs.push(id + "-incent-" + val);
     }
+    deliverylist.push(d)
   }
   getemployees(input: ApiInput) {
     this.api
