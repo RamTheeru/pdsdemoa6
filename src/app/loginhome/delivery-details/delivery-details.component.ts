@@ -9,6 +9,7 @@ import { UserType } from "../../models/usertype";
 import { CommercialConstant } from "../../models/commercialconstant";
 import { DeliveryDetails } from "../../models/deliverydetails";
 import * as r from "rxjs";
+import { forEach } from "@angular/router/src/utils/collection";
 const deliverylist: DeliveryDetails[] = [];
 @Component({
   selector: "app-delivery-details",
@@ -18,6 +19,7 @@ const deliverylist: DeliveryDetails[] = [];
 export class DeliveryDetailsComponent implements OnInit, OnDestroy {
   petrolallowance: number = 0;
   standardRate: number = 0;
+  load: boolean = false;
   cc: CommercialConstant;
   isHide: boolean = true;
   currentmonth: number = 0;
@@ -168,25 +170,22 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
   }
   focusOutFunction(val, event) {
     console.log(event);
-    let dd = new DeliveryDetails();
-    dd.stationId = this.stationId;
-    dd.DeliveryRate = this.standardRate;
-    dd.PetrolAllowance = this.petrolallowance;
+
     if (val == "dvc") {
       var id = event.target.id;
       var vl = event.target.value;
-      dd.DeliveryCount = vl;
-      dd.EmployeeId = id;
-       
-      //this.inputs.push(id + "-delcount-" + val);
+      if (vl == null || vl == undefined || vl == "") {
+        vl = 0;
+      }
+      this.inputs.push(id + "-delcount-" + vl);
     } else if (val == "inc") {
       var id = event.target.id;
       var vl2 = event.target.value;
-      dd.Incentive = vl2;
-      dd.EmployeeId=id;
-      // this.inputs.push(id + "-incent-" + val);
+      if (vl2 == null || vl2 == undefined || vl2 == "") {
+        vl2 = 0;
+      }
+      this.inputs.push(id + "-incent-" + vl2);
     }
-    deliverylist.push(d)
   }
   getemployees(input: ApiInput) {
     this.api
@@ -207,5 +206,63 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
   }
   Onsub() {
     console.log(this.inputs);
+    this.load = true;
+    this.inputs.forEach(function(val) {
+      let ele = val;
+      let dd = new DeliveryDetails();
+      dd.stationId = this.stationId;
+      dd.DeliveryRate = this.standardRate;
+      dd.PetrolAllowance = this.petrolallowance;
+      if (ele.includes("del")) {
+        var splitted = ele.split("-", 3);
+        let c = Number(splitted[2]);
+        let id = Number(splitted[0]);
+        if (c == NaN || c == undefined) {
+          c = 0;
+        }
+        // dd.DeliveryCount = c;
+        let found = deliverylist.some(el => el.EmployeeId === id);
+        if (found) {
+          deliverylist.find(el => el.EmployeeId == id).DeliveryCount = c;
+        } else {
+          dd.DeliveryCount = c;
+          deliverylist.push(dd);
+        }
+      } else if (ele.includes("inc")) {
+        var splitted2 = ele.split("-", 3);
+        let c2 = Number(splitted2[2]);
+        let id = Number(splitted2[0]);
+        if (c2 == NaN || c2 == undefined) {
+          c2 = 0;
+        }
+        let found = deliverylist.some(el => el.EmployeeId === id);
+        if (found) {
+          deliverylist.find(el => el.EmployeeId == id).Incentive = c2;
+        } else {
+          dd.DeliveryCount = c2;
+          deliverylist.push(dd);
+        }
+      }
+    });
+    // forEach(let i of this.inputs)
+    // {
+    //         let dd = new DeliveryDetails();
+    // dd.stationId = this.stationId;
+    // dd.DeliveryRate = this.standardRate;
+    // dd.PetrolAllowance = this.petrolallowance;
+    // }
+    this.api
+      .updateCDADeliverylist(deliverylist, this.usrToken)
+      .subscribe((data: APIResult) => {
+        this.load = false;
+        let status = data.status;
+        let message = data.message;
+        if (status) {
+          this.swServ.showSuccessMessage("Sucess!!!", message);
+          this.ngOnInit();
+        } else {
+          this.swServ.showErrorMessage("Failure!!!", message);
+        }
+      });
   }
 }
