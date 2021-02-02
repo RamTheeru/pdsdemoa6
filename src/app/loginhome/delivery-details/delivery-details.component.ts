@@ -112,7 +112,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
       this.userInfo = JSON.parse(u);
     }
     this.stationId = this.userInfo.stationId;
-    if (this.stationId == 0) {
+    if (this.stationId == 0 || this.stationId == null || this.stationId == undefined) {
       this.swServ.showErrorMessage(
         "Something Went Wrong!!",
         "Unable to get Station, Please try again!!"
