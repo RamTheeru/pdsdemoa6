@@ -239,6 +239,9 @@ export class PdsApiService {
           apierrResult.message = m;
           obj = apierrResult;
         }
+        else {
+           JSON.stringify(this.printObject(obj.)
+        }
       }
 
       // ...optionally return a default fallback value so app can continue (pick one)
