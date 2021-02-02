@@ -240,7 +240,7 @@ export class PdsApiService {
           obj = apierrResult;
         }
         else {
-           JSON.stringify(this.printObject(obj.)
+           JSON.stringify(this.printObject(obj));
         }
       }
 
