@@ -239,8 +239,8 @@ export class PdsApiService {
           apierrResult.message = m;
           obj = apierrResult;
         } else {
-           m = m + "Reason : " +JSON.stringify(this.printObject(obj));
-                     apierrResult.status = false;
+          m = m + "Reason : " + JSON.stringify(this.printObject(obj));
+          apierrResult.status = false;
           apierrResult.message = m;
           obj = apierrResult;
         }
@@ -462,7 +462,10 @@ export class PdsApiService {
       })
     };
     console.log(
-      this.baseurl + this.employeesUrl + CurrentUrls.getCDADeliveryStation
+      this.baseurl +
+        this.employeesUrl +
+        CurrentUrls.getCDADeliveryStation +
+        input
     );
     return this.http
       .get<any>(
