@@ -198,14 +198,10 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
         if (!test) {
           this.swServ.showErrorMessage(title, msg);
         } else {
-          // this.inputs = this.inputs.filter(function(val) {
-          //   let ele = val;
-          //   var splitted2 = ele.split("-", 3);
-          //   let t = splitted2[1];
-          //   let c2 = splitted2[2];
-          //   let i = splitted2[0];
-          //   i !== id && t === "delcount";
-          // });
+          //  var ind = this.inputs.indexOf(e=>e.startsWith(id+'-delcount'));
+          this.inputs = this.inputs.filter(
+            e => !e.startsWith(id + "-delcount-")
+          );
           this.inputs.push(id + "-delcount-" + del);
         }
       }
@@ -224,14 +220,9 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
         if (!test) {
           this.swServ.showErrorMessage(title, msg);
         } else {
-          // this.inputs = this.inputs.filter(function(val) {
-          //   let ele = val;
-          //   var splitted2 = ele.split("-", 3);
-          //   let t = splitted2[1];
-          //   let c2 = splitted2[2];
-          //   let i = splitted2[0];
-          //   i !== id && t === "incent";
-          // });
+          this.inputs = this.inputs.filter(
+            e => !e.startsWith(id + "-incent-")
+          );
           this.inputs.push(id + "-incent-" + v2);
         }
       }
