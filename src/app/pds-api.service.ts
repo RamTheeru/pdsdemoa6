@@ -527,6 +527,7 @@ export class PdsApiService {
     console.log(
       this.baseurl + this.employeesUrl + CurrentUrls.updateCDADeliverylist
     );
+    console.log( JSON.stringify(input));
     return this.http
       .post<any>(
         this.baseurl + this.employeesUrl + CurrentUrls.updateCDADeliverylist,
