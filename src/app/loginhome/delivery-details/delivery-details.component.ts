@@ -174,21 +174,37 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
   }
   focusOutFunction(val, event) {
     console.log(event);
-
+    var test = false;
+    let title = "Invalid Input!!!";
+    let msg = "Please Enter Only Numbers";
     if (val == "dvc") {
       var id = event.target.id;
-      var vl = event.target.value;
+      let vl = event.target.value;
       if (vl == null || vl == undefined || vl == "") {
-        vl = 0;
+        vl = "0";
       }
-      this.inputs.push(id + "-delcount-" + vl);
+      if (v1 != null || v1 != "") {
+        test = this.api.ValidateNumbers(v1);
+        if (!test) {
+          this.swServ.showErrorMessage(title, msg);
+        } else {
+          this.inputs.push(id + "-delcount-" + vl);
+        }
+      }
     } else if (val == "inc") {
       var id = event.target.id;
-      var vl2 = event.target.value;
+      let vl2 = event.target.value;
       if (vl2 == null || vl2 == undefined || vl2 == "") {
-        vl2 = 0;
+        vl2 = "0;
       }
-      this.inputs.push(id + "-incent-" + vl2);
+      if (v12 != null || v12 != "") {
+        test = this.api.ValidateNumbers(v12);
+        if (!test) {
+          this.swServ.showErrorMessage(title, msg);
+        } else {
+          this.inputs.push(id + "-incent-" + vl2);
+        }
+      }
     }
   }
   getemployees(input: ApiInput) {
