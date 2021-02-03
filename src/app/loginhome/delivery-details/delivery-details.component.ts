@@ -222,12 +222,13 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
         if (!test) {
           this.swServ.showErrorMessage(title, msg);
         } else {
-          this.inputs = this.inputs.filter(function(val) {
+        this.inputs.filter(function(val) {
             let ele = val;
             var splitted2 = ele.split("-", 3);
             let t = splitted2[1];
             let c2 = splitted2[2];
             let i = splitted2[0];
+            if(t=="")
             i !== id && t === "incent";
           });
           this.inputs.push(id + "-incent-" + v2);
@@ -255,11 +256,12 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
   Onsub() {
     console.log(this.inputs);
     this.load = true;
+    let dd: DeliveryDetails = new DeliveryDetails();
     let count = this.inputs.length;
     if (count > 0) {
       this.inputs.forEach(function(val) {
         let ele = val;
-        let dd = new DeliveryDetails();
+        dd = new DeliveryDetails();
         dd.StationId = this.stationId;
         dd.DeliveryRate = this.standardRate;
         dd.PetrolAllowance = this.petrolallowance;
