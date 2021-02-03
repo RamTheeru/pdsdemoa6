@@ -183,6 +183,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
     if (val == "dvc") {
       id = event.target.id;
       del = event.target.value;
+
       if (del == null || del == undefined || del == "") {
         del = "0";
         this.swServ.showMessage(
@@ -195,6 +196,14 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
         if (!test) {
           this.swServ.showErrorMessage(title, msg);
         } else {
+          this.inputs = this.inputs.filter(function(val) {
+            let ele = val;
+            var splitted2 = ele.split("-", 3);
+            let t = splitted2[1];
+            let c2 = splitted2[2];
+            let i = splitted2[0];
+            i !== id && t === "delcount";
+          });
           this.inputs.push(id + "-delcount-" + del);
         }
       }
@@ -213,6 +222,14 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
         if (!test) {
           this.swServ.showErrorMessage(title, msg);
         } else {
+          this.inputs = this.inputs.filter(function(val) {
+            let ele = val;
+            var splitted2 = ele.split("-", 3);
+            let t = splitted2[1];
+            let c2 = splitted2[2];
+            let i = splitted2[0];
+            i !== id && t === "incent";
+          });
           this.inputs.push(id + "-incent-" + v2);
         }
       }
