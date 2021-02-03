@@ -238,9 +238,8 @@ export class PdsApiService {
           apierrResult.status = false;
           apierrResult.message = m;
           obj = apierrResult;
-        }
-        else {
-           JSON.stringify(this.printObject(obj));
+        } else {
+          obj = JSON.stringify(this.printObject(obj));
         }
       }
 
@@ -467,7 +466,8 @@ export class PdsApiService {
         this.baseurl +
           this.employeesUrl +
           CurrentUrls.getCDADeliveryStation +
-          input,phttpOptions
+          input,
+        phttpOptions
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
