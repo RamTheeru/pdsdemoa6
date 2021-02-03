@@ -174,7 +174,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
   }
   focusOutFunction(val, event) {
     console.log(event);
-  let del="";
+    let del = "";
     let v2 = "";
     let id = "0";
     var test = false;
@@ -182,9 +182,13 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
     let msg = "Please Enter Only Numbers";
     if (val == "dvc") {
       id = event.target.id;
-        del = event.target.value;
+      del = event.target.value;
       if (del == null || del == undefined || del == "") {
         del = "0";
+        this.swServ.showMessage(
+          "ALert!!!",
+          "Values that are not given will be taken as ZERO(default)"
+        );
       }
       if (del != null || del != "") {
         test = this.api.ValidateNumbers(del);
@@ -199,6 +203,10 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
       v2 = event.target.value;
       if (v2 == null || v2 == undefined || v2 == "") {
         v2 = "0";
+        this.swServ.showMessage(
+          "ALert!!!",
+          "Values that are not given will be taken as ZERO(default)"
+        );
       }
       if (v2 != null || v2 != "") {
         test = this.api.ValidateNumbers(v2);

@@ -14,8 +14,11 @@ export class SweetService {
   showErrorMessage(title, text = "") {
     swal(title, text, "error");
   }
+  showMessage(title, text = "") {
+    swal(title, text, "warning");
+  }
 
-   showWarning(text, obj?: any) : R.Observable<boolean>{
+  showWarning(text, obj?: any): R.Observable<boolean> {
     let r: Promise<boolean>;
     let result = false;
     swal({
@@ -51,14 +54,10 @@ export class SweetService {
         // });
       }
     });
-       return R.Observable.create(observer => {
-
-
-             observer.next(result);
-             observer.complete();
-
-
-          });
+    return R.Observable.create(observer => {
+      observer.next(result);
+      observer.complete();
+    });
     //this.r = await this.setpromise(result);
     // await this.setpromise(result);
     // await (() => {
