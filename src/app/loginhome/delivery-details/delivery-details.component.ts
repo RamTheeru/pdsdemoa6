@@ -174,35 +174,38 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
   }
   focusOutFunction(val, event) {
     console.log(event);
+    let v1 = "";
+    let v2 = "";
+    let id = "0";
     var test = false;
     let title = "Invalid Input!!!";
     let msg = "Please Enter Only Numbers";
     if (val == "dvc") {
-      var id = event.target.id;
-      let vl = event.target.value;
-      if (vl == null || vl == undefined || vl == "") {
-        vl = "0";
+      id = event.target.id;
+      vl = event.target.value;
+      if (v1 == null || v1 == undefined || v1 == "") {
+        v1 = "0";
       }
       if (v1 != null || v1 != "") {
         test = this.api.ValidateNumbers(v1);
         if (!test) {
           this.swServ.showErrorMessage(title, msg);
         } else {
-          this.inputs.push(id + "-delcount-" + vl);
+          this.inputs.push(id + "-delcount-" + v1);
         }
       }
     } else if (val == "inc") {
-      var id = event.target.id;
-      let vl2 = event.target.value;
-      if (vl2 == null || vl2 == undefined || vl2 == "") {
-        vl2 = "0;
+      id = event.target.id;
+      v2 = event.target.value;
+      if (v2 == null || v2 == undefined || v2 == "") {
+        v2 = "0";
       }
-      if (v12 != null || v12 != "") {
-        test = this.api.ValidateNumbers(v12);
+      if (v2 != null || v2 != "") {
+        test = this.api.ValidateNumbers(v2);
         if (!test) {
           this.swServ.showErrorMessage(title, msg);
         } else {
-          this.inputs.push(id + "-incent-" + vl2);
+          this.inputs.push(id + "-incent-" + v2);
         }
       }
     }
