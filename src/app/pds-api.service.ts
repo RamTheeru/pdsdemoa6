@@ -80,6 +80,18 @@ export class PdsApiService {
   //   //
   //   this.app.hideload();
   // }
+  ValidateNumbers(txt: string): boolean {
+    var val = false;
+    var regexp = new RegExp("^[0-9]+$");
+    val = regexp.test(txt);
+    return val;
+  }
+  convert(str) {
+    var date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return [date.getFullYear(), mnth, day].join("-");
+  }
   transform(value): any {
     let res = [];
     for (let i = 1; i <= value; i++) {
@@ -527,7 +539,7 @@ export class PdsApiService {
     console.log(
       this.baseurl + this.employeesUrl + CurrentUrls.updateCDADeliverylist
     );
-    console.log( JSON.stringify(input));
+    console.log(JSON.stringify(input));
     return this.http
       .post<any>(
         this.baseurl + this.employeesUrl + CurrentUrls.updateCDADeliverylist,

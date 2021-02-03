@@ -211,62 +211,71 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
   Onsub() {
     console.log(this.inputs);
     this.load = true;
-    this.inputs.forEach(function(val) {
-      let ele = val;
-      let dd = new DeliveryDetails();
-      dd.stationId = this.stationId;
-      dd.DeliveryRate = this.standardRate;
-      dd.PetrolAllowance = this.petrolallowance;
-      if (ele.includes("del")) {
-        var splitted = ele.split("-", 3);
-        let c = Number(splitted[2]);
-        let id = Number(splitted[0]);
-        if (c == NaN || c == undefined) {
-          c = 0;
-        }
-        // dd.DeliveryCount = c;
-        let found = deliverylist.some(el => el.EmployeeId === id);
-        if (found) {
-          deliverylist.find(el => el.EmployeeId == id).DeliveryCount = c;
-        } else {
-          dd.DeliveryCount = c;
-          deliverylist.push(dd);
-        }
-      } else if (ele.includes("inc")) {
-        var splitted2 = ele.split("-", 3);
-        let c2 = Number(splitted2[2]);
-        let id = Number(splitted2[0]);
-        if (c2 == NaN || c2 == undefined) {
-          c2 = 0;
-        }
-        let found = deliverylist.some(el => el.EmployeeId === id);
-        if (found) {
-          deliverylist.find(el => el.EmployeeId == id).Incentive = c2;
-        } else {
-          dd.DeliveryCount = c2;
-          deliverylist.push(dd);
-        }
-      }
-    });
-    // forEach(let i of this.inputs)
-    // {
-    //         let dd = new DeliveryDetails();
-    // dd.stationId = this.stationId;
-    // dd.DeliveryRate = this.standardRate;
-    // dd.PetrolAllowance = this.petrolallowance;
-    // }
-    this.api
-      .updateCDADeliverylist(deliverylist, this.usrToken)
-      .subscribe((data: APIResult) => {
-        this.load = false;
-        let status = data.status;
-        let message = data.message;
-        if (status) {
-          this.swServ.showSuccessMessage("Sucess!!!", message);
-          this.ngOnInit();
-        } else {
-          this.swServ.showErrorMessage("Failure!!!", message);
+    let count = this.inputs.length;
+    if (count > 0) {
+      this.inputs.forEach(function(val) {
+        let ele = val;
+        let dd = new DeliveryDetails();
+        dd.StationId = this.stationId;
+        dd.DeliveryRate = this.standardRate;
+        dd.PetrolAllowance = this.petrolallowance;
+        dd.CurrentMonth = this.currentmonth;
+        if (ele.includes("del")) {
+          var splitted = ele.split("-", 3);
+          let c = Number(splitted[2]);
+          let id = Number(splitted[0]);
+          if (c == NaN || c == undefined) {
+            c = 0;
+          }
+          // dd.DeliveryCount = c;
+          let found = deliverylist.some(el => el.EmployeeId === id);
+          if (found) {
+            deliverylist.find(el => el.EmployeeId == id).DeliveryCount = c;
+          } else {
+            dd.DeliveryCount = c;
+            deliverylist.push(dd);
+          }
+        } else if (ele.includes("inc")) {
+          var splitted2 = ele.split("-", 3);
+          let c2 = Number(splitted2[2]);
+          let id = Number(splitted2[0]);
+          if (c2 == NaN || c2 == undefined) {
+            c2 = 0;
+          }
+          let found = deliverylist.some(el => el.EmployeeId === id);
+          if (found) {
+            deliverylist.find(el => el.EmployeeId == id).Incentive = c2;
+          } else {
+            dd.DeliveryCount = c2;
+            deliverylist.push(dd);
+          }
         }
       });
+      // forEach(let i of this.inputs)
+      // {
+      //         let dd = new DeliveryDetails();
+      // dd.stationId = this.stationId;
+      // dd.DeliveryRate = this.standardRate;
+      // dd.PetrolAllowance = this.petrolallowance;
+      // }
+      this.api
+        .updateCDADeliverylist(deliverylist, this.usrToken)
+        .subscribe((data: APIResult) => {
+          this.load = false;
+          let status = data.status;
+          let message = data.message;
+          if (status) {
+            this.swServ.showSuccessMessage("Sucess!!!", message);
+            this.ngOnInit();
+          } else {
+            this.swServ.showErrorMessage("Failure!!!", message);
+          }
+        });
+    } else {
+      this.swServ.showErrorMessage(
+        "Invalid Input!!!",
+        "Please Enter Details for atleast one Employee"
+      );
+    }
   }
 }
