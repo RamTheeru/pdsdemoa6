@@ -198,14 +198,14 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
         if (!test) {
           this.swServ.showErrorMessage(title, msg);
         } else {
-          this.inputs = this.inputs.filter(function(val) {
-            let ele = val;
-            var splitted2 = ele.split("-", 3);
-            let t = splitted2[1];
-            let c2 = splitted2[2];
-            let i = splitted2[0];
-            i !== id && t === "delcount";
-          });
+          // this.inputs = this.inputs.filter(function(val) {
+          //   let ele = val;
+          //   var splitted2 = ele.split("-", 3);
+          //   let t = splitted2[1];
+          //   let c2 = splitted2[2];
+          //   let i = splitted2[0];
+          //   i !== id && t === "delcount";
+          // });
           this.inputs.push(id + "-delcount-" + del);
         }
       }
@@ -224,14 +224,14 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
         if (!test) {
           this.swServ.showErrorMessage(title, msg);
         } else {
-          this.inputs = this.inputs.filter(function(val) {
-            let ele = val;
-            var splitted2 = ele.split("-", 3);
-            let t = splitted2[1];
-            let c2 = splitted2[2];
-            let i = splitted2[0];
-            i !== id && t === "incent";
-          });
+          // this.inputs = this.inputs.filter(function(val) {
+          //   let ele = val;
+          //   var splitted2 = ele.split("-", 3);
+          //   let t = splitted2[1];
+          //   let c2 = splitted2[2];
+          //   let i = splitted2[0];
+          //   i !== id && t === "incent";
+          // });
           this.inputs.push(id + "-incent-" + v2);
         }
       }
@@ -279,8 +279,8 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
           if (found) {
             deliverylist.find(el => el.EmployeeId == id).DeliveryCount = c;
           } else {
-            dd.DeliveryCount = c;
-            deliverylist.push(dd);
+            this.dd.DeliveryCount = c;
+            deliverylist.push(this.dd);
           }
         } else if (ele.includes("inc")) {
           var splitted2 = ele.split("-", 3);
@@ -293,8 +293,8 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
           if (found) {
             deliverylist.find(el => el.EmployeeId == id).Incentive = c2;
           } else {
-            dd.DeliveryCount = c2;
-            deliverylist.push(dd);
+            this.dd.DeliveryCount = c2;
+            deliverylist.push(this.dd);
           }
         }
       });
