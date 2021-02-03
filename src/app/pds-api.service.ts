@@ -239,7 +239,10 @@ export class PdsApiService {
           apierrResult.message = m;
           obj = apierrResult;
         } else {
-          obj = JSON.stringify(this.printObject(obj));
+           m = m + "Reason : " +JSON.stringify(this.printObject(obj));
+                     apierrResult.status = false;
+          apierrResult.message = m;
+          obj = apierrResult;
         }
       }
 
