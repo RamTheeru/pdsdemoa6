@@ -20,7 +20,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
   petrolallowance: number = 0;
   standardRate: number = 0;
   load: boolean = false;
-  dd: DeliveryDetails = new DeliveryDetails;
+  dd: DeliveryDetails = new DeliveryDetails();
   cc: CommercialConstant;
   isHide: boolean = true;
   currentmonth: number = 0;
