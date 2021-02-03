@@ -11,7 +11,7 @@ import { DeliveryDetails } from "../../models/deliverydetails";
 import * as r from "rxjs";
 import { forEach } from "@angular/router/src/utils/collection";
 const deliverylist: DeliveryDetails[] = [];
-const dd = new DeliveryDetails();
+
 @Component({
   selector: "app-delivery-details",
   templateUrl: "./delivery-details.component.html",
@@ -250,6 +250,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
   Onsub() {
     console.log(this.inputs);
     this.load = true;
+    const dd = new DeliveryDetails();
     //let dd: DeliveryDetails = new DeliveryDetails();
     let count = this.inputs.length;
     if (count > 0) {
