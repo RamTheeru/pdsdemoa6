@@ -11,6 +11,7 @@ import { DeliveryDetails } from "../../models/deliverydetails";
 import * as r from "rxjs";
 import { forEach } from "@angular/router/src/utils/collection";
 const deliverylist: DeliveryDetails[] = [];
+const dd = new DeliveryDetails();
 @Component({
   selector: "app-delivery-details",
   templateUrl: "./delivery-details.component.html",
@@ -20,7 +21,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
   petrolallowance: number = 0;
   standardRate: number = 0;
   load: boolean = false;
-  dd: DeliveryDetails = new DeliveryDetails();
+
   cc: CommercialConstant;
   isHide: boolean = true;
   currentmonth: number = 0;
@@ -184,8 +185,9 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
     let msg = "Please Enter Only Numbers";
     if (val == "dvc") {
       id = event.target.id;
+      id = id.toString();
       del = event.target.value;
-
+      del = del.toString();
       if (del == null || del == undefined || del == "") {
         del = "0";
         this.swServ.showMessage(
@@ -207,7 +209,9 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
       }
     } else if (val == "inc") {
       id = event.target.id;
+      id = id.toString();
       v2 = event.target.value;
+      v2 = v2.toString();
       if (v2 == null || v2 == undefined || v2 == "") {
         v2 = "0";
         this.swServ.showMessage(
@@ -220,9 +224,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
         if (!test) {
           this.swServ.showErrorMessage(title, msg);
         } else {
-          this.inputs = this.inputs.filter(
-            e => !e.startsWith(id + "-incent-")
-          );
+          this.inputs = this.inputs.filter(e => !e.startsWith(id + "-incent-"));
           this.inputs.push(id + "-incent-" + v2);
         }
       }
@@ -253,11 +255,11 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
     if (count > 0) {
       this.inputs.forEach(function(val) {
         let ele = val;
-        this.dd = new DeliveryDetails();
-        this.dd.stationId = this.stationId;
-        this.dd.deliveryRate = this.standardRate;
-        this.dd.petrolAllowance = this.petrolallowance;
-        this.dd.currentMonth = this.currentmonth;
+        //dd = new DeliveryDetails();
+        dd.StationId = this.stationId;
+        dd.DeliveryRate = this.standardRate;
+        dd.PetrolAllowance = this.petrolallowance;
+        dd.CurrentMonth = this.currentmonth;
         if (ele.includes("del")) {
           var splitted = ele.split("-", 3);
           let c = Number(splitted[2]);
@@ -270,8 +272,8 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
           if (found) {
             deliverylist.find(el => el.EmployeeId == id).DeliveryCount = c;
           } else {
-            this.dd.DeliveryCount = c;
-            deliverylist.push(this.dd);
+            dd.DeliveryCount = c;
+            deliverylist.push(dd);
           }
         } else if (ele.includes("inc")) {
           var splitted2 = ele.split("-", 3);
@@ -284,8 +286,8 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
           if (found) {
             deliverylist.find(el => el.EmployeeId == id).Incentive = c2;
           } else {
-            this.dd.DeliveryCount = c2;
-            deliverylist.push(this.dd);
+            dd.DeliveryCount = c2;
+            deliverylist.push(dd);
           }
         }
       });
