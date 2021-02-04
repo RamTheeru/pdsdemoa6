@@ -265,6 +265,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
       });
   }
   Onsub() {
+    this.btnallow = false;
     // console.log(this.inputs);
     let dd = new DeliveryDetails();
     let sid = this.stationId;
