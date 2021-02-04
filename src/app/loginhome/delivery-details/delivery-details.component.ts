@@ -355,9 +355,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
               "Canelled",
               "Please re-enter all details again."
             );
-            this.fil.forEach(function(e) {
-              e.nativeElement.value = "0";
-            });
+              this.OnCancel
             this.inputs = [];
           }
         });
@@ -440,5 +438,10 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
           this.swServ.showErrorMessage("Failure!!!", message);
         }
       });
+  }
+  OnCancel() {
+    this.fil.forEach(function(e) {
+      e.nativeElement.value = "0";
+    });
   }
 }
