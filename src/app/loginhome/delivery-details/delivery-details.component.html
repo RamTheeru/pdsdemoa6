@@ -31,11 +31,11 @@
 					<td [hidden]="isHide"> {{emp.employeeId}}</td>
 					<td>{{emp.empCode}}</td>
 					<td>{{emp.firstName}}</td>
-					<td><input type="text" #fil id="{{emp.employeeId}}" (focusout)="focusOutFunction('dvc',$event)" value="{{emp.delivery.deliveryCount}}"/></td>
+					<td><input type="text" #fil id="{{emp.employeeId}}" name="dvc" (focusout)="focusOutFunction('dvc',$event)" value="{{emp.delivery.deliveryCount}}"/></td>
 					<td>{{standardRate}}</td>
 					<td>{{petrolallowance}}</td>
-					<td><input type="text" #fil id="{{emp.employeeId}}" (focusout)="focusOutFunction('inc',$event)" value="{{emp.delivery.incentive}}"/></td>
-					<td>{{emp.totalAmount}} </td>
+					<td><input type="text" #fil id="{{emp.employeeId}}" name="inc" (focusout)="focusOutFunction('inc',$event)" value="{{emp.delivery.incentive}}"/></td>
+					<td>{{emp.delivery.totalAmount}} </td>
 
 				</tr>
 			</tbody>

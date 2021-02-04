@@ -258,103 +258,166 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
   }
   Onsub() {
     console.log(this.inputs);
-
     let dd = new DeliveryDetails();
-    //let dd: DeliveryDetails = new DeliveryDetails();
-    let count = this.inputs.length;
-    if (this.currentmonth == 0) {
-      this.swServ.showErrorMessage("Invalid Input!!!", "Please Select Month & get list of employees");
-    } else if (count > 0) {
-      let sid = this.stationId;
-      let sdrate = this.standardRate;
-      let ptrrate = this.petrolallowance;
-      let mo = this.currentmonth;
-
-      this.inputs.forEach(function(val) {
-        let ele = val;
-        //dd = new DeliveryDetails();
-        // dd.StationId = this.stationId;
-        // dd.DeliveryRate = this.standardRate;
-        // dd.PetrolAllowance = this.petrolallowance;
-        // dd.CurrentMonth = this.currentmonth;
-        if (ele.includes("del")) {
-          var splitted = ele.split("-", 3);
-          let c = Number(splitted[2]);
-          let id = Number(splitted[0]);
-          if (c == NaN || c == undefined) {
-            c = 0;
-          }
-          // dd.DeliveryCount = c;
-          let found = deliverylist.some(el => el.EmployeeId === id);
-          if (found) {
-            deliverylist.find(el => el.EmployeeId == id).DeliveryCount = c;
-          } else {
-            let d = {
-              EmployeeId: id,
-              StationId: sid,
-              DeliveryRate: sdrate,
-              PetrolAllowance: ptrrate,
-              CurrentMonth: mo,
-              DeliveryCount: c
-            };
-            dd = d as DeliveryDetails;
-            //dd.DeliveryCount = c;
-            deliverylist.push(dd);
-          }
-        } else if (ele.includes("inc")) {
-          var splitted2 = ele.split("-", 3);
-          let c2 = Number(splitted2[2]);
-          let id = Number(splitted2[0]);
-          if (c2 == NaN || c2 == undefined) {
-            c2 = 0;
-          }
-          let found = deliverylist.some(el => el.EmployeeId === id);
-          if (found) {
-            deliverylist.find(el => el.EmployeeId == id).Incentive = c2;
-          } else {
-            let d2 = {
-              EmployeeId: id,
-              StationId: sid,
-              DeliveryRate: sdrate,
-              PetrolAllowance: ptrrate,
-              CurrentMonth: mo,
-              DeliveryCount: c2
-            };
-            dd = d2 as DeliveryDetails;
-            // dd.DeliveryCount = c2;
-            deliverylist.push(dd);
-          }
-        }
-      });
-      // forEach(let i of this.inputs)
-      // {
-      //         let dd = new DeliveryDetails();
-      // dd.stationId = this.stationId;
+    let sid = this.stationId;
+    let sdrate = this.standardRate;
+    let ptrrate = this.petrolallowance;
+    let mo = this.currentmonth;
+    this.fil.forEach(function(e) {
+      let ele = e;
+      //console.log(e);
+      let field = ele.nativeElement.name;
+      let c = Number(ele.nativeElement.value);
+      let id = Number(ele.nativeElement.id);
+      dd = new DeliveryDetails();
+      if (c == NaN || c == undefined || c == null) {
+        c = 0;
+      }
+      // dd.StationId = this.stationId;
       // dd.DeliveryRate = this.standardRate;
       // dd.PetrolAllowance = this.petrolallowance;
-      // }
-      swal({
-        title: "Are you sure?",
-        text: "Do you want to Update Details for following users?",
-        type: "warning",
-        showConfirmButton: true,
-        showCancelButton: true
-      }).then(willDelete => {
-        if (willDelete.value) {
-          console.log(deliverylist);
-          // this.updateDeilveryDetails(deliverylist, this.usrToken);
-          // this.api.approveUser(e.RegisterId, status);
+      // dd.CurrentMonth = this.currentmonth;
+      if (field == "dvc") {
+        // dd.DeliveryCount = c;
+        let found = deliverylist.some(el => el.EmployeeId === id);
+        if (found) {
+          deliverylist.find(el => el.EmployeeId == id).DeliveryCount = c;
         } else {
-          this.swServ.showErrorMessage(
-            "Canelled",
-            "Please re-enter all details again."
-          );
-          this.fil.forEach(function(e) {
-            e.nativeElement.value = "";
-          });
-          this.inputs = [];
+          let d = {
+            EmployeeId: id,
+            StationId: sid,
+            DeliveryRate: sdrate,
+            PetrolAllowance: ptrrate,
+            CurrentMonth: mo,
+            DeliveryCount: c
+          };
+          dd = d as DeliveryDetails;
+          //dd.DeliveryCount = c;
+          deliverylist.push(dd);
         }
+      } else if (field == "inc") {
+        let found = deliverylist.some(el => el.EmployeeId === id);
+        if (found) {
+          deliverylist.find(el => el.EmployeeId == id).Incentive = c;
+        } else {
+          let d2 = {
+            EmployeeId: id,
+            StationId: sid,
+            DeliveryRate: sdrate,
+            PetrolAllowance: ptrrate,
+            CurrentMonth: mo,
+            DeliveryCount: c
+          };
+          dd = d2 as DeliveryDetails;
+          // dd.DeliveryCount = c2;
+          deliverylist.push(dd);
+        }
+      } else {
+        this.swServ.showErrorMessage(
+          "Something went wrong!!!",
+          "Please try again"
+        );
+      }
+    });
+    //let dd = new DeliveryDetails();
+    //let dd: DeliveryDetails = new DeliveryDetails();
+    let count = 1; //this.inputs.length;
+    if (this.currentmonth == 0) {
+      this.swServ.showErrorMessage(
+        "Invalid Input!!!",
+        "Please Select Month & get list of employees"
+      );
+    } else if (count > 0) {
+      this.inputs.forEach(function(val) {
+        // let ele = val;
+        // //dd = new DeliveryDetails();
+        // // dd.StationId = this.stationId;
+        // // dd.DeliveryRate = this.standardRate;
+        // // dd.PetrolAllowance = this.petrolallowance;
+        // // dd.CurrentMonth = this.currentmonth;
+        // if (ele.includes("del")) {
+        //   var splitted = ele.split("-", 3);
+        //   let c = Number(splitted[2]);
+        //   let id = Number(splitted[0]);
+        //   if (c == NaN || c == undefined) {
+        //     c = 0;
+        //   }
+        //   // dd.DeliveryCount = c;
+        //   let found = deliverylist.some(el => el.EmployeeId === id);
+        //   if (found) {
+        //     deliverylist.find(el => el.EmployeeId == id).DeliveryCount = c;
+        //   } else {
+        //     let d = {
+        //       EmployeeId: id,
+        //       StationId: sid,
+        //       DeliveryRate: sdrate,
+        //       PetrolAllowance: ptrrate,
+        //       CurrentMonth: mo,
+        //       DeliveryCount: c
+        //     };
+        //     dd = d as DeliveryDetails;
+        //     //dd.DeliveryCount = c;
+        //     deliverylist.push(dd);
+        //   }
+        // } else if (ele.includes("inc")) {
+        //   var splitted2 = ele.split("-", 3);
+        //   let c2 = Number(splitted2[2]);
+        //   let id = Number(splitted2[0]);
+        //   if (c2 == NaN || c2 == undefined) {
+        //     c2 = 0;
+        //   }
+        //   let found = deliverylist.some(el => el.EmployeeId === id);
+        //   if (found) {
+        //     deliverylist.find(el => el.EmployeeId == id).Incentive = c2;
+        //   } else {
+        //     let d2 = {
+        //       EmployeeId: id,
+        //       StationId: sid,
+        //       DeliveryRate: sdrate,
+        //       PetrolAllowance: ptrrate,
+        //       CurrentMonth: mo,
+        //       DeliveryCount: c2
+        //     };
+        //     dd = d2 as DeliveryDetails;
+        //     // dd.DeliveryCount = c2;
+        //     deliverylist.push(dd);
+        //   }
+        // }
       });
+      count = deliverylist.length;
+
+      if (count > 0) {
+        swal({
+          title: "Are you sure?",
+          text: "Do you want to Update Details for following users?",
+          type: "warning",
+          showConfirmButton: true,
+          showCancelButton: true
+        }).then(willDelete => {
+          if (willDelete.value) {
+            if (this.inputs.length == 0) {
+              // this.employees
+            }
+            console.log(deliverylist);
+            // this.updateDeilveryDetails(deliverylist, this.usrToken);
+            // this.api.approveUser(e.RegisterId, status);
+          } else {
+            this.swServ.showErrorMessage(
+              "Canelled",
+              "Please re-enter all details again."
+            );
+            this.fil.forEach(function(e) {
+              e.nativeElement.value = "";
+            });
+            this.inputs = [];
+          }
+        });
+      } else {
+        this.swServ.showErrorMessage(
+          "Invalid Operation!!!",
+          "Unable to update  delivery details of employees"
+        );
+      }
     } else {
       this.swServ.showErrorMessage(
         "Invalid Input!!!",
