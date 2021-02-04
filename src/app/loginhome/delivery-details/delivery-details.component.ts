@@ -249,6 +249,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
           this.pageCount = data.queryPages;
           this.totalCount = data.queryTotalCount;
           this.pages = this.api.transform(this.pageCount);
+          // if(this.employees.)
           console.log(data);
         } else {
           this.swServ.showErrorMessage("Failure!!!", message);
@@ -345,7 +346,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
             "Canelled",
             "Please re-enter all details again."
           );
-          this.fil.forEach(function(e){
+          this.fil.forEach(function(e) {
             e.nativeElement.value = "";
           });
           this.inputs = [];
