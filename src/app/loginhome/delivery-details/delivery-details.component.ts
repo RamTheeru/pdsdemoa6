@@ -256,11 +256,17 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
   }
   Onsub() {
     console.log(this.inputs);
-    this.load = true;
+
     let dd = new DeliveryDetails();
     //let dd: DeliveryDetails = new DeliveryDetails();
     let count = this.inputs.length;
     if (count > 0) {
+
+      let sid =  this.stationId;
+       let sdrate = this.standardRate;
+       let ptrrate = this.petrolallowance;
+       let mo = this.currentmonth;
+
       this.inputs.forEach(function(val) {
         let ele = val;
         //dd = new DeliveryDetails();
@@ -280,12 +286,12 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
           if (found) {
             deliverylist.find(el => el.EmployeeId == id).DeliveryCount = c;
           } else {
-            let d =  {
-              
-              StationId: this.stationId,
-              DeliveryRate: this.standardRate,
-              PetrolAllowance: this.petrolallowance,
-              CurrentMonth: this.currentmonth,
+            let d = {
+              EmployeeId: id,
+              StationId: sid,
+              DeliveryRate: sdrate,
+              PetrolAllowance: ptrrate,
+              CurrentMonth: mo,
               DeliveryCount: c
             };
             dd = d as DeliveryDetails;
@@ -304,11 +310,11 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
             deliverylist.find(el => el.EmployeeId == id).Incentive = c2;
           } else {
             let d2 = {
-              EmployeeId : id,
-              StationId: this.stationId,
-              DeliveryRate: this.standardRate,
-              PetrolAllowance: this.petrolallowance,
-              CurrentMonth: this.currentmonth,
+              EmployeeId: id,
+              StationId: sid,
+              DeliveryRate: sdrate,
+              PetrolAllowance: ptrrate,
+              CurrentMonth: mo,
               DeliveryCount: c2
             };
             dd = d2 as DeliveryDetails;
@@ -351,6 +357,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
     }
   }
   updateDeilveryDetails(dvlist, token) {
+    this.load = true;
     this.api
       .updateCDADeliverylist(dvlist, token)
       .subscribe((data: APIResult) => {
