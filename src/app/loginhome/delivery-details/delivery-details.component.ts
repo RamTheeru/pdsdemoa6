@@ -43,6 +43,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
   userInfo: UserType;
   pageCount: number = 1;
   pages = [];
+  btnallow: boolean = false;
   totalCount: number = 0;
   list: DeliveryDetails[] = [];
   months = [
@@ -197,21 +198,24 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
       del = del.toString();
       if (del == null || del == undefined || del == "") {
         del = "0";
+        this.btnallow = true;
         this.swServ.showMessage(
-          "ALert!!!",
+          "Alert!!!",
           "Values that are not given will be taken as ZERO(default)"
         );
       }
       if (del != null || del != "") {
         test = this.api.ValidateNumbers(del);
         if (!test) {
+          this.btnallow = false;
           this.swServ.showErrorMessage(title, msg);
         } else {
+          this.btnallow = true;
           //  var ind = this.inputs.indexOf(e=>e.startsWith(id+'-delcount'));
-          this.inputs = this.inputs.filter(
-            e => !e.startsWith(id + "-delcount-")
-          );
-          this.inputs.push(id + "-delcount-" + del);
+          // this.inputs = this.inputs.filter(
+          //   e => !e.startsWith(id + "-delcount-")
+          // );
+          // this.inputs.push(id + "-delcount-" + del);
         }
       }
     } else if (val == "inc") {
@@ -221,6 +225,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
       v2 = v2.toString();
       if (v2 == null || v2 == undefined || v2 == "") {
         v2 = "0";
+        this.btnallow = true;
         this.swServ.showMessage(
           "ALert!!!",
           "Values that are not given will be taken as ZERO(default)"
@@ -229,14 +234,16 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
       if (v2 != null || v2 != "") {
         test = this.api.ValidateNumbers(v2);
         if (!test) {
+          this.btnallow = false;
           this.swServ.showErrorMessage(title, msg);
         } else {
-          this.inputs = this.inputs.filter(e => !e.startsWith(id + "-incent-"));
-          this.inputs.push(id + "-incent-" + v2);
+          this.btnallow = true;
+          // this.inputs = this.inputs.filter(e => !e.startsWith(id + "-incent-"));
+          // this.inputs.push(id + "-incent-" + v2);
         }
       }
     }
-    console.log(this.inputs);
+    //console.log(this.inputs);
   }
   getemployees(input: ApiInput) {
     this.api
@@ -257,7 +264,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
       });
   }
   Onsub() {
-    console.log(this.inputs);
+    // console.log(this.inputs);
     let dd = new DeliveryDetails();
     let sid = this.stationId;
     let sdrate = this.standardRate;
@@ -273,10 +280,6 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
       if (c == NaN || c == undefined || c == null) {
         c = 0;
       }
-      // dd.StationId = this.stationId;
-      // dd.DeliveryRate = this.standardRate;
-      // dd.PetrolAllowance = this.petrolallowance;
-      // dd.CurrentMonth = this.currentmonth;
       if (field == "dvc") {
         // dd.DeliveryCount = c;
         let found = deliverylist.some(el => el.EmployeeId === id);
@@ -385,7 +388,6 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
         // }
       });
       count = deliverylist.length;
-
       if (count > 0) {
         swal({
           title: "Are you sure?",
@@ -395,9 +397,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
           showCancelButton: true
         }).then(willDelete => {
           if (willDelete.value) {
-            if (this.inputs.length == 0) {
-              // this.employees
-            }
+
             console.log(deliverylist);
             // this.updateDeilveryDetails(deliverylist, this.usrToken);
             // this.api.approveUser(e.RegisterId, status);
