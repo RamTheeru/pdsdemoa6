@@ -10,6 +10,7 @@ import { CommercialConstant } from "../../models/commercialconstant";
 import { DeliveryDetails } from "../../models/deliverydetails";
 import * as r from "rxjs";
 import { forEach } from "@angular/router/src/utils/collection";
+import swal from "sweetalert2";
 const deliverylist: DeliveryDetails[] = [];
 
 @Component({
@@ -175,7 +176,6 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
     }
   }
   focusOutFunction(val, event) {
-    console.log(this.inputs);
     console.log(event);
     let del = "";
     let v2 = "";
@@ -229,6 +229,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
         }
       }
     }
+    console.log(this.inputs);
   }
   getemployees(input: ApiInput) {
     this.api
@@ -299,24 +300,41 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
       // dd.DeliveryRate = this.standardRate;
       // dd.PetrolAllowance = this.petrolallowance;
       // }
-      this.api
-        .updateCDADeliverylist(deliverylist, this.usrToken)
-        .subscribe((data: APIResult) => {
-          this.load = false;
-          let status = data.status;
-          let message = data.message;
-          if (status) {
-            this.swServ.showSuccessMessage("Sucess!!!", message);
-            this.ngOnInit();
-          } else {
-            this.swServ.showErrorMessage("Failure!!!", message);
-          }
-        });
+      swal({
+        title: "Are you sure?",
+        text: "Do you want to Update Details for following users?",
+        type: "warning",
+        showConfirmButton: true,
+        showCancelButton: true
+      }).then(willDelete => {
+        if (willDelete.value) {
+          this.updateDeilveryDetails(deliverylist, this.usrToken);
+          // this.api.approveUser(e.RegisterId, status);
+        } else {
+          this.swServ.showErrorMessage("Canelled", "");
+          this.inputs = [];
+        }
+      });
     } else {
       this.swServ.showErrorMessage(
         "Invalid Input!!!",
         "Please Enter Details for atleast one Employee"
       );
     }
+  }
+  updateDeilveryDetails(dvlist, token) {
+    this.api
+      .updateCDADeliverylist(dvlist, token)
+      .subscribe((data: APIResult) => {
+        this.load = false;
+        let status = data.status;
+        let message = data.message;
+        if (status) {
+          this.swServ.showSuccessMessage("Success!!!", message);
+          this.ngOnInit();
+        } else {
+          this.swServ.showErrorMessage("Failure!!!", message);
+        }
+      });
   }
 }
