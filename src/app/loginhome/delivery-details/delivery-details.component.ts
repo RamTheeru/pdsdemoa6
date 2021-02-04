@@ -1,7 +1,7 @@
 import {
   Component,
   OnInit,
-  ViewChild,
+  ViewChildren,
   ElementRef,
   OnDestroy
 } from "@angular/core";
@@ -28,7 +28,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
   petrolallowance: number = 0;
   standardRate: number = 0;
   load: boolean = false;
-  @ViewChild("fil") fil: ElementRef;
+  @ViewChildren("fil") fil: ElementRef;
   cc: CommercialConstant;
   isHide: boolean = true;
   currentmonth: number = 0;
@@ -261,11 +261,10 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
     //let dd: DeliveryDetails = new DeliveryDetails();
     let count = this.inputs.length;
     if (count > 0) {
-
-      let sid =  this.stationId;
-       let sdrate = this.standardRate;
-       let ptrrate = this.petrolallowance;
-       let mo = this.currentmonth;
+      let sid = this.stationId;
+      let sdrate = this.standardRate;
+      let ptrrate = this.petrolallowance;
+      let mo = this.currentmonth;
 
       this.inputs.forEach(function(val) {
         let ele = val;
