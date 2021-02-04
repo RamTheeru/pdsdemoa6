@@ -262,7 +262,9 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
     let dd = new DeliveryDetails();
     //let dd: DeliveryDetails = new DeliveryDetails();
     let count = this.inputs.length;
-    if (count > 0) {
+    if (this.currentmonth == 0) {
+      this.swServ.showErrorMessage("Invalid Input!!!", "Please Select Month");
+    } else if (count > 0) {
       let sid = this.stationId;
       let sdrate = this.standardRate;
       let ptrrate = this.petrolallowance;
@@ -339,7 +341,8 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
         showCancelButton: true
       }).then(willDelete => {
         if (willDelete.value) {
-          this.updateDeilveryDetails(deliverylist, this.usrToken);
+          console.log(deliverylist);
+          // this.updateDeilveryDetails(deliverylist, this.usrToken);
           // this.api.approveUser(e.RegisterId, status);
         } else {
           this.swServ.showErrorMessage(
