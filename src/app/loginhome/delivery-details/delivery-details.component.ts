@@ -280,14 +280,15 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
           if (found) {
             deliverylist.find(el => el.EmployeeId == id).DeliveryCount = c;
           } else {
-            var d = {
+            let d =  {
+              
               StationId: this.stationId,
               DeliveryRate: this.standardRate,
-              PetrolAllowance: this.petrolalloeance,
+              PetrolAllowance: this.petrolallowance,
               CurrentMonth: this.currentmonth,
               DeliveryCount: c
             };
-            dd = <DeliveryDetails>d;
+            dd = d as DeliveryDetails;
             //dd.DeliveryCount = c;
             deliverylist.push(dd);
           }
@@ -302,14 +303,15 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
           if (found) {
             deliverylist.find(el => el.EmployeeId == id).Incentive = c2;
           } else {
-            var d2 = {
+            let d2 = {
+              EmployeeId : id,
               StationId: this.stationId,
               DeliveryRate: this.standardRate,
-              PetrolAllowance: this.petrolalloeance,
+              PetrolAllowance: this.petrolallowance,
               CurrentMonth: this.currentmonth,
               DeliveryCount: c2
             };
-            dd = <DeliveryDetails>d2;
+            dd = d2 as DeliveryDetails;
             // dd.DeliveryCount = c2;
             deliverylist.push(dd);
           }
