@@ -322,9 +322,10 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
         );
       }
     });
+    
     //let dd = new DeliveryDetails();
     //let dd: DeliveryDetails = new DeliveryDetails();
-    let count = ; //this.inputs.length;
+    let count = 0; //this.inputs.length;
     if (this.currentmonth == 0) {
       this.swServ.showErrorMessage(
         "Invalid Input!!!",
