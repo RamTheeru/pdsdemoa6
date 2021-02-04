@@ -257,7 +257,11 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
           this.pageCount = data.queryPages;
           this.totalCount = data.queryTotalCount;
           this.pages = this.api.transform(this.pageCount);
-          // if(this.employees.)
+          if (this.employees.length > 0) {
+            this.btnallow = true;
+          }else{
+              this.btnallow = false;
+          }
           console.log(data);
         } else {
           this.swServ.showErrorMessage("Failure!!!", message);
@@ -265,7 +269,6 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
       });
   }
   Onsub() {
-    this.btnallow = false;
     // console.log(this.inputs);
     let dd = new DeliveryDetails();
     let sid = this.stationId;
