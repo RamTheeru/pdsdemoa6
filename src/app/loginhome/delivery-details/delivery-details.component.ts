@@ -165,6 +165,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
     }
     if (this.currentmonth == 0) {
       this.swServ.showErrorMessage("Invalid Input!!!", "Please Select Month");
+      this.employees = [];
     } else if (
       this.usrToken == "" ||
       this.usrToken == undefined ||
@@ -322,7 +323,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
         );
       }
     });
-    
+    console.log(deliverylist);
     //let dd = new DeliveryDetails();
     //let dd: DeliveryDetails = new DeliveryDetails();
     let count = 0; //this.inputs.length;
