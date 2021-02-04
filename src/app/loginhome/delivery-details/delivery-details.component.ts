@@ -263,7 +263,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
     //let dd: DeliveryDetails = new DeliveryDetails();
     let count = this.inputs.length;
     if (this.currentmonth == 0) {
-      this.swServ.showErrorMessage("Invalid Input!!!", "Please Select Month");
+      this.swServ.showErrorMessage("Invalid Input!!!", "Please Select Month & get list of employees");
     } else if (count > 0) {
       let sid = this.stationId;
       let sdrate = this.standardRate;
