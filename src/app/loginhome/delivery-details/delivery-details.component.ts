@@ -1,4 +1,10 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  OnDestroy
+} from "@angular/core";
 import { APIResult } from "../../models/apiresult";
 import { PdsApiService } from "../../pds-api.service";
 import { ApiInput } from "../../models/apiinput";
@@ -22,7 +28,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
   petrolallowance: number = 0;
   standardRate: number = 0;
   load: boolean = false;
-
+  @ViewChild("fil") fil: ElementRef;
   cc: CommercialConstant;
   isHide: boolean = true;
   currentmonth: number = 0;
@@ -311,7 +317,11 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
           this.updateDeilveryDetails(deliverylist, this.usrToken);
           // this.api.approveUser(e.RegisterId, status);
         } else {
-          this.swServ.showErrorMessage("Canelled", "");
+          this.swServ.showErrorMessage(
+            "Canelled",
+            "Please re-enter all details again."
+          );
+          this.fil.nativeElement.value = "";
           this.inputs = [];
         }
       });
