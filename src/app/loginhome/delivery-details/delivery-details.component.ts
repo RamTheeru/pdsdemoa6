@@ -259,8 +259,8 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
           this.pages = this.api.transform(this.pageCount);
           if (this.employees.length > 0) {
             this.btnallow = true;
-          }else{
-              this.btnallow = false;
+          } else {
+            this.btnallow = false;
           }
           console.log(data);
         } else {
@@ -356,7 +356,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
               "Please re-enter all details again."
             );
             this.fil.forEach(function(e) {
-              e.nativeElement.value = "";
+              e.nativeElement.value = "0";
             });
             this.inputs = [];
           }
