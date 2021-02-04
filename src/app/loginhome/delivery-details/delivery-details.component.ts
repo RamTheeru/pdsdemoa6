@@ -257,17 +257,17 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
   Onsub() {
     console.log(this.inputs);
     this.load = true;
-    const dd = new DeliveryDetails();
+    let dd = new DeliveryDetails();
     //let dd: DeliveryDetails = new DeliveryDetails();
     let count = this.inputs.length;
     if (count > 0) {
       this.inputs.forEach(function(val) {
         let ele = val;
         //dd = new DeliveryDetails();
-        dd.StationId = this.stationId;
-        dd.DeliveryRate = this.standardRate;
-        dd.PetrolAllowance = this.petrolallowance;
-        dd.CurrentMonth = this.currentmonth;
+        // dd.StationId = this.stationId;
+        // dd.DeliveryRate = this.standardRate;
+        // dd.PetrolAllowance = this.petrolallowance;
+        // dd.CurrentMonth = this.currentmonth;
         if (ele.includes("del")) {
           var splitted = ele.split("-", 3);
           let c = Number(splitted[2]);
@@ -280,7 +280,15 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
           if (found) {
             deliverylist.find(el => el.EmployeeId == id).DeliveryCount = c;
           } else {
-            dd.DeliveryCount = c;
+            var d = {
+              StationId: this.stationId,
+              DeliveryRate: this.standardRate,
+              PetrolAllowance: this.petrolalloeance,
+              CurrentMonth: this.currentmonth,
+              DeliveryCount: c
+            };
+            dd = <DeliveryDetails>d;
+            //dd.DeliveryCount = c;
             deliverylist.push(dd);
           }
         } else if (ele.includes("inc")) {
@@ -294,7 +302,15 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
           if (found) {
             deliverylist.find(el => el.EmployeeId == id).Incentive = c2;
           } else {
-            dd.DeliveryCount = c2;
+            var d2 = {
+              StationId: this.stationId,
+              DeliveryRate: this.standardRate,
+              PetrolAllowance: this.petrolalloeance,
+              CurrentMonth: this.currentmonth,
+              DeliveryCount: c2
+            };
+            dd = <DeliveryDetails>d2;
+            // dd.DeliveryCount = c2;
             deliverylist.push(dd);
           }
         }
