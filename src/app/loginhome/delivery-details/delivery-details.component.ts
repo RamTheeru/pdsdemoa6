@@ -3,6 +3,7 @@ import {
   OnInit,
   ViewChildren,
   ElementRef,
+  QueryList,
   OnDestroy
 } from "@angular/core";
 import { APIResult } from "../../models/apiresult";
@@ -28,7 +29,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
   petrolallowance: number = 0;
   standardRate: number = 0;
   load: boolean = false;
-  @ViewChildren("fil") fil: ElementRef;
+  @ViewChildren("fil") fil: QueryList<any>;
   cc: CommercialConstant;
   isHide: boolean = true;
   currentmonth: number = 0;
@@ -344,7 +345,9 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
             "Canelled",
             "Please re-enter all details again."
           );
-          this.fil.nativeElement.value = "";
+          this.fil.forEach(function(e){
+            e.nativeElement.value = "";
+          });
           this.inputs = [];
         }
       });
