@@ -330,63 +330,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
         "Invalid Input!!!",
         "Please Select Month & get list of employees"
       );
-    } else if (count > 0) {
-      this.inputs.forEach(function(val) {
-        // let ele = val;
-        // //dd = new DeliveryDetails();
-        // // dd.StationId = this.stationId;
-        // // dd.DeliveryRate = this.standardRate;
-        // // dd.PetrolAllowance = this.petrolallowance;
-        // // dd.CurrentMonth = this.currentmonth;
-        // if (ele.includes("del")) {
-        //   var splitted = ele.split("-", 3);
-        //   let c = Number(splitted[2]);
-        //   let id = Number(splitted[0]);
-        //   if (c == NaN || c == undefined) {
-        //     c = 0;
-        //   }
-        //   // dd.DeliveryCount = c;
-        //   let found = deliverylist.some(el => el.EmployeeId === id);
-        //   if (found) {
-        //     deliverylist.find(el => el.EmployeeId == id).DeliveryCount = c;
-        //   } else {
-        //     let d = {
-        //       EmployeeId: id,
-        //       StationId: sid,
-        //       DeliveryRate: sdrate,
-        //       PetrolAllowance: ptrrate,
-        //       CurrentMonth: mo,
-        //       DeliveryCount: c
-        //     };
-        //     dd = d as DeliveryDetails;
-        //     //dd.DeliveryCount = c;
-        //     deliverylist.push(dd);
-        //   }
-        // } else if (ele.includes("inc")) {
-        //   var splitted2 = ele.split("-", 3);
-        //   let c2 = Number(splitted2[2]);
-        //   let id = Number(splitted2[0]);
-        //   if (c2 == NaN || c2 == undefined) {
-        //     c2 = 0;
-        //   }
-        //   let found = deliverylist.some(el => el.EmployeeId === id);
-        //   if (found) {
-        //     deliverylist.find(el => el.EmployeeId == id).Incentive = c2;
-        //   } else {
-        //     let d2 = {
-        //       EmployeeId: id,
-        //       StationId: sid,
-        //       DeliveryRate: sdrate,
-        //       PetrolAllowance: ptrrate,
-        //       CurrentMonth: mo,
-        //       DeliveryCount: c2
-        //     };
-        //     dd = d2 as DeliveryDetails;
-        //     // dd.DeliveryCount = c2;
-        //     deliverylist.push(dd);
-        //   }
-        // }
-      });
+    } else {
       count = deliverylist.length;
       if (count > 0) {
         swal({
@@ -397,7 +341,6 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
           showCancelButton: true
         }).then(willDelete => {
           if (willDelete.value) {
-
             console.log(deliverylist);
             // this.updateDeilveryDetails(deliverylist, this.usrToken);
             // this.api.approveUser(e.RegisterId, status);
@@ -418,11 +361,62 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
           "Unable to update  delivery details of employees"
         );
       }
-    } else {
-      this.swServ.showErrorMessage(
-        "Invalid Input!!!",
-        "Please Enter Details for atleast one Employee"
-      );
+      // this.inputs.forEach(function(val) {
+      // let ele = val;
+      // //dd = new DeliveryDetails();
+      // // dd.StationId = this.stationId;
+      // // dd.DeliveryRate = this.standardRate;
+      // // dd.PetrolAllowance = this.petrolallowance;
+      // // dd.CurrentMonth = this.currentmonth;
+      // if (ele.includes("del")) {
+      //   var splitted = ele.split("-", 3);
+      //   let c = Number(splitted[2]);
+      //   let id = Number(splitted[0]);
+      //   if (c == NaN || c == undefined) {
+      //     c = 0;
+      //   }
+      //   // dd.DeliveryCount = c;
+      //   let found = deliverylist.some(el => el.EmployeeId === id);
+      //   if (found) {
+      //     deliverylist.find(el => el.EmployeeId == id).DeliveryCount = c;
+      //   } else {
+      //     let d = {
+      //       EmployeeId: id,
+      //       StationId: sid,
+      //       DeliveryRate: sdrate,
+      //       PetrolAllowance: ptrrate,
+      //       CurrentMonth: mo,
+      //       DeliveryCount: c
+      //     };
+      //     dd = d as DeliveryDetails;
+      //     //dd.DeliveryCount = c;
+      //     deliverylist.push(dd);
+      //   }
+      // } else if (ele.includes("inc")) {
+      //   var splitted2 = ele.split("-", 3);
+      //   let c2 = Number(splitted2[2]);
+      //   let id = Number(splitted2[0]);
+      //   if (c2 == NaN || c2 == undefined) {
+      //     c2 = 0;
+      //   }
+      //   let found = deliverylist.some(el => el.EmployeeId === id);
+      //   if (found) {
+      //     deliverylist.find(el => el.EmployeeId == id).Incentive = c2;
+      //   } else {
+      //     let d2 = {
+      //       EmployeeId: id,
+      //       StationId: sid,
+      //       DeliveryRate: sdrate,
+      //       PetrolAllowance: ptrrate,
+      //       CurrentMonth: mo,
+      //       DeliveryCount: c2
+      //     };
+      //     dd = d2 as DeliveryDetails;
+      //     // dd.DeliveryCount = c2;
+      //     deliverylist.push(dd);
+      //   }
+      // }
+      // });
     }
   }
   updateDeilveryDetails(dvlist, token) {
