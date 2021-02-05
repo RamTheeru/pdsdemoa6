@@ -14,6 +14,7 @@ import { APIResult } from "../models/apiresult";
 })
 export class PdsMainComponent implements OnInit {
   img: string;
+  load: boolean = false;
   userName: string;
   password: string;
   user: UserType;
@@ -39,8 +40,10 @@ export class PdsMainComponent implements OnInit {
     this.img = Environment.MainLogo;
   }
   onLogin() {
+    this.load = true;
     this.api.loginuser(this.userName, this.password).subscribe(
       (data: APIResult) => {
+        this.load = false;
         let status: Boolean = data.status;
         let m: string = data.message;
         this.user = data.userInfo;

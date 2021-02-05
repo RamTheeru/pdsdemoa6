@@ -247,12 +247,14 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
     //console.log(this.inputs);
   }
   getemployees(input: ApiInput) {
+    this.load = true;
     this.api
       .getCDADeliverylist(input, this.usrToken)
       .subscribe((data: APIResult) => {
         let status = data.status;
         let message = data.message;
         if (status) {
+          this.load = false;
           this.employees = data.employees;
           this.pageCount = data.queryPages;
           this.totalCount = data.queryTotalCount;
@@ -355,7 +357,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
               "Canelled",
               "Please re-enter all details again."
             );
-              this.OnCancel
+            this.OnCancel;
             this.inputs = [];
           }
         });
