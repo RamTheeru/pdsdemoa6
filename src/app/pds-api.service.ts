@@ -236,7 +236,7 @@ export class PdsApiService {
         // The response body may contain clues as to what went wrong,
         let m: string = "";
         m = `Backend returned code ${err.status}`;
-        console.log(err);
+        //  console.log(err);
         obj = err.error;
 
         if ("title" in obj) {
@@ -250,7 +250,11 @@ export class PdsApiService {
           apierrResult.status = false;
           apierrResult.message = m;
           obj = apierrResult;
-        } else if ("commandType" in obj || "status" in obj || "message" in obj) {
+        } else if (
+          "commandType" in obj ||
+          "status" in obj ||
+          "message" in obj
+        ) {
           m = m + " Reason : " + obj.message;
           apierrResult.status = false;
           apierrResult.message = m;

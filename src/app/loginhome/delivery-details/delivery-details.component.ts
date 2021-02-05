@@ -329,7 +329,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
         );
       }
     });
-    console.log(deliverylist);
+    // console.log(deliverylist);
     //let dd = new DeliveryDetails();
     //let dd: DeliveryDetails = new DeliveryDetails();
     let count = 0; //this.inputs.length;
