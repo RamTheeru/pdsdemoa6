@@ -349,8 +349,8 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
           showCancelButton: true
         }).then(willDelete => {
           if (willDelete.value) {
-           // console.log(deliverylist);
-            / this.updateDeilveryDetails(deliverylist, this.usrToken);
+            // console.log(deliverylist);
+            this.updateDeilveryDetails(deliverylist, this.usrToken);
             // this.api.approveUser(e.RegisterId, status);
           } else {
             this.swServ.showErrorMessage(

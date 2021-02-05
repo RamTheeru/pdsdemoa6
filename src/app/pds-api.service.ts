@@ -234,11 +234,11 @@ export class PdsApiService {
         let apierrResult: APIResult = new APIResult();
         // The backend returned an unsuccessful response code.
         // The response body may contain clues as to what went wrong,
-        console.error(
-          `Backend returned code ${err.status}, body was: ${err.error}`
-        );
-        obj = err.error;
         let m: string = "";
+        m = `Backend returned code ${err.status}`;
+        console.log(err);
+        obj = err.error;
+
         if ("title" in obj) {
           m = obj.title;
           apierrResult.status = false;
@@ -246,12 +246,17 @@ export class PdsApiService {
           obj = apierrResult;
         }
         if ("errors" in obj) {
-          m = m + "Reason : " + JSON.stringify(this.printObject(obj.errors));
+          m = m + " Reason : " + JSON.stringify(this.printObject(obj.errors));
+          apierrResult.status = false;
+          apierrResult.message = m;
+          obj = apierrResult;
+        } else if ("commandType" in obj || "status" in obj || "message" in obj) {
+          m = m + " Reason : " + obj.message;
           apierrResult.status = false;
           apierrResult.message = m;
           obj = apierrResult;
         } else {
-          m = m + "Reason : " + JSON.stringify(this.printObject(obj));
+          m = m + " Reason : " + JSON.stringify(obj);
           apierrResult.status = false;
           apierrResult.message = m;
           obj = apierrResult;
