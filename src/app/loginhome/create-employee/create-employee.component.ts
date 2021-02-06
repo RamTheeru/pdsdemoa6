@@ -90,77 +90,104 @@ export class CreateEmployeeComponent
     this.initForm();
   }
   ngAfterViewInit() {
-    console.log("ElementRef");
+    //console.log("ElementRef");
     this.childClassess = this.someInput.nativeElement.children;
 
     for (var val of this.childClassess) {
       //console.log(val.id)
       //console.log(val.className)
       var index = val.className.indexOf("active");
-      if (this.isEdle) {
-        if (this.tab1Id == val.id && index !== -1) {
-          this.activeTab = 1;
-          this.showtab(1);
-          this.hidPrev = true;
-          this.hidNext = false;
-        } else if (this.tab2Id == val.id && index !== -1) {
-          this.activeTab = 2;
-          this.showtab(2);
-          this.hidPrev = false;
-          this.hidNext = false;
-        } else if (this.tab3Id == val.id && index !== -1) {
-          this.activeTab = 3;
-          this.showtab(3);
-          this.hidPrev = false;
-          this.hidNext = true;
-        }
-      } else {
-        if (this.tab1Id == val.id && index !== -1) {
-          this.activeTab = 1;
-          this.showtab(1);
-          this.hidPrev = false;
-          this.hidNext = false;
-        } else if (this.tab2Id == val.id && index !== -1) {
-          this.activeTab = 2;
-          this.showtab(2);
-          this.hidPrev = false;
-          this.hidNext = false;
-        }
+      if (this.tab1Id == val.id && index !== -1) {
+        this.activeTab = 1;
+        this.showtab(1);
+        this.hidPrev = true;
+        this.hidNext = false;
+      } else if (this.tab2Id == val.id && index !== -1) {
+        this.activeTab = 2;
+        this.showtab(2);
+        this.hidPrev = false;
+        this.hidNext = false;
+      } else if (this.tab3Id == val.id && index !== -1) {
+        this.activeTab = 3;
+        this.showtab(3);
+        this.hidPrev = false;
+        this.hidNext = true;
       }
+      // if (this.isEdle) {
+      //   if (this.tab1Id == val.id && index !== -1) {
+      //     this.activeTab = 1;
+      //     this.showtab(1);
+      //     this.hidPrev = true;
+      //     this.hidNext = false;
+      //   } else if (this.tab2Id == val.id && index !== -1) {
+      //     this.activeTab = 2;
+      //     this.showtab(2);
+      //     this.hidPrev = false;
+      //     this.hidNext = false;
+      //   } else if (this.tab3Id == val.id && index !== -1) {
+      //     this.activeTab = 3;
+      //     this.showtab(3);
+      //     this.hidPrev = false;
+      //     this.hidNext = true;
+      //   }
+      // } else {
+      //   if (this.tab1Id == val.id && index !== -1) {
+      //     this.activeTab = 1;
+      //     this.showtab(1);
+      //     this.hidPrev = false;
+      //     this.hidNext = false;
+      //   } else if (this.tab2Id == val.id && index !== -1) {
+      //     this.activeTab = 2;
+      //     this.showtab(2);
+      //     this.hidPrev = false;
+      //     this.hidNext = false;
+      //   }
+      // }
     }
   }
   onchangetab(text: string) {
-    if (this.isLe) {
-      this.isEdle = true;
-    }
-
-    if (this.isEdle) {
-      if (text == "p") {
-        this.activeTab = this.activeTab - 1;
-      } else {
-        this.activeTab = this.activeTab + 1;
-      }
-      if (this.activeTab == 3) {
-        this.hidPrev = false;
-        this.hidNext = true;
-      } else if (this.activeTab == 1) {
-        this.hidPrev = true;
-        this.hidNext = false;
-      } else if (this.activeTab == 2) {
-        this.hidPrev = false;
-        this.hidNext = false;
-      }
+    if (text == "p") {
+      this.activeTab = this.activeTab - 1;
     } else {
-      if (text == "p") {
-        this.activeTab = 2;
-        this.activeTab = this.activeTab - 1;
-      } else {
-        this.activeTab = 1;
-        this.activeTab = this.activeTab + 1;
-      }
+      this.activeTab = this.activeTab + 1;
+    }
+    if (this.activeTab == 3) {
+      this.hidPrev = false;
+      this.hidNext = true;
+    } else if (this.activeTab == 1) {
+      this.hidPrev = true;
+      this.hidNext = false;
+    } else if (this.activeTab == 2) {
       this.hidPrev = false;
       this.hidNext = false;
     }
+    // if (this.isEdle) {
+    //   if (text == "p") {
+    //     this.activeTab = this.activeTab - 1;
+    //   } else {
+    //     this.activeTab = this.activeTab + 1;
+    //   }
+    //   if (this.activeTab == 3) {
+    //     this.hidPrev = false;
+    //     this.hidNext = true;
+    //   } else if (this.activeTab == 1) {
+    //     this.hidPrev = true;
+    //     this.hidNext = false;
+    //   } else if (this.activeTab == 2) {
+    //     this.hidPrev = false;
+    //     this.hidNext = false;
+    //   }
+    // } else {
+    //   if (text == "p") {
+    //     this.activeTab = 2;
+    //     this.activeTab = this.activeTab - 1;
+    //   } else {
+    //     this.activeTab = 1;
+    //     this.activeTab = this.activeTab + 1;
+    //   }
+    //   this.hidPrev = false;
+    //   this.hidNext = false;
+    // }
 
     // console.log(this.activeTab);
     this.showtab(this.activeTab);
@@ -234,18 +261,19 @@ export class CreateEmployeeComponent
     if (index !== -1) {
       this.isLe = true;
       this.isHe = false;
-      console.log("edle : " + this.edleVerify);
-      if (this.edleVerify == "edle") {
-        this.isEdle = false;
-        this.hidPrev = false;
-        this.hidNext = false;
-        this.showtab(1);
-      } else {
-        this.isEdle = true;
-      }
+      this.isEdle = true;
+      // console.log("edle : " + this.edleVerify);
+      // if (this.edleVerify == "edle") {
+      //   this.isEdle = false;
+      //   this.hidPrev = false;
+      //   this.hidNext = false;
+      //   this.showtab(1);
+      // } else {
+      //   this.isEdle = true;
+      // }
     } else {
       this.isHe = true;
-      //this.isEdle = false;
+      this.isEdle = false;
     }
     this.route.params.subscribe((params: Params) => {
       this.empId = +params["id"];
@@ -668,10 +696,11 @@ export class CreateEmployeeComponent
         if (status) {
           this.swServ.showSuccessMessage("Success!!!", m);
           this.initForm();
+          // this.ngAfterViewInit();
+          this.ngOnInit();
           this.showtab(1);
           this.hidPrev = true;
           this.hidNext = false;
-          // this.ngAfterViewInit();
         } else {
           this.swServ.showErrorMessage("Error!!", m);
         }
