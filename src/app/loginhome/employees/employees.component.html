@@ -18,13 +18,18 @@
     </select>
 		<button class="btn btn-success" (click)="getemployeesbyStation($event)"  type="submit">Search</button>
 	</form>
-	<!-- <div></div> -->
-	<div style="height: 600px;overflow: scroll;">
+	<h3><u>Contract Delivery Associate List:</u></h3><b>
+	<div class="row">
+		Total Records in Server : {{totalCount}}
+	</div>
+	<!-- <div>style="height: 600px;overflow: scroll;"</div> -->
+	<div>
 		<table id="t" class="table table-striped">
 			<thead>
 				<tr>
 					<th>FirstName</th>
 					<th>LastName</th>
+					<th>CDA Code</th>
 					<div *ngIf="isHe">
 						<th>Action</th>
 					</div>
@@ -59,6 +64,7 @@
 					<td [hidden]="isHide">{{emp.employeeId}}</td>
 					<td>{{emp.firstName}}</td>
 					<td>{{emp.lastName}}</td>
+					<td>{{emp.empCode}}</td>
 					<div *ngIf="isHe">
 						<td><input  #tablist id="{{emp.employeeId}}" (click)="toggleEditable($event)" type="checkbox" value=""/>
 				</div>
