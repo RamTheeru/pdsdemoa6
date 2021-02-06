@@ -698,6 +698,7 @@ export class CreateEmployeeComponent
           this.initForm();
           // this.ngAfterViewInit();
           this.ngOnInit();
+          this.activeTab = 1;
           this.showtab(1);
           this.hidPrev = true;
           this.hidNext = false;
