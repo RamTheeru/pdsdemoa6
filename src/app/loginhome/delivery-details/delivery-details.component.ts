@@ -447,6 +447,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
         } else {
           this.swServ.showErrorMessage("Failure!!!", message);
         }
+        deliverylist.length = 0;
       });
   }
   OnCancel() {
