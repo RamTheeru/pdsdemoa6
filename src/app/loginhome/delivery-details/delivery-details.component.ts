@@ -246,6 +246,14 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
     }
     //console.log(this.inputs);
   }
+  getdata(val: number) {
+    console.log(val);
+    this.apiInput = new ApiInput();
+    this.apiInput.page = val;
+    this.apiInput.stationId = Number(this.stationId);
+    this.apiInput.currentmonth = this.currentmonth;
+    this.getemployees(this.apiInput);
+  }
   getemployees(input: ApiInput) {
     this.load = true;
     this.api
@@ -357,7 +365,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
               "Canelled",
               "Please re-enter all details again."
             );
-            this.OnCancel;
+            this.OnCancel();
             this.inputs = [];
           }
         });
