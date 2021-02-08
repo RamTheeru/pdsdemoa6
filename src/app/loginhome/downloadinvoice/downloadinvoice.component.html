@@ -14,7 +14,18 @@
         >
       </div>
       <div class="row" *ngIf="showPath">
+        <label>Download Path:</label>
         <input type="text" [(ngModel)]="path" value="" />
+      </div>
+      <div class="row" *ngIf="showPath">
+        <button
+          type="button"
+          mat-raised-button
+          color="primary"
+          (click)="Onsub()"
+        >
+          Download files for all Employees
+        </button>
       </div>
     </div>
   </div>
