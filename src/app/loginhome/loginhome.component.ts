@@ -116,7 +116,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
     this.shoesidenav = !this.shoesidenav;
   }
   oncreateclk(tab = "") {
-    //fdhfgjf
+    //fdhfgjf  routerLink="/loginhome/downloadinvoice"
     this.shownotify = false;
     if (tab == "si") {
       this.act1SubMenu = true;
@@ -124,6 +124,16 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
     } else if (tab == "sl") {
       this.act1SubMenu = false;
       this.act2SubMenu = true;
+    } else if (tab == "edle") {
+      this.shownotify = false;
+      this.act1SubMenu = false;
+      this.act2SubMenu = false;
+      this.vServ.removeValue("fheverify");
+      this.vServ.removeValue("evheverify");
+      this.vServ.removeValue("hrvheverify");
+      this.vServ.setVerify("edle");
+      this.router.onSameUrlNavigation = "reload";
+      this.router.navigate(["/loginhome/downloadinvoice"]);
     } else {
       this.act1SubMenu = false;
       this.act2SubMenu = false;

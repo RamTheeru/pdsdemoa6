@@ -7,6 +7,7 @@ import { Component, OnInit } from "@angular/core";
 })
 export class DownloadinvoiceComponent implements OnInit {
   showPath: boolean = false;
+  path: string = "";
   constructor() {}
   shwPath() {
     if (!this.showPath) {

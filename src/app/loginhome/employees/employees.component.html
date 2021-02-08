@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <form class="form-inline" *ngIf="isHe">
+  <!-- <form class="form-inline" *ngIf="isHe">
     <input class="form-control mr-sm-2" type="text" placeholder="StationCode" />
     <button
       class="btn btn-success"
@@ -8,7 +8,7 @@
     >
       Search
     </button>
-  </form>
+  </form> -->
   <form class="form-inline" *ngIf="isHe">
     <!-- <input class="form-control mr-sm-2"     type="text"  placeholder="StationCode">  -->
     <!-- <p>dgsd         
@@ -44,6 +44,9 @@
           <th>LastName</th>
           <th>CDA Code</th>
           <div *ngIf="isHe">
+            <th>Action</th>
+          </div>
+          <div *ngIf="isEdle">
             <th>Action</th>
           </div>
           <th>Gaurdian Name</th>
@@ -89,7 +92,17 @@
               />
             </td>
           </div>
-
+          <div *ngIf="isEdle">
+            <td>
+              <input
+                #tablist
+                id="{{emp.employeeId}}"
+                (click)="toggleEditable($event)"
+                type="checkbox"
+                value=""
+              />
+            </td>
+          </div>
           <td>{{emp.guard_FullName}}</td>
           <td>{{emp.dob}}</td>
           <td>{{emp.stationCode}}</td>
@@ -117,6 +130,30 @@
         </tr>
       </tbody>
     </table>
+  </div>
+  <div class="container" *ngIf="isEdle">
+    <div class="row">
+      <div class="col">
+        <button
+          (click)="onDownload()"
+          type="button"
+          mat-raised-button
+          color="warn"
+        >
+          Download
+        </button>
+      </div>
+      <div class="col">
+        <button
+          type="button"
+          mat-raised-button
+          color="warn"
+          style="margin-right:10px;"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
   </div>
   <div class="container">
     <div class="row" *ngIf="isHe">

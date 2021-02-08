@@ -30,6 +30,7 @@ export class EmployeesComponent
   userInfo: UserType;
   pageCount: number = 1;
   pages = [];
+  selectedEmps = [];
   stationId: number = 0;
   totalCount: number = 0;
   ledgerIds = [];
@@ -312,16 +313,28 @@ export class EmployeesComponent
     const cbsChecked = this.tablist._results.filter(cb => {
       return cb.nativeElement.checked;
     });
-
-    for (var val2 of cbsChecked) {
-      this.ledgerIds.push(val2.nativeElement.id);
-    }
-    if (this.ledgerIds.length > 0) {
+    if (this.isEdle) {
+      for (var val2 of cbsChecked) {
+        this.selectedEmps.push(val2.nativeElement.id);
+      }
+      if (this.selectedEmps.length > 0) {
+      } else {
+        this.swServ.showErrorMessage(
+          "Invalid Input!!",
+          "Please Select atleast one of the CheckBoxes!!"
+        );
+      }
     } else {
-      this.swServ.showErrorMessage(
-        "Invalid Input!!",
-        "Please Select atleast one of the CheckBoxes!!"
-      );
+      for (var val2 of cbsChecked) {
+        this.ledgerIds.push(val2.nativeElement.id);
+      }
+      if (this.ledgerIds.length > 0) {
+      } else {
+        this.swServ.showErrorMessage(
+          "Invalid Input!!",
+          "Please Select atleast one of the CheckBoxes!!"
+        );
+      }
     }
   }
   toggleEditable(event) {
