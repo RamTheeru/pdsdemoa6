@@ -57,7 +57,7 @@ const appRoutes: Routes = [
       { path: "viewemployees", component: EmployeesComponent },
       { path: "confirmemployment", component: EmployeesComponent },
       { path: "generatesalaryslips", component: EmployeelistComponent },
-       { path: "downloadinvoice", component: DownloadinvoiceComponent },
+      { path: "downloadinvoice", component: DownloadinvoiceComponent },
       { path: "createcommercialrates", component: CommercialconstantComponent },
       { path: "employeesinsufficientdata", component: EmployeesComponent }
       //  {path : 'new',component: RecipeEditComponent ,canActivate:[AuthGuard]},
