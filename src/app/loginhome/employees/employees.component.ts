@@ -14,6 +14,7 @@ import { PdsApiService } from "../../pds-api.service";
 import { ApiInput } from "../../models/apiinput";
 import { SweetService } from "../../sweet.service";
 import { UserType } from "../../models/usertype";
+import { PDFInput } from "../../models/pdfinput";
 import { ViewService } from "../../view.service";
 import * as r from "rxjs";
 @Component({
@@ -28,6 +29,7 @@ export class EmployeesComponent
   isHide: boolean = true;
   usrToken: string = "";
   userInfo: UserType;
+  currentmonth: number = 0;
   pageCount: number = 1;
   pages = [];
   selectedEmps = [];
@@ -94,6 +96,27 @@ export class EmployeesComponent
       "Invalid Request!!!",
       "Unable to process request with invalid token, Please login again!!!"
     );
+  }
+  getemployeesbyMonth(event) {
+    //console.log(this.selectedStation) ;
+    if (this.usrToken == "") {
+      this.usrToken = this.vServ.getToken();
+    }
+    if (this.currentmonth == 0) {
+      this.swServ.showErrorMessage("Invalid Input!!!", "Please Select Month");
+      this.employees = [];
+    } else if (
+      this.usrToken == "" ||
+      this.usrToken == undefined ||
+      this.usrToken == null
+    ) {
+      this.handleUnauthorizedrequest();
+    } else {
+      this.apiInput = new ApiInput();
+      this.apiInput.stationId = Number(this.stationId);
+      this.apiInput.currentmonth = this.currentmonth;
+      this.getemployees(this.apiInput);
+    }
   }
   getemployees(input: ApiInput) {
     this.api
@@ -317,7 +340,36 @@ export class EmployeesComponent
       for (var val2 of cbsChecked) {
         this.selectedEmps.push(val2.nativeElement.id);
       }
-      if (this.selectedEmps.length > 0) {
+      if (this.currentmonth == 0) {
+        this.swServ.showErrorMessage(
+          "Invalid Input!!",
+          "Please Select Month!!"
+        );
+      } else if (
+        this.usrToken == "" ||
+        this.usrToken == undefined ||
+        this.usrToken == null
+      ) {
+        this.handleUnauthorizedrequest();
+      } else if (this.selectedEmps.length > 0) {
+        let pdf = new PDFInput();
+        pdf.emps = this.selectedEmps;
+        pdf.currentmonth = this.currentmonth;
+        this.api
+          .downloadpdffilesforemployees(pdf, this.usrToken)
+          .subscribe((data: APIResult) => {
+            let status = data.status;
+            let message = data.message;
+            if (status) {
+              // this.employees = data.employees;
+              // this.pageCount = data.queryPages;
+              // this.totalCount = data.queryTotalCount;
+              // this.pages = this.api.transform(this.pageCount);
+              // console.log(data);
+            } else {
+              this.swServ.showErrorMessage("Failure!!!", message);
+            }
+          });
       } else {
         this.swServ.showErrorMessage(
           "Invalid Input!!",

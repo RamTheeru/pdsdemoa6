@@ -15,5 +15,5 @@ export class DownloadinvoiceComponent implements OnInit {
     }
   }
   ngOnInit() {}
-  Onsub()
+  Onsub() {}
 }

@@ -36,6 +36,7 @@ export const CurrentUrls = {
   getCDADeliverylist: "CDAGetDeiveryDetails",
   getCDADeliveryStation: "CDAStationDeiveryDetails",
   updateCDADeliverylist: "CDAUpdateDeiveryDetails",
+  PDFFileDownload: "DownloadCDADeiveryDetails",
   logout: "DeleteSession"
 };
 @Injectable()
@@ -587,6 +588,32 @@ export class PdsApiService {
         catchError((error: HttpErrorResponse) => {
           let obj = this.handlehttpError(error);
           console.log(obj);
+          return new Observable(function(x) {
+            x.next(obj);
+          });
+        })
+      );
+  }
+  //PDF Files download for CDA
+  downloadpdffilesforemployees(input: any, tkn: string): R.Observable<any> {
+    var body = JSON.stringify(input);
+    const phttpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        Authorization: "Bearer " + tkn
+      })
+    };
+    console.log(this.baseurl + this.employeesUrl + CurrentUrls.PDFFileDownload);
+    return this.http
+      .post(
+        this.baseurl + this.employeesUrl + CurrentUrls.PDFFileDownload,
+        body,
+        phttpOptions
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let obj = this.handlehttpError(error);
           return new Observable(function(x) {
             x.next(obj);
           });
