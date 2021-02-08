@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-downloadinvoice',
-  templateUrl: './downloadinvoice.component.html',
-  styleUrls: ['./downloadinvoice.component.css']
+  selector: "app-downloadinvoice",
+  templateUrl: "./downloadinvoice.component.html",
+  styleUrls: ["./downloadinvoice.component.css"]
 })
 export class DownloadinvoiceComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+  showPath: boolean = false;
+  constructor() {}
+  shwPath() {
+    if (!this.showPath) {
+      this.showPath = true;
+    }
   }
-
+  ngOnInit() {}
 }

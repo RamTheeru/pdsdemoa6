@@ -2,15 +2,13 @@
   <div class="row">
     <div class="col">
       <a routerLink="/loginhome/registeremployees">
-        <span class="border border-primary"
-          ><p>{{blck1Text}} : {{registeredUsersCount}}</p></span
-        ></a
+        <span class="border border-primary"><p>Invidual Download</p></span></a
       >
     </div>
     <div class="col">
       <a>
-        <span class="border border-primary"
-          ><p>{{blck1Text}} : {{registeredUsersCount}}</p></span
+        <span class="border border-primary" (click)="shwPath()"
+          ><p>Bulk Download</p></span
         ></a
       >
     </div>

@@ -293,6 +293,14 @@ export class CreateEmployeeComponent
     });
   }
   private initForm() {
+    let staVal = {};
+    if (this.stationId > 0) {
+      staVal = new FormControl(
+        this.stations.find(e => e.stationId == this.stationId)
+      );
+    } else {
+      staVal = new FormControl("");
+    }
     if (this.editMode) {
       let eDate = new FormControl(new Date("09/15/1990"));
       this.empForm2 = this._fb.group({
@@ -330,7 +338,7 @@ export class CreateEmployeeComponent
         // desg: new FormControl("Su"),
         empc: new FormControl("Emp123"),
         //prof: new FormControl("3"),
-        station: new FormControl(""),
+        station: staVal, //new FormControl(staVal),
         location: new FormControl("testloaction"),
         account: new FormControl("3242533"),
         ifsc: new FormControl("ICIC21421"),
@@ -376,7 +384,7 @@ export class CreateEmployeeComponent
         //  year2: new FormControl(),
         //   ut: new FormControl(''),
         // desg: new FormControl(""),
-        station: new FormControl(""),
+        station: staVal,
         location: new FormControl(),
         account: new FormControl(),
         ifsc: new FormControl(),
