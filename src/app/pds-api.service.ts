@@ -605,7 +605,7 @@ export class PdsApiService {
       })
     };
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.PDFFileDownload);
-    console.log(bo)
+    console.log(body);
     return this.http
       .post(
         this.baseurl + this.employeesUrl + CurrentUrls.PDFFileDownload,
