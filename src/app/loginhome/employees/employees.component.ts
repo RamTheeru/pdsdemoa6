@@ -55,7 +55,7 @@ export class EmployeesComponent
   selectedStation: string = "";
   apiInput: ApiInput;
   @Input("") hrvheVerify: string = "";
-   months = [
+  months = [
     { id: 1, name: "January" },
     { id: 2, name: "Febrauary" },
     { id: 3, name: "March" },
@@ -372,6 +372,7 @@ export class EmployeesComponent
         this.api
           .downloadpdffilesforemployees(pdf, this.usrToken)
           .subscribe((data: APIResult) => {
+            console.log(data);
             let status = data.status;
             let message = data.message;
             if (status) {
