@@ -352,7 +352,7 @@ export class EmployeesComponent
     });
     if (this.isEdle) {
       for (var val2 of cbsChecked) {
-        this.selectedEmps.push(Nval2.nativeElement.id);
+        this.selectedEmps.push(Number(val2.nativeElement.id));
       }
       if (this.currentmonth == 0) {
         this.swServ.showErrorMessage(

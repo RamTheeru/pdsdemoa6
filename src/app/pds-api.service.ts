@@ -251,11 +251,8 @@ export class PdsApiService {
           apierrResult.status = false;
           apierrResult.message = m;
           obj = apierrResult;
-        } else if (
-          "commandType" in obj ||
-          "status" in obj ||
-          "message" in obj
-        ) {
+        }
+        if ("commandType" in obj || "status" in obj || "message" in obj) {
           m = m + " Reason : " + obj.message;
           apierrResult.status = false;
           apierrResult.message = m;
