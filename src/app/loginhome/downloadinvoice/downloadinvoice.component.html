@@ -1,24 +1,21 @@
 <div class="container">
-  <div class="row">
-    <div class="col">
-      <a routerLink="/loginhome/individualdownloadinvoice">
-        <span class="border border-primary"><p>Invidual Download</p></span></a
-      >
-    </div>
-    <div class="col">
-      <div class="row">
-        <a>
-          <span class="border border-primary" (click)="shwPath()"
-            ><p>Bulk Download</p></span
-          ></a
-        >
+	<div class="row">
+		<div class="col">
+			<a routerLink="/loginhome/individualdownloadinvoice">
+				<span class="border border-primary"><p>Individual Download</p></span></a>
+		</div>
+		<div class="col">
+			<div class="row">
+				<a>
+					<span class="border border-primary" (click)="shwPath()"
+            ><p>Bulk Download</p></span></a>
+			</div>
+			<div class="row" *ngIf="showPath">
+				<label>Download Path:</label>
+				<input type="text" [(ngModel)]="path" value="" />
       </div>
-      <div class="row" *ngIf="showPath">
-        <label>Download Path:</label>
-        <input type="text" [(ngModel)]="path" value="" />
-      </div>
-      <div class="row" *ngIf="showPath">
-        <button
+				<div class="row" *ngIf="showPath">
+					<button
           type="button"
           mat-raised-button
           color="primary"
@@ -26,7 +23,7 @@
         >
           Download files for all Employees
         </button>
-      </div>
-    </div>
-  </div>
-</div>
+				</div>
+			</div>
+		</div>
+	</div>

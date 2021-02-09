@@ -55,6 +55,20 @@ export class EmployeesComponent
   selectedStation: string = "";
   apiInput: ApiInput;
   @Input("") hrvheVerify: string = "";
+   months = [
+    { id: 1, name: "January" },
+    { id: 2, name: "Febrauary" },
+    { id: 3, name: "March" },
+    { id: 4, name: "April" },
+    { id: 5, name: "May" },
+    { id: 6, name: "June" },
+    { id: 7, name: "July" },
+    { id: 8, name: "August" },
+    { id: 9, name: "September" },
+    { id: 10, name: "October" },
+    { id: 11, name: "November" },
+    { id: 12, name: "December" }
+  ];
   constructor(
     private route: ActivatedRoute,
     private api: PdsApiService,
