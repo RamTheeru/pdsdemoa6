@@ -376,6 +376,10 @@ export class EmployeesComponent
             let status = data.status;
             let message = data.message;
             if (status) {
+              this.swServ.showSuccessMessage(
+                "Success!!!",
+                "File Downloaded Successfully"
+              );
               // this.employees = data.employees;
               // this.pageCount = data.queryPages;
               // this.totalCount = data.queryTotalCount;
