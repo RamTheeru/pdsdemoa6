@@ -182,7 +182,7 @@ export class EmployeesComponent
     this.apiInput.stationId = Number(this.selectedStation);
     if (this.isLe == true && this.isEdle === false) {
       this.apiInput.stationId = this.stationId;
-    }else if(this.isLe==true){
+    } else if (this.isLe == true) {
       this.apiInput.stationId = this.stationId;
     }
     if (tab == "d") {
@@ -191,46 +191,7 @@ export class EmployeesComponent
       this.getemployees(this.apiInput);
     }
   }
-  // getstaticEmployees() {
-  //   const emp: Employee = new Employee();
-  //   const errorTitle: string = "INVALID INPUT!!!";
-  //   emp.EmployeeId = 1;
-  //   emp.FirstName = "Ram";
-  //   emp.LastName = "k";
-  //   emp.MiddleName = "";
-  //   emp.Phone = "62463732424";
 
-  //   emp.Age = 29;
-
-  //   emp.BloodGroup = "O+";
-  //   emp.Gender = "m";
-  //   emp.Marital = "married";
-
-  //   emp.Address1 = "D.NO2-65";
-  //   emp.Address2 = "pragathi nagar";
-  //   emp.Place = "atp";
-  //   emp.State = "AP";
-  //   // emp.PostalCode = ;
-  //   emp.AAdharNumber = "236264657";
-  //   emp.PANNumber = "Aj24u23985";
-  //   emp.Guard_FullName = "Ramdas";
-
-  //   emp.Gaurd_PhoneNumber = "5353463473";
-  //   emp.DOB = "09-09-1990";
-  //   emp.DOJ = "09-09-2020";
-  //   emp.Designation = "Office Assisstnat";
-  //   emp.StationCode = "gtkl";
-  //   emp.LocationName = "Guntakal";
-  //   emp.DLLRStatus = "NO";
-  //   emp.VehicleNumber = "";
-  //   emp.DLLRNumber = "";
-  //   emp.BankAccountNumber = "35643637537";
-  //   emp.BankName = "Kotak";
-  //   emp.IFSCCode = "KTKB43523";
-  //   emp.BranchName = "Madhapur";
-
-  //   return emp;
-  // }
   ngAfterViewInit() {
     //this.ngOnInit();
   }
