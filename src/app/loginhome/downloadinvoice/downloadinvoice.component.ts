@@ -96,9 +96,9 @@ export class DownloadinvoiceComponent implements OnInit, OnDestroy {
     );
   }
   shwPath() {
-    // if (!this.showPath) {
-    //   this.showPath = true;
-    // }
+    if (!this.showPath) {
+      this.showPath = true;
+    }
   }
   getemployees(input: ApiInput) {
     this.load = true;
