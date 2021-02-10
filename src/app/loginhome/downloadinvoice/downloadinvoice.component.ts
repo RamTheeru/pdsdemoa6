@@ -9,6 +9,7 @@ import { PDFInput } from "../../models/pdfinput";
 import { ViewService } from "../../view.service";
 import * as r from "rxjs";
 import swal from "sweetalert2";
+import { saveAs } from "file-saver";
 @Component({
   selector: "app-downloadinvoice",
   templateUrl: "./downloadinvoice.component.html",
@@ -18,6 +19,7 @@ export class DownloadinvoiceComponent implements OnInit, OnDestroy {
   showPath: boolean = false;
   usrToken: string = "";
   userInfo: UserType;
+  selectedEmps = [];
   private subsc: r.Subscription;
   private subsc2: r.Subscription;
   path: string = "";
@@ -112,8 +114,40 @@ export class DownloadinvoiceComponent implements OnInit, OnDestroy {
           this.totalCount = data.queryTotalCount;
           this.pages = this.api.transform(this.pageCount);
           if (this.totalCount > 0) {
+            let pdf = new PDFInput();
+            pdf.emps = this.selectedEmps;
+            pdf.currentmonth = this.currentmonth;
+            this.load = true;
+            this.api
+              .downloadpdffilesforemployees(pdf, this.usrToken)
+              .subscribe(data => {
+                this.load = false;
+                console.log(data);
+                if (data instanceof APIResult) {
+                  let status = data.status;
+                  let message = data.message;
+                  if (status) {
+                    // this.employees = data.employees;
+                    // this.pageCount = data.queryPages;
+                    // this.totalCount = data.queryTotalCount;
+                    // this.pages = this.api.transform(this.pageCount);
+                    // console.log(data);
+                  } else {
+                    this.swServ.showErrorMessage("Failure!!!", message);
+                  }
+                } else {
+                  saveAs(data);
+                  this.swServ.showSuccessMessage(
+                    "Success!!!",
+                    "File Downloaded Successfully"
+                  );
+                }
+              });
           } else {
-            this.swServ.showMessage("Warning!!!", message);
+            this.swServ.showMessage(
+              "Warning!!!",
+              "No employees found to download file"
+            );
           }
         } else {
           this.swServ.showErrorMessage("Failure!!!", message);
