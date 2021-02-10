@@ -17,8 +17,11 @@ export class DownloadinvoiceComponent implements OnInit {
   showPath: boolean = false;
   usrToken: string = "";
   path: string = "";
-  currentmonth:number
+  stationId: number = 0;
+  load: boolean = false;
+  currentmonth: number = 0;
   apiInput: ApiInput;
+  employees: Employee[] = [];
   constructor(
     private swServ: SweetService,
     private api: PdsApiService,
