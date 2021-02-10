@@ -39,6 +39,7 @@ export class EmployeesComponent
   ledgerIds = [];
   employees: Employee[] = [];
   e: Employee;
+  filename: string = "CDAInvoice";
   load: boolean = false;
   private subsc: r.Subscription;
   private subsc2: r.Subscription;
@@ -131,7 +132,7 @@ export class EmployeesComponent
       this.apiInput = new ApiInput();
       this.apiInput.stationId = Number(this.stationId);
       this.apiInput.currentmonth = this.currentmonth;
-      this.getemployees(this.apiInput);
+      this.getCDADeliverylist(this.apiInput);
     }
   }
   getemployees(input: ApiInput) {
@@ -153,16 +154,40 @@ export class EmployeesComponent
         }
       });
   }
-  getdata(val: number) {
+  getCDADeliverylist(input: ApiInput) {
+    this.load = true;
+    this.api
+      .getCDADeliverylist(input, this.usrToken)
+      .subscribe((data: APIResult) => {
+        this.load = false;
+        let status = data.status;
+        let message = data.message;
+        if (status) {
+          this.employees = data.employees;
+          this.pageCount = data.queryPages;
+          this.totalCount = data.queryTotalCount;
+          this.filename = this.filename + data.employeeName;
+          this.pages = this.api.transform(this.pageCount);
+          console.log(data);
+        } else {
+          this.swServ.showErrorMessage("Failure!!!", message);
+        }
+      });
+  }
+  getdata(val: number, tab) {
     console.log(val);
+
     this.apiInput = new ApiInput();
     this.apiInput.page = val;
     this.apiInput.stationId = Number(this.selectedStation);
     if (this.isLe == true && this.isEdle === false) {
       this.apiInput.stationId = this.stationId;
     }
-
-    this.getemployees(this.apiInput);
+    if (tab == "d") {
+      this.getCDADeliverylist(this.apiInput);
+    } else {
+      this.getemployees(this.apiInput);
+    }
   }
   // getstaticEmployees() {
   //   const emp: Employee = new Employee();
@@ -392,7 +417,7 @@ export class EmployeesComponent
                 this.swServ.showErrorMessage("Failure!!!", message);
               }
             } else {
-              saveAs(data);
+              saveAs(data, this.filename);
               this.swServ.showSuccessMessage(
                 "Success!!!",
                 "File Downloaded Successfully"

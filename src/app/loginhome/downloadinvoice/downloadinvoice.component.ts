@@ -24,6 +24,7 @@ export class DownloadinvoiceComponent implements OnInit, OnDestroy {
   private subsc2: r.Subscription;
   path: string = "";
   pageCount: number = 1;
+  filename: string = "CDAInvoice";
   pages = [];
   stationId: number = 0;
   totalCount: number = 0;
@@ -103,7 +104,7 @@ export class DownloadinvoiceComponent implements OnInit, OnDestroy {
   getemployees(input: ApiInput) {
     this.load = true;
     this.api
-      .getdeliveryassociates(input, this.usrToken)
+      .getCDADeliverylist(input, this.usrToken)
       .subscribe((data: APIResult) => {
         this.load = false;
         let status = data.status;
@@ -112,6 +113,7 @@ export class DownloadinvoiceComponent implements OnInit, OnDestroy {
           this.employees = data.employees;
           this.pageCount = data.queryPages;
           this.totalCount = data.queryTotalCount;
+          this.filename = this.filename + data.employeeName;
           this.pages = this.api.transform(this.pageCount);
           if (this.totalCount > 0) {
             let pdf = new PDFInput();
@@ -139,7 +141,7 @@ export class DownloadinvoiceComponent implements OnInit, OnDestroy {
                     this.swServ.showErrorMessage("Failure!!!", message);
                   }
                 } else {
-                  saveAs(data);
+                  saveAs(data, this.filename);
                   this.swServ.showSuccessMessage(
                     "Success!!!",
                     "Zip file containing " +
