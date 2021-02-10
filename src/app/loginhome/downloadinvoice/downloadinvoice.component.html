@@ -18,7 +18,7 @@
 				<label>Download Path:</label>
 				<input type="text" [(ngModel)]="path" value="" />
       </div> -->
-				<!-- <div class="row" *ngIf="showPath">
+			<!-- <div class="row" *ngIf="showPath">
 					<button
           type="button"
           mat-raised-button
@@ -29,16 +29,16 @@
         </button>
         
 				</div> -->
-				<div class="row" *ngIf="showPath">
+			<div class="row" *ngIf="showPath">
 
-					<select     [(ngModel)]="currentmonth" name="month" id="stat">
+				<select     [(ngModel)]="currentmonth" name="month" id="stat">
 							<option value="0" selected>Select Month</option>
               	<option *ngFor="let s of months" [ngValue]="s.id">
 								{{s.name}}
 							</option>
     </select>
-					<button class="btn btn-success" (click)="getemployeesbyMonth($event)"  type="submit">Search</button>
-				</div>
+				<button class="btn btn-success" (click)="getemployeesbyMonth($event)"  type="submit">Search</button>
 			</div>
 		</div>
 	</div>
+</div>
