@@ -182,6 +182,8 @@ export class EmployeesComponent
     this.apiInput.stationId = Number(this.selectedStation);
     if (this.isLe == true && this.isEdle === false) {
       this.apiInput.stationId = this.stationId;
+    }else if(this.isLe==true){
+      this.apiInput.stationId = this.stationId;
     }
     if (tab == "d") {
       this.getCDADeliverylist(this.apiInput);

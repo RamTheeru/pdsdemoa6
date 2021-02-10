@@ -22,7 +22,7 @@
     "moment": "2.29.1",
     "popper.js": "1.16.1",
     "rxjs": "6.1.0",
-    "rxjs-compat": "^6.6.3",
+    "rxjs-compat": "6.6.3",
     "sweetalert2": "7.22.2",
     "tslib": "2.0.1",
     "zone.js": "0.8.26"
