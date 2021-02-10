@@ -48,63 +48,28 @@
 	<div class="row">
 		Total Records in Server : {{totalCount}}
 	</div>
-	<!-- <div></div> -->
-	<div style="overflow-x:auto;">
-		<table id="t" class="table table-striped">
+	<div class="row" *ngIf="isEdle; else rg">
+		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>FirstName</th>
-					<th>LastName</th>
-					<th>CDA Code</th>
-					<div *ngIf="isHe">
-						<th>Action</th>
-					</div>
+					<!-- <th>S.No</th> -->
+					<th>Employee Code</th>
+					<th>Employee Name</th>
 					<div *ngIf="isEdle">
 						<th>Action</th>
 					</div>
-					<th>Gaurdian Name</th>
-					<th>DOB</th>
-					<th>StateCode</th>
-					<th>LocationName</th>
-					<!-- <th>Designation</th> -->
-					<th>DOJ</th>
-					<th>AccountNumber</th>
-					<th>IFSC Code</th>
-					<th>Bank Name</th>
-					<th>Branch Name</th>
-					<th>Aadhar Number</th>
-					<!-- <th>PAN Status</th> -->
-					<th>PAN Number</th>
-					<th>DL/LR Status</th>
-					<th>DL/LLR Number</th>
-					<th>Vehicle Number</th>
-					<th>Address ( D.No )</th>
-					<th>Place</th>
-					<th>Employee Type</th>
-					<th>Mobile</th>
-					<th>Alternate number</th>
-					<th>Marital Status</th>
-					<th>Blood Group</th>
-					<th>Age</th>
+					<th>Delivery Count</th>
+					<th>Standard Rate/Delivery</th>
+					<th>Petrol Allowance</th>
+					<th>Incentive</th>
+					<th>Total Amount</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr *ngFor="let emp of employees;">
-					<td [hidden]="isHide">{{emp.employeeId}}</td>
-					<td>{{emp.firstName}}</td>
-					<td>{{emp.lastName}}</td>
+					<td [hidden]="isHide"> {{emp.employeeId}}</td>
 					<td>{{emp.empCode}}</td>
-					<div *ngIf="isHe">
-						<td>
-							<input
-                #tablist
-                id="{{emp.employeeId}}"
-                (click)="toggleEditable($event)"
-                type="checkbox"
-                value=""
-              />
-            </td>
-					</div>
+					<td>{{emp.firstName}}</td>
 					<div *ngIf="isEdle">
 						<td>
 							<input
@@ -116,34 +81,118 @@
               />
             </td>
 					</div>
-					<td>{{emp.guard_FullName}}</td>
-					<td>{{emp.dob}}</td>
-					<td>{{emp.stationCode}}</td>
-					<td>{{emp.locationName}}</td>
-					<!-- <td>{{emp.Designation}}</td> -->
-					<td>{{emp.doj}}</td>
-					<td>{{emp.bankAccountNumber}}</td>
-					<td>{{emp.ifscCode}}</td>
-					<td>{{emp.bankName}}</td>
-					<td>{{emp.branchName}}</td>
-					<td>{{emp.aadharNumber}}</td>
-					<!-- <td>{{emp.PAN==true?'Active':'Inactive'}}</td> -->
-					<td>{{emp.panNumber}}</td>
-					<td>{{emp.dllrStatus}}</td>
-					<td>{{emp.dllrNumber}}</td>
-					<td>{{emp.vehicleNumber}}</td>
-					<td>{{emp.address1}}</td>
-					<td>{{emp.place}}</td>
-					<td>{{emp.employeeType}}</td>
-					<td>{{emp.phone}}</td>
-					<td>{{emp.guard_Phone}}</td>
-					<td>{{emp.maritalStatus==true?'Married':'UnMarried'}}</td>
-					<td>{{emp.bloodGroup}}</td>
-					<td>{{emp.empAge}}</td>
+					<td>{{emp.delivery.deliveryCount}}</td>
+					<td>{{standardRate}}</td>
+					<td>{{petrolallowance}}</td>
+					<td>{{emp.delivery.incentive}}"/</td>
+					<td>{{emp.delivery.totalAmount}} </td>
+
 				</tr>
 			</tbody>
 		</table>
 	</div>
+	<!-- <div></div> -->
+	<ng-template #rg>
+		<div class="row">
+
+			<div style="overflow-x:auto;">
+				<table id="t" class="table table-striped">
+					<thead>
+						<tr>
+							<th>FirstName</th>
+							<th>LastName</th>
+							<th>CDA Code</th>
+							<div *ngIf="isHe">
+								<th>Action</th>
+							</div>
+							<div *ngIf="isEdle">
+								<th>Action</th>
+							</div>
+							<th>Gaurdian Name</th>
+							<th>DOB</th>
+							<th>StateCode</th>
+							<th>LocationName</th>
+							<!-- <th>Designation</th> -->
+							<th>DOJ</th>
+							<th>AccountNumber</th>
+							<th>IFSC Code</th>
+							<th>Bank Name</th>
+							<th>Branch Name</th>
+							<th>Aadhar Number</th>
+							<!-- <th>PAN Status</th> -->
+							<th>PAN Number</th>
+							<th>DL/LR Status</th>
+							<th>DL/LLR Number</th>
+							<th>Vehicle Number</th>
+							<th>Address ( D.No )</th>
+							<th>Place</th>
+							<th>Employee Type</th>
+							<th>Mobile</th>
+							<th>Alternate number</th>
+							<th>Marital Status</th>
+							<th>Blood Group</th>
+							<th>Age</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let emp of employees;">
+							<td [hidden]="isHide">{{emp.employeeId}}</td>
+							<td>{{emp.firstName}}</td>
+							<td>{{emp.lastName}}</td>
+							<td>{{emp.empCode}}</td>
+							<div *ngIf="isHe">
+								<td>
+									<input
+                #tablist
+                id="{{emp.employeeId}}"
+                (click)="toggleEditable($event)"
+                type="checkbox"
+                value=""
+              />
+            </td>
+							</div>
+							<div *ngIf="isEdle">
+								<td>
+									<input
+                #tablist
+                id="{{emp.employeeId}}"
+                (click)="toggleEditable($event)"
+                type="checkbox"
+                value=""
+              />
+            </td>
+							</div>
+							<td>{{emp.guard_FullName}}</td>
+							<td>{{emp.dob}}</td>
+							<td>{{emp.stationCode}}</td>
+							<td>{{emp.locationName}}</td>
+							<!-- <td>{{emp.Designation}}</td> -->
+							<td>{{emp.doj}}</td>
+							<td>{{emp.bankAccountNumber}}</td>
+							<td>{{emp.ifscCode}}</td>
+							<td>{{emp.bankName}}</td>
+							<td>{{emp.branchName}}</td>
+							<td>{{emp.aadharNumber}}</td>
+							<!-- <td>{{emp.PAN==true?'Active':'Inactive'}}</td> -->
+							<td>{{emp.panNumber}}</td>
+							<td>{{emp.dllrStatus}}</td>
+							<td>{{emp.dllrNumber}}</td>
+							<td>{{emp.vehicleNumber}}</td>
+							<td>{{emp.address1}}</td>
+							<td>{{emp.place}}</td>
+							<td>{{emp.employeeType}}</td>
+							<td>{{emp.phone}}</td>
+							<td>{{emp.guard_Phone}}</td>
+							<td>{{emp.maritalStatus==true?'Married':'UnMarried'}}</td>
+							<td>{{emp.bloodGroup}}</td>
+							<td>{{emp.empAge}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</ng-template>
 	<div class="container" *ngIf="isEdle">
 		<div class="row">
 			<div class="col">
