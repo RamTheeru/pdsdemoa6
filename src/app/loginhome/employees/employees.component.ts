@@ -17,6 +17,7 @@ import { UserType } from "../../models/usertype";
 import { PDFInput } from "../../models/pdfinput";
 import { ViewService } from "../../view.service";
 import * as r from "rxjs";
+import { saveAs } from "file-saver";
 @Component({
   selector: "app-employees",
   templateUrl: "./employees.component.html",
@@ -371,22 +372,26 @@ export class EmployeesComponent
         pdf.currentmonth = this.currentmonth;
         this.api
           .downloadpdffilesforemployees(pdf, this.usrToken)
-          .subscribe((data: APIResult) => {
+          .subscribe(data => {
             console.log(data);
-            let status = data.status;
-            let message = data.message;
-            if (status) {
+            if (data instanceof APIResult) {
+              let status = data.status;
+              let message = data.message;
+              if (status) {
+                // this.employees = data.employees;
+                // this.pageCount = data.queryPages;
+                // this.totalCount = data.queryTotalCount;
+                // this.pages = this.api.transform(this.pageCount);
+                // console.log(data);
+              } else {
+                this.swServ.showErrorMessage("Failure!!!", message);
+              }
+            } else {
+              saveAs(data)
               this.swServ.showSuccessMessage(
                 "Success!!!",
                 "File Downloaded Successfully"
               );
-              // this.employees = data.employees;
-              // this.pageCount = data.queryPages;
-              // this.totalCount = data.queryTotalCount;
-              // this.pages = this.api.transform(this.pageCount);
-              // console.log(data);
-            } else {
-              this.swServ.showErrorMessage("Failure!!!", message);
             }
           });
       } else {
