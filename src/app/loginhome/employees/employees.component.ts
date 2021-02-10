@@ -39,6 +39,7 @@ export class EmployeesComponent
   ledgerIds = [];
   employees: Employee[] = [];
   e: Employee;
+  load: boolean = false;
   private subsc: r.Subscription;
   private subsc2: r.Subscription;
   private subsc3: r.Subscription;
@@ -134,9 +135,11 @@ export class EmployeesComponent
     }
   }
   getemployees(input: ApiInput) {
+    this.load = true;
     this.api
       .getdeliveryassociates(input, this.usrToken)
       .subscribe((data: APIResult) => {
+        this.load = false;
         let status = data.status;
         let message = data.message;
         if (status) {
@@ -370,9 +373,11 @@ export class EmployeesComponent
         let pdf = new PDFInput();
         pdf.emps = this.selectedEmps;
         pdf.currentmonth = this.currentmonth;
+        this.load = true;
         this.api
           .downloadpdffilesforemployees(pdf, this.usrToken)
           .subscribe(data => {
+            this.load = false;
             console.log(data);
             if (data instanceof APIResult) {
               let status = data.status;
@@ -387,11 +392,14 @@ export class EmployeesComponent
                 this.swServ.showErrorMessage("Failure!!!", message);
               }
             } else {
-              saveAs(data)
+              saveAs(data);
               this.swServ.showSuccessMessage(
                 "Success!!!",
                 "File Downloaded Successfully"
               );
+              for (var val2 of cbsChecked) {
+                val2.nativeElement.target.value = false;
+              }
             }
           });
       } else {
@@ -416,6 +424,8 @@ export class EmployeesComponent
   toggleEditable(event) {
     if (event.target.checked) {
       event.target.value = true;
+    } else {
+      event.target.value = false;
     }
   }
   ngOnDestroy() {
