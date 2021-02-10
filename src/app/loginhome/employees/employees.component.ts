@@ -401,6 +401,7 @@ export class EmployeesComponent
                 val2.nativeElement.target.value = false;
               }
             }
+            this.selectedEmps.length = 0;
           });
       } else {
         this.swServ.showErrorMessage(

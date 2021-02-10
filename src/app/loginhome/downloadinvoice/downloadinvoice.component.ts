@@ -115,7 +115,10 @@ export class DownloadinvoiceComponent implements OnInit, OnDestroy {
           this.pages = this.api.transform(this.pageCount);
           if (this.totalCount > 0) {
             let pdf = new PDFInput();
+            this.selectedEmps.length = 0;
             pdf.emps = this.selectedEmps;
+            pdf.forall = true;
+            pdf.stationId = this.stationId;
             pdf.currentmonth = this.currentmonth;
             this.load = true;
             this.api
@@ -139,7 +142,9 @@ export class DownloadinvoiceComponent implements OnInit, OnDestroy {
                   saveAs(data);
                   this.swServ.showSuccessMessage(
                     "Success!!!",
-                    "File Downloaded Successfully"
+                    "Zip file containing " +
+                      this.totalCount.toString() +
+                      "file(s) Downloaded Successfully"
                   );
                 }
               });
