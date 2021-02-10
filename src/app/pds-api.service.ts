@@ -629,23 +629,5 @@ export class PdsApiService {
         })
       );
   }
-  HandleBase64(data, contentType, fileName) {
-    let byteCharacters = atob(data);
-    let byteNumbers = new Array(byteCharacters.length);
-    for (var i = 0; i < byteCharacters.length; i++)
-      byteNumbers[i] = byteCharacters.charCodeAt(i);
 
-    let byteArray = new Uint8Array(byteNumbers);
-    let blob = new Blob([byteArray], { type: contentType });
-    if (contentType === "audio/wav") {
-      var blobURL = URL.createObjectURL(blob);
-      window.open(blobURL);
-    } else {
-      var blobURL = window.URL.createObjectURL(blob);
-      var anchor = document.createElement("a");
-      anchor.download = fileName;
-      anchor.href = blobURL;
-      anchor.click();
-    }
-  }
 }
