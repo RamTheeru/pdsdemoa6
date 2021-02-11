@@ -341,7 +341,7 @@ export class EmployeesComponent
   }
   private resetfilters() {
     this.tablist._results.foreach(cb => {
-      cb.nativeElement..checked = false;
+      cb.nativeElement.checked = false;
     });
   }
   onDownload() {
@@ -391,9 +391,9 @@ export class EmployeesComponent
                 "Success!!!",
                 "File Downloaded Successfully"
               );
-              for (var val2 of cbsChecked) {
-                val2.nativeElement.target.value = false;
-              }
+              // for (var val2 of cbsChecked) {
+              //   val2.nativeElement.target.value = false;
+              // }
               this.resetfilters();
               this.selectedEmps.length = 0;
             }
