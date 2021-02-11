@@ -156,6 +156,7 @@ export class EmployeesComponent
   }
   getCDADeliverylist(input: ApiInput) {
     this.load = true;
+    this.filename = "CDAInvoice";
     this.api
       .getCDADeliverylist(input, this.usrToken)
       .subscribe((data: APIResult) => {
