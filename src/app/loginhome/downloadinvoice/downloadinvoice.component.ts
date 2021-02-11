@@ -154,6 +154,7 @@ export class DownloadinvoiceComponent implements OnInit, OnDestroy {
         } else {
           this.swServ.showErrorMessage("Failure!!!", message);
         }
+        this.currentmonth 
       });
   }
   ngOnInit() {

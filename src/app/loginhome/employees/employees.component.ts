@@ -339,6 +339,11 @@ export class EmployeesComponent
       );
     }
   }
+  private resetfilters() {
+    this.tablist._results.filter(cb => {
+      cb.checked = false;
+    });
+  }
   onDownload() {
     const cbsChecked = this.tablist._results.filter(cb => {
       return cb.nativeElement.checked;
@@ -389,8 +394,9 @@ export class EmployeesComponent
               for (var val2 of cbsChecked) {
                 val2.nativeElement.target.value = false;
               }
+              this.resetfilters();
+              this.selectedEmps.length = 0;
             }
-            this.selectedEmps.length = 0;
           });
       } else {
         this.swServ.showErrorMessage(
