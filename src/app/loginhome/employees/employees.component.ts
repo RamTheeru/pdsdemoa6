@@ -166,7 +166,7 @@ export class EmployeesComponent
           this.employees = data.employees;
           this.pageCount = data.queryPages;
           this.totalCount = data.queryTotalCount;
-          this.filename = this.filename + data.employeeName;
+          this.filename = this.filename + "-" + data.employeeName;
           this.pages = this.api.transform(this.pageCount);
           console.log(data);
         } else {

@@ -113,7 +113,7 @@ export class DownloadinvoiceComponent implements OnInit, OnDestroy {
           this.employees = data.employees;
           this.pageCount = data.queryPages;
           this.totalCount = data.queryTotalCount;
-          this.filename = this.filename + data.employeeName;
+          this.filename = this.filename +"-"+ data.employeeName;
           this.pages = this.api.transform(this.pageCount);
           if (this.totalCount > 0) {
             let pdf = new PDFInput();
