@@ -340,8 +340,8 @@ export class EmployeesComponent
     }
   }
   private resetfilters() {
-    this.tablist._results.filter(cb => {
-      cb.checked = false;
+    this.tablist._results.foreach(cb => {
+      cb.nativeElement..checked = false;
     });
   }
   onDownload() {
