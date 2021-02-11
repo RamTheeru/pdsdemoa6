@@ -132,7 +132,6 @@ export class DownloadinvoiceComponent implements OnInit, OnDestroy {
                   let status = data.status;
                   let message = data.message;
                   if (status) {
-    
                   } else {
                     this.swServ.showErrorMessage("Failure!!!", message);
                   }

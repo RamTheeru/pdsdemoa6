@@ -176,7 +176,6 @@ export class EmployeesComponent
   }
   getdata(val: number, tab) {
     console.log(val);
-
     this.apiInput = new ApiInput();
     this.apiInput.page = val;
     this.apiInput.stationId = Number(this.selectedStation);
