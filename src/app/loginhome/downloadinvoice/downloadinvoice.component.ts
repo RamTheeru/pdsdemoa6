@@ -99,6 +99,9 @@ export class DownloadinvoiceComponent implements OnInit, OnDestroy {
   shwPath() {
     if (!this.showPath) {
       this.showPath = true;
+    } else {
+      this.currentmonth = 0;
+      this.showPath = false;
     }
   }
   getemployees(input: ApiInput) {
@@ -154,7 +157,7 @@ export class DownloadinvoiceComponent implements OnInit, OnDestroy {
         } else {
           this.swServ.showErrorMessage("Failure!!!", message);
         }
-        this.currentmonth 
+        this.currentmonth = 0;
       });
   }
   ngOnInit() {
