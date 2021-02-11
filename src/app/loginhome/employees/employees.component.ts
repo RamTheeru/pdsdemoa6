@@ -182,10 +182,11 @@ export class EmployeesComponent
     this.apiInput.stationId = Number(this.selectedStation);
     if (this.isLe == true && this.isEdle === false) {
       this.apiInput.stationId = Number(this.stationId);
-    } else if (this.isLe == true) {
+    } else if (this.isLe == true || this.isEdle === true) {
       this.apiInput.stationId = Number(this.stationId);
     }
     if (tab == "d") {
+      this.apiInput.currentmonth = this.currentmonth;
       this.getCDADeliverylist(this.apiInput);
     } else {
       this.getemployees(this.apiInput);
