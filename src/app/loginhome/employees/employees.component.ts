@@ -340,9 +340,14 @@ export class EmployeesComponent
     }
   }
   private resetfilters() {
-    this.tablist._results.foreach(cb => {
-      cb.nativeElement.checked = false;
-    });
+    let c = this.tablist._results.length;
+    var k: number;
+    for (k = 0; k < c; k++) {
+      this.tablist._results[k].nativeElement.checked = false;
+    }
+    // this.tablist._results.length.filter(cb => {
+    //   cb.nativeElement.checked = false;
+    // });
   }
   onDownload() {
     const cbsChecked = this.tablist._results.filter(cb => {
