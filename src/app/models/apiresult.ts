@@ -34,5 +34,5 @@ export class APIResult {
   message: string;
   id: number;
   requests: RequestDetail[];
-  dbBackups:DbBackupInfo[];
+  dbBackups: DbBackupInfo[];
 }
