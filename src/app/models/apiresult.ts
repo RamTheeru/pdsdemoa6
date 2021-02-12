@@ -7,6 +7,7 @@ import { Ledger } from "../models/ledger";
 import { Profession } from "../models/profession";
 import { Designation } from "../models/designation";
 import { RequestDetail } from "../models/requestdetail";
+import { DbBackupInfo } from "../models/dbbackupinfo";
 import { CommercialConstant } from "../models/commercialconstant";
 export class APIResult {
   employees: Employee[];
@@ -33,4 +34,5 @@ export class APIResult {
   message: string;
   id: number;
   requests: RequestDetail[];
+  dbBackups:DbBackupInfo[];
 }
