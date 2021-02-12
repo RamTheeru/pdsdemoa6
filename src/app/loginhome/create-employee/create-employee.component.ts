@@ -24,7 +24,7 @@ import { Profession } from "../../models/profession";
 import { SweetService } from "../../sweet.service";
 import { ViewService } from "../../view.service";
 import * as r from "rxjs";
-const emp: Employee = new Employee();
+var emp: Employee = new Employee();
 @Component({
   selector: "app-create-employee",
   templateUrl: "./create-employee.component.html",
@@ -703,6 +703,7 @@ export class CreateEmployeeComponent
         let m: string = data.message;
         if (status) {
           this.swServ.showSuccessMessage("Success!!!", m);
+          emp = new Employee();
           this.initForm();
           // this.ngAfterViewInit();
           this.ngOnInit();

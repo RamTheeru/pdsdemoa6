@@ -24,7 +24,7 @@ import { RegisterEmployee } from "../models/registeremployee";
 import { APIResult } from "../models/apiresult";
 import { Designation } from "../models/designation";
 import { Station } from "../models/station";
-const emp: RegisterEmployee = new RegisterEmployee();
+var emp: RegisterEmployee = new RegisterEmployee();
 
 @Component({
   selector: "app-register",
@@ -438,6 +438,7 @@ export class RegisterComponent implements OnInit {
           this.designatons = data.designations;
           this._swServ.showSuccessMessage("Success!!!", m);
           this.router.navigate(["/login"]);
+          emp = new RegisterEmployee();
         } else {
           this._swServ.showErrorMessage("Error!!", m);
         }
