@@ -37,6 +37,8 @@ export const CurrentUrls = {
   getCDADeliveryStation: "CDAStationDeiveryDetails",
   updateCDADeliverylist: "CDAUpdateDeiveryDetails",
   PDFFileDownload: "DownloadCDADeiveryDetails",
+  backuplist: "Backups",
+  restore: "RestoreDb",
   logout: "DeleteSession"
 };
 @Injectable()
@@ -628,5 +630,36 @@ export class PdsApiService {
           });
         })
       );
+  }
+  //DB Backups
+  getBackups(tkn: string): R.Observable<any> {
+    const phttpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        Authorization: "Bearer " + tkn
+      })
+    };
+    console.log(this.baseurl + this.employeesUrl + CurrentUrls.backuplist);
+    return this.http.get(
+      this.baseurl + this.employeesUrl + CurrentUrls.backuplist,
+      phttpOptions
+    );
+  }
+  //DB Backup restore
+  restore(filename: string, tkn: string): R.Observable<any> {
+    const phttpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        Authorization: "Bearer " + tkn
+      })
+    };
+    let input = "?file=" + filename;
+    console.log(this.baseurl + this.employeesUrl + CurrentUrls.restore);
+    return this.http.get(
+      this.baseurl + this.employeesUrl + CurrentUrls.restore + input,
+      phttpOptions
+    );
   }
 }
