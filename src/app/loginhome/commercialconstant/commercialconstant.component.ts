@@ -13,7 +13,7 @@ import { APIResult } from "../../models/apiresult";
 import { Station } from "../../models/station";
 import { CommercialConstant } from "../../models/commercialconstant";
 import { Subscription } from "rxjs";
-const cc: CommercialConstant = new CommercialConstant();
+var cc: CommercialConstant = new CommercialConstant();
 @Component({
   selector: "app-commercialconstant",
   templateUrl: "./commercialconstant.component.html",
@@ -83,7 +83,11 @@ export class CommercialconstantComponent implements OnInit, OnDestroy {
     cc.deliveryRate = Number(delvr);
     cc.petrolAllowance = Number(petrl);
     cc.incentives = Number(incen);
-    if (cc.incentives == NaN || cc.incentives == undefined ||  cc.incentives == n) {
+    if (
+      cc.incentives == NaN ||
+      cc.incentives == undefined ||
+      cc.incentives == n
+    ) {
       cc.incentives = 0;
     }
     if (
@@ -122,6 +126,7 @@ export class CommercialconstantComponent implements OnInit, OnDestroy {
           let m: string = data.message;
           if (status) {
             this._swServ.showSuccessMessage("Success!!!", m);
+            cc = new CommercialConstant();
             this.initForm();
           } else {
             this._swServ.showErrorMessage("Error!!", m);
