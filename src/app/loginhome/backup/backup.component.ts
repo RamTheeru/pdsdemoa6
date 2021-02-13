@@ -49,9 +49,13 @@ export class BackupComponent implements OnInit {
       }
     );
   }
-  restore(evnt) {
-    var nam = evnt.target.name;
-    if (nam != "" || nam != undefined || nam != null) {
+  restore(evnt, val) {
+    // var nam = evnt.target.id;
+    // console.log(nam);
+    //console.log(val);
+    var nam = val.filePath;
+    console.log(nam);
+    if (nam !== "" || nam !== undefined || nam !== null) {
       this.api.restore(nam, this.tkn).subscribe(
         (data: APIResult) => {
           console.log(data);
@@ -68,8 +72,11 @@ export class BackupComponent implements OnInit {
           this._swServ.showErrorMessage("Network Error!!!", err.message);
         }
       );
-    }else{
-      this._swServ.showErrorMessage("Error!!", 'unable to restore, misssing file path');
+    } else {
+      this._swServ.showErrorMessage(
+        "Error!!",
+        "unable to restore, misssing file path"
+      );
     }
   }
 }
