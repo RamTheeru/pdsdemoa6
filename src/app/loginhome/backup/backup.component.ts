@@ -68,6 +68,8 @@ export class BackupComponent implements OnInit {
           this._swServ.showErrorMessage("Network Error!!!", err.message);
         }
       );
+    }else{
+      this._swServ.showErrorMessage("Error!!", 'unable to restore, misssing file path');
     }
   }
 }
