@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Router } from "@angular/router";
 import { SweetService } from "../../sweet.service";
 import { ViewService } from "../../view.service";
 import { PdsApiService } from "../../pds-api.service";
@@ -17,6 +18,7 @@ export class BackupComponent implements OnInit, OnDestroy {
   constructor(
     private api: PdsApiService,
     private vServ: ViewService,
+    private router: Router,
     private _swServ: SweetService
   ) {}
 
@@ -49,7 +51,7 @@ export class BackupComponent implements OnInit, OnDestroy {
       }
     );
   }
-   handleUnauthorizedrequest() {
+  handleUnauthorizedrequest() {
     this._swServ.showErrorMessage(
       "Invalid Request!!!",
       "Unable to process request with invalid token, Please login again!!!"
@@ -61,10 +63,9 @@ export class BackupComponent implements OnInit, OnDestroy {
     //console.log(val);
     var nam = val.filePath;
     console.log(nam);
-     if (this.tkn == null || this.tkn == undefined || this.tkn == "") {
+    if (this.tkn == null || this.tkn == undefined || this.tkn == "") {
       this.handleUnauthorizedrequest();
-    }
-   else if (nam !== "" || nam !== undefined || nam !== null) {
+    } else if (nam !== "" || nam !== undefined || nam !== null) {
       this.api.restore(nam, this.tkn).subscribe(
         (data: APIResult) => {
           console.log(data);
@@ -72,6 +73,7 @@ export class BackupComponent implements OnInit, OnDestroy {
           let m: string = data.message;
           if (status) {
             this._swServ.showSuccessMessage("Sucess!!", m);
+            this.router.navigate([`/login`]);
           } else {
             this._swServ.showErrorMessage("Error!!", m);
           }
