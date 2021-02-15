@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit,OnDestroy } from "@angular/core";
 import { SweetService } from "../../sweet.service";
 import { ViewService } from "../../view.service";
 import { PdsApiService } from "../../pds-api.service";
@@ -10,7 +10,7 @@ import { Subscription } from "rxjs";
   templateUrl: "./backup.component.html",
   styleUrls: ["./backup.component.css"]
 })
-export class BackupComponent implements OnInit {
+export class BackupComponent implements OnInit,OnDestroy {
   backups: DbBackupInfo[] = [];
   tkn: string = "";
   private subsc: Subscription;
@@ -79,4 +79,7 @@ export class BackupComponent implements OnInit {
       );
     }
   }
+  ngOnDestroy(){
+  this.subsc.unsubscribe();
+}
 }

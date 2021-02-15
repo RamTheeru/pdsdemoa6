@@ -344,7 +344,8 @@ export class PdsApiService {
     id: any,
     status: string,
     pId: number,
-    empCode: string
+    empCode: string,
+    tkn
   ): R.Observable<any> {
     let input =
       "?registerId=" +
@@ -355,11 +356,18 @@ export class PdsApiService {
       pId +
       "&empCode=" +
       empCode;
+    const phttpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        Authorization: "Bearer " + tkn
+      })
+    };
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.approve);
     return this.http
       .put(
         this.baseurl + this.employeesUrl + CurrentUrls.approve + input,
-        this.httpOptions
+        phttpOptions
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
