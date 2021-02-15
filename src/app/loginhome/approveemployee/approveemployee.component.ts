@@ -109,6 +109,12 @@ export class ApproveemployeeComponent implements OnInit, OnDestroy {
     // let dialogRef = this.matDialog.open(ApproveemployeeComponent);
     // dialogRef.close();
   }
+  handleUnauthorizedrequest() {
+    this._swServ.showErrorMessage(
+      "Invalid Request!!!",
+      "Unable to process request with invalid token, Please login again!!!"
+    );
+  }
   onSubmit() {
     // var p = this.aprvForm.value["prof"];
     // let empCode = this.aprvForm.value["empc"];
@@ -125,6 +131,8 @@ export class ApproveemployeeComponent implements OnInit, OnDestroy {
       this.stationId == 0
     ) {
       this._swServ.showErrorMessage("Error!!", "Invalid Input!!!");
+    } else if (this.tkn == null || this.tkn == undefined || this.tkn == "") {
+      this.handleUnauthorizedrequest();
     } else {
       let pid = Number(p);
       this.api

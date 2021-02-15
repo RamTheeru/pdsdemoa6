@@ -1,4 +1,4 @@
-import { Component, OnInit,OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { SweetService } from "../../sweet.service";
 import { ViewService } from "../../view.service";
 import { PdsApiService } from "../../pds-api.service";
@@ -10,7 +10,7 @@ import { Subscription } from "rxjs";
   templateUrl: "./backup.component.html",
   styleUrls: ["./backup.component.css"]
 })
-export class BackupComponent implements OnInit,OnDestroy {
+export class BackupComponent implements OnInit, OnDestroy {
   backups: DbBackupInfo[] = [];
   tkn: string = "";
   private subsc: Subscription;
@@ -49,13 +49,22 @@ export class BackupComponent implements OnInit,OnDestroy {
       }
     );
   }
+   handleUnauthorizedrequest() {
+    this._swServ.showErrorMessage(
+      "Invalid Request!!!",
+      "Unable to process request with invalid token, Please login again!!!"
+    );
+  }
   restore(evnt, val) {
     // var nam = evnt.target.id;
     // console.log(nam);
     //console.log(val);
     var nam = val.filePath;
     console.log(nam);
-    if (nam !== "" || nam !== undefined || nam !== null) {
+     if (this.tkn == null || this.tkn == undefined || this.tkn == "") {
+      this.handleUnauthorizedrequest();
+    }
+   else if (nam !== "" || nam !== undefined || nam !== null) {
       this.api.restore(nam, this.tkn).subscribe(
         (data: APIResult) => {
           console.log(data);
@@ -79,7 +88,7 @@ export class BackupComponent implements OnInit,OnDestroy {
       );
     }
   }
-  ngOnDestroy(){
-  this.subsc.unsubscribe();
-}
+  ngOnDestroy() {
+    this.subsc.unsubscribe();
+  }
 }
