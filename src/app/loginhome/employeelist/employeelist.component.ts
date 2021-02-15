@@ -262,6 +262,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
                   } else {
                     this.swServ.showErrorMessage("Error!!", m);
                   }
+                  this.isreguser = true;
                   this.apiInput = new ApiInput();
                   this.apiInput.stationId = Number(this.selectedStation);
                   this.registeredUsers(this.apiInput);
@@ -324,6 +325,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
       // this.ngOnInit();
       //  this.selectedStation="";
       //  this.employees.length =0;
+      this.isreguser = true;
       this.apiInput = new ApiInput();
       this.apiInput.stationId = Number(this.selectedStation);
       this.registeredUsers(this.apiInput);
