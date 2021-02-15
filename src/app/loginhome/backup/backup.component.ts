@@ -6,6 +6,7 @@ import { PdsApiService } from "../../pds-api.service";
 import { APIResult } from "../../models/apiresult";
 import { DbBackupInfo } from "../../models/dbbackupinfo";
 import { Subscription } from "rxjs";
+import swal from "sweetalert2";
 @Component({
   selector: "app-backup",
   templateUrl: "./backup.component.html",
@@ -66,7 +67,15 @@ export class BackupComponent implements OnInit, OnDestroy {
     if (this.tkn == null || this.tkn == undefined || this.tkn == "") {
       this.handleUnauthorizedrequest();
     } else if (nam !== "" || nam !== undefined || nam !== null) {
-      this.api.restore(nam, this.tkn).subscribe(
+      swal({
+          title: "Are you sure?",
+          text: "Do you want to restore database with this file?",
+          type: "warning",
+          showConfirmButton: true,
+          showCancelButton: true
+        }).then(willDelete => {
+          if (willDelete.value) {
+           this.api.restore(nam, this.tkn).subscribe(
         (data: APIResult) => {
           console.log(data);
           let status: Boolean = data.status;
@@ -83,6 +92,11 @@ export class BackupComponent implements OnInit, OnDestroy {
           this._swServ.showErrorMessage("Network Error!!!", err.message);
         }
       );
+          } else {
+            this._swServ.showErrorMessage("Canelled", "");
+          }
+        });
+      
     } else {
       this._swServ.showErrorMessage(
         "Error!!",
