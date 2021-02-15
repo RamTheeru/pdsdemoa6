@@ -265,7 +265,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
                   this.apiInput = new ApiInput();
                   this.apiInput.stationId = Number(this.selectedStation);
                   this.registeredUsers(this.apiInput);
-                  this.ngOnInit();
+                  //this.ngOnInit();
                 },
                 err => {
                   //console.log(err.message);
@@ -321,11 +321,12 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(ApproveemployeeComponent, config2);
     dialogRef.afterClosed().subscribe(result => {
       console.log("dialog result....");
-      console.log(result);
+      // this.ngOnInit();
+      //  this.selectedStation="";
+      //  this.employees.length =0;
       this.apiInput = new ApiInput();
-      this.apiInput.stationId = Number(stationId);
+      this.apiInput.stationId = Number(this.selectedStation);
       this.registeredUsers(this.apiInput);
-      this.ngOnInit();
 
       // if (result.status) {
       // } else {

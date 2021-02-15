@@ -68,35 +68,34 @@ export class BackupComponent implements OnInit, OnDestroy {
       this.handleUnauthorizedrequest();
     } else if (nam !== "" || nam !== undefined || nam !== null) {
       swal({
-          title: "Are you sure?",
-          text: "Do you want to restore database with this file?",
-          type: "warning",
-          showConfirmButton: true,
-          showCancelButton: true
-        }).then(willDelete => {
-          if (willDelete.value) {
-           this.api.restore(nam, this.tkn).subscribe(
-        (data: APIResult) => {
-          console.log(data);
-          let status: Boolean = data.status;
-          let m: string = data.message;
-          if (status) {
-            this._swServ.showSuccessMessage("Sucess!!", m);
-            this.router.navigate([`/login`]);
-          } else {
-            this._swServ.showErrorMessage("Error!!", m);
-          }
-        },
-        err => {
-          //console.log(err.message);
-          this._swServ.showErrorMessage("Network Error!!!", err.message);
+        title: "Are you sure?",
+        text: "Do you want to restore database with this file?",
+        type: "warning",
+        showConfirmButton: true,
+        showCancelButton: true
+      }).then(willDelete => {
+        if (willDelete.value) {
+          this.api.restore(nam, this.tkn).subscribe(
+            (data: APIResult) => {
+              console.log(data);
+              let status: Boolean = data.status;
+              let m: string = data.message;
+              if (status) {
+                this._swServ.showSuccessMessage("Sucess!!", m);
+                this.router.navigate([`/login`]);
+              } else {
+                this._swServ.showErrorMessage("Error!!", m);
+              }
+            },
+            err => {
+              //console.log(err.message);
+              this._swServ.showErrorMessage("Network Error!!!", err.message);
+            }
+          );
+        } else {
+          this._swServ.showErrorMessage("Canelled", "");
         }
-      );
-          } else {
-            this._swServ.showErrorMessage("Canelled", "");
-          }
-        });
-      
+      });
     } else {
       this._swServ.showErrorMessage(
         "Error!!",
