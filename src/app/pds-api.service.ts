@@ -363,9 +363,10 @@ export class PdsApiService {
         Authorization: "Bearer " + tkn
       })
     };
-    console.log(this.baseurl + this.employeesUrl + CurrentUrls.approve);
+    console.log(tkn);
+    console.log(this.baseurl + this.employeesUrl + CurrentUrls.approve + input);
     return this.http
-      .put(
+      .get(
         this.baseurl + this.employeesUrl + CurrentUrls.approve + input,
         phttpOptions
       )
