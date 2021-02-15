@@ -247,28 +247,31 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
         }).then(willDelete => {
           if (willDelete.value) {
             //   this.openApproveForm(e.RegisterId);
-            this.api.approveUser(e.RegisterId, status, 0, "").subscribe(
-              (data: APIResult) => {
-                //console.log(data);
-                let status: Boolean = data.status;
-                let m: string = data.message;
-                if (status) {
-                  // this.userTypes = data.usertypes;
-                  // this.designatons = data.designations;
-                  // this.stations = data.stations;
-                  this.swServ.showSuccessMessage("Success!!", m);
-                } else {
-                  this.swServ.showErrorMessage("Error!!", m);
+            this.api
+              .approveUser(e.RegisterId, status, 0, "", this.usrToken)
+              .subscribe(
+                (data: APIResult) => {
+                  //console.log(data);
+                  let status: Boolean = data.status;
+                  let m: string = data.message;
+                  if (status) {
+                    // this.userTypes = data.usertypes;
+                    // this.designatons = data.designations;
+                    // this.stations = data.stations;
+                    this.swServ.showSuccessMessage("Success!!", m);
+                  } else {
+                    this.swServ.showErrorMessage("Error!!", m);
+                  }
+                  this.apiInput = new ApiInput();
+                  this.apiInput.stationId = Number(this.selectedStation);
+                  this.registeredUsers(this.apiInput);
+                  this.ngOnInit();
+                },
+                err => {
+                  //console.log(err.message);
+                  this.swServ.showErrorMessage("Network Error!!!", err.message);
                 }
-                this.apiInput = new ApiInput();
-                this.apiInput.stationId = Number(this.selectedStation);
-                this.registeredUsers(this.apiInput);
-              },
-              err => {
-                //console.log(err.message);
-                this.swServ.showErrorMessage("Network Error!!!", err.message);
-              }
-            );
+              );
           } else {
             this.swServ.showErrorMessage("Canelled", "");
           }
@@ -322,6 +325,8 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
       this.apiInput = new ApiInput();
       this.apiInput.stationId = Number(stationId);
       this.registeredUsers(this.apiInput);
+      this.ngOnInit();
+
       // if (result.status) {
       // } else {
       // }
