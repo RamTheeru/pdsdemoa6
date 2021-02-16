@@ -15,6 +15,7 @@ import swal from "sweetalert2";
 export class BackupComponent implements OnInit, OnDestroy {
   backups: DbBackupInfo[] = [];
   tkn: string = "";
+  load: boolean = false;
   private subsc: Subscription;
   constructor(
     private api: PdsApiService,
@@ -75,9 +76,11 @@ export class BackupComponent implements OnInit, OnDestroy {
         showCancelButton: true
       }).then(willDelete => {
         if (willDelete.value) {
+          this.load = true;
           this.api.restore(nam, this.tkn).subscribe(
             (data: APIResult) => {
               console.log(data);
+              this.load = false;
               let status: Boolean = data.status;
               let m: string = data.message;
               if (status) {
