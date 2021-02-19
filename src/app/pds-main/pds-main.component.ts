@@ -43,7 +43,7 @@ export class PdsMainComponent implements OnInit {
     this.load = true;
     this.api.loginuser(this.userName, this.password).subscribe(
       (data: APIResult) => {
-        console.log(data)
+        console.log(data);
         this.load = false;
         let status: Boolean = data.status;
         let m: string = data.message;
@@ -58,6 +58,8 @@ export class PdsMainComponent implements OnInit {
             if (userTypeId == 1) {
               userInfo = "admin";
             }
+            ////
+            //
             // if (userTypeId == 1) {
             //   userInfo = "admin";
             // } else if (userTypeId == 2) {
