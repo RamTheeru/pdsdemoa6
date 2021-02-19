@@ -43,6 +43,7 @@ export class PdsMainComponent implements OnInit {
     this.load = true;
     this.api.loginuser(this.userName, this.password).subscribe(
       (data: APIResult) => {
+        console.log(data)
         this.load = false;
         let status: Boolean = data.status;
         let m: string = data.message;
