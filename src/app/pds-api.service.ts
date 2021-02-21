@@ -39,6 +39,7 @@ export const CurrentUrls = {
   PDFFileDownload: "DownloadCDADeiveryDetails",
   backuplist: "Backups",
   restore: "RestoreDb",
+  updatesession: "SessionUpdate",
   logout: "DeleteSession"
 };
 @Injectable()
@@ -124,6 +125,27 @@ export class PdsApiService {
     return this.http
       .get(
         this.baseurl + this.employeesUrl + CurrentUrls.login + input,
+        this.httpOptions
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let obj = this.handlehttpError(error);
+          return new Observable(function(x) {
+            x.next(obj);
+          });
+        })
+      );
+  }
+  //Employee login update session
+  updateSession(userTypeId: Number, employeeId: Number) {
+    let input: string =
+      "?usertypeId=" + userTypeId + "&employeeId=" + employeeId;
+    console.log(
+      this.baseurl + this.employeesUrl + CurrentUrls.updatesession + input
+    );
+    return this.http
+      .get(
+        this.baseurl + this.employeesUrl + CurrentUrls.updatesession + input,
         this.httpOptions
       )
       .pipe(
