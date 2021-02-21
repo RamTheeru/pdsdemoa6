@@ -1,6 +1,7 @@
 import { Component, VERSION, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { PdsApiService } from "./pds-api.service";
+import { AuthService } from "./auth.service";
 import { SweetService } from "./sweet.service";
 import { ViewService } from "./view.service";
 import { UserType } from "./models/usertype";
@@ -38,6 +39,7 @@ export class AppComponent {
   constructor(
     private router: Router,
     private api: PdsApiService,
+    private auth: AuthService,
     private swServ: SweetService,
     private vServ: ViewService,
     private route: ActivatedRoute
@@ -105,7 +107,7 @@ export class AppComponent {
 
           setInterval(() => {
             this.updateSession();
-          }, 120000);
+          }, 1200000);
         }
 
         this.isLogin = true;
@@ -188,6 +190,15 @@ export class AppComponent {
                   this.swServ.showSuccessMessage("Success!!", m);
                 } else {
                   this.swServ.showErrorMessage("Failed!!", m);
+                  this.swServ.showSuccessMessage("Success!!", m);
+                  this.vServ.removeValue("usrtoken");
+                  this.vServ.removeValue("userProp");
+                  this.vServ.removeValue("storedProp");
+                  this.vServ.removeValue("fheverify");
+                  this.vServ.removeValue("edleverify");
+                  this.vServ.removeValue("evheverify");
+                  this.vServ.removeValue("hrvheverify");
+                  this.auth.setToken("");
                   this.router.navigate(["/login"]);
                 }
                 // console.log(data);
