@@ -105,7 +105,7 @@ export class AppComponent {
 
           setInterval(() => {
             this.updateSession();
-          }, 20000);
+          }, 120000);
         }
 
         this.isLogin = true;
