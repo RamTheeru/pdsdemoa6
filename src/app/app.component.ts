@@ -96,7 +96,7 @@ export class AppComponent {
           }
         }
       } else {
-      //  this.sess = 0;
+        //  this.sess = 0;
         clearInterval(updatesession);
       }
       if (this.url == "/404") {
