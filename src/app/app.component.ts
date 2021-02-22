@@ -187,10 +187,15 @@ export class AppComponent {
                 let status: Boolean = data.status;
                 let m: string = data.message;
                 if (status) {
+                  let tkn = data.userInfo.token;
+                  this.vServ.setValue(data.userInfo.user);
+                  this.vServ.setUser(data.userInfo);
+                  this.auth.setToken(tkn);
+                  this.vServ.setToken(tkn);
                   this.swServ.showSuccessMessage("Success!!", m);
                 } else {
                   this.swServ.showErrorMessage("Failed!!", m);
-                  this.swServ.showSuccessMessage("Success!!", m);
+
                   this.vServ.removeValue("usrtoken");
                   this.vServ.removeValue("userProp");
                   this.vServ.removeValue("storedProp");
