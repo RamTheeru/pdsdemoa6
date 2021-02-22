@@ -80,45 +80,43 @@ export class AppComponent {
       //console.log(event);
       this.url = event.urlAfterRedirects;
       var index = this.url.indexOf("loginhome");
+      var updatesession = setInterval(() => {
+        this.updateSession();
+      }, 1200000);
+      if (index !== -1) {
+        //this.sess = 1;
+        var ind = this.url.indexOf("loginhome");
+        if (ind !== -1) {
+          this.subsc = this.vServ.userInfo.subscribe((res: UserType) => {
+            this.userInfo = res;
+          });
+          if (this.userInfo == null || this.userInfo == undefined) {
+            var u = this.vServ.getValue("userProp");
+            this.userInfo = JSON.parse(u);
+          }
+        }
+      } else {
+      //  this.sess = 0;
+        clearInterval(updatesession);
+      }
       if (this.url == "/404") {
         this.tabView = false;
         this.isLogin = false;
       } else if (this.url == "/register") {
         this.tabView = false;
         this.isLogin = false;
-        //   this.subsc = this.vServ.view.subscribe(
-        //   (val:Boolean)=>{
-        //     this.tabView = val;
-        //   }
-        // );
       } else if (index !== -1) {
-        if (this.sess == 0) {
-          this.sess = 1;
-          var ind = this.url.indexOf("loginhome");
-          if (ind !== -1) {
-            this.subsc = this.vServ.userInfo.subscribe((res: UserType) => {
-              this.userInfo = res;
-            });
-            if (this.userInfo == null || this.userInfo == undefined) {
-              var u = this.vServ.getValue("userProp");
-              this.userInfo = JSON.parse(u);
-            }
-          }
-
-          setInterval(() => {
-            this.updateSession();
-          }, 1200000);
-        }
-
         this.isLogin = true;
         this.tabView = false;
       } else {
         this.tabView = true;
         this.isLogin = false;
+        // clearInterval(updatesession);
       }
-      if (this.url == "/login") {
-        this.sess = 0;
-      }
+      // if (this.url == "/login") {
+      //  // this.sess = 0;
+      //   //clearInterval(updatesession);
+      // }
       setTimeout(() => {
         // here
         this.load = false;
@@ -195,7 +193,6 @@ export class AppComponent {
                   this.swServ.showSuccessMessage("Success!!", m);
                 } else {
                   this.swServ.showErrorMessage("Failed!!", m);
-
                   this.vServ.removeValue("usrtoken");
                   this.vServ.removeValue("userProp");
                   this.vServ.removeValue("storedProp");
