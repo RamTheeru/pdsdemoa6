@@ -446,12 +446,11 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
         if (status) {
           this.swServ.showSuccessMessage("Success!!!", message);
           this.ngOnInit();
-          this
-              this.apiInput = new ApiInput();
-    this.apiInput.page = this.activePage;
-    this.apiInput.stationId = Number(this.stationId);
-    this.apiInput.currentmonth = this.currentmonth;
-    this.getemployees(this.apiInput);
+          this.apiInput = new ApiInput();
+          this.apiInput.page = this.activePage;
+          this.apiInput.stationId = Number(this.stationId);
+          this.apiInput.currentmonth = this.currentmonth;
+          this.getemployees(this.apiInput);
         } else {
           this.swServ.showErrorMessage("Failure!!!", message);
         }
