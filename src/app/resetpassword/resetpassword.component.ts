@@ -41,38 +41,50 @@ export class ResetpasswordComponent implements OnInit {
   }
   onCon() {
     if (
-      this.password !== "" &&
-      this.password !== null &&
-      this.password !== undefined &&
-      this.cpassword !== "" &&
-      this.cpassword !== null &&
-      this.cpassword !== undefined
+      this.regId > 0 &&
+      this.regId !== null &&
+      this.regId !== undefined &&
+      this.regId !== NaN
     ) {
-      if (this.password === this.cpassword) {
-        this.load = true;
-        this.api
-          .resetPassword(this.regId, this.password)
-          .subscribe((data: APIResult) => {
-            console.log(data);
-            this.load = false;
-            let status: Boolean = data.status;
-            let m: string = data.message;
-            if (status) {
-              this.sweet.showSuccessMessage("Success", m);
-            } else {
-              this.sweet.showErrorMessage("Failed", m);
-            }
-          });
+      if (
+        this.password !== "" &&
+        this.password !== null &&
+        this.password !== undefined &&
+        this.cpassword !== "" &&
+        this.cpassword !== null &&
+        this.cpassword !== undefined
+      ) {
+        if (this.password === this.cpassword) {
+          this.load = true;
+          this.api
+            .resetPassword(this.regId, this.password)
+            .subscribe((data: APIResult) => {
+              console.log(data);
+              this.load = false;
+              let status: Boolean = data.status;
+              let m: string = data.message;
+              if (status) {
+                this.sweet.showSuccessMessage("Success", m);
+              } else {
+                this.sweet.showErrorMessage("Failed", m);
+              }
+            });
+        } else {
+          this.sweet.showErrorMessage(
+            "Invalid Input!!",
+            "Given passwords are not same."
+          );
+        }
       } else {
         this.sweet.showErrorMessage(
           "Invalid Input!!",
-          "Given passwords are not same."
+          "Please give proper input."
         );
       }
     } else {
       this.sweet.showErrorMessage(
-        "Invalid Input!!",
-        "Please give proper input."
+        "Invalid data to process further!!",
+        "Please check the link and  refresh the page."
       );
     }
   }
