@@ -62,10 +62,7 @@ export class ApproveemployeeComponent implements OnInit, OnDestroy {
           let status: Boolean = data.status;
           let m: string = data.message;
           if (status) {
-            // this.userTypes = data.usertypes;
-            // this.designatons = data.designations;
             this.professions = data.professions;
-
           } else {
             this._swServ.showErrorMessage("Error!!", m);
           }
