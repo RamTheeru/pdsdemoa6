@@ -40,6 +40,7 @@ export const CurrentUrls = {
   backuplist: "Backups",
   restore: "RestoreDb",
   updatesession: "SessionUpdate",
+  resetPassword: "ResetPassword",
   logout: "DeleteSession"
 };
 @Injectable()
@@ -125,6 +126,26 @@ export class PdsApiService {
     return this.http
       .get(
         this.baseurl + this.employeesUrl + CurrentUrls.login + input,
+        this.httpOptions
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let obj = this.handlehttpError(error);
+          return new Observable(function(x) {
+            x.next(obj);
+          });
+        })
+      );
+  }
+  //Employee Reset password
+  resetPassword(employeeId: number, password: string) {
+    let input: string = "?employeeId=" + employeeId + "&password=" + password;
+    console.log(
+      this.baseurl + this.employeesUrl + CurrentUrls.resetPassword + input
+    );
+    return this.http
+      .get(
+        this.baseurl + this.employeesUrl + CurrentUrls.resetPassword + input,
         this.httpOptions
       )
       .pipe(

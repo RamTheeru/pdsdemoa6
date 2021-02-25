@@ -15,6 +15,7 @@ import { PdsMainComponent } from "./pds-main/pds-main.component";
 import { HomeComponent } from "./home/home.component";
 import { LoadingComponent } from "./loading/loading.component";
 import { AboutusComponent } from "./aboutus/aboutus.component";
+import { ResetpasswordComponent } from "./resetpassword/resetpassword.component";
 import { LogintabComponent } from "./logintab/logintab.component";
 import { ScrollingComponent } from "./scrolling/scrolling.component";
 import { RegisterComponent } from "./register/register.component";
@@ -86,6 +87,7 @@ import { AuthGuard } from "./auth-guard.service";
     PaginationComponent,
     CommercialconstantComponent,
     DownloadinvoiceComponent,
+    ResetpasswordComponent,
     BackupComponent,
     NopageComponent
   ],
