@@ -514,7 +514,7 @@ export class RegisterComponent implements OnInit {
         this.fvalid = true;
       }
     } else if (field == "Employee Email Address") {
-      var msg = field + " " + " is not in propeEmail Address format!!";
+      var msg = field + " " + " is not in proper Email Address format!!";
       test = this.ValidateEmail(txt);
       if (!test) {
         this.fvalid = false;
