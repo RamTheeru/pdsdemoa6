@@ -8,6 +8,7 @@ export class RegisterEmployee {
   UserTypeId: number;
   FirstName: string;
   MiddleName: string;
+  Email: string;
   LastName: string;
   DOB: string;
   Phone: string;
