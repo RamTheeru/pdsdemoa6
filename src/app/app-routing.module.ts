@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { HomeComponent } from "./home/home.component";
-import { ResetpasswordComponent } from "./resetpassword/resetpassword.component";
+//import { ResetpasswordComponent } from "./resetpassword/resetpassword.component";
 import { NopageComponent } from "./nopage/nopage.component";
 import { PdsMainComponent } from "./pds-main/pds-main.component";
 import { AboutusComponent } from "./aboutus/aboutus.component";
@@ -31,7 +31,7 @@ const appRoutes: Routes = [
   { path: "login", component: PdsMainComponent },
   { path: "vision", component: AboutusComponent },
   { path: "aboutus", component: AbtusComponent },
-  { path: "ResetPassword/:rid", component: ResetpasswordComponent },
+//  { path: "ResetPassword/:rid", component: ResetpasswordComponent },
   { path: "register", component: RegisterComponent },
   {
     path: "loginhome",

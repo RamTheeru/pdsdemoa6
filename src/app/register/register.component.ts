@@ -8,8 +8,8 @@ import {
 } from "@angular/forms";
 import { Router } from "@angular/router";
 import * as _moment from "moment";
-import { default as _rollupMoment } from "moment";
-const moment = _rollupMoment || _moment;
+//import { default as _rollupMoment } from "moment";
+//const moment = _rollupMoment || _moment;
 import { MY_FORMATS } from "../models/dateformats";
 import { MomentDateAdapter } from "@angular/material-moment-adapter";
 import {
@@ -511,7 +511,26 @@ export class RegisterComponent implements OnInit {
         this.fvalid = false;
         this._swServ.showErrorMessage(title, msg);
       } else {
-        this.fvalid = true;
+        var index = txt.indexOf("+");
+        var ind = txt.indexOf("-");
+        if (field == "Employee Contact Number" && txt.length == 10) {
+          this.fvalid = true;
+        } else if (field == "Employee AGE") {
+          this.fvalid = true;
+        } else {
+          if (index !== -1 || ind !== -1) {
+            var msg =
+              field +
+              " " +
+              " field must contains only 10 digits, NO extension allowed!!";
+            this.fvalid = false;
+            this._swServ.showErrorMessage(title, msg);
+          } else {
+            var msg = field + " " + " field must contains only 10 digits!!";
+            this.fvalid = false;
+            this._swServ.showErrorMessage(title, msg);
+          }
+        }
       }
     } else if (field == "Employee Email Address") {
       var msg = field + " " + " is not in proper Email Address format!!";
@@ -548,14 +567,12 @@ export class RegisterComponent implements OnInit {
         }
       );
     } else {
-      this.fvalid = true;
+      // this.fvalid = true;
     }
   }
   ValidateEmail(inputText): boolean {
     var val = false;
-    var reg = new RegExp(
-      "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"
-    );
+    var reg = new RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
     val = reg.test(inputText);
     return val;
     // if (inputText.value.match(mailformat)) {
@@ -578,20 +595,27 @@ export class RegisterComponent implements OnInit {
   checkValue(event: any, field) {
     // console.log(event.checked);
     // console.log(event.source.value);
-
+    console.log(event);
     const errorTitle: string = "INVALID INPUT!!!";
     if (field == "m") {
       let v = event.source.value;
       if (!event.checked) {
         var txt = "";
-        this.checkMarried = false;
-        this.checkUnMarried = false;
+        if (v == "married") {
+          this.checkMarried = false;
+        }
+        if (v == "unmarried") {
+          this.checkUnMarried = false;
+        }
         var f = "Employee Marital Status";
-        this.showrequiredMessage(f, "", errorTitle);
+        if (this.checkMarried == false && this.checkUnMarried == false) {
+          this.showrequiredMessage(f, "", errorTitle);
+        }
       } else {
         emp.Marital = v;
         if (v == "married") {
           this.checkMarried = true;
+          // this.checkUnMarried = true;
           emp.MaritalStatus = true;
         } else if (v == "unmarried") {
           this.checkUnMarried = true;
@@ -602,10 +626,16 @@ export class RegisterComponent implements OnInit {
       let v = event.source.value;
       if (!event.checked) {
         var txt = "";
-        this.checkPermanent = false;
-        this.checkContract = false;
+        if (v == "permanent") {
+          this.checkPermanent = false;
+        }
+        if (v == "contract") {
+          this.checkContract = false;
+        }
         var f = "Employee Type Status";
-        this.showrequiredMessage(f, "", errorTitle);
+        if (this.checkPermanent == false && this.checkContract == false) {
+          this.showrequiredMessage(f, "", errorTitle);
+        }
       } else {
         emp.Employeetype = v;
         if (v == "permanent") {

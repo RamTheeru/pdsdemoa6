@@ -28,6 +28,8 @@ export const CurrentUrls = {
   registeremployees: "RegisteredUsers",
   createemployee: "CreateEmployee",
   createDAemployee: "CreateDAEmployee",
+  checkempCode: "CheckEmpCode",
+  checkcdaCode: "CheckCDACode",
   login: "Login",
   employeelogins: "Logins",
   checkUsername: "CheckUserName",
@@ -38,8 +40,8 @@ export const CurrentUrls = {
   updateCDADeliverylist: "CDAUpdateDeiveryDetails",
   PDFFileDownload: "DownloadCDADeiveryDetails",
   backuplist: "Backups",
-  restore: "RestoreDb",
   updatesession: "SessionUpdate",
+  restore: "RestoreDb",
   resetPassword: "ResetPassword",
   logout: "DeleteSession"
 };
@@ -130,7 +132,8 @@ export class PdsApiService {
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          let obj = this.handlehttpError(error);
+          let obj: never;
+          obj = this.handlehttpError(error) as never;
           return new Observable(function(x) {
             x.next(obj);
           });
@@ -150,7 +153,8 @@ export class PdsApiService {
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          let obj = this.handlehttpError(error);
+          let obj: never;
+          obj = this.handlehttpError(error) as never;
           return new Observable(function(x) {
             x.next(obj);
           });
@@ -171,7 +175,8 @@ export class PdsApiService {
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          let obj = this.handlehttpError(error);
+          let obj: never;
+          obj = this.handlehttpError(error) as never;
           return new Observable(function(x) {
             x.next(obj);
           });
@@ -200,7 +205,8 @@ export class PdsApiService {
       .pipe(
         catchError((error: HttpErrorResponse) => {
           console.log(error);
-          let obj = this.handlehttpError(error);
+          let obj: never;
+          obj = this.handlehttpError(error) as never;
           return new Observable(function(x) {
             x.next(obj);
           });
@@ -226,7 +232,7 @@ export class PdsApiService {
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          let obj = this.handlehttpError(error);
+          let obj: never = this.handlehttpError(error) as never;
           return new Observable(function(x) {
             x.next(obj);
           });
@@ -256,7 +262,7 @@ export class PdsApiService {
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          let obj = this.handlehttpError(error);
+          let obj: never = this.handlehttpError(error) as never;
           return new Observable(function(x) {
             x.next(obj);
           });
@@ -264,7 +270,7 @@ export class PdsApiService {
       );
   }
   private handlehttpError(err: HttpErrorResponse) {
-    let obj = {};
+    let obj: any;
     if (err.status === 401) {
       this.handleAuthError(err);
     } else {
@@ -350,7 +356,7 @@ export class PdsApiService {
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          let obj = this.handlehttpError(error);
+          let obj: never = this.handlehttpError(error) as never;
           return new Observable(function(x) {
             x.next(obj);
           });
@@ -374,8 +380,8 @@ export class PdsApiService {
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          let ob: any = {};
-          ob = this.handlehttpError(error);
+          let ob: never;
+          ob = this.handlehttpError(error) as never;
           return new Observable(function(x) {
             x.next(ob);
           });
@@ -415,7 +421,7 @@ export class PdsApiService {
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          let obj = this.handlehttpError(error);
+          let obj: never = this.handlehttpError(error) as never;
           return new Observable(function(x) {
             x.next(obj);
           });
@@ -435,7 +441,47 @@ export class PdsApiService {
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          let obj = this.handlehttpError(error);
+          let obj: never = this.handlehttpError(error) as never;
+          return new Observable(function(x) {
+            x.next(obj);
+          });
+        })
+      );
+  }
+  //check Employee Code for approve employee
+  checkEmpCode(empCode: string): R.Observable<any> {
+    let input = "?empCode=" + empCode;
+    console.log(
+      this.baseurl + this.employeesUrl + CurrentUrls.checkempCode + input
+    );
+    return this.http
+      .get(
+        this.baseurl + this.employeesUrl + CurrentUrls.checkempCode + input,
+        this.httpOptions
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let obj: never = this.handlehttpError(error) as never;
+          return new Observable(function(x) {
+            x.next(obj);
+          });
+        })
+      );
+  }
+  //check CDA Code for cda enroll
+  checkCDACode(cdaCode: string): R.Observable<any> {
+    let input = "?cdaCode=" + cdaCode;
+    console.log(
+      this.baseurl + this.employeesUrl + CurrentUrls.checkcdaCode + input
+    );
+    return this.http
+      .get(
+        this.baseurl + this.employeesUrl + CurrentUrls.checkcdaCode + input,
+        this.httpOptions
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let obj: never = this.handlehttpError(error) as never;
           return new Observable(function(x) {
             x.next(obj);
           });
@@ -458,7 +504,7 @@ export class PdsApiService {
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          let obj = this.handlehttpError(error);
+          let obj: never = this.handlehttpError(error) as never;
           return new Observable(function(x) {
             x.next(obj);
           });
@@ -485,7 +531,7 @@ export class PdsApiService {
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          let obj = this.handlehttpError(error);
+          let obj: never = this.handlehttpError(error) as never;
           console.log(obj);
           return new Observable(function(x) {
             x.next(obj);
@@ -515,7 +561,7 @@ export class PdsApiService {
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          let obj = this.handlehttpError(error);
+          let obj: never = this.handlehttpError(error) as never;
           console.log(obj);
           return new Observable(function(x) {
             x.next(obj);
@@ -550,7 +596,7 @@ export class PdsApiService {
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          let obj = this.handlehttpError(error);
+          let obj: never = this.handlehttpError(error) as never;
           console.log(obj);
           return new Observable(function(x) {
             x.next(obj);
@@ -579,7 +625,7 @@ export class PdsApiService {
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          let obj = this.handlehttpError(error);
+          let obj: never = this.handlehttpError(error) as never;
           console.log(obj);
           return new Observable(function(x) {
             x.next(obj);
@@ -609,7 +655,7 @@ export class PdsApiService {
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          let obj = this.handlehttpError(error);
+          let obj: never = this.handlehttpError(error) as never;
           console.log(obj);
           return new Observable(function(x) {
             x.next(obj);
@@ -637,7 +683,7 @@ export class PdsApiService {
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          let obj = this.handlehttpError(error);
+          let obj: never = this.handlehttpError(error) as never;
           console.log(obj);
           return new Observable(function(x) {
             x.next(obj);
@@ -676,7 +722,7 @@ export class PdsApiService {
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          let obj = this.handlehttpError(error);
+          let obj: never = this.handlehttpError(error) as never;
           return new Observable(function(x) {
             x.next(obj);
           });
@@ -693,10 +739,20 @@ export class PdsApiService {
       })
     };
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.backuplist);
-    return this.http.get(
-      this.baseurl + this.employeesUrl + CurrentUrls.backuplist,
-      phttpOptions
-    );
+    return this.http
+      .get(
+        this.baseurl + this.employeesUrl + CurrentUrls.backuplist,
+        phttpOptions
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let obj: never = this.handlehttpError(error) as never;
+          console.log(obj);
+          return new Observable(function(x) {
+            x.next(obj);
+          });
+        })
+      );
   }
   //DB Backup restore
   restore(filename: string, tkn: string): R.Observable<any> {
@@ -709,9 +765,19 @@ export class PdsApiService {
     };
     let input = "?file=" + filename;
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.restore);
-    return this.http.get(
-      this.baseurl + this.employeesUrl + CurrentUrls.restore + input,
-      phttpOptions
-    );
+    return this.http
+      .get(
+        this.baseurl + this.employeesUrl + CurrentUrls.restore + input,
+        phttpOptions
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let obj: never = this.handlehttpError(error) as never;
+          console.log(obj);
+          return new Observable(function(x) {
+            x.next(obj);
+          });
+        })
+      );
   }
 }
