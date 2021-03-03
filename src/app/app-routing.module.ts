@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { HomeComponent } from "./home/home.component";
-//import { ResetpasswordComponent } from "./resetpassword/resetpassword.component";
 import { NopageComponent } from "./nopage/nopage.component";
+//import { ResetpasswordComponent } from "./resetpassword/resetpassword.component";
 import { PdsMainComponent } from "./pds-main/pds-main.component";
 import { AboutusComponent } from "./aboutus/aboutus.component";
 import { AbtusComponent } from "./abtus/abtus.component";
@@ -25,18 +25,21 @@ import { CommercialconstantComponent } from "./loginhome/commercialconstant/comm
 import { DownloadinvoiceComponent } from "./loginhome/downloadinvoice/downloadinvoice.component";
 import { BackupComponent } from "./loginhome/backup/backup.component";
 import { AuthGuard } from "./auth-guard.service";
+//import { CanDeactivateGuardService } from "./can-deactivate-guard.service";
 const appRoutes: Routes = [
   { path: "", redirectTo: "/home", pathMatch: "full" },
   { path: "home", component: HomeComponent },
   { path: "login", component: PdsMainComponent },
+  { path: "forcelogin", component: PdsMainComponent },
   { path: "vision", component: AboutusComponent },
   { path: "aboutus", component: AbtusComponent },
-//  { path: "ResetPassword/:rid", component: ResetpasswordComponent },
+  // { path: "ResetPassword/:rid", component: ResetpasswordComponent },
   { path: "register", component: RegisterComponent },
   {
     path: "loginhome",
     component: LoginhomeComponent,
     canActivate: [AuthGuard],
+    //  canDeactivate:[CanDeactivateGuardService],
     children: [
       { path: "", component: LogindefaulthomeComponent },
       { path: "approvals", component: UserreadingsComponent },
@@ -74,6 +77,7 @@ const appRoutes: Routes = [
       //    {path : ':id/edit',component: RecipeEditComponent,canActivate:[AuthGuard],canDeactivate:[CanDeactivateGuard] }
     ]
   },
+  // { path: "pds", redirectTo: "/home", pathMatch: "full" },
   { path: "404", component: NopageComponent },
   { path: "**", redirectTo: "/404" }
 ];
@@ -81,6 +85,7 @@ const appRoutes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(appRoutes, {
+      useHash: true,
       onSameUrlNavigation: "reload"
     })
   ],

@@ -2,6 +2,8 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import { APP_BASE_HREF } from "@angular/common";
+import { MATERIAL_SANITY_CHECKS } from "@angular/material/core";
 import { Routes, RouterModule, PreloadAllModules } from "@angular/router";
 import { AppComponent } from "./app.component";
 import { MaterialModule } from "./material.module";
@@ -9,13 +11,14 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { appRoutingModule } from "./app-routing.module";
 import { CommonModule } from "@angular/common";
+import { HashLocationStrategy, LocationStrategy } from "@angular/common";
 //import {HttpClientModule} from "@angular/common/http";
 
 import { PdsMainComponent } from "./pds-main/pds-main.component";
 import { HomeComponent } from "./home/home.component";
+//import { ResetpasswordComponent } from "./resetpassword/resetpassword.component";
 import { LoadingComponent } from "./loading/loading.component";
 import { AboutusComponent } from "./aboutus/aboutus.component";
-//import { ResetpasswordComponent } from "./resetpassword/resetpassword.component";
 import { LogintabComponent } from "./logintab/logintab.component";
 import { ScrollingComponent } from "./scrolling/scrolling.component";
 import { RegisterComponent } from "./register/register.component";
@@ -62,6 +65,7 @@ import { AuthGuard } from "./auth-guard.service";
     AppComponent,
     PdsMainComponent,
     HomeComponent,
+    // ResetpasswordComponent,
     LoadingComponent,
     AboutusComponent,
     LogintabComponent,
@@ -87,12 +91,23 @@ import { AuthGuard } from "./auth-guard.service";
     PaginationComponent,
     CommercialconstantComponent,
     DownloadinvoiceComponent,
-    // ResetpasswordComponent,
     BackupComponent,
     NopageComponent
   ],
   entryComponents: [SalaryslipComponent, ApproveemployeeComponent],
   bootstrap: [AppComponent],
-  providers: [ViewService, PdsApiService, SweetService, AuthService, AuthGuard]
+  providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    {
+      provide: MATERIAL_SANITY_CHECKS,
+      useValue: false
+    },
+    { provide: APP_BASE_HREF, useValue: "" },
+    ViewService,
+    PdsApiService,
+    SweetService,
+    AuthService,
+    AuthGuard
+  ]
 })
 export class AppModule {}
