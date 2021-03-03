@@ -1,5 +1,5 @@
-import { Component, OnInit ,OnDestroy} from "@angular/core";
-import { Router,ActivatedRoute } from "@angular/router";
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Router, ActivatedRoute } from "@angular/router";
 import { Environment } from "../environment";
 import { UserType } from "../models/usertype";
 import { PdsApiService } from "../pds-api.service";
@@ -13,14 +13,14 @@ import * as r from "rxjs";
   templateUrl: "./pds-main.component.html",
   styleUrls: ["./pds-main.component.css"]
 })
-export class PdsMainComponent implements OnInit,OnDestroy {
+export class PdsMainComponent implements OnInit, OnDestroy {
   img: string;
   private subsc: r.Subscription;
   load: boolean = false;
   userName: string;
   password: string;
   user: UserType;
-  url:string;
+  url: string;
   view: Boolean = true;
   userInfo: UserType;
   constructor(
@@ -31,9 +31,9 @@ export class PdsMainComponent implements OnInit,OnDestroy {
     private autServ: AuthService,
     private route: ActivatedRoute
   ) {}
-ngOnDestroy(){
-  this.subsc.unsubscribe();
-}
+  ngOnDestroy() {
+    this.subsc.unsubscribe();
+  }
   ngOnInit() {
     this.url = this.route["_routerState"].snapshot.url;
 
@@ -45,45 +45,45 @@ ngOnDestroy(){
       var u = this.vServ.getValue("userProp");
       this.userInfo = JSON.parse(u);
     }
-    if(this.userInfo != null && this.userInfo != undefined )
-    {
-    if (
-      this.userInfo.employeeId > 0 &&
-      this.userInfo.userTypeId > 0 &&
-      this.userInfo.user != "" && force == -1
-    ) {
-      this.api
-      .signOut(
-        this.userInfo.user,
-        this.userInfo.employeeId,
-        this.userInfo.userTypeId
-      )
-      .subscribe(
-        (data: APIResult) => {
-          let status: Boolean = data.status;
-          let m: string = data.message;
-          if (status) {
-            this.sweet.showSuccessMessage("Success!!", m);
-            this.vServ.removeValue("usrtoken");
-            this.vServ.userInfo.next(new UserType());
-            this.vServ.removeValue("userProp");
-            this.vServ.removeValue("storedProp");
-            this.vServ.removeValue("fheverify");
-            this.vServ.removeValue("edleverify");
-            this.vServ.removeValue("evheverify");
-            this.vServ.removeValue("hrvheverify");
-            this.autServ.setToken("");
-           // this.router.navigate(["/login"]);
-          } else {
-            this.sweet.showErrorMessage("Error!!", m);
-          }
-        },
-        err => {
-          this.sweet.showErrorMessage("Network Error!!!", err.message);
-        }
-      );
+    if (this.userInfo != null && this.userInfo != undefined) {
+      if (
+        this.userInfo.employeeId > 0 &&
+        this.userInfo.userTypeId > 0 &&
+        this.userInfo.user != "" &&
+        force == -1
+      ) {
+        this.api
+          .signOut(
+            this.userInfo.user,
+            this.userInfo.employeeId,
+            this.userInfo.userTypeId
+          )
+          .subscribe(
+            (data: APIResult) => {
+              let status: Boolean = data.status;
+              let m: string = data.message;
+              if (status) {
+                this.sweet.showSuccessMessage("Success!!", m);
+                this.vServ.removeValue("usrtoken");
+                this.vServ.userInfo.next(new UserType());
+                this.vServ.removeValue("userProp");
+                this.vServ.removeValue("storedProp");
+                this.vServ.removeValue("fheverify");
+                this.vServ.removeValue("edleverify");
+                this.vServ.removeValue("evheverify");
+                this.vServ.removeValue("hrvheverify");
+                this.autServ.setToken("");
+                // this.router.navigate(["/login"]);
+              } else {
+                this.sweet.showErrorMessage("Error!!", m);
+              }
+            },
+            err => {
+              this.sweet.showErrorMessage("Network Error!!!", err.message);
+            }
+          );
+      }
     }
-  }
     //
     this.vServ.removeValue("usrtoken");
     this.vServ.removeValue("userProp");
