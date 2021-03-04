@@ -128,7 +128,7 @@ export class PdsMainComponent implements OnInit, OnDestroy {
             // } else if (userTypeId == 7) {
             //   userInfo = "hrhe";
             // }
-            //sf  tysd
+
             this.vServ.setToken(tkn);
             this.vServ.setValue(userInfo);
             this.vServ.setUser(this.user);
