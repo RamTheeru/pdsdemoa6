@@ -128,7 +128,6 @@ export class PdsMainComponent implements OnInit, OnDestroy {
             // } else if (userTypeId == 7) {
             //   userInfo = "hrhe";
             // }
-
             this.vServ.setToken(tkn);
             this.vServ.setValue(userInfo);
             this.vServ.setUser(this.user);
@@ -185,32 +184,7 @@ export class PdsMainComponent implements OnInit, OnDestroy {
         this.sweet.showErrorMessage("Network Error!!!", err.message);
       }
     );
-
-    // if (this.user == "financele" && this.password == "1234") {
-    //   this.vServ.setValue(this.user);
-    //   this.router.navigate(["/loginhome"]);
-    // } else if (this.user == "financehe" && this.password == "1234") {
-    //   this.vServ.setValue(this.user);
-    //   this.router.navigate(["/loginhome"]);
-    // } else if (this.user == "executivele" && this.password == "1234") {
-    //   this.vServ.setValue(this.user);
-    //   this.router.navigate(["/loginhome"]);
-    // } else if (this.user == "executivehe" && this.password == "1234") {
-    //   this.vServ.setValue(this.user);
-    //   this.router.navigate(["/loginhome"]);
-    // } else if (this.user == "hrle" && this.password == "1234") {
-    //   this.vServ.setValue(this.user);
-    //   this.router.navigate(["/loginhome"]);
-    // } else if (this.user == "hrhe" && this.password == "1234") {
-    //   this.vServ.setValue(this.user);
-    //   this.router.navigate(["/loginhome"]);
-    // } else {
-    //   this.sweet.showErrorMessage("Fail!!", "Ivalid Login");
-    // }
   }
 
-  // onRegister() {
-  //   this.view = false;
-  //     this.vServ.updateView(this.view);
-  // }
+
 }
