@@ -1,470 +1,296 @@
-import { Component, Input, ViewChild, OnInit, OnDestroy } from "@angular/core";
-import { Router, NavigationExtras } from "@angular/router";
-import { MatSidenav } from "@angular/material";
-import * as r from "rxjs";
-import { ViewledgerComponent } from "./viewledger/viewledger.component";
-import { ViewService } from "../view.service";
-import { PdsApiService } from "../pds-api.service";
-import { SweetService } from "../sweet.service";
-import { UserType } from "../models/usertype";
-import { AuthService } from "../auth.service";
-import { APIResult } from "../models/apiresult";
-import swal from "sweetalert2";
-// const navigationExtras: NavigationExtras = {
-//   state: {
-//     transd: 'TRANS001',
-//     workQueue: false,
-//     services: 10,
-//     code: '003'
-//   }
-// };
-@Component({
-  selector: "app-loginhome",
-  templateUrl: "./loginhome.component.html",
-  styleUrls: ["./loginhome.component.css"]
-})
-export class LoginhomeComponent implements OnInit, OnDestroy {
-  @Input("") user: string;
-  private subsc: r.Subscription;
-  private subsc2: r.Subscription;
-  userInfo: UserType;
-  loginInfo: string = "";
-  loginUsername: string = "";
-  userType: number = 0;
-  isFle: Boolean = false;
-  updatesession: any;
-  shoesidenav: Boolean = false;
-  shownotify: Boolean = false;
-  actTab: Boolean = false;
-  @ViewChild("sidenav") sidenav: MatSidenav;
-  isExpanded = true;
-  showSubmenu: boolean = false;
-  isShowing = false;
-  act1SubMenu: boolean = false;
-  act2SubMenu: boolean = false;
-  mouseenter() {
-    if (!this.isExpanded) {
-      this.isShowing = true;
-    }
-  }
+<div class="container-fluid">
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+		<a class="navbar-brand"></a>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="#">{{loginInfo}}</a>
+				</li>
+				<li></li>
+			</ul>
+			<ul class="navbar-nav">
+				<!-- <li class="nav-item">
+					<a class="nav-link" routerLink="/login">Logout</a>
+				</li> -->
+				<div class="dropdown">
+					<button
+            type="button"
+            class="btn btn-dark dropdown-toggle"
+            data-toggle="dropdown"
+          >
+            {{loginUsername}}
+          </button>
+					<div class="dropdown-menu">
+						<a class="dropdown-item active" (click)="onLogout()">Logout</a>
+						<!-- <a class="dropdown-item" href="#">Link 2</a>
+            <a class="dropdown-item" href="#">Link 3</a> -->
+					</div>
+				</div>
+			</ul>
+		</div>
+	</nav>
 
-  mouseleave() {
-    if (!this.isExpanded) {
-      this.isShowing = false;
-    }
-  }
-  //should   Run = [/(^|\.)plnkr\.co$/,    /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
-  //
-  constructor(
-    private vServ: ViewService,
-    private auth: AuthService,
-    private router: Router,
-    private api: PdsApiService,
-    private swServ: SweetService
-  ) {}
+	<div class="row">
+		<div class="col-sm-2">
+			<ng-container *ngIf="userType === 1; else elseif1">
+				<!-- <p>AdminMenu</p> -->
 
-  ngOnInit() {
-    this.updatesession = setInterval(() => {
-      this.updateSession();
-    }, 1200000);
-    this.subsc = this.vServ.data.subscribe((val: string) => {
-      this.user = val;
-    });
-    this.subsc2 = this.vServ.userInfo.subscribe((res: UserType) => {
-      this.userInfo = res;
-    });
-    if (this.user == "" || this.user == null || this.user == undefined) {
-      this.user = this.vServ.getValue("storedProp");
-    }
-    if (this.userInfo == null || this.userInfo == undefined) {
-      var u = this.vServ.getValue("userProp");
-      this.userInfo = JSON.parse(u);
-    }
-    console.log(this.user);
-    this.loginUsername = this.userInfo.user;
-    this.userType = this.userInfo.userTypeId;
-    //this.user =    "   fle"
-    if (this.userType === 1) {
-      // this.userType = 1;
-      this.shownotify = false;
-      this.loginInfo = "Admin Login";
-    } else if (this.userType === 4) {
-      //  this.userType = 2;
-      this.shownotify = false;
-      this.loginInfo = "Finance LE Login";
-    } else if (this.userType === 5) {
-      //  this.userType = 3;
-      this.shownotify = false;
-      this.loginInfo = "Finance HE Login";
-    } else if (this.userType === 6) {
-      // this.userType = 4;
-      this.shownotify = false;
-      this.loginInfo = "Executive LE Login";
-    } else if (this.userType === 7) {
-      // this.userType = 5;
-      this.shownotify = false;
-      this.loginInfo = "Executive HE Login";
-    } else if (this.userType === 2) {
-      //  this.userType = 6;
-      this.shownotify = false;
-      this.loginInfo = "HR LE Login";
-    } else if (this.userType === 3) {
-      // this.userType = 7;
-      this.shownotify = false;
-      this.loginInfo = "HR HE Login";
-    } else {
-      //
-      this.shownotify = false;
-    }
-  }
-  Onbtnclick() {
-    this.shoesidenav = !this.shoesidenav;
-  }
-  updateSession() {
-    if (
-      this.userInfo != null &&
-      this.userInfo != undefined &&
-      this.userInfo.employeeId != 0 &&
-      this.userInfo.userTypeId > 0
-    ) {
-      swal({
-        title: "Are you sure?",
-        text: "Do you want to continue the session?",
-        type: "warning",
-        showConfirmButton: true,
-        showCancelButton: true
-      }).then(willDelete => {
-        if (willDelete.value) {
-          this.api
-            .updateSession(this.userInfo.userTypeId, this.userInfo.employeeId)
-            .subscribe(
-              (data: APIResult) => {
-                let status: Boolean = data.status;
-                let m: string = data.message;
-                if (status) {
-                  let tkn = data.userInfo.token;
-                  this.vServ.setValue(data.userInfo.user);
-                  this.vServ.setUser(data.userInfo);
-                  this.auth.setToken(tkn);
-                  this.vServ.setToken(tkn);
-                  this.swServ.showSuccessMessage("Success!!", m);
-                } else {
-                  this.swServ.showErrorMessage("Failed!!", m);
-                  this.vServ.removeValue("usrtoken");
-                  this.vServ.removeValue("userProp");
-                  this.vServ.removeValue("storedProp");
-                  this.vServ.removeValue("fheverify");
-                  this.vServ.removeValue("edleverify");
-                  this.vServ.removeValue("evheverify");
-                  this.vServ.removeValue("hrvheverify");
-                  this.auth.setToken("");
-                  this.vServ.setToken("");
-                  this.router.navigate(["/login"]);
-                }
-                // console.log(data);
-                // this.swServ.showSuccessMessage("Sucess!!", "we didit");
-                // this.swServ.showMessage("SomethingWent", "wrong");
-                // this.swServ.showWarning("Delete it");
-              },
-              err => {
-                //console.log(err.message);
-                this.swServ.showErrorMessage("Network Error!!", err.message);
-              },
-              () => {
-                console.log("completed");
-              }
-            );
-          // this.openApproveForm(e.RegisterId, Number(this.selectedStation));
-          // this.api.approveUser(e.RegisterId, status);
-        } else {
-          this.swServ.showErrorMessage(
-            "Canelled",
-            "Please dont forget to signout or you will be signout automatically."
-          );
-        }
-      });
-    } else {
-      this.swServ.showErrorMessage(
-        "Something went wrong!!",
-        "Unable to get details to continue session, Please Sign-in again."
-      );
-    }
-  }
-  oncreateclk(tab = "") {
-    //fdhfgjf  routerLink="/loginhome/downloadinvoice"
-    this.shownotify = false;
-    if (tab == "si") {
-      this.act1SubMenu = true;
-      this.act2SubMenu = false;
-    } else if (tab == "sl") {
-      this.act1SubMenu = false;
-      this.act2SubMenu = true;
-    } else if (tab == "edle") {
-      this.shownotify = false;
-      this.act1SubMenu = false;
-      this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("hrvheverify");
-      this.vServ.setVerify("edle");
-      this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(["/loginhome/downloadinvoice"]);
-    } else {
-      this.act1SubMenu = false;
-      this.act2SubMenu = false;
-    }
-    this.shownotify = false;
-  }
-  onloghomeclk(tab = "") {
-    if (tab == "fh") {
-      this.shownotify = false;
-      this.act1SubMenu = false;
-      this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("hrvheverify");
-      // this.router.navigate["/loginhome"];
-    } else if (tab == "ah") {
-      this.shownotify = false;
-      this.act1SubMenu = false;
-      this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("hrvheverify");
-      this.router.navigate(["/loginhome"]);
-    } else if (tab == "a") {
-      this.shownotify = false;
-      this.act1SubMenu = false;
-      this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("hrvheverify");
-      this.router.navigate(["/loginhome/registeremployees"]);
-    } else if (tab == "ar") {
-      this.shownotify = false;
-      this.act1SubMenu = false;
-      this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("hrvheverify");
-      this.router.navigate(["/loginhome/approvals"]);
-    } else if (tab == "lg") {
-      this.shownotify = false;
-      this.act1SubMenu = false;
-      this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("hrvheverify");
-      this.router.navigate(["/loginhome/employeelogins"]);
-    } else if (tab == "fhe") {
-      this.shownotify = false;
-      this.act1SubMenu = false;
-      this.act2SubMenu = false;
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("hrvheverify");
-      this.vServ.setVerify("fhe");
-      this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(["/loginhome/verifyvouchers"]);
-    } else if (tab == "fihe") {
-      this.shownotify = false;
-      this.act1SubMenu = false;
-      this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("hrvheverify");
-      this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(["/loginhome/viewledger"]);
-    } else if (tab == "fle") {
-      this.shownotify = false;
-      this.act1SubMenu = false;
-      this.act2SubMenu = false;
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("hrvheverify");
-    } else if (tab == "ele") {
-      this.shownotify = false;
-      this.act1SubMenu = false;
-      this.act2SubMenu = false;
-      this.vServ.removeValue("hrvheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("fheverify");
-      this.router.navigate(["/loginhome/viewdas"]);
-    } else if (tab == "ehe") {
-      this.shownotify = false;
-      this.act1SubMenu = false;
-      this.act2SubMenu = false;
-      this.vServ.removeValue("hrvheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("fheverify");
-    } else if (tab == "eele") {
-      this.shownotify = false;
-      this.act1SubMenu = false;
-      this.act2SubMenu = false;
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("hrvheverify");
-      this.router.navigate(["/loginhome/createemployee"]);
-    } else if (tab == "edle") {
-      this.shownotify = false;
-      this.act1SubMenu = false;
-      this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("hrvheverify");
-      this.vServ.setVerify("edle");
-      this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(["/loginhome/enrolldeliveryassociate"]);
-    } else if (tab == "evhe") {
-      // this.shownotify = false;
-      // this.act1SubMenu = false;
-      // this.act2SubMenu = false;
-      // this.vServ.removeValue("edleverify");
-      // this.vServ.removeValue("fheverify");
-      // this.vServ.setVerify("evhe");
-      // this.router.onSameUrlNavigation = "reload";
-      // this.router.navigate(["/loginhome/employees"]);
-    } else if (tab == "eehe") {
-      this.shownotify = false;
-      this.act1SubMenu = false;
-      this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("hrvheverify");
-      this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(["/loginhome/viewdas"]);
-    } else if (tab == "hrle") {
-      this.shownotify = false;
-      this.act1SubMenu = false;
-      this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("hrvheverify");
-      this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(["/loginhome/createemployee"]);
-    } else if (tab == "hrhe") {
-      this.shownotify = false;
-      this.act1SubMenu = false;
-      this.act2SubMenu = false;
-      this.vServ.removeValue("hrvheverify");
-      this.vServ.removeValue("fheverify");
-      //this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.setVerify("evhe");
-      this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(["/loginhome/confirmemployment"]);
-    } else if (tab == "hruahe") {
-      this.shownotify = false;
-      this.act1SubMenu = false;
-      this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("hrvheverify");
-      //this.vServ.setVerify("hruahe");
-      //this.router.onSameUrlNavigation = "reload";
-      //this.router.navigate(["/loginhome/employees"]);
-    } else if (tab == "hrvhe") {
-      this.shownotify = false;
-      this.act1SubMenu = false;
-      this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.setVerify("hrvhe");
-      this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(["/loginhome/viewemployees"]);
-    } else if (tab == "hrgshe") {
-      this.shownotify = false;
-      this.act1SubMenu = false;
-      this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("hrvheverify");
-      this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(["/loginhome/generatesalaryslips"]);
-    } else {
-      this.shownotify = false;
-      this.act1SubMenu = false;
-      this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("hrvheverify");
-    }
-  }
-  ngOnDestroy() {
-    this.subsc.unsubscribe();
-    this.subsc2.unsubscribe();
-    clearInterval(this.updatesession);
-  }
-  onLogout() {
-    this.subsc2 = this.vServ.userInfo.subscribe((res: UserType) => {
-      this.userInfo = res;
-    });
-    if (this.userInfo == null || this.userInfo == undefined) {
-      var u = this.vServ.getValue("userProp");
-      this.userInfo = JSON.parse(u);
-    }
-    if (
-      this.userInfo.employeeId > 0 &&
-      this.userInfo.userTypeId > 0 &&
-      this.userInfo.user != ""
-    ) {
-      this.api
-        .signOut(
-          this.userInfo.user,
-          this.userInfo.employeeId,
-          this.userInfo.userTypeId
-        )
-        .subscribe(
-          (data: APIResult) => {
-            let status: Boolean = data.status;
-            let m: string = data.message;
-            if (status) {
-              //  this.swServ.showSuccessMessage("Success!!", m);
-              this.vServ.removeValue("usrtoken");
-              this.vServ.removeValue("userProp");
-              this.vServ.removeValue("storedProp");
-              this.vServ.removeValue("fheverify");
-              this.vServ.removeValue("edleverify");
-              this.vServ.removeValue("evheverify");
-              this.vServ.removeValue("hrvheverify");
-              this.vServ.userInfo.next(new UserType());
-              this.auth.setToken("");
-              this.vServ.setToken("");
-              this.swServ.showSuccessMessage("Success!!", m);
-              this.router.navigate(["/forcelogin"]);
-            } else {
-              this.swServ.showErrorMessage("Error!!", m);
-              this.router.navigate(["/login"]);
-            }
-          },
-          err => {
-            this.swServ.showErrorMessage("Network Error!!!", err.message);
-            this.router.navigate(["/login"]);
-          }
-        );
-    } else {
-      this.swServ.showErrorMessage(
-        "Error!!",
-        "Unable to logout,Something Went Wrong!!!"
-      );
-      this.router.navigate(["/login"]);
-    }
-    //bkgk jhk   ugk
-  }
-}
+				<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+					<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
+						aria-controls="v-pills-home" aria-selected="true" (click)="onloghomeclk('ah')">Home</a>
+					<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
+						aria-controls="v-pills-profile" aria-selected="false" (click)="onloghomeclk('ar')">Approvals</a>
+					<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
+						aria-controls="v-pills-profile" aria-selected="false" (click)="onloghomeclk('lg')">Logins</a>
+					<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
+						aria-controls="v-pills-profile" aria-selected="false" (click)="oncreateclk('')"
+						routerLink="/loginhome/createcommercialrates">Constants</a>
+					<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
+						aria-controls="v-pills-profile" aria-selected="false" (click)="oncreateclk('')"
+						routerLink="/loginhome/backups">Backups</a>
+
+					<!-- <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
+						aria-controls="v-pills-profile" aria-selected="false" (click)="oncreateclk()"
+						routerLink="/loginhome/createemployee">Create Employee</a>
+					<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
+						aria-controls="v-pills-profile" aria-selected="false">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+								aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Bulk View</span>
+								<span class="caret"></span></a>
+							<ul class="dropdown-menu" id="drop">
+								<li> <a [ngClass]="act1SubMenu?'nav-link active':'nav-link'" id="v-pills-sub1-tab"
+										data-toggle="pill" href="#v-pills-sub1" role="tab" aria-controls="v-pills-sub1"
+										aria-selected="false" (click)="oncreateclk('si')"
+										routerLink="/loginhome/individualview/1"> Individual View</a></li>
+								<li> <a [ngClass]="act2SubMenu?'nav-link active':'nav-link'" id="v-pills-sub2-tab"
+										data-toggle="pill" href="#v-pills-sub2" role="tab" aria-controls="v-pills-sub2"
+										aria-selected="false" (click)="oncreateclk('sl')"
+										routerLink="/loginhome/employeelist"> Location based List</a></li>
+							</ul>
+						</li>
+
+					</a> -->
+				</div>
+			</ng-container>
+			<ng-template #elseif1>
+				<ng-container *ngIf="userType === 2; else elseif2">
+					<!-- <p>HRLE menu</p> -->
+					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+						<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home"
+							role="tab" aria-controls="v-pills-home" aria-selected="true" (click)="onloghomeclk('ehe')"
+							routerLink="/loginhome">Home</a>
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="onloghomeclk('hrle')">Enroll Employee</a>
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							routerLink="/loginhome/submitattendance">Submit Attendence</a>
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="onloghomeclk('hrle')">View Employees</a>
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" routerLink="/loginhome/salaryslips"
+							aria-selected="false">Salary Slips</a>
+					</div>
+				</ng-container>
+			</ng-template>
+			<ng-template #elseif2>
+				<ng-container *ngIf="userType === 3; else elseif3">
+					<!-- <p>HRHE menu</p> -->
+					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+						<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home"
+							role="tab" aria-controls="v-pills-home" aria-selected="true" (click)="onloghomeclk('ehe')"
+							routerLink="/loginhome">Home</a>
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							routerLink="/loginhome/uploadattendance" (click)="onloghomeclk('hruahe')">Upload Attendance
+						</a>
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="onloghomeclk('hrhe')">Confirm Employment
+						</a>
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="onloghomeclk('hrvhe')">View Employees</a>
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="onloghomeclk('hrgshe')">Generate Salary Slips</a>
+					</div>
+				</ng-container>
+			</ng-template>
+			<ng-template #elseif3>
+				<ng-container *ngIf="userType === 4; else elseif4">
+					<!-- <p>FLE menu</p> -->
+					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+						<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home"
+							role="tab" aria-controls="v-pills-home" aria-selected="true" (click)="onloghomeclk('fh')"
+							routerLink="/loginhome">Home</a>
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="onloghomeclk('fle')" routerLink="/loginhome/entervoucher">Enter Voucher Details</a>
+						<!-- <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false" (click)="oncreateclk()"
+							routerLink="/loginhome/editvoucher/1">Edit Voucher Detais</a> -->
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="onloghomeclk('fle')" routerLink="/loginhome/viewledger">View Ledger</a>
+						<!-- <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false">
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+									aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Bulk View</span>
+									<span class="caret"></span></a>
+								<ul class="dropdown-menu" id="drop">
+									<li> <a [ngClass]="act1SubMenu?'nav-link active':'nav-link'" id="v-pills-sub1-tab"
+											data-toggle="pill" href="#v-pills-sub1" role="tab"
+											aria-controls="v-pills-sub1" aria-selected="false"
+											(click)="oncreateclk('si')" routerLink="/loginhome/individualview/1">
+											Individual View</a></li>
+									<li> <a [ngClass]="act2SubMenu?'nav-link active':'nav-link'" id="v-pills-sub2-tab"
+											data-toggle="pill" href="#v-pills-sub2" role="tab"
+											aria-controls="v-pills-sub2" aria-selected="false"
+											(click)="oncreateclk('sl')" routerLink="/loginhome/employeelist"> Location
+											based List</a></li>
+								</ul>
+							</li>
+
+						</a> -->
+					</div>
+				</ng-container>
+			</ng-template>
+			<ng-template #elseif4>
+				<ng-container *ngIf="userType === 5; else elseif5">
+					<!-- <p>FHE menu</p> -->
+					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+						<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home"
+							role="tab" aria-controls="v-pills-home" aria-selected="true" (click)="onloghomeclk('fh')"
+							routerLink="/loginhome">Home</a>
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="onloghomeclk('fle')" routerLink="/loginhome/entercreditdetails">Enter Credit
+							Details</a>
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="onloghomeclk('fhe')">Verify Vouchers</a>
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="onloghomeclk('fihe')">View Ledger</a>
+					</div>
+				</ng-container>
+			</ng-template>
+			<ng-template #elseif5>
+				<ng-container *ngIf="userType === 6; else elseif6">
+					<!-- <p>ELE menu</p> -->
+					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+						<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home"
+							role="tab" aria-controls="v-pills-home" aria-selected="true"
+							routerLink="/loginhome">Home</a>
+						<!-- <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="onloghomeclk('eele')">Create Employee</a> -->
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="onloghomeclk('edle')">Enroll Delivery Associate</a>
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="onloghomeclk('ele')">View Das
+						</a>
+						<!-- <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="onloghomeclk('ele')" routerLink="/loginhome/employees">ViewStaff Details
+						</a> -->
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							routerLink="/loginhome/updatedeliverydetails">Update Delivery Details
+						</a>
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="oncreateclk('edle')">Download Invoice</a>
+
+						<!-- <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="onloghomeclk('ele')" routerLink="/loginhome/employeesinsufficientdata">Staff With
+							Insufficient Data
+						</a> -->
+					</div>
+				</ng-container>
+			</ng-template>
+			<ng-template #elseif6>
+				<ng-container *ngIf="userType === 7; else else1">
+					<!-- <p>EHE menu</p> -->
+					<p>NO MENU</p>
+					<!-- <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+						<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home"
+							role="tab" aria-controls="v-pills-home" aria-selected="true" (click)="onloghomeclk('ehe')"
+							routerLink="/loginhome">Home</a>
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="onloghomeclk('evhe')">Verify Staff</a>
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+							role="tab" aria-controls="v-pills-profile" aria-selected="false"
+							(click)="onloghomeclk('eehe')">View Das</a> 
+		</div>-->
+				</ng-container>
+			</ng-template>
+			<ng-template #else1>
+				<p>NO MENU</p>
+			</ng-template>
+		</div>
+		<!--col1-->
+		<div [ngClass]="shownotify ? 'col-sm-8' : 'col-sm-10'">
+			<div class="tab-content" id="v-pills-tabContent">
+				<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+					aria-labelledby="v-pills-home-tab">
+					<router-outlet></router-outlet>
+				</div>
+				<!-- <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
+  <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
+  <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div> -->
+			</div>
+		</div>
+		<!--col2-->
+		<div class="col-sm-2" *ngIf="shownotify">
+			<ul>
+				<li>Notification1</li>
+				<li>Notification2</li>
+			</ul>
+		</div>
+	</div>
+	<!--row-->
+</div>
+<!--container-->
+<!-- <p>
+  <mat-toolbar color="primary">
+
+    <span>Login Name of User</span>
+    <span class="example-spacer"></span>
+
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <mat-icon>Logout</mat-icon>
+    </button>
+  </mat-toolbar>
+</p>
+
+<mat-sidenav-container>
+  <mat-sidenav [opened]="shoesidenav">
+    <mat-nav-list>
+
+      <a mat-list-item routerLink="/loginhome"> User Stats </a>
+      <a mat-list-item routerLink="/loginhome"> Info </a>
+      <a mat-list-item routerLink="/loginhome"> Contacts </a>
+
+
+    </mat-nav-list>
+  </mat-sidenav>
+      <mat-sidenav opened position="end">
+         <button type="submit" class="bg-primary" (click)="Onbtnclick()" ><b class="text-light" >>>Side Menu </b></button> 
+      Notifications 
+    </mat-sidenav>
+  <mat-sidenav-content>
+    <div id="content">
+
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container> -->

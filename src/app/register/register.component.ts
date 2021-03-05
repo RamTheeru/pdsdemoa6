@@ -495,7 +495,7 @@ export class RegisterComponent implements OnInit {
       this.showrequiredMessage(f, txt, errorTitle);
     } else if (field == "g") {
       var f = "Employee Location Name";
-      this.fvalid = true;
+      //this.fvalid = true;
     }
   }
   showrequiredMessage(field, txt, title) {
@@ -567,7 +567,7 @@ export class RegisterComponent implements OnInit {
         }
       );
     } else {
-      // this.fvalid = true;
+      this.fvalid = true;
     }
   }
   ValidateEmail(inputText): boolean {
