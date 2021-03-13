@@ -1,120 +1,120 @@
 <div class="container-fluid">
-	<h1 class="text-primary"><u>{{formText}}</u></h1>
-	<form class="form-horizontal" [formGroup]="voucherForm" (ngSubmit)="onSubmit()">
-		<div class="frm">
-			<div class="row">
-				<label>Select Location:</label>
+  <h1 class="text-primary"><u>{{formText}}</u></h1>
+  <form class="form-horizontal" [formGroup]="voucherForm" (ngSubmit)="onSubmit()">
+    <div class="frm">
+      <div class="row">
+        <label>Select Location:</label>
 
-				<!-- <mat-form-field class="inpt">
+        <!-- <mat-form-field class="inpt">
 
 					<input type="text" formControlName="lmcredit" class="form-control" matInput placeholder="Last Month's Credit*">
 					<mat-error>This field is mandatory</mat-error>
 				</mat-form-field> -->
 
-				<mat-form-field>
-					<mat-select formControlName="station" aria-placeholder="Station">
-						<mat-option value="">Select Station</mat-option>
-						<mat-option *ngFor="let s of stations" [value]="s.stationId">
-							{{s.stationName}}
-						</mat-option>
-					</mat-select>
-					<!-- <input type="text" name="StationCode" formControlName="station" matInput placeholder="Station Code" class="form-control">
+        <mat-form-field class="inpt" style="margin-left:100px;">
+          <mat-select formControlName="stat" aria-placeholder="Station">
+            <mat-option value="">Select Station</mat-option>
+            <mat-option *ngFor="let s of stations" [value]="s.stationId">
+              {{s.stationName}}
+            </mat-option>
+          </mat-select>
+          <!-- <input type="text" name="StationCode" formControlName="station" matInput placeholder="Station Code" class="form-control">
 					<mat-error>This field is mandatory</mat-error> -->
-				</mat-form-field>
-			</div>
+        </mat-form-field>
+      </div>
 
-			<div class="row">
-				<label>Voucher Date: </label>
+      <div class="row">
+        <label>Voucher Date: </label>
 
-				<!-- <mat-form-field class="inpt" style="margin-left:25px;">
+        <!-- <mat-form-field class="inpt" style="margin-left:25px;">
 					<input type="text" name="lmtdebit" formControlName="lmtdebit" matInput placeholder="Last Month's Total Debit" class="form-control">
 					<mat-error>This field is mandatory</mat-error>
 				</mat-form-field> -->
-				<mat-form-field class="inpt" style="margin-left:100px;">
-					<input  formControlName="voucherdate" matInput [matDatepicker]="picker" class="form-control" placeholder="Date Of Voucher">
-					<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-					<mat-datepicker #picker></mat-datepicker>
-					<mat-error>This field is mandatory</mat-error>
-				</mat-form-field>
+        <mat-form-field class="inpt" style="margin-left:100px;">
+          <input  formControlName="voucherdate" matInput [matDatepicker]="picker" class="form-control" placeholder="Date Of Voucher">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error>This field is mandatory</mat-error>
+        </mat-form-field>
 
-			</div>
-			<div class="row">
-				<label>Voucher Number:</label>
+      </div>
+      <div class="row">
+        <label>Voucher Number:</label>
 
-				<mat-form-field class="inpt" style="margin-left:88px;">
+        <mat-form-field class="inpt" style="margin-left:88px;">
 
-					<input type="text" name="vno" formControlName="vno" (focusout)="focusOutFunction('vno',$event)" matInput placeholder="Voucher Number" class="form-control">
-					<mat-error>This field is mandatory</mat-error>
-				</mat-form-field>
+          <input type="text" name="vno" formControlName="vno" (focusout)="focusOutFunction('vno',$event)" matInput placeholder="Voucher Number" class="form-control">
+          <mat-error>This field is mandatory</mat-error>
+        </mat-form-field>
 
-			</div>
-			<div class="row">
-				<label>Voucher Paid To:</label>
+      </div>
+      <div class="row">
+        <label>Voucher Paid To:</label>
 
-				<mat-form-field class="inpt" style="margin-left:88px;">
+        <mat-form-field class="inpt" style="margin-left:88px;">
 
-					<input type="text" name="paidto" formControlName="paidto" (focusout)="focusOutFunction('vpto',$event)" matInput placeholder="Paid To" class="form-control">
-					<mat-error>This field is mandatory</mat-error>
-				</mat-form-field>
+          <input type="text" name="paidto" formControlName="paidto" (focusout)="focusOutFunction('vpto',$event)" matInput placeholder="Paid To" class="form-control">
+          <mat-error>This field is mandatory</mat-error>
+        </mat-form-field>
 
-			</div>
-			<div class="row">
-				<label>Purpose Of Payment:</label>
+      </div>
+      <div class="row">
+        <label>Purpose Of Payment:</label>
 
-				<mat-form-field class="inpt" style="margin-left:58px;">
+        <mat-form-field class="inpt" style="margin-left:58px;">
 
-					<input type="text" name="purpose" formControlName="purpose" (focusout)="focusOutFunction('vpu',$event)" matInput placeholder="Purpose" class="form-control">
-					<mat-error>This field is mandatory</mat-error>
-				</mat-form-field>
+          <input type="text" name="purpose" formControlName="purpose" (focusout)="focusOutFunction('vpu',$event)" matInput placeholder="Purpose" class="form-control">
+          <mat-error>This field is mandatory</mat-error>
+        </mat-form-field>
 
-			</div>
-			<div class="row">
-				<label>Net Amount:</label>
+      </div>
+      <div class="row">
+        <label>Net Amount:</label>
 
-				<mat-form-field class="inpt" style="margin-left:117px;">
+        <mat-form-field class="inpt" style="margin-left:117px;">
 
-					<input type="text" name="netamnt" formControlName="netamnt" matInput (focusout)="focusOutFunction('vna',$event)" placeholder="Net Amount" class="form-control">
-					<mat-error>This field is mandatory</mat-error>
-				</mat-form-field>
+          <input type="text" name="netamnt" formControlName="netamnt" matInput (focusout)="focusOutFunction('vna',$event)" placeholder="Net Amount" class="form-control">
+          <mat-error>This field is mandatory</mat-error>
+        </mat-form-field>
 
-			</div>
-			<div class="row">
-				<div class="col">
-					<label>Tax Amount:</label>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label>Tax Amount:</label>
 
-					<mat-form-field class="inpt" style="margin-left:117px;">
+          <mat-form-field class="inpt" style="margin-left:117px;">
 
-						<input type="text" name="taxamnt" formControlName="taxamnt" matInput placeholder="Tax Amount" class="form-control">
-						<mat-error>This field is mandatory</mat-error>
-					</mat-form-field>
-				</div>
-				<div class="col">
-					<label>Taxes If Any:</label>
+            <input type="text" name="taxamnt" formControlName="taxamnt" matInput placeholder="Tax Amount" class="form-control">
+            <mat-error>This field is mandatory</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <label>Taxes If Any:</label>
 
-					<mat-form-field class="inpt" style="margin-left:117px;">
+          <mat-form-field class="inpt" style="margin-left:117px;">
 
-						<mat-select formControlName="tax" (selectionChange)="onSelectTax($event)"
-							aria-placeholder="Select Tax" class="form-control">
-							<mat-option value="">Select Tax</mat-option>
-							<mat-option value="gst">GST</mat-option>
-						</mat-select>
-					</mat-form-field>
-				</div>
-			</div>
-			<div class="row">
-				<label>Total Amount:</label>
+            <mat-select formControlName="tax" (selectionChange)="onSelectTax($event)" aria-placeholder="Select Tax"
+              class="form-control">
+              <mat-option value="">Select Tax</mat-option>
+              <mat-option value="gst">GST</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <label>Total Amount:</label>
 
-				<mat-form-field class="inpt" style="margin-left:117px;">
+        <mat-form-field class="inpt" style="margin-left:117px;">
 
-					<input type="text" name="totalamnt" formControlName="totalamnt" matInput placeholder="Total Amount" class="form-control">
-					<mat-error>This field is mandatory</mat-error>
-				</mat-form-field>
-			</div>
-			<div class="row" id="btnset">
-				<button  type="button" mat-raised-button color="warn" style="margin-right:10px;" >Cancel</button>
-				<button  type="button" [disabled]="!fValid" mat-raised-button color="primary" >Submit</button>
-			</div>
-		</div>
-	</form>
+          <input type="text" name="totalamnt" formControlName="totalamnt" matInput placeholder="Total Amount" class="form-control">
+          <mat-error>This field is mandatory</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="row" id="btnset">
+        <button  type="submit" mat-raised-button color="warn" style="margin-right:10px;" >Cancel</button>
+        <button  type="submit" [disabled]="!fValid" mat-raised-button color="primary" >Submit</button>
+      </div>
+    </div>
+  </form>
 
 </div>
