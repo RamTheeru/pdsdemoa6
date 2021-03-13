@@ -39,7 +39,7 @@ const appRoutes: Routes = [
     path: "loginhome",
     component: LoginhomeComponent,
     canActivate: [AuthGuard],
-    //  canDeactivate:[CanDeactivateGuardService],
+
     children: [
       { path: "", component: LogindefaulthomeComponent },
       { path: "approvals", component: UserreadingsComponent },
