@@ -465,6 +465,6 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       );
       this.router.navigate(["/login"]);
     }
-    //bkgk jhk   ugk
+
   }
 }
