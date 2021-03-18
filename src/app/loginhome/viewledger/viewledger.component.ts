@@ -16,7 +16,7 @@ import * as r from "rxjs";
 import { PdsApiService } from "../../pds-api.service";
 import { ViewService } from "../../view.service";
 import { SweetService } from "../../sweet.service";
-import { UserType } from "src/app/models/usertype";
+import { UserType } from "../../models/usertype";
 @Component({
   selector: "app-viewledger",
   templateUrl: "./viewledger.component.html",
@@ -61,6 +61,7 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
   statuses = [
     { val: "P", name: "Pending" },
     { val: "A", name: "Approved" },
+    { val: "R", name: "Rejected" },
     { val: "al", name: "All" }
   ];
   userInfo: UserType;
@@ -188,6 +189,7 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
       this.isLe = true;
       if (vouch !== -1) {
         this.isLeVoucher = true;
+        //  this.route.snapshot.queryParamMap.get('station');
       } else {
         this.isLeVoucher = false;
       }
@@ -220,7 +222,7 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
     // }
   }
   getledgersbyMonth(event) {
-    //console.log(this.selectedStation) ;
+    console.log(this.isLeVoucher);
     if (this.usrToken == "") {
       this.usrToken = this.vServ.getToken();
     }
@@ -251,13 +253,23 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
       this.handleUnauthorizedrequest();
     } else {
       if (this.isLeVoucher) {
-        if (this.toDate != "") {
+        if (
+          this.toDate != "" &&
+          this.toDate != undefined &&
+          this.toDate != null
+        ) {
           this.apiInput = new ApiInput();
-          this.apiInput.status = this.vStatus;
+          if (this.vStatus == "al") {
+            this.apiInput.status = "";
+          } else {
+            this.apiInput.status = this.vStatus;
+          }
+
           this.apiInput.stationId = Number(this.stationId);
-          this.apiInput.vEndDate = this.toDate;
+          this.apiInput.vEndDate = this.api.convert(this.toDate);
           //this.apiInput.currentmonth = this.currentmonth;
-          this.getledgers(this.apiInput);
+          console.log(this.apiInput);
+          this.getvouchers(this.apiInput);
         } else {
           this.swServ.showErrorMessage(
             "Invalid Request!!!",
@@ -321,9 +333,22 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
         this.totalCount = data.queryTotalCount;
         this.pages = this.api.transform(this.pageCount);
         console.log(data);
-        this.list.forEach(obj => {
-          obj.VStatus = obj.Status == "A" ? true : false;
-        });
+        //          this.list.forEach(obj => {
+        //   obj.VStatus = obj.Status == "A" ? true : false;
+        // });
+        if (this.list == undefined || this.list == null) {
+          this.swServ.showMessage(
+            "Warning!",
+            "No records found for this request."
+          );
+        } else {
+          if (this.list.length == 0) {
+            this.swServ.showMessage(
+              "Warning!",
+              "No records found for this request."
+            );
+          }
+        }
       } else {
         this.swServ.showErrorMessage("Failure!!!", message);
       }
@@ -343,6 +368,19 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
           this.totalCount = data.queryTotalCount;
           this.pages = this.api.transform(this.pageCount);
           console.log(data);
+          if (this.list == undefined || this.list == null) {
+            this.swServ.showMessage(
+              "Warning!",
+              "No records found for this request."
+            );
+          } else {
+            if (this.list.length == 0) {
+              this.swServ.showMessage(
+                "Warning!",
+                "No records found for this request."
+              );
+            }
+          }
         } else {
           this.swServ.showErrorMessage("Failure!!!", message);
         }

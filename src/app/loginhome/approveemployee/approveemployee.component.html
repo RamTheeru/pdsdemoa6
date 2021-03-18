@@ -1,15 +1,17 @@
 <div class="container-fluid">
-	<h1 class="text-primary"><u>Approve Form</u></h1>
-	<div class="row" style="float:right;">
-		<button class="btn-dialog-close" style="float:right;background-color:white;" (click)="onClose()"  mat-stroked-button tabIndex="-1">
-    <mat-icon>X</mat-icon>
-  </button>
-	</div>
-	<form>
+  <button class="close" mat-button (click)="onClose()">X</button>
+  <h1 class="text-primary"><u>Approve Form</u></h1>
+  <!-- <div class="row" style="float:right;"> -->
+  <!-- <button class="btn-dialog-close" style="float:right;background-color:white;" (click)="onClose()"  mat-stroked-button tabIndex="-1"> -->
 
-		<div class="row">
-			<div class="col">
-				<!-- <mat-form-field>
+  <!-- <mat-icon>X</mat-icon> -->
+  <!-- </button> -->
+  <!-- </div> -->
+  <form>
+
+    <div class="row">
+      <div class="col">
+        <!-- <mat-form-field>
 					<mat-label>Profession</mat-label>
 					<mat-select formControlName="prof" name="prof" aria-placeholder="Profession Type">
 						<mat-option value="" selected>Select Profession Type</mat-option>
@@ -17,24 +19,24 @@
 						</mat-option>
 					</mat-select>
 				</mat-form-field> -->
-				<select [(ngModel)]="profid" name="prof" id="prof">
+        <select class="form-control" [(ngModel)]="profid" name="prof" id="prof">
 							<option value="0" selected>Select Profession Type</option>
               	<option *ngFor="let p of professions" [ngValue]="p.pid">
 								{{p.professionName}}
 							</option>
     </select>
-			</div>
-			<div class="col">
-				<input type="text" name="empc" [(ngModel)]="empCode" (focusout)="focusOutFunction('empCode',$event)"    placeholder="Employee Code*" class="form-control">
-			</div>
+      </div>
+      <div class="col">
+        <input type="text" name="empc" [(ngModel)]="empCode" (focusout)="focusOutFunction('empCode',$event)"    placeholder="Employee Code*" class="form-control">
+      </div>
 
 
-			</div>
-			<div class="row">
-				<mat-dialog-actions align="end">
-					<button type="submit" mat-dialog-close (click)="onCancel()" mat-raised-button color="warn">Cancel</button>
-					<button type="submit" [disabled]="!fValid" mat-dialog-close (click)="onSubmit()" mat-raised-button color="primary">Submit</button>
-				</mat-dialog-actions>
-			</div>
-	</form>
+    </div>
+    <div class="row">
+      <mat-dialog-actions align="end">
+        <button type="button" mat-dialog-close (click)="onCancel()" mat-raised-button color="warn">Cancel</button>
+        <button type="submit" [disabled]="!fValid" mat-dialog-close (click)="onSubmit()" mat-raised-button color="primary">Submit</button>
+      </mat-dialog-actions>
+    </div>
+  </form>
 </div>

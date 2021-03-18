@@ -138,6 +138,19 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
             this.totalCount = data.queryTotalCount;
             this.pages = this.api.transform(this.pageCount);
             console.log(data);
+            if (this.employees == undefined || this.employees == null) {
+              this.swServ.showMessage(
+                "Warning!",
+                "No records found for this request."
+              );
+            } else {
+              if (this.employees.length == 0) {
+                this.swServ.showMessage(
+                  "Warning!",
+                  "No records found for this request."
+                );
+              }
+            }
           } else {
             this.swServ.showErrorMessage("Failure!!!", message);
           }
@@ -155,6 +168,19 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
             this.totalCount = data.queryTotalCount;
             this.pages = this.api.transform(this.pageCount);
             console.log(data);
+            if (this.employees == undefined || this.employees == null) {
+              this.swServ.showMessage(
+                "Warning!",
+                "No records found for this request."
+              );
+            } else {
+              if (this.employees.length == 0) {
+                this.swServ.showMessage(
+                  "Warning!",
+                  "No records found for this request."
+                );
+              }
+            }
           } else {
             this.swServ.showErrorMessage("Failure!!!", message);
           }
