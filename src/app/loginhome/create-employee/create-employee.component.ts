@@ -546,14 +546,28 @@ export class CreateEmployeeComponent
       this.fvalid = false;
       this.showrequiredMessage(
         "Employee Type Status",
-        "Please Select Proper option",
+        "Please Select Proper Employee Type option",
+        errorTitle
+      );
+    } else if (this.checkContract == false && this.checkPermanent == false) {
+      this.fvalid = false;
+      this.showrequiredMessage(
+        "Employee Type Status",
+        "Please Select Proper Employee Type option",
         errorTitle
       );
     } else if (this.checkMarried == true && this.checkUnMarried == true) {
       this.fvalid = false;
       this.showrequiredMessage(
         "Employee Marital Status",
-        "Please Select Proper option",
+        "Please Select Proper Employee Marital option",
+        errorTitle
+      );
+    } else if (this.checkMarried == false && this.checkUnMarried == false) {
+      this.fvalid = false;
+      this.showrequiredMessage(
+        "Employee Marital Status",
+        "Please Select Proper Employee Marital option",
         errorTitle
       );
     } else if (
@@ -685,7 +699,64 @@ export class CreateEmployeeComponent
       ) {
         this.handleUnauthorizedrequest();
       } else {
-        this.submittoAPI(emp, this.usrToken);
+        this.validateNonEmptyfilelds(emp.EmpCode, "empc");
+        this.validateNonEmptyfilelds(emp.FirstName, "fname");
+        this.validateNonEmptyfilelds(emp.Phone, "phone");
+        this.validateNonEmptyfilelds(emp.EmpAge, "age");
+        this.validateNonEmptyfilelds(emp.Address1, "ad1");
+        this.validateNonEmptyfilelds(emp.Place, "place");
+        this.validateNonEmptyfilelds(emp.State, "state");
+        this.validateNonEmptyfilelds(emp.PostalCode, "post");
+        this.validateNonEmptyfilelds(emp.AAdharNumber, "aad");
+        this.validateNonEmptyfilelds(emp.PANNumber, "pan");
+        // this.validateNonEmptyfilelds(emp.UserName,"usr") ;
+        this.validateNonEmptyfilelds(emp.LocationName, "loc");
+        this.validateNonEmptyfilelds(emp.VehicleNumber, "veh");
+        this.validateNonEmptyfilelds(emp.DLLRNumber, "dllr");
+        this.validateNonEmptyfilelds(emp.BankAccountNumber, "acc");
+        this.validateNonEmptyfilelds(emp.BankName, "bank");
+        this.validateNonEmptyfilelds(emp.IFSCCode, "ifsc");
+        this.validateNonEmptyfilelds(emp.Gaurd_PhoneNumber, "gph");
+        if (this.fvalid) {
+          this.submittoAPI(emp, this.usrToken);
+        }
+
+        //   const promise = new Promise((resolve, reject) => {
+        //     if(this.validateNonEmptyfilelds(emp.FirstName,"fname") &&
+        //     this.validateNonEmptyfilelds(emp.Phone,"phone") &&
+        //     this.validateNonEmptyfilelds(emp.EmpAge,"age") &&
+        //     this.validateNonEmptyfilelds(emp.Address1,"ad1") &&
+        //     this.validateNonEmptyfilelds(emp.Place,"place") &&
+        //     this.validateNonEmptyfilelds(emp.State,"state") &&
+        //     this.validateNonEmptyfilelds(emp.PostalCode,"post") &&
+        //     this.validateNonEmptyfilelds(emp.AAdharNumber,"aad") &&
+        //     this.validateNonEmptyfilelds(emp.PANNumber,"pan") &&
+        //     this.validateNonEmptyfilelds(emp.UserName,"usr") &&
+        //     this.validateNonEmptyfilelds(emp.LocationName,"loc") &&
+        //     this.validateNonEmptyfilelds(emp.VehicleNumber,"veh") &&
+        //     this.validateNonEmptyfilelds(emp.DLLRNumber,"dllr") &&
+        //     this.validateNonEmptyfilelds(emp.BankAccountNumber,"acc") &&
+        //     this.validateNonEmptyfilelds(emp.BankName,"bank") &&
+        //     this.validateNonEmptyfilelds(emp.IFSCCode,"ifsc") &&
+        //     this.validateNonEmptyfilelds(emp.Gaurd_PhoneNumber,"gph") &&
+        //     this.validateNonEmptyfilelds(emp.EmpCode,"empc")
+        //     ){
+        //       resolve(123);
+        //     }
+        //     else{
+        //       reject(new Error("Something Went Wrong!! Invalid Form!!"));
+        //     }
+
+        // });
+        //    promise.then((res) => {
+        //       this.submittoAPI(emp, this.usrToken);
+        //     });
+        //     promise.catch((err) => {
+        //       this.swServ.showErrorMessage(
+        //         "Failed!!",
+        //         err.message
+        //       );
+        //   });
       }
     } else {
       this.swServ.showErrorMessage(
@@ -702,30 +773,32 @@ export class CreateEmployeeComponent
     //  },2000);
   }
   submittoAPI(employ, tkn: string): void {
-    this.api.createDAemployee(employ, tkn).subscribe(
-      (data: APIResult) => {
-        //console.log(data);
-        let status: Boolean = data.status;
-        let m: string = data.message;
-        if (status) {
-          this.swServ.showSuccessMessage("Success!!!", m);
-          emp = new Employee();
-          this.initForm();
-          // this.ngAfterViewInit();
-          this.ngOnInit();
-          this.activeTab = 1;
-          this.showtab(1);
-          this.hidPrev = true;
-          this.hidNext = false;
-        } else {
-          this.swServ.showErrorMessage("Error!!", m);
+    if (this.fvalid) {
+      this.api.createDAemployee(employ, tkn).subscribe(
+        (data: APIResult) => {
+          //console.log(data);
+          let status: Boolean = data.status;
+          let m: string = data.message;
+          if (status) {
+            this.swServ.showSuccessMessage("Success!!!", m);
+            emp = new Employee();
+            this.initForm();
+            // this.ngAfterViewInit();
+            this.ngOnInit();
+            this.activeTab = 1;
+            this.showtab(1);
+            this.hidPrev = true;
+            this.hidNext = false;
+          } else {
+            this.swServ.showErrorMessage("Error!!", m);
+          }
+        },
+        err => {
+          //console.log(err);
+          this.swServ.showErrorMessage("Network Error!!!", err.message);
         }
-      },
-      err => {
-        //console.log(err);
-        this.swServ.showErrorMessage("Network Error!!!", err.message);
-      }
-    );
+      );
+    }
   }
   handleUnauthorizedrequest() {
     this.swServ.showErrorMessage(
@@ -772,7 +845,74 @@ export class CreateEmployeeComponent
       this.showrequiredMessage(f, txt, errorTitle);
     } else if (field == "usr") {
       var f = "Employee User Name";
+      // this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "loc") {
+      var f = "Employee Location Name";
       this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "veh") {
+      var f = "Employee Vehicle Number";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "dllr") {
+      var f = "Employee Drving or Learning Liscense";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "acc") {
+      var f = "Employee Bank Account Number";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "bank") {
+      var f = "Employee Bank Name";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "ifsc") {
+      var f = "Employee Bank IFSC Code";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "bb") {
+      var f = "Employee Bank  Branch Name";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "gph") {
+      var f = "Employee Guardian Phone Number";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "g") {
+      var f = "Employee Location Name";
+      // this.fvalid = true;
+    } else if (field == "empc") {
+      var f = "CDA Employee Code";
+      this.showrequiredMessage(f, txt, errorTitle);
+      // this.fvalid = true;
+    }
+  }
+  validateNonEmptyfilelds(txt: any, field: string): void {
+    const errorTitle: string = "INVALID INPUT!!!";
+    // let valid  = false;
+    // var txt = event.target.value;
+    if (field == "fname") {
+      var f = "First Name";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "phone") {
+      var f = "Employee Contact Number";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "age") {
+      var f = "Employee AGE";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "ad1") {
+      var f = "Employee Address";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "place") {
+      var f = "Employee Place";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "state") {
+      var f = "Employee State";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "post") {
+      var f = "Employee PostalCode";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "aad") {
+      var f = "Employee AAdhar Code";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "pan") {
+      var f = "Employee PAN Number";
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == "usr") {
+      var f = "Employee User Name";
+      //  this.showrequiredMessage(f, txt, errorTitle);
     } else if (field == "loc") {
       var f = "Employee Location Name";
       this.showrequiredMessage(f, txt, errorTitle);
@@ -813,6 +953,7 @@ export class CreateEmployeeComponent
     const errorTitle: string = "INVALID INPUT!!!";
     if (field == "m") {
       let v = event.source.value;
+      var f = "Employee Marital Status";
       if (!event.checked) {
         var txt = "";
         if (v == "married") {
@@ -821,8 +962,9 @@ export class CreateEmployeeComponent
         if (v == "unmarried") {
           this.checkUnMarried = false;
         }
-        var f = "Employee Marital Status";
+
         if (this.checkMarried == false && this.checkUnMarried == false) {
+          emp.Marital = "";
           this.fvalid = false;
           this.showrequiredMessage(f, "", errorTitle);
         }
@@ -837,12 +979,14 @@ export class CreateEmployeeComponent
           emp.MaritalStatus = false;
         }
         if (this.checkMarried == true && this.checkUnMarried == true) {
+          emp.Marital = "";
           this.fvalid = false;
           this.showrequiredMessage(f, "", errorTitle);
         }
       }
     } else if (field == "e") {
       let v = event.source.value;
+      var f = "Employee Type Status";
       if (!event.checked) {
         var txt = "";
         if (v == "permanent") {
@@ -851,8 +995,9 @@ export class CreateEmployeeComponent
         if (v == "contract") {
           this.checkContract = false;
         }
-        var f = "Employee Type Status";
+
         if (this.checkPermanent == false && this.checkContract == false) {
+          emp.Employeetype = "";
           this.fvalid = false;
           this.showrequiredMessage(f, "", errorTitle);
         }
@@ -866,6 +1011,7 @@ export class CreateEmployeeComponent
           emp.IsPermanent = false;
         }
         if (this.checkPermanent == true && this.checkContract == true) {
+          emp.Employeetype = "";
           this.fvalid = false;
           this.showrequiredMessage(f, "", errorTitle);
         }
@@ -892,6 +1038,7 @@ export class CreateEmployeeComponent
       }
     } else if (
       field == "Employee Contact Number" ||
+      field == "Employee Bank Account Number" ||
       field == "Employee AAdhar Code" ||
       field == "Employee PostalCode" ||
       field == "Employee AGE" ||
@@ -919,6 +1066,8 @@ export class CreateEmployeeComponent
         ) {
           this.fvalid = true;
         } else if (field == "Employee AGE") {
+          this.fvalid = true;
+        } else if (field == "Employee Bank Account Number") {
           this.fvalid = true;
         } else if (field == "Employee PostalCode") {
           this.fvalid = true;

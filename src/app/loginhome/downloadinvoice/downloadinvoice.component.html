@@ -1,24 +1,24 @@
 <div class="container">
-	<div class="row">
-		<app-loading [deliver]="load"></app-loading>
-	</div>
+  <div class="row">
+    <app-loading [deliver]="load"></app-loading>
+  </div>
 
-	<div class="row">
-		<div class="col">
-			<a routerLink="/loginhome/individualdownloadinvoice">
-				<span class="border border-primary"><p>Individual Download</p></span></a>
-		</div>
-		<div class="col">
-			<div class="row">
-				<a>
-					<span class="border border-primary" (click)="shwPath()"
+  <div class="row">
+    <div class="col">
+      <a routerLink="/loginhome/individualdownloadinvoice">
+        <span class="border border-primary"><p>Individual Download</p></span></a>
+    </div>
+    <div class="col">
+      <div class="row">
+        <a>
+          <span class="border border-primary" (click)="shwPath()"
             ><p>Bulk Download</p></span></a>
-			</div>
-			<!-- <div class="row" *ngIf="showPath">
+      </div>
+      <!-- <div class="row" *ngIf="showPath">
 				<label>Download Path:</label>
 				<input type="text" [(ngModel)]="path" value="" />
       </div> -->
-			<!-- <div class="row" *ngIf="showPath">
+      <!-- <div class="row" *ngIf="showPath">
 					<button
           type="button"
           mat-raised-button
@@ -29,16 +29,16 @@
         </button>
         
 				</div> -->
-			<div class="row" *ngIf="showPath">
+      <div class="row" *ngIf="showPath">
 
-				<select     [(ngModel)]="currentmonth" name="month" id="stat">
+        <select     [(ngModel)]="currentmonth" name="month" id="stat">
 							<option value="0" selected>Select Month</option>
               	<option *ngFor="let s of months" [ngValue]="s.id">
 								{{s.name}}
 							</option>
     </select>
-				<button class="btn btn-success" (click)="getemployeesbyMonth($event)"  type="submit">Search</button>
-			</div>
-		</div>
-	</div>
+        <button class="btn btn-success" (click)="getemployeesbyMonth($event)"  type="submit">Download</button>
+      </div>
+    </div>
+  </div>
 </div>

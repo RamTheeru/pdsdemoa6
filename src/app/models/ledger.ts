@@ -15,4 +15,7 @@ export class Ledger extends Voucher {
   credit: any;
   debit: any;
   balance: any;
+  currentCreditAmount: any;
+  currentDebitAmount: any;
+  currentBalanceAmount: any;
 }

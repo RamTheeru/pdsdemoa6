@@ -17,6 +17,7 @@ import { PdsApiService } from "../../pds-api.service";
 import { ViewService } from "../../view.service";
 import { SweetService } from "../../sweet.service";
 import { UserType } from "../../models/usertype";
+import { Voucher } from "src/app/models/voucher";
 @Component({
   selector: "app-viewledger",
   templateUrl: "./viewledger.component.html",
@@ -26,6 +27,7 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
   @Input("") userType: string;
   @ViewChildren("tablist") tablist;
   ledgerIds = [];
+  vouchers: Voucher[] = [];
   isLedger: boolean = true;
   isLeVoucher: boolean = false;
   stations: Station[] = [];
@@ -128,6 +130,7 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
     //viewvouchers
     this.url = this.route["_routerState"].snapshot.url;
     var vouch = this.url.indexOf("viewvouchers");
+    var isHevouch = this.url.indexOf("verifyvouchers");
     this.api.getConstants().subscribe(
       (data: APIResult) => {
         //console.log(data);
@@ -182,7 +185,6 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
       var u = this.vServ.getValue("userProp");
       this.userInfo = JSON.parse(u);
     }
-
     var index = this.userType.indexOf("le");
     if (index !== -1) {
       this.stationId = this.userInfo.stationId;
@@ -198,6 +200,11 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
       this.isHe = true;
       this.isLeVoucher = false;
       if (this.fheVerify == "fhe") {
+        this.isVerify = true;
+      } else {
+        this.isVerify = false;
+      }
+      if (isHevouch !== -1) {
         this.isVerify = true;
       } else {
         this.isVerify = false;
@@ -226,7 +233,14 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
     if (this.usrToken == "") {
       this.usrToken = this.vServ.getToken();
     }
-    if (this.currentmonth == 0 && this.isLeVoucher == false) {
+    if (this.isHe) {
+      this.stationId = Number(this.location);
+    }
+    if (
+      this.currentmonth == 0 &&
+      this.isLe == true &&
+      this.isLeVoucher == false
+    ) {
       this.swServ.showErrorMessage("Invalid Input!!!", "Please Select Month");
       this.list = [];
     } else if (this.vStatus == "" && this.isLeVoucher == true) {
@@ -277,14 +291,53 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
           );
         }
       } else {
+        //console.log(this.stationId);
         this.apiInput = new ApiInput();
+        if (
+          this.isHe == true &&
+          this.isLe == false &&
+          this.toDate != "" &&
+          this.toDate != undefined &&
+          this.toDate != null &&
+          this.fromDate != "" &&
+          this.fromDate != undefined &&
+          this.fromDate != null
+        ) {
+          this.apiInput.stationId = Number(this.stationId);
+          //  this.apiInput.currentmonth = this.currentmonth;
+          let std = this.api.getmonthFromDate(this.fromDate);
+          let etd = this.api.getmonthFromDate(this.toDate);
+          if (Number(std) == Number(etd)) {
+            this.apiInput.vEndDate = this.api.convert(this.toDate);
+            this.apiInput.vstartDate = this.api.convert(this.fromDate);
+            console.log(this.apiInput);
+            if (this.isVerify) {
+              this.apiInput.status = "P";
+              this.getvouchers(this.apiInput);
+            } else {
+              this.getledgers(this.apiInput);
+            }
+          } else {
+            this.swServ.showErrorMessage(
+              "Invalid Request!!!",
+              "Please select from and to Dates in same month!!!"
+            );
+          }
+        } else if (this.isLe == true && this.isHe == false) {
+          this.apiInput.stationId = Number(this.stationId);
+          this.apiInput.currentmonth = this.currentmonth;
+          console.log(this.apiInput);
+          this.getledgers(this.apiInput);
+        } else {
+          this.swServ.showErrorMessage(
+            "Invalid Request!!!",
+            "Please select from and to Dates!!!"
+          );
+        }
         // if(this.toDate!="")
         // {
         //   this.apiInput.vEndDate = this.toDate;
         // }
-        this.apiInput.stationId = Number(this.stationId);
-        this.apiInput.currentmonth = this.currentmonth;
-        this.getledgers(this.apiInput);
       }
     }
   }
@@ -388,14 +441,38 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
   }
   onAccept() {
     // // filter only checked element;
+    this.vouchers.length = 0;
     const cbsChecked = this.tablist._results.filter(cb => {
       return cb.nativeElement.checked;
     });
 
     for (var val2 of cbsChecked) {
-      this.ledgerIds.push(val2.nativeElement.id);
+      let i = Number(val2.nativeElement.id);
+      let vochr = new Voucher();
+      if (i === NaN || i == 0 || i == undefined) {
+        i = 0;
+      }
+      vochr.VoucherId = i;
+      this.vouchers.push(vochr);
     }
-    if (this.ledgerIds.length > 0) {
+    if (this.vouchers.length > 0) {
+      this.api.approvevouchers(this.vouchers, this.usrToken).subscribe(
+        (data: APIResult) => {
+          //console.log(data);
+          let status: Boolean = data.status;
+          let m: string = data.message;
+          if (status) {
+            this.swServ.showSuccessMessage("Success!!!", m);
+            this.refreshVoucherList();
+          } else {
+            this.swServ.showErrorMessage("Error!!", m);
+          }
+        },
+        err => {
+          //console.log(err);
+          this.swServ.showErrorMessage("Network Error!!!", err.message);
+        }
+      );
     } else {
       this.swServ.showErrorMessage(
         "Invalid Input!!",
@@ -403,15 +480,48 @@ export class ViewledgerComponent implements OnInit, OnChanges, OnDestroy {
       );
     }
   }
+  refreshVoucherList() {
+    this.apiInput = new ApiInput();
+    this.apiInput.stationId = Number(this.stationId);
+    this.apiInput.vEndDate = this.api.convert(this.toDate);
+    this.apiInput.vstartDate = this.api.convert(this.fromDate);
+    this.apiInput.status = "P";
+    this.apiInput.page = this.activePage;
+    this.getvouchers(this.apiInput);
+  }
   onReject() {
+    this.vouchers.length = 0;
     const cbsChecked = this.tablist._results.filter(cb => {
       return cb.nativeElement.checked;
     });
 
     for (var val2 of cbsChecked) {
-      this.ledgerIds.push(val2.nativeElement.id);
+      let i = Number(val2.nativeElement.id);
+      let vochr = new Voucher();
+      if (i === NaN || i == 0 || i == undefined) {
+        i = 0;
+      }
+      vochr.VoucherId = i;
+      this.vouchers.push(vochr);
     }
-    if (this.ledgerIds.length > 0) {
+    if (this.vouchers.length > 0) {
+      this.api.rejectVouchers(this.vouchers, this.usrToken).subscribe(
+        (data: APIResult) => {
+          //console.log(data);
+          let status: Boolean = data.status;
+          let m: string = data.message;
+          if (status) {
+            this.refreshVoucherList();
+            this.swServ.showSuccessMessage("Success!!!", m);
+          } else {
+            this.swServ.showErrorMessage("Error!!", m);
+          }
+        },
+        err => {
+          //console.log(err);
+          this.swServ.showErrorMessage("Network Error!!!", err.message);
+        }
+      );
     } else {
       this.swServ.showErrorMessage(
         "Invalid Input!!",

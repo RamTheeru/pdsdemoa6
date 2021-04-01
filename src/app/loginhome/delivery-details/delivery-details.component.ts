@@ -258,6 +258,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
   }
   getemployees(input: ApiInput) {
     this.load = true;
+    input.status = "update";
     this.api
       .getCDADeliverylist(input, this.usrToken)
       .subscribe((data: APIResult) => {
@@ -271,6 +272,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
           this.pages = this.api.transform(this.pageCount);
 
           if (this.employees == undefined || this.employees == null) {
+            this.totalCount = 0;
             this.swServ.showMessage(
               "Warning!",
               "No records found for this request."
@@ -282,6 +284,7 @@ export class DeliveryDetailsComponent implements OnInit, OnDestroy {
               this.btnallow = false;
             }
             if (this.employees.length == 0) {
+              this.totalCount = 0;
               this.swServ.showMessage(
                 "Warning!",
                 "No records found for this request."
