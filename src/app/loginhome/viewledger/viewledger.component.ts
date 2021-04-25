@@ -17,7 +17,7 @@ import { PdsApiService } from "../../pds-api.service";
 import { ViewService } from "../../view.service";
 import { SweetService } from "../../sweet.service";
 import { UserType } from "../../models/usertype";
-import { Voucher } from "src/app/models/voucher";
+import { Voucher } from "../../models/voucher";
 import { saveAs } from "file-saver";
 @Component({
   selector: "app-viewledger",
