@@ -437,6 +437,7 @@ export class RegisterComponent implements OnInit {
       if (this.fvalid) {
         this.submittoAPI(emp);
       }
+
       // this.submittoAPI(emp);
     } else {
       this._swServ.showErrorMessage(
@@ -475,21 +476,48 @@ export class RegisterComponent implements OnInit {
           this._swServ.showErrorMessage("Network Error!!!", err.message);
         }
       );
+    } else {
+      this._swServ.showErrorMessage(
+        "Invalid Form!!",
+        "Please Check Provided Details."
+      );
     }
   }
   validateallnonemptyfields() {
-    this.validateNonEmptyfilelds(emp.FirstName, "fname");
-    this.validateNonEmptyfilelds(emp.Phone, "phone");
-    this.validateNonEmptyfilelds(emp.EmpAge, "age");
-    this.validateNonEmptyfilelds(emp.Address1, "ad1");
-    this.validateNonEmptyfilelds(emp.Place, "place");
-    this.validateNonEmptyfilelds(emp.State, "state");
-    this.validateNonEmptyfilelds(emp.PostalCode, "post");
-    this.validateNonEmptyfilelds(emp.AAdharNumber, "aad");
-    this.validateNonEmptyfilelds(emp.PANNumber, "pan");
+    if (this.fvalid) {
+      this.validateNonEmptyfilelds(emp.FirstName, "fname");
+    }
+    if (this.fvalid) {
+      this.validateNonEmptyfilelds(emp.Phone, "phone");
+    }
+    if (this.fvalid) {
+      this.validateNonEmptyfilelds(emp.EmpAge, "age");
+    }
+    if (this.fvalid) {
+      this.validateNonEmptyfilelds(emp.Address1, "ad1");
+    }
+    if (this.fvalid) {
+      this.validateNonEmptyfilelds(emp.Place, "place");
+    }
+    if (this.fvalid) {
+      this.validateNonEmptyfilelds(emp.State, "state");
+    }
+    if (this.fvalid) {
+      this.validateNonEmptyfilelds(emp.PostalCode, "post");
+    }
+    if (this.fvalid) {
+      this.validateNonEmptyfilelds(emp.AAdharNumber, "aad");
+    }
+    if (this.fvalid) {
+      this.validateNonEmptyfilelds(emp.PANNumber, "pan");
+    }
     // this.validateNonEmptyfilelds(emp.UserName,"usr") ;
-    this.validateNonEmptyfilelds(emp.LocationName, "loc");
-    this.validateNonEmptyfilelds(emp.Gaurd_PhoneNumber, "gph");
+    if (this.fvalid) {
+      this.validateNonEmptyfilelds(emp.LocationName, "loc");
+    }
+    if (this.fvalid) {
+      this.validateNonEmptyfilelds(emp.Gaurd_PhoneNumber, "gph");
+    }
     // let  prom :Promise<boolean>= new Promise((resolve,reject)=>{
     //   if(this.fvalid){
     //     resolve(true);
@@ -753,13 +781,26 @@ export class RegisterComponent implements OnInit {
       let v = event.source.value;
       if (!event.checked) {
         var txt = "";
+
+        if (
+          emp.Marital != null &&
+          emp.Marital != "" &&
+          emp.Marital != undefined
+        ) {
+          if (this.checkMarried) {
+            emp.MaritalStatus = true;
+            emp.Marital = "married";
+          } else if (this.checkUnMarried) {
+            emp.MaritalStatus = false;
+            emp.Marital = "unmarried";
+          }
+        }
         if (v == "married") {
           this.checkMarried = false;
         }
         if (v == "unmarried") {
           this.checkUnMarried = false;
         }
-
         if (this.checkMarried == false && this.checkUnMarried == false) {
           emp.Marital = "";
           this.fvalid = false;
@@ -776,7 +817,7 @@ export class RegisterComponent implements OnInit {
           emp.MaritalStatus = false;
         }
         if (this.checkMarried == true && this.checkUnMarried == true) {
-          emp.Marital = "";
+          //emp.Marital ="";
           this.fvalid = false;
           this.showrequiredMessage(f, "", errorTitle);
         }
@@ -786,13 +827,26 @@ export class RegisterComponent implements OnInit {
       var f = "Employee Type Status";
       if (!event.checked) {
         var txt = "";
+
+        if (
+          emp.Employeetype != null &&
+          emp.Employeetype != "" &&
+          emp.Employeetype != undefined
+        ) {
+          if (this.checkPermanent) {
+            emp.IsPermanent = true;
+            emp.Employeetype = "permanent";
+          } else if (this.checkContract) {
+            emp.IsPermanent = false;
+            emp.Employeetype = "contract";
+          }
+        }
         if (v == "permanent") {
           this.checkPermanent = false;
         }
         if (v == "contract") {
           this.checkContract = false;
         }
-
         if (this.checkPermanent == false && this.checkContract == false) {
           emp.Employeetype = "";
           this.fvalid = false;
@@ -808,7 +862,7 @@ export class RegisterComponent implements OnInit {
           emp.IsPermanent = false;
         }
         if (this.checkPermanent == true && this.checkContract == true) {
-          emp.Employeetype = "";
+          //emp.Employeetype = "";
           this.fvalid = false;
           this.showrequiredMessage(f, "", errorTitle);
         }

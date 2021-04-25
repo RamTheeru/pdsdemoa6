@@ -49,6 +49,7 @@ export const CurrentUrls = {
   creditInsert: "InsertCredit",
   resetPassword: "ResetPassword",
   legders: "Ledgers",
+  downloadLedger: "DownloadLedgerDetails",
   approveVouchers: "ApproveVoucher",
   rejectvouchers: "RejectVoucher",
   vouchers: "Vouchers",
@@ -761,6 +762,43 @@ export class PdsApiService {
           })
         }
       )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let obj: never = this.handlehttpError(error) as never;
+          return new Observable(function(x) {
+            x.next(obj);
+          });
+        })
+      );
+  }
+  //PDF Files download for Ledger details
+  downloadpdffilesforledgerDetailsbyStation(
+    input: any,
+    tkn: string
+  ): R.Observable<any> {
+    var body = JSON.stringify(input);
+    const phttpOptions = {
+      responseType: "blob",
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        Authorization: "Bearer " + tkn
+      })
+      //   observe:"body",
+      //   reportProgress:false,
+      //  responseType: "blob"
+    };
+    // console.log(this.baseurl + this.employeesUrl + CurrentUrls.PDFFileDownload);
+    // console.log(body);
+    return this.http
+      .post(this.baseurl + this.financeUrl + CurrentUrls.downloadLedger, body, {
+        responseType: "blob",
+        headers: new HttpHeaders({
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          Authorization: "Bearer " + tkn
+        })
+      })
       .pipe(
         catchError((error: HttpErrorResponse) => {
           let obj: never = this.handlehttpError(error) as never;
