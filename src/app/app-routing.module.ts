@@ -35,7 +35,7 @@ const appRoutes: Routes = [
   { path: 'forcelogin', component: PdsMainComponent },
   { path: 'vision', component: AboutusComponent },
   { path: 'aboutus', component: AbtusComponent },
-   { path: 'testpage', component: TestpageComponent },
+  { path: 'testpage', component: TestpageComponent },
   // { path: "ResetPassword/:rid", component: ResetpasswordComponent }
   { path: 'register', component: RegisterComponent },
   {
