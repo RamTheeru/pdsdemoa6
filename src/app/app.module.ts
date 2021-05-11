@@ -16,6 +16,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { PdsMainComponent } from './pds-main/pds-main.component';
 import { HomeComponent } from './home/home.component';
+import { TestpageComponent } from './testpage/testpage.component';
 //import { ResetpasswordComponent } from "./resetpassword/resetpassword.component";
 import { LoadingComponent } from './loading/loading.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
@@ -66,6 +67,7 @@ import { AuthGuard } from './auth-guard.service';
     AppComponent,
     PdsMainComponent,
     HomeComponent,
+    TestpageComponent,
     // ResetpasswordComponent,
     LoadingComponent,
     AboutusComponent,
