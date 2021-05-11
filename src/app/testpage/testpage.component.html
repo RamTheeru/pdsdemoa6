@@ -7,7 +7,7 @@
       <div class="card">
         <div class="card-header">
           <a class="card-link" data-toggle="collapse" href="#collapseOne">
-            Collapsible Group Item #1
+            Personal Information
           </a>
         </div>
         <div id="collapseOne" class="collapse show" data-parent="#accordion">
@@ -120,26 +120,188 @@
       <div class="card">
         <div class="card-header">
           <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
-            Collapsible Group Item #2
+            Account & Other Details
           </a>
         </div>
         <div id="collapseTwo" class="collapse" data-parent="#accordion">
           <div class="card-body">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore
-            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-            commodo
-            consequat.
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <input  formControlName="joindate" matInput [matDatepicker]="picker2" class="form-control" placeholder="Date Of Join">
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+
+              </div>
+              <div class="col">
+
+                <mat-form-field>
+                  <input type="text" name="pName" (focusout)="focusOutFunction('g',$event)" formControlName="gName" matInput placeholder=" Parent/Guardian Full Name" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <mat-label>Alternate Contact:+91-</mat-label>
+                  <input type="text" name="gphone" (focusout)="focusOutFunction('gph',$event)"  formControlName="gphone" matInput placeholder="Phone" class="form-control">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <mat-select formControlName="station" aria-placeholder="Station">
+                    <mat-option value="">Select Station</mat-option>
+                    <mat-option *ngFor="let s of stations" [value]="s">
+                      {{s.stationName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="location" formControlName="location" (focusout)="focusOutFunction('loc',$event)" matInput placeholder="Location Name" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+
+                <mat-form-field>
+                  <mat-select formControlName="dlstat" name="dlstat" aria-placeholder="DL/LLR Status">
+                    <mat-option value="">Select Status</mat-option>
+                    <mat-option value="DL">DL</mat-option>
+                    <mat-option value="LLR">LLR</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="veh" formControlName="veh" (focusout)="focusOutFunction('veh',$event)" matInput placeholder="Vehicle Number" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="dllr" formControlName="dllr" (focusout)="focusOutFunction('dllr',$event)" matInput placeholder="DL/LLR Number" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col">
+
+                <mat-form-field>
+                  <input type="text" name="account" formControlName="account" (focusout)="focusOutFunction('acc',$event)" matInput placeholder="Account Number" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="bank" formControlName="bank" (focusout)="focusOutFunction('bank',$event)" matInput placeholder="Bank Name" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="ifsc" formControlName="ifsc" (focusout)="focusOutFunction('ifsc',$event)" matInput placeholder="IFSC CODE" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+
+
+
+                <mat-form-field>
+                  <input type="text" name="bb" formControlName="bbranch" (focusout)="focusOutFunction('bb',$event)" matInput placeholder="Branch Name" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <div class="card">
         <div class="card-header">
           <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
-            Collapsible Group Item #3
+            Address Details & EmployeeCode
           </a>
         </div>
         <div id="collapseThree" class="collapse" data-parent="#accordion">
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="addressLine1" formControlName="ad1" matInput placeholder="Address Line 1" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="addressLine2" formControlName="ad2" matInput placeholder="Address Line 2" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="place" formControlName="place" matInput placeholder="Town/Mandal/Taluka/Village" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="state" formControlName="state" matInput placeholder="State" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="postal" formControlName="postal" matInput placeholder="Postal Code" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="empc" formControlName="empc" (focusout)="focusOutFunction('empc',$event)" matInput placeholder="Employee Code*" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+                <!-- <mat-form-field>
+								<mat-select formControlName="desg" aria-placeholder="Designation">
+									<mat-option value="">Select Designation</mat-option>
+									<mat-option value="Ka">KeyAccountsManager</mat-option>
+									<mat-option value="Su">Supervisor</mat-option>
+									<mat-option value="Sr">Sr. Manager</mat-option>
+									<mat-option value="Ast">Asst. Manager</mat-option>
+									<mat-option value="Su">Office Assistant</mat-option>
+								</mat-select>
+							</mat-form-field> -->
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <a class="collapsed card-link" data-toggle="collapse" href="#collapseFour">
+            Collapsible Group Item #3
+          </a>
+        </div>
+        <div id="collapseFour" class="collapse" data-parent="#accordion">
           <div class="card-body">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
             dolore
