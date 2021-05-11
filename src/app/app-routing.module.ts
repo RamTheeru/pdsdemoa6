@@ -34,7 +34,7 @@ const appRoutes: Routes = [
   { path: 'forcelogin', component: PdsMainComponent },
   { path: 'vision', component: AboutusComponent },
   { path: 'aboutus', component: AbtusComponent },
-  // { path: "ResetPassword/:rid", component: ResetpasswordComponent },
+  // { path: "ResetPassword/:rid", component: ResetpasswordComponent }
   { path: 'register', component: RegisterComponent },
   {
     path: 'loginhome',
@@ -44,7 +44,7 @@ const appRoutes: Routes = [
       { path: '', component: LogindefaulthomeComponent },
       { path: 'approvals', component: UserreadingsComponent },
       { path: 'createemployee', component: CreateEmployeeComponent },
-        { path: 'createpdsemployee', component: CreatemainemployeeComponent },
+      { path: 'createpdsemployee', component: CreatemainemployeeComponent },
       { path: 'enrolldeliveryassociate', component: CreateEmployeeComponent },
       { path: 'updatedeliverydetails', component: DeliveryDetailsComponent },
       { path: 'employeeedit/:id', component: CreateEmployeeComponent },
