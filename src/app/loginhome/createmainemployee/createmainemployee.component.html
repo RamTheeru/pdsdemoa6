@@ -7,7 +7,7 @@
         </mat-checkbox>
       </div>
       <div class="col">
-        <mat-checkbox (change)="checkESIC($event)" name="e" [formControlName]="esic">ESICOption
+        <mat-checkbox (change)="checkESIC($event)" name="esic" [formControlName]="esic">ESICOption
         </mat-checkbox>
       </div>
     </div>
@@ -80,8 +80,6 @@
                     <mat-option value="O-Positive">O-Positive</mat-option>
                     <mat-option value="O-Negative">O-Negative</mat-option>
                   </mat-select>
-                  <!-- <input type="text" formControlName="bg" class="form-control" matInput placeholder="Blood Group">
-								<mat-error>This field is mandatory</mat-error> -->
                 </mat-form-field>
               </div>
               <div class="col">
@@ -328,7 +326,7 @@
           </div>
         </div>
       </div>
-      <div class="card" *ngIf="{{isPF}}">
+      <div class="card" *ngIf="isPF">
         <div class="card-header">
           <a class="collapsed card-link" data-toggle="collapse" href="#collapseFive">
             PF Information
@@ -344,7 +342,7 @@
           </div>
         </div>
       </div>
-      <div class="card" *ngIf="{{isEsic}}">
+      <div class="card" *ngIf="isEsic">
         <div class="card-header">
           <a class="collapsed card-link" data-toggle="collapse" href="#collapseSix">
             Esic Information

@@ -1016,8 +1016,6 @@ export class CreatemainemployeeComponent
     }
   }
   checkValue(event: any, field) {
-    // console.log(event.checked);
-    // console.log(event.source.value);
     console.log(event);
     const errorTitle: string = 'INVALID INPUT!!!';
     if (field == 'm') {
@@ -1199,8 +1197,7 @@ export class CreatemainemployeeComponent
       this.swServ.showErrorMessage(title, txt);
     } else if (field == 'CDA Employee Code') {
       this.api.checkCDACode(txt).subscribe((data: APIResult) => {
-        //
-        //     console.log(data)     ;
+
         let status: Boolean = data.status;
         let m: string = data.message;
         if (status) {
