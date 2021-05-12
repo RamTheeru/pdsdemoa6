@@ -1197,7 +1197,6 @@ export class CreatemainemployeeComponent
       this.swServ.showErrorMessage(title, txt);
     } else if (field == 'CDA Employee Code') {
       this.api.checkCDACode(txt).subscribe((data: APIResult) => {
-
         let status: Boolean = data.status;
         let m: string = data.message;
         if (status) {
