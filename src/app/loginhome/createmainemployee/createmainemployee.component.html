@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <form class="form-horizontal" [formGroup]="empForm2" (ngSubmit)="onSubmit()">
     <h2><b><u>Create Employee:</u></b></h2>
-    <div class="row">
+    <div class="row" id="opts">
       <div class="col">
         <mat-checkbox (change)="checkPF($event)" name="PF" [formControlName]="pf">PFOption
         </mat-checkbox>
