@@ -317,6 +317,9 @@ export class CreatemainemployeeComponent
         //  day: new FormControl(),
         //   month: new FormControl(''),
         //    year: new FormControl(),
+        pf: new FormControl(),
+        esic: new FormControl(),
+        prof: new FormControl('0'),
         age: new FormControl('28'),
         bg: new FormControl('BPositive'),
         gender: new FormControl('male'),
@@ -995,10 +998,10 @@ export class CreatemainemployeeComponent
   checkPF(event: any) {
     let v = event.source.value;
     if (event.checked) {
-      this.isPF=true;
+      this.isPF = true;
       emp.IsPfOption = true;
     } else {
-       this.isPF=false;;
+      this.isPF = false;
       emp.IsPfOption = false;
     }
   }
@@ -1008,7 +1011,7 @@ export class CreatemainemployeeComponent
       this.isEsic = true;
       emp.IsEsicApplicable = true;
     } else {
-       this.isEsic = false;
+      this.isEsic = false;
       emp.IsEsicApplicable = false;
     }
   }
