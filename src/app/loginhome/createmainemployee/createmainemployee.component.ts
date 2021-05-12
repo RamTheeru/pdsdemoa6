@@ -15,7 +15,7 @@ import {
   Validators
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Employee } from '../../models/employee';
+import { Pdsemployee } from '../../models/pdsemployee';
 import { APIResult } from '../../models/apiresult';
 import { Station } from '../../models/station';
 import { UserType } from '../../models/usertype';
@@ -24,7 +24,7 @@ import { Profession } from '../../models/profession';
 import { SweetService } from '../../sweet.service';
 import { ViewService } from '../../view.service';
 import * as r from 'rxjs';
-var emp: Employee = new Employee();
+var emp: Pdsemployee = new Pdsemployee();
 @Component({
   selector: 'app-createmainemployee',
   templateUrl: './createmainemployee.component.html',
@@ -38,6 +38,8 @@ export class CreatemainemployeeComponent
   url: string = '';
   stations: Station[];
   stationId: number = 0;
+  isPF: boolean = false;
+  isEsic: boolean = false;
   private subsc: r.Subscription;
   private subsc2: r.Subscription;
   private subsc3: r.Subscription;
@@ -369,6 +371,11 @@ export class CreatemainemployeeComponent
         unmarried: new FormControl(),
         permanent: new FormControl(),
         contract: new FormControl(),
+        pf: new FormControl(),
+        esic: new FormControl(),
+        prof: new FormControl('0'),
+        reprtman: new FormControl(),
+        reprtmancode: new FormControl(),
         // mars:new FormArray([]),
         ad1: new FormControl(),
         ad2: new FormControl(),
@@ -474,7 +481,9 @@ export class CreatemainemployeeComponent
     emp.DOJ = dj;
     emp.StationId = st.stationId;
     emp.StationCode = st.stationCode;
-    emp.PId = 3;
+    emp.PId = this.empForm2.value['prof'];
+    emp.ReportingManager = this.empForm2.value['reprtman'];
+    emp.ReportingManagerEmpCode = this.empForm2.value['reprtmancode'];
     //this.empForm2.value["birthdate"]; //this.empForm2.value["joindate"];
     // emp.Day2 = this.empForm2.value['day2'];
     // emp.Month2 = this.empForm2.value['month2'];
@@ -981,6 +990,26 @@ export class CreatemainemployeeComponent
       var f = 'CDA Employee Code';
       this.showrequiredMessage(f, txt, errorTitle);
       // this.fvalid = true;
+    }
+  }
+  checkPF(event: any) {
+    let v = event.source.value;
+    if (event.checked) {
+      this.isPF=true;
+      emp.IsPfOption = true;
+    } else {
+       this.isPF=false;;
+      emp.IsPfOption = false;
+    }
+  }
+  checkESIC(event: any) {
+    let v = event.source.value;
+    if (event.checked) {
+      this.isEsic = true;
+      emp.IsEsicApplicable = true;
+    } else {
+       this.isEsic = false;
+      emp.IsEsicApplicable = false;
     }
   }
   checkValue(event: any, field) {

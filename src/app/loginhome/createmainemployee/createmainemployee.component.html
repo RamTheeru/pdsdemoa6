@@ -3,11 +3,11 @@
     <h2><b><u>Create Employee:</u></b></h2>
     <div class="row">
       <div class="col">
-        <mat-checkbox (change)="checkPF($event)" name="PF" value="{{c}}" [formControlName]="c">{{c}}
+        <mat-checkbox (change)="checkPF($event)" name="PF" value="{{c}}" [formControlName]="pf">{{c}}
         </mat-checkbox>
       </div>
       <div class="col">
-        <mat-checkbox (change)="checkESIC$event)" name="ESIC" value="{{c}}" [formControlName]="c">{{c}}
+        <mat-checkbox (change)="checkESIC$event)" name="ESIC" value="{{c}}" [formControlName]="esic">{{c}}
         </mat-checkbox>
       </div>
     </div>
@@ -298,18 +298,75 @@
 							</mat-form-field> -->
               </div>
 
+
+            </div>
+            <div class="row">
+              <div class="col">
+                <select class="form-control" formControlName="prof"  name="prof" id="prof">
+							<option value="0" selected>Select Profession Type</option>
+              	<option *ngFor="let p of professions" [value]="p.pid">
+								{{p.professionName}}
+							</option>
+    </select>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="reprtman" formControlName="reprtman" matInput placeholder="Reporting Manager" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="reprtmancode" formControlName="reprtmancode" matInput placeholder="Reporting Manager Code" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+
+              </div>
             </div>
 
           </div>
         </div>
       </div>
+      <div class="card" *ngIf="{{isPF}}">
+        <div class="card-header">
+          <a class="collapsed card-link" data-toggle="collapse" href="#collapseFive">
+            PF Information
+          </a>
+        </div>
+        <div id="collapseFive" class="collapse" data-parent="#accordion">
+          <div class="card-body">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo
+            consequat.
+          </div>
+        </div>
+      </div>
+      <div class="card" *ngIf="{{isEsic}}">
+        <div class="card-header">
+          <a class="collapsed card-link" data-toggle="collapse" href="#collapseSix">
+            Esic Information
+          </a>
+        </div>
+        <div id="collapseSix" class="collapse" data-parent="#accordion">
+          <div class="card-body">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo
+            consequat.
+          </div>
+        </div>
+      </div>
       <div class="card">
         <div class="card-header">
-          <a class="collapsed card-link" data-toggle="collapse" href="#collapseFour">
+          <a class="collapsed card-link" data-toggle="collapse" href="#collapseSeven">
             Collapsible Group Item #3
           </a>
         </div>
-        <div id="collapseFour" class="collapse" data-parent="#accordion">
+        <div id="collapseSeven" class="collapse" data-parent="#accordion">
           <div class="card-body">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
             dolore
