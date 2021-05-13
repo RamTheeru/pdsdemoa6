@@ -375,7 +375,6 @@ export class CreatemainemployeeComponent
         birthdate: new FormControl(),
         joindate: new FormControl(),
         pfdoj: new FormControl(),
-
         age: new FormControl(),
         bg: new FormControl(''),
         // prof: new FormControl(""),
