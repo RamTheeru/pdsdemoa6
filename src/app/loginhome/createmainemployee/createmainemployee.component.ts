@@ -82,9 +82,9 @@ export class CreatemainemployeeComponent
   ) {
     this.initForm();
     if (this.editMode) {
-      this.formText = 'Edit CDA Form:';
+      this.formText = 'Enroll Employee Form:';
     } else {
-      this.formText = 'Enroll CDA  Form:';
+      this.formText = 'Enroll Employee  Form:';
     }
   }
   onCancel() {
@@ -314,12 +314,23 @@ export class CreatemainemployeeComponent
         middleName: new FormControl('middleNametest'),
         birthdate: eDate, //new FormControl('09/15/1990'),
         joindate: eDate, //new FormControl('09/15/2020'),
+        pfdoj: eDate,
         //  day: new FormControl(),
         //   month: new FormControl(''),
         //    year: new FormControl(),
         pf: new FormControl(),
         esic: new FormControl(),
         prof: new FormControl('0'),
+        pffname: new FormControl(''),
+        pfmemship: new FormControl(''),
+        reprtman: new FormControl(''),
+        reprtmancode: new FormControl(''),
+        uan: new FormControl('denote'),
+
+        esicfid: new FormControl(''),
+        esicmemship: new FormControl(''),
+        esicdoj: eDate,
+
         age: new FormControl('28'),
         bg: new FormControl('BPositive'),
         gender: new FormControl('male'),
@@ -363,6 +374,7 @@ export class CreatemainemployeeComponent
         middleName: new FormControl(),
         birthdate: new FormControl(),
         joindate: new FormControl(),
+        pfdoj: new FormControl(),
         //  day: new FormControl(),
         //   month: new FormControl(''),
         //    year: new FormControl(),
@@ -379,6 +391,13 @@ export class CreatemainemployeeComponent
         prof: new FormControl('0'),
         reprtman: new FormControl(),
         reprtmancode: new FormControl(),
+        pffname: new FormControl(),
+        pfmemship: new FormControl(),
+        uan: new FormControl(),
+
+        esicfid: new FormControl(''),
+        esicmemship: new FormControl(''),
+        esicdoj: new FormControl(),
         // mars:new FormArray([]),
         ad1: new FormControl(),
         ad2: new FormControl(),
@@ -436,6 +455,7 @@ export class CreatemainemployeeComponent
     emp.Gender = this.empForm2.value['gender'];
     let db = this.convert(this.empForm2.value['birthdate']);
     let dj = this.convert(this.empForm2.value['joindate']);
+    let dpf = this.convert(this.empForm2.value['pfdoj']);
     let st = this.empForm2.value['station'];
     // let prf = this.empForm2.value["prof"];
     //  if(selectedmaritals.length>0)
@@ -487,6 +507,9 @@ export class CreatemainemployeeComponent
     emp.PId = this.empForm2.value['prof'];
     emp.ReportingManager = this.empForm2.value['reprtman'];
     emp.ReportingManagerEmpCode = this.empForm2.value['reprtmancode'];
+    emp.PfFundName = this.empForm2.value['pffname'];
+    emp.PfMembershipNumber = this.empForm2.value['pfmemship'];
+    emp.PfDOJFund = dpf;
     //this.empForm2.value["birthdate"]; //this.empForm2.value["joindate"];
     // emp.Day2 = this.empForm2.value['day2'];
     // emp.Month2 = this.empForm2.value['month2'];
@@ -507,7 +530,7 @@ export class CreatemainemployeeComponent
 
     if (emp.EmpCode == '' || emp.EmpCode == null || emp.EmpCode == undefined) {
       this.fvalid = false;
-      this.showrequiredMessage('CDA Employee Code', '', errorTitle);
+      this.showrequiredMessage('Employee Code', '', errorTitle);
     } else if (
       emp.LocationName == '' ||
       emp.LocationName == null ||
@@ -825,7 +848,7 @@ export class CreatemainemployeeComponent
           let m: string = data.message;
           if (status) {
             this.swServ.showSuccessMessage('Success!!!', m);
-            emp = new Employee();
+            emp = new Pdsemployee();
             this.initForm();
             // this.ngAfterViewInit();
             this.ngOnInit();
@@ -923,7 +946,7 @@ export class CreatemainemployeeComponent
       var f = 'Employee Location Name';
       // this.fvalid = true;
     } else if (field == 'empc') {
-      var f = 'CDA Employee Code';
+      var f = 'Employee Code';
       this.showrequiredMessage(f, txt, errorTitle);
       // this.fvalid = true;
     }
@@ -990,7 +1013,7 @@ export class CreatemainemployeeComponent
       var f = 'Employee Location Name';
       // this.fvalid = true;
     } else if (field == 'empc') {
-      var f = 'CDA Employee Code';
+      var f = 'Employee Code';
       this.showrequiredMessage(f, txt, errorTitle);
       // this.fvalid = true;
     }
@@ -1195,7 +1218,7 @@ export class CreatemainemployeeComponent
     ) {
       this.fvalid = false;
       this.swServ.showErrorMessage(title, txt);
-    } else if (field == 'CDA Employee Code') {
+    } else if (field == 'Employee Code') {
       this.api.checkCDACode(txt).subscribe((data: APIResult) => {
         let status: Boolean = data.status;
         let m: string = data.message;
