@@ -383,7 +383,7 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.vServ.removeValue('fheverify');
       this.vServ.removeValue('evheverify');
       this.vServ.removeValue('edleverify');
-      this.vServ.setVerify('hrve');
+      this.vServ.setVerify('hrvle');
       this.router.onSameUrlNavigation = 'reload';
       this.router.navigate(['/loginhome/pdsemployees']);
     } else if (tab == 'hrvhe') {
