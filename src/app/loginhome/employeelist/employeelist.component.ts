@@ -173,7 +173,6 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     this.subsc3.unsubscribe();
   }
   getemployeesbyStation(event) {
-
     if (
       this.usrToken == '' ||
       this.usrToken == null ||
