@@ -54,13 +54,13 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
   isHrLE: Boolean = false;
   empId: number = 0;
   e: Employee;
-  //t
+
   constructor(
     public dialog: MatDialog,
     private api: PdsApiService,
     private swServ: SweetService,
     private vServ: ViewService,
-    private route: ActivatedRoute //public apdialogref:MatDialogRef<ApproveemployeeComponent>
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
