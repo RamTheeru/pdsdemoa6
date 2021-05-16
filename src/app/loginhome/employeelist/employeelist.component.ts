@@ -4,49 +4,54 @@ import {
   ViewChildren,
   ElementRef,
   OnDestroy
-} from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
-import { SalaryslipComponent } from "../salaryslip/salaryslip.component";
-import { ApproveemployeeComponent } from "../approveemployee/approveemployee.component";
-import { RegisterEmployee } from "../../models/registeremployee";
-import { Employee } from "../../models/employee";
-import { APIResult } from "../../models/apiresult";
-import { ViewService } from "../../view.service";
-import { PdsApiService } from "../../pds-api.service";
-import { SweetService } from "../../sweet.service";
-import { Station } from "../../models/station";
-import { ApiInput } from "../../models/apiinput";
-import * as r from "rxjs";
-import swal from "sweetalert2";
+} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
+import { SalaryslipComponent } from '../salaryslip/salaryslip.component';
+import { ApproveemployeeComponent } from '../approveemployee/approveemployee.component';
+import { RegisterEmployee } from '../../models/registeremployee';
+import { Employee } from '../../models/employee';
+import { APIResult } from '../../models/apiresult';
+import { ViewService } from '../../view.service';
+import { PdsApiService } from '../../pds-api.service';
+import { SweetService } from '../../sweet.service';
+import { Station } from '../../models/station';
+import { ApiInput } from '../../models/apiinput';
+import * as r from 'rxjs';
+import swal from 'sweetalert2';
+import { UserType } from '../../models/usertype';
 @Component({
-  selector: "app-employeelist",
-  templateUrl: "./employeelist.component.html",
-  styleUrls: ["./employeelist.component.css"]
+  selector: 'app-employeelist',
+  templateUrl: './employeelist.component.html',
+  styleUrls: ['./employeelist.component.css']
 })
 export class EmployeelistComponent implements OnInit, OnDestroy {
-  @ViewChildren("empCode") empCode;
+  @ViewChildren('empCode') empCode;
+  isLogin: boolean = false;
   employees: RegisterEmployee[] = [];
   pageCount: number = 1;
   pages = [];
-  url: string = "";
+  url: string = '';
   isreguser: boolean = true;
   totalCount: number = 0;
   stations: Station[];
   apiInput: ApiInput;
-  selectedStation: string = "";
-  userType: string = "";
-  usrToken: string = "";
-  emCode: string = "";
+  userInfo: UserType;
+  selectedStation: string = '';
+  userType: string = '';
+  usrToken: string = '';
+  emCode: string = '';
   private subsc: r.Subscription;
   private subsc2: r.Subscription;
-  stationCode: string = "";
+  private subsc3: r.Subscription;
+  stationId: number = 0;
+  stationCode: string = '';
   apiResult: APIResult;
   isHide = true;
   isHE: Boolean = false;
-    isLE: Boolean = false;
-    isHrHE  : Boolean = false;
-     isHrLE  : Boolean = false;
+  isLE: Boolean = false;
+  isHrHE: Boolean = false;
+  isHrLE: Boolean = false;
   empId: number = 0;
   e: Employee;
   //t
@@ -55,18 +60,27 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     private api: PdsApiService,
     private swServ: SweetService,
     private vServ: ViewService,
-    private route: ActivatedRoute
-  ) //public apdialogref:MatDialogRef<ApproveemployeeComponent>
-  {}
+    private route: ActivatedRoute //public apdialogref:MatDialogRef<ApproveemployeeComponent>
+  ) {}
 
   ngOnInit() {
-    this.url = this.route["_routerState"].snapshot.url;
+    this.url = this.route['_routerState'].snapshot.url;
 
-    var index = this.url.indexOf("logins");
+    var index = this.url.indexOf('logins');
     if (index !== -1) {
       this.isreguser = false;
+      this.isLE = false;
+      this.isHrLE = false;
+      this.isHE = false;
+      this.isHrLE = false;
+      this.isLogin = true;
     } else {
       this.isreguser = true;
+      this.isLE = false;
+      this.isHrLE = false;
+      this.isHE = false;
+      this.isHrLE = false;
+      this.isLogin = false;
     }
     this.subsc = this.vServ.data.subscribe((val: string) => {
       this.userType = val;
@@ -75,19 +89,54 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
       this.usrToken = val;
     });
 
-    if (this.userType == "" || this.userType == undefined) {
-      this.userType = this.vServ.getValue("storedProp");
+    if (this.userType == '' || this.userType == undefined) {
+      this.userType = this.vServ.getValue('storedProp');
     }
-    if (this.userType == "hrhe") {
+    this.subsc3 = this.vServ.userInfo.subscribe((res: UserType) => {
+      this.userInfo = res;
+    });
+    if (this.userInfo == null || this.userInfo == undefined) {
+      var u = this.vServ.getValue('userProp');
+      this.userInfo = JSON.parse(u);
+    }
+    if (this.userType == 'hrhe') {
       this.isHE = true;
       this.isHrHE = true;
       this.isLE = false;
-      this.isHrLE=false;
-    }else if(this.userType == "hrhe"){
-    this.isHE = false;
+      this.isHrLE = false;
+      this.isLogin = false;
+      this.isreguser = false;
+    } else if (this.userType == 'hrle') {
+      this.isHE = false;
       this.isHrHE = false;
       this.isLE = true;
-      this.isHrLE=true;
+      this.isHrLE = true;
+      this.isLogin = false;
+      this.isreguser = false;
+      this.stationId = this.userInfo.stationId;
+      if (
+        this.usrToken == '' ||
+        this.usrToken == null ||
+        this.usrToken == undefined
+      ) {
+        this.usrToken = this.vServ.getToken();
+      }
+      if (this.stationId == 0) {
+        this.swServ.showErrorMessage(
+          'Something Went Wrong!!',
+          'Unable to get Station, Please try again!!'
+        );
+      } else if (
+        this.usrToken == '' ||
+        this.usrToken == undefined ||
+        this.usrToken == null
+      ) {
+        this.handleUnauthorizedrequest();
+      } else {
+        this.apiInput = new ApiInput();
+        this.apiInput.stationId = this.stationId;
+        this.getPdsEmployees(this.apiInput);
+      }
     }
     this.api.getConstants().subscribe(
       (data: APIResult) => {
@@ -96,45 +145,143 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
         if (status) {
           this.stations = data.stations;
         } else {
-          this.swServ.showErrorMessage("Error!!", m);
+          this.swServ.showErrorMessage('Error!!', m);
         }
       },
       err => {
-        this.swServ.showErrorMessage("Network Error!!!", err.message);
+        this.swServ.showErrorMessage('Network Error!!!', err.message);
       }
     );
   }
   ngOnDestroy() {
     this.subsc.unsubscribe();
     this.subsc2.unsubscribe();
+    this.subsc3.unsubscribe();
   }
   getemployeesbyStation(event) {
     //console.log(this.selectedStation) ;
-    if (this.usrToken == "") {
+    if (
+      this.usrToken == '' ||
+      this.usrToken == null ||
+      this.usrToken == undefined
+    ) {
       this.usrToken = this.vServ.getToken();
     }
-    if (this.selectedStation == "") {
-      this.swServ.showErrorMessage("Invalid Input!!!", "Please Select Station");
+    if (this.selectedStation == '') {
+      this.swServ.showErrorMessage('Invalid Input!!!', 'Please Select Station');
     } else if (
-      this.usrToken == "" ||
+      this.usrToken == '' ||
       this.usrToken == undefined ||
       this.usrToken == null
     ) {
       this.handleUnauthorizedrequest();
     } else {
-      this.apiInput = new ApiInput();
-      this.apiInput.stationId = Number(this.selectedStation);
-      this.registeredUsers(this.apiInput);
+      if (this.isHE) {
+        this.apiInput = new ApiInput();
+        this.apiInput.stationId = Number(this.selectedStation);
+        this.getPdsEmployees(this.apiInput);
+      } else {
+        this.apiInput = new ApiInput();
+        this.apiInput.stationId = Number(this.selectedStation);
+        this.registeredUsers(this.apiInput);
+      }
     }
   }
   getdata(val: number) {
     console.log(val);
     this.apiInput = new ApiInput();
     this.apiInput.page = val;
-    this.apiInput.stationId = Number(this.selectedStation);
-    this.registeredUsers(this.apiInput);
+    if (this.isLE) {
+      this.apiInput.stationId = this.stationId;
+      if (this.stationId > 0) {
+        this.getPdsEmployees(this.apiInput);
+      } else {
+        this.swServ.showErrorMessage(
+          'Something Went Wrong!!',
+          'Unable to get Station, Please try again!!'
+        );
+      }
+    } else {
+      this.apiInput.stationId = Number(this.selectedStation);
+      if (this.isHE) {
+        this.getPdsEmployees(this.apiInput);
+      } else {
+        this.registeredUsers(this.apiInput);
+      }
+    }
   }
-
+  toggleEditable(event) {
+    if (event.target.checked) {
+      event.target.value = true;
+    } else {
+      event.target.value = false;
+    }
+  }
+  getPdsEmployees(input: ApiInput) {
+    if (this.isHE) {
+      this.api
+        .getpdsunApprovedEmployees(input, this.usrToken)
+        .subscribe((data: APIResult) => {
+          // console.log(data)     ;
+          let status = data.status;
+          let message = data.message;
+          if (status) {
+            this.employees = data.registerEmployees;
+            this.pageCount = data.queryPages;
+            this.totalCount = data.queryTotalCount;
+            this.pages = this.api.transform(this.pageCount);
+            console.log(data);
+            if (this.employees == undefined || this.employees == null) {
+              this.swServ.showMessage(
+                'Warning!',
+                'No records found for this request.'
+              );
+            } else {
+              if (this.employees.length == 0) {
+                this.swServ.showMessage(
+                  'Warning!',
+                  'No records found for this request.'
+                );
+              }
+            }
+          } else {
+            this.swServ.showErrorMessage('Failure!!!', message);
+          }
+        });
+    } else {
+      this.api
+        .getPDSEmployees(input, this.usrToken)
+        .subscribe((data: APIResult) => {
+          console.log(data);
+          let status = data.status;
+          let message = data.message;
+          if (status) {
+            this.employees = data.employees;
+            this.pageCount = data.queryPages;
+            this.totalCount = data.queryTotalCount;
+            this.pages = this.api.transform(this.pageCount);
+            console.log(data);
+            if (this.employees == undefined || this.employees == null) {
+              this.totalCount = 0;
+              this.swServ.showMessage(
+                'Warning!',
+                'No records found for this request.'
+              );
+            } else {
+              if (this.employees.length == 0) {
+                this.totalCount = 0;
+                this.swServ.showMessage(
+                  'Warning!',
+                  'No records found for this request.'
+                );
+              }
+            }
+          } else {
+            this.swServ.showErrorMessage('Failure!!!', message);
+          }
+        });
+    }
+  }
   registeredUsers(input: ApiInput) {
     if (this.isreguser) {
       this.api
@@ -151,19 +298,19 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
             console.log(data);
             if (this.employees == undefined || this.employees == null) {
               this.swServ.showMessage(
-                "Warning!",
-                "No records found for this request."
+                'Warning!',
+                'No records found for this request.'
               );
             } else {
               if (this.employees.length == 0) {
                 this.swServ.showMessage(
-                  "Warning!",
-                  "No records found for this request."
+                  'Warning!',
+                  'No records found for this request.'
                 );
               }
             }
           } else {
-            this.swServ.showErrorMessage("Failure!!!", message);
+            this.swServ.showErrorMessage('Failure!!!', message);
           }
         });
     } else {
@@ -182,28 +329,28 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
             if (this.employees == undefined || this.employees == null) {
               this.totalCount = 0;
               this.swServ.showMessage(
-                "Warning!",
-                "No records found for this request."
+                'Warning!',
+                'No records found for this request.'
               );
             } else {
               if (this.employees.length == 0) {
                 this.totalCount = 0;
                 this.swServ.showMessage(
-                  "Warning!",
-                  "No records found for this request."
+                  'Warning!',
+                  'No records found for this request.'
                 );
               }
             }
           } else {
-            this.swServ.showErrorMessage("Failure!!!", message);
+            this.swServ.showErrorMessage('Failure!!!', message);
           }
         });
     }
   }
   handleUnauthorizedrequest() {
     this.swServ.showErrorMessage(
-      "Invalid Request!!!",
-      "Unable to process request with invalid token, Please login again!!!"
+      'Invalid Request!!!',
+      'Unable to process request with invalid token, Please login again!!!'
     );
   }
   approveUser(evt: any, status: string) {
@@ -216,7 +363,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     let e: RegisterEmployee = new RegisterEmployee();
     //e.EmpCode = this.emCode;
     e.RegisterId = Number(id);
-    if (this.usrToken == "") {
+    if (this.usrToken == '') {
       this.usrToken = this.vServ.getToken();
     }
     // if (elements.length > 0) {
@@ -235,7 +382,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     //   );
     // }
     if (e.RegisterId == 0 || e.RegisterId == undefined) {
-      this.swServ.showErrorMessage("Invalid Input!!!", "Please try again!!!");
+      this.swServ.showErrorMessage('Invalid Input!!!', 'Please try again!!!');
     }
     // } else if (
     //   status == "r" &&
@@ -246,14 +393,14 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     //     "Please try again!!!"
     //   );
     // }
-    else if (this.usrToken == "" || this.usrToken == undefined) {
+    else if (this.usrToken == '' || this.usrToken == undefined) {
       this.handleUnauthorizedrequest();
     } else {
-      if (status == "a") {
+      if (status == 'a') {
         swal({
-          title: "Are you sure?",
-          text: "Do you want to approve this user?",
-          type: "warning",
+          title: 'Are you sure?',
+          text: 'Do you want to approve this user?',
+          type: 'warning',
           showConfirmButton: true,
           showCancelButton: true
         }).then(willDelete => {
@@ -261,7 +408,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
             this.openApproveForm(e.RegisterId, Number(this.selectedStation));
             // this.api.approveUser(e.RegisterId, status);
           } else {
-            this.swServ.showErrorMessage("Canelled", "");
+            this.swServ.showErrorMessage('Canelled', '');
           }
         });
         // this.swServ
@@ -279,16 +426,16 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
         //   });
       } else {
         swal({
-          title: "Are you sure?",
-          text: "Do you want to remove this user?",
-          type: "warning",
+          title: 'Are you sure?',
+          text: 'Do you want to remove this user?',
+          type: 'warning',
           showConfirmButton: true,
           showCancelButton: true
         }).then(willDelete => {
           if (willDelete.value) {
             //   this.openApproveForm(e.RegisterId);
             this.api
-              .approveUser(e.RegisterId, status, 0, "", this.usrToken)
+              .approveUser(e.RegisterId, status, 0, '', this.usrToken)
               .subscribe(
                 (data: APIResult) => {
                   //console.log(data);
@@ -298,9 +445,9 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
                     // this.userTypes = data.usertypes;
                     // this.designatons = data.designations;
                     // this.stations = data.stations;
-                    this.swServ.showSuccessMessage("Success!!", m);
+                    this.swServ.showSuccessMessage('Success!!', m);
                   } else {
-                    this.swServ.showErrorMessage("Error!!", m);
+                    this.swServ.showErrorMessage('Error!!', m);
                   }
                   this.isreguser = true;
                   // this.employees.length=0;
@@ -311,11 +458,11 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
                 },
                 err => {
                   //console.log(err.message);
-                  this.swServ.showErrorMessage("Network Error!!!", err.message);
+                  this.swServ.showErrorMessage('Network Error!!!', err.message);
                 }
               );
           } else {
-            this.swServ.showErrorMessage("Canelled", "");
+            this.swServ.showErrorMessage('Canelled', '');
           }
         });
         // this.swServ
@@ -353,7 +500,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     const config2 = new MatDialogConfig();
     config2.disableClose = true;
     config2.autoFocus = true;
-    config2.width = "60%";
+    config2.width = '60%';
     config2.closeOnNavigation = true;
     config2.data = {
       registerId: regId,
@@ -366,7 +513,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     //   console.log(result);
     // });
     dialogRef.componentInstance.onget.subscribe(result => {
-      console.log("Event emittet dialog result....");
+      console.log('Event emittet dialog result....');
       console.log(result);
       if (result != undefined) {
         let status = result.status;
@@ -376,26 +523,26 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
           status != null &&
           message != undefined &&
           message != null &&
-          message != ""
+          message != ''
         ) {
           if (status) {
-            this.swServ.showSuccessMessage("Success!!", message);
+            this.swServ.showSuccessMessage('Success!!', message);
             this.isreguser = true;
             this.apiInput = new ApiInput();
             this.apiInput.stationId = Number(this.selectedStation);
             this.registeredUsers(this.apiInput);
           } else {
-            this.swServ.showErrorMessage("Error!!", message);
+            this.swServ.showErrorMessage('Error!!', message);
           }
         } else {
-          this.swServ.showMessage("Warning!!", "No Action happend");
+          this.swServ.showMessage('Warning!!', 'No Action happend');
         }
       } else {
-        this.swServ.showMessage("Warning!!", "No Action happend");
+        this.swServ.showMessage('Warning!!', 'No Action happend');
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log("dialog result....");
+      console.log('dialog result....');
       console.log(result);
       // if(result != undefined)
       // {
@@ -434,7 +581,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
     const config = new MatDialogConfig();
     config.disableClose = true;
     config.autoFocus = true;
-    config.width = "60%";
+    config.width = '60%';
     config.closeOnNavigation = true;
     config.data = {
       empId: val.target.id
