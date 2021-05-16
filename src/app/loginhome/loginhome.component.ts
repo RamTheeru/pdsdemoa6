@@ -1,15 +1,15 @@
-import { Component, Input, ViewChild, OnInit, OnDestroy } from "@angular/core";
-import { Router, NavigationExtras } from "@angular/router";
-import { MatSidenav } from "@angular/material";
-import * as r from "rxjs";
-import { ViewledgerComponent } from "./viewledger/viewledger.component";
-import { ViewService } from "../view.service";
-import { PdsApiService } from "../pds-api.service";
-import { SweetService } from "../sweet.service";
-import { UserType } from "../models/usertype";
-import { AuthService } from "../auth.service";
-import { APIResult } from "../models/apiresult";
-import swal from "sweetalert2";
+import { Component, Input, ViewChild, OnInit, OnDestroy } from '@angular/core';
+import { Router, NavigationExtras } from '@angular/router';
+import { MatSidenav } from '@angular/material';
+import * as r from 'rxjs';
+import { ViewledgerComponent } from './viewledger/viewledger.component';
+import { ViewService } from '../view.service';
+import { PdsApiService } from '../pds-api.service';
+import { SweetService } from '../sweet.service';
+import { UserType } from '../models/usertype';
+import { AuthService } from '../auth.service';
+import { APIResult } from '../models/apiresult';
+import swal from 'sweetalert2';
 // const navigationExtras: NavigationExtras = {
 //   state: {
 //     transd: 'TRANS001',
@@ -19,24 +19,24 @@ import swal from "sweetalert2";
 //   }
 // };
 @Component({
-  selector: "app-loginhome",
-  templateUrl: "./loginhome.component.html",
-  styleUrls: ["./loginhome.component.css"]
+  selector: 'app-loginhome',
+  templateUrl: './loginhome.component.html',
+  styleUrls: ['./loginhome.component.css']
 })
 export class LoginhomeComponent implements OnInit, OnDestroy {
-  @Input("") user: string;
+  @Input('') user: string;
   private subsc: r.Subscription;
   private subsc2: r.Subscription;
   userInfo: UserType;
-  loginInfo: string = "";
-  loginUsername: string = "";
+  loginInfo: string = '';
+  loginUsername: string = '';
   userType: number = 0;
   isFle: Boolean = false;
   updatesession: any;
   shoesidenav: Boolean = false;
   shownotify: Boolean = false;
   actTab: Boolean = false;
-  @ViewChild("sidenav") sidenav: MatSidenav;
+  @ViewChild('sidenav') sidenav: MatSidenav;
   isExpanded = true;
   showSubmenu: boolean = false;
   isShowing = false;
@@ -73,11 +73,11 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
     this.subsc2 = this.vServ.userInfo.subscribe((res: UserType) => {
       this.userInfo = res;
     });
-    if (this.user == "" || this.user == null || this.user == undefined) {
-      this.user = this.vServ.getValue("storedProp");
+    if (this.user == '' || this.user == null || this.user == undefined) {
+      this.user = this.vServ.getValue('storedProp');
     }
     if (this.userInfo == null || this.userInfo == undefined) {
-      var u = this.vServ.getValue("userProp");
+      var u = this.vServ.getValue('userProp');
       this.userInfo = JSON.parse(u);
     }
     console.log(this.user);
@@ -87,31 +87,31 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
     if (this.userType === 1) {
       // this.userType = 1;
       this.shownotify = false;
-      this.loginInfo = "Admin Login";
+      this.loginInfo = 'Admin Login';
     } else if (this.userType === 4) {
       //  this.userType = 2;
       this.shownotify = false;
-      this.loginInfo = "Finance LE Login";
+      this.loginInfo = 'Finance LE Login';
     } else if (this.userType === 5) {
       //  this.userType = 3;
       this.shownotify = false;
-      this.loginInfo = "Finance HE Login";
+      this.loginInfo = 'Finance HE Login';
     } else if (this.userType === 6) {
       // this.userType = 4;
       this.shownotify = false;
-      this.loginInfo = "Executive LE Login";
+      this.loginInfo = 'Executive LE Login';
     } else if (this.userType === 7) {
       // this.userType = 5;
       this.shownotify = false;
-      this.loginInfo = "Executive HE Login";
+      this.loginInfo = 'Executive HE Login';
     } else if (this.userType === 2) {
       //  this.userType = 6;
       this.shownotify = false;
-      this.loginInfo = "HR LE Login";
+      this.loginInfo = 'HR LE Login';
     } else if (this.userType === 3) {
       // this.userType = 7;
       this.shownotify = false;
-      this.loginInfo = "HR HE Login";
+      this.loginInfo = 'HR HE Login';
     } else {
       //
       this.shownotify = false;
@@ -128,9 +128,9 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.userInfo.userTypeId > 0
     ) {
       swal({
-        title: "Are you sure?",
-        text: "Do you want to continue the session?",
-        type: "warning",
+        title: 'Are you sure?',
+        text: 'Do you want to continue the session?',
+        type: 'warning',
         showConfirmButton: true,
         showCancelButton: true
       }).then(willDelete => {
@@ -147,19 +147,19 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
                   this.vServ.setUser(data.userInfo);
                   this.auth.setToken(tkn);
                   this.vServ.setToken(tkn);
-                  this.swServ.showSuccessMessage("Success!!", m);
+                  this.swServ.showSuccessMessage('Success!!', m);
                 } else {
-                  this.swServ.showErrorMessage("Failed!!", m);
-                  this.vServ.removeValue("usrtoken");
-                  this.vServ.removeValue("userProp");
-                  this.vServ.removeValue("storedProp");
-                  this.vServ.removeValue("fheverify");
-                  this.vServ.removeValue("edleverify");
-                  this.vServ.removeValue("evheverify");
-                  this.vServ.removeValue("hrvheverify");
-                  this.auth.setToken("");
-                  this.vServ.setToken("");
-                  this.router.navigate(["/login"]);
+                  this.swServ.showErrorMessage('Failed!!', m);
+                  this.vServ.removeValue('usrtoken');
+                  this.vServ.removeValue('userProp');
+                  this.vServ.removeValue('storedProp');
+                  this.vServ.removeValue('fheverify');
+                  this.vServ.removeValue('edleverify');
+                  this.vServ.removeValue('evheverify');
+                  this.vServ.removeValue('hrvheverify');
+                  this.auth.setToken('');
+                  this.vServ.setToken('');
+                  this.router.navigate(['/login']);
                 }
                 // console.log(data);
                 // this.swServ.showSuccessMessage("Sucess!!", "we didit");
@@ -168,164 +168,164 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
               },
               err => {
                 //console.log(err.message);
-                this.swServ.showErrorMessage("Network Error!!", err.message);
+                this.swServ.showErrorMessage('Network Error!!', err.message);
               },
               () => {
-                console.log("completed");
+                console.log('completed');
               }
             );
           // this.openApproveForm(e.RegisterId, Number(this.selectedStation));
           // this.api.approveUser(e.RegisterId, status);
         } else {
           this.swServ.showErrorMessage(
-            "Canelled",
-            "Please dont forget to signout or you will be signout automatically."
+            'Canelled',
+            'Please dont forget to signout or you will be signout automatically.'
           );
         }
       });
     } else {
       this.swServ.showErrorMessage(
-        "Something went wrong!!",
-        "Unable to get details to continue session, Please Sign-in again."
+        'Something went wrong!!',
+        'Unable to get details to continue session, Please Sign-in again.'
       );
     }
   }
-  oncreateclk(tab = "") {
+  oncreateclk(tab = '') {
     //fdhfgjf  routerLink="/loginhome/downloadinvoice"
     this.shownotify = false;
-    if (tab == "si") {
+    if (tab == 'si') {
       this.act1SubMenu = true;
       this.act2SubMenu = false;
-    } else if (tab == "sl") {
+    } else if (tab == 'sl') {
       this.act1SubMenu = false;
       this.act2SubMenu = true;
-    } else if (tab == "edle") {
+    } else if (tab == 'edle') {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("hrvheverify");
-      this.vServ.setVerify("edle");
-      this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(["/loginhome/downloadinvoice"]);
+      this.vServ.removeValue('fheverify');
+      this.vServ.removeValue('evheverify');
+      this.vServ.removeValue('hrvheverify');
+      this.vServ.setVerify('edle');
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate(['/loginhome/downloadinvoice']);
     } else {
       this.act1SubMenu = false;
       this.act2SubMenu = false;
     }
     this.shownotify = false;
   }
-  onloghomeclk(tab = "") {
-    if (tab == "fh") {
+  onloghomeclk(tab = '') {
+    if (tab == 'fh') {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("hrvheverify");
+      this.vServ.removeValue('fheverify');
+      this.vServ.removeValue('evheverify');
+      this.vServ.removeValue('edleverify');
+      this.vServ.removeValue('hrvheverify');
       // this.router.navigate["/loginhome"];
-    } else if (tab == "ah") {
+    } else if (tab == 'ah') {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("hrvheverify");
-      this.router.navigate(["/loginhome"]);
-    } else if (tab == "a") {
+      this.vServ.removeValue('fheverify');
+      this.vServ.removeValue('evheverify');
+      this.vServ.removeValue('edleverify');
+      this.vServ.removeValue('hrvheverify');
+      this.router.navigate(['/loginhome']);
+    } else if (tab == 'a') {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("hrvheverify");
-      this.router.navigate(["/loginhome/registeremployees"]);
-    } else if (tab == "ar") {
+      this.vServ.removeValue('fheverify');
+      this.vServ.removeValue('evheverify');
+      this.vServ.removeValue('edleverify');
+      this.vServ.removeValue('hrvheverify');
+      this.router.navigate(['/loginhome/registeremployees']);
+    } else if (tab == 'ar') {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("hrvheverify");
-      this.router.navigate(["/loginhome/approvals"]);
-    } else if (tab == "lg") {
+      this.vServ.removeValue('fheverify');
+      this.vServ.removeValue('evheverify');
+      this.vServ.removeValue('edleverify');
+      this.vServ.removeValue('hrvheverify');
+      this.router.navigate(['/loginhome/approvals']);
+    } else if (tab == 'lg') {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("hrvheverify");
-      this.router.navigate(["/loginhome/employeelogins"]);
-    } else if (tab == "fhe") {
+      this.vServ.removeValue('fheverify');
+      this.vServ.removeValue('evheverify');
+      this.vServ.removeValue('edleverify');
+      this.vServ.removeValue('hrvheverify');
+      this.router.navigate(['/loginhome/employeelogins']);
+    } else if (tab == 'fhe') {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("hrvheverify");
-      this.vServ.setVerify("fhe");
-      this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(["/loginhome/verifyvouchers"]);
-    } else if (tab == "fihe") {
+      this.vServ.removeValue('evheverify');
+      this.vServ.removeValue('edleverify');
+      this.vServ.removeValue('hrvheverify');
+      this.vServ.setVerify('fhe');
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate(['/loginhome/verifyvouchers']);
+    } else if (tab == 'fihe') {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("hrvheverify");
-      this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(["/loginhome/viewledger"]);
-    } else if (tab == "fle") {
+      this.vServ.removeValue('fheverify');
+      this.vServ.removeValue('evheverify');
+      this.vServ.removeValue('edleverify');
+      this.vServ.removeValue('hrvheverify');
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate(['/loginhome/viewledger']);
+    } else if (tab == 'fle') {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("hrvheverify");
-    } else if (tab == "ele") {
+      this.vServ.removeValue('evheverify');
+      this.vServ.removeValue('edleverify');
+      this.vServ.removeValue('fheverify');
+      this.vServ.removeValue('hrvheverify');
+    } else if (tab == 'ele') {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
-      this.vServ.removeValue("hrvheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("fheverify");
-      this.router.navigate(["/loginhome/viewdas"]);
-    } else if (tab == "ehe") {
+      this.vServ.removeValue('hrvheverify');
+      this.vServ.removeValue('evheverify');
+      this.vServ.removeValue('edleverify');
+      this.vServ.removeValue('fheverify');
+      this.router.navigate(['/loginhome/viewdas']);
+    } else if (tab == 'ehe') {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
-      this.vServ.removeValue("hrvheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("fheverify");
-    } else if (tab == "eele") {
+      this.vServ.removeValue('hrvheverify');
+      this.vServ.removeValue('evheverify');
+      this.vServ.removeValue('edleverify');
+      this.vServ.removeValue('fheverify');
+    } else if (tab == 'eele') {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("hrvheverify");
-      this.router.navigate(["/loginhome/createemployee"]);
-    } else if (tab == "edle") {
+      this.vServ.removeValue('evheverify');
+      this.vServ.removeValue('edleverify');
+      this.vServ.removeValue('fheverify');
+      this.vServ.removeValue('hrvheverify');
+      this.router.navigate(['/loginhome/createemployee']);
+    } else if (tab == 'edle') {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("hrvheverify");
-      this.vServ.setVerify("edle");
-      this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(["/loginhome/enrolldeliveryassociate"]);
-    } else if (tab == "evhe") {
+      this.vServ.removeValue('fheverify');
+      this.vServ.removeValue('evheverify');
+      this.vServ.removeValue('hrvheverify');
+      this.vServ.setVerify('edle');
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate(['/loginhome/enrolldeliveryassociate']);
+    } else if (tab == 'evhe') {
       // this.shownotify = false;
       // this.act1SubMenu = false;
       // this.act2SubMenu = false;
@@ -334,76 +334,86 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       // this.vServ.setVerify("evhe");
       // this.router.onSameUrlNavigation = "reload";
       // this.router.navigate(["/loginhome/employees"]);
-    } else if (tab == "eehe") {
+    } else if (tab == 'eehe') {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("hrvheverify");
-      this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(["/loginhome/viewdas"]);
-    } else if (tab == "hrle") {
+      this.vServ.removeValue('fheverify');
+      this.vServ.removeValue('evheverify');
+      this.vServ.removeValue('edleverify');
+      this.vServ.removeValue('hrvheverify');
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate(['/loginhome/viewdas']);
+    } else if (tab == 'hrle') {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("hrvheverify");
-      this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(["/loginhome/createpdsemployee"]);
-    } else if (tab == "hrhe") {
+      this.vServ.removeValue('fheverify');
+      this.vServ.removeValue('evheverify');
+      this.vServ.removeValue('edleverify');
+      this.vServ.removeValue('hrvheverify');
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate(['/loginhome/createpdsemployee']);
+    } else if (tab == 'hrhe') {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
-      this.vServ.removeValue("hrvheverify");
-      this.vServ.removeValue("fheverify");
+      this.vServ.removeValue('hrvheverify');
+      this.vServ.removeValue('fheverify');
       //this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.setVerify("evhe");
-      this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(["/loginhome/confirmemployment"]);
-    } else if (tab == "hruahe") {
+      this.vServ.removeValue('edleverify');
+      this.vServ.setVerify('evhe');
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate(['/loginhome/confirmemployment']);
+    } else if (tab == 'hruahe') {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("hrvheverify");
+      this.vServ.removeValue('fheverify');
+      this.vServ.removeValue('evheverify');
+      this.vServ.removeValue('edleverify');
+      this.vServ.removeValue('hrvheverify');
       //this.vServ.setVerify("hruahe");
       //this.router.onSameUrlNavigation = "reload";
       //this.router.navigate(["/loginhome/employees"]);
-    } else if (tab == "hrvhe") {
+    } else if (tab == 'hrvle') {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.setVerify("hrvhe");
-      this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(["/loginhome/viewemployees"]);
-    } else if (tab == "hrgshe") {
+      this.vServ.removeValue('fheverify');
+      this.vServ.removeValue('evheverify');
+      this.vServ.removeValue('edleverify');
+      this.vServ.setVerify('hrve');
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate(['/loginhome/pdsemployees']);
+    } else if (tab == 'hrvhe') {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("hrvheverify");
-      this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(["/loginhome/generatesalaryslips"]);
+      this.vServ.removeValue('fheverify');
+      this.vServ.removeValue('evheverify');
+      this.vServ.removeValue('edleverify');
+      this.vServ.setVerify('hrvhe');
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate(['/loginhome/pendingpdsemployees']);
+    } else if (tab == 'hrgshe') {
+      this.shownotify = false;
+      this.act1SubMenu = false;
+      this.act2SubMenu = false;
+      this.vServ.removeValue('fheverify');
+      this.vServ.removeValue('evheverify');
+      this.vServ.removeValue('edleverify');
+      this.vServ.removeValue('hrvheverify');
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate(['/loginhome/generatesalaryslips']);
     } else {
       this.shownotify = false;
       this.act1SubMenu = false;
       this.act2SubMenu = false;
-      this.vServ.removeValue("fheverify");
-      this.vServ.removeValue("evheverify");
-      this.vServ.removeValue("edleverify");
-      this.vServ.removeValue("hrvheverify");
+      this.vServ.removeValue('fheverify');
+      this.vServ.removeValue('evheverify');
+      this.vServ.removeValue('edleverify');
+      this.vServ.removeValue('hrvheverify');
     }
   }
   ngOnDestroy() {
@@ -416,13 +426,13 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
       this.userInfo = res;
     });
     if (this.userInfo == null || this.userInfo == undefined) {
-      var u = this.vServ.getValue("userProp");
+      var u = this.vServ.getValue('userProp');
       this.userInfo = JSON.parse(u);
     }
     if (
       this.userInfo.employeeId > 0 &&
       this.userInfo.userTypeId > 0 &&
-      this.userInfo.user != ""
+      this.userInfo.user != ''
     ) {
       this.api
         .signOut(
@@ -436,35 +446,34 @@ export class LoginhomeComponent implements OnInit, OnDestroy {
             let m: string = data.message;
             if (status) {
               //  this.swServ.showSuccessMessage("Success!!", m);
-              this.vServ.removeValue("usrtoken");
-              this.vServ.removeValue("userProp");
-              this.vServ.removeValue("storedProp");
-              this.vServ.removeValue("fheverify");
-              this.vServ.removeValue("edleverify");
-              this.vServ.removeValue("evheverify");
-              this.vServ.removeValue("hrvheverify");
+              this.vServ.removeValue('usrtoken');
+              this.vServ.removeValue('userProp');
+              this.vServ.removeValue('storedProp');
+              this.vServ.removeValue('fheverify');
+              this.vServ.removeValue('edleverify');
+              this.vServ.removeValue('evheverify');
+              this.vServ.removeValue('hrvheverify');
               this.vServ.userInfo.next(new UserType());
-              this.auth.setToken("");
-              this.vServ.setToken("");
-              this.swServ.showSuccessMessage("Success!!", m);
-              this.router.navigate(["/forcelogin"]);
+              this.auth.setToken('');
+              this.vServ.setToken('');
+              this.swServ.showSuccessMessage('Success!!', m);
+              this.router.navigate(['/forcelogin']);
             } else {
-              this.swServ.showErrorMessage("Error!!", m);
-              this.router.navigate(["/login"]);
+              this.swServ.showErrorMessage('Error!!', m);
+              this.router.navigate(['/login']);
             }
           },
           err => {
-            this.swServ.showErrorMessage("Network Error!!!", err.message);
-            this.router.navigate(["/login"]);
+            this.swServ.showErrorMessage('Network Error!!!', err.message);
+            this.router.navigate(['/login']);
           }
         );
     } else {
       this.swServ.showErrorMessage(
-        "Error!!",
-        "Unable to logout,Something Went Wrong!!!"
+        'Error!!',
+        'Unable to logout,Something Went Wrong!!!'
       );
-      this.router.navigate(["/login"]);
+      this.router.navigate(['/login']);
     }
-
   }
 }

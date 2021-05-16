@@ -65,7 +65,7 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.url = this.route['_routerState'].snapshot.url;
-
+    var index2 = this.url.indexOf('register');
     var index = this.url.indexOf('logins');
     if (index !== -1) {
       this.isreguser = false;
@@ -81,6 +81,21 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
       this.isHE = false;
       this.isHrLE = false;
       this.isLogin = false;
+    }
+    if (index2 !== -1) {
+      this.isreguser = true;
+      this.isLE = false;
+      this.isHrLE = false;
+      this.isHE = false;
+      this.isHrLE = false;
+      this.isLogin = false;
+    } else {
+      this.isreguser = false;
+      this.isLE = false;
+      this.isHrLE = false;
+      this.isHE = false;
+      this.isHrLE = false;
+      this.isLogin = true;
     }
     this.subsc = this.vServ.data.subscribe((val: string) => {
       this.userType = val;

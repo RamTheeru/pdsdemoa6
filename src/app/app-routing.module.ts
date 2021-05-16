@@ -53,6 +53,8 @@ const appRoutes: Routes = [
       { path: 'individualview/:id', component: IndividualviewComponent },
       { path: 'registeremployees', component: EmployeelistComponent },
       { path: 'employeelogins', component: EmployeelistComponent },
+      { path: 'pdsemployees', component: EmployeelistComponent },
+      { path: 'pendingpdsemployees', component: EmployeelistComponent },
       { path: 'entercreditdetails', component: EntercreditdetailsComponent },
       { path: 'viewvouchers', component: ViewledgerComponent },
       { path: 'entervoucher', component: VoucherComponent },
