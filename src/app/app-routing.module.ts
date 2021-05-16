@@ -77,8 +77,7 @@ const appRoutes: Routes = [
       },
       { path: 'createcommercialrates', component: CommercialconstantComponent },
       { path: 'employeesinsufficientdata', component: EmployeesComponent }
-      //  {path : 'new',component: RecipeEditComponent ,canActivate:[AuthGuard]},
-      //  {path : ':id',component: RecipeDetailComponent },
+
 
       //    {path : ':id/edit',component: RecipeEditComponent,canActivate:[AuthGuard],canDeactivate:[CanDeactivateGuard] }
     ]
