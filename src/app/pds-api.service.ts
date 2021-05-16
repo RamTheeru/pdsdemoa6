@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   HttpClient,
   HttpHeaders,
@@ -7,82 +7,85 @@ import {
   HttpEvent,
   HttpInterceptor,
   HttpErrorResponse
-} from "@angular/common/http";
-import { Router } from "@angular/router";
-import * as R from "rxjs";
-import { catchError } from "rxjs/internal/operators";
-import swal from "sweetalert2";
-import "rxjs/add/operator/catch";
-import "rxjs/add/observable/of";
-import "rxjs/add/observable/empty";
-import "rxjs/add/operator/retry"; // don't forget the imports
-import { Observable, EMPTY, throwError, of } from "rxjs";
-import { APIResult } from "./models/apiresult";
-import { AppComponent } from "./app.component";
+} from '@angular/common/http';
+import { Router } from '@angular/router';
+import * as R from 'rxjs';
+import { catchError } from 'rxjs/internal/operators';
+import swal from 'sweetalert2';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/empty';
+import 'rxjs/add/operator/retry'; // don't forget the imports
+import { Observable, EMPTY, throwError, of } from 'rxjs';
+import { APIResult } from './models/apiresult';
+import { AppComponent } from './app.component';
 export const CurrentUrls = {
-  constants: "Constants",
-  approve: "ApproveUser",
-  employeelist: "employees",
-  daemployeelist: "DAEmployees",
-  registeremployee: "RegisterEmployee",
-  registeremployees: "RegisteredUsers",
-  createemployee: "CreateEmployee",
-  createDAemployee: "CreateDAEmployee",
-  checkempCode: "CheckEmpCode",
-  checkcdaCode: "CheckCDACode",
-  login: "Login",
-  employeelogins: "Logins",
-  checkUsername: "CheckUserName",
-  adminDetails: "AdminDetails",
-  createconstant: "CreateCC",
-  getCDADeliverylist: "CDAGetDeiveryDetails",
-  getCDADeliveryStation: "CDAStationDeiveryDetails",
-  updateCDADeliverylist: "CDAUpdateDeiveryDetails",
-  PDFFileDownload: "DownloadCDADeiveryDetails",
-  backuplist: "Backups",
-  updatesession: "SessionUpdate",
-  restore: "RestoreDb",
-  voucherCreate: "InsertVoucher",
-  voucherUpdate: "UpdateVoucher",
-  voucherDetails: "VoucherDetails",
-  previousmonthCredit: "PreviousMonthCredit",
-  creditInsert: "InsertCredit",
-  resetPassword: "ResetPassword",
-  legders: "Ledgers",
-  downloadLedger: "DownloadLedgerDetails",
-  approveVouchers: "ApproveVoucher",
-  rejectvouchers: "RejectVoucher",
-  vouchers: "Vouchers",
-  logout: "DeleteSession"
+  constants: 'Constants',
+  approve: 'ApproveUser',
+  employeelist: 'employees',
+  daemployeelist: 'DAEmployees',
+  registeremployee: 'RegisterEmployee',
+  registeremployees: 'RegisteredUsers',
+  createemployee: 'CreateEmployee',
+  createDAemployee: 'CreateDAEmployee',
+  createPDSemployee: 'CreatePDSEmployee',
+  pdsunapprovedemployees: 'PDSUnApprovedEmployees',
+  pdsemployees: 'PDSEmployees',
+  checkempCode: 'CheckEmpCode',
+  checkcdaCode: 'CheckCDACode',
+  login: 'Login',
+  employeelogins: 'Logins',
+  checkUsername: 'CheckUserName',
+  adminDetails: 'AdminDetails',
+  createconstant: 'CreateCC',
+  getCDADeliverylist: 'CDAGetDeiveryDetails',
+  getCDADeliveryStation: 'CDAStationDeiveryDetails',
+  updateCDADeliverylist: 'CDAUpdateDeiveryDetails',
+  PDFFileDownload: 'DownloadCDADeiveryDetails',
+  backuplist: 'Backups',
+  updatesession: 'SessionUpdate',
+  restore: 'RestoreDb',
+  voucherCreate: 'InsertVoucher',
+  voucherUpdate: 'UpdateVoucher',
+  voucherDetails: 'VoucherDetails',
+  previousmonthCredit: 'PreviousMonthCredit',
+  creditInsert: 'InsertCredit',
+  resetPassword: 'ResetPassword',
+  legders: 'Ledgers',
+  downloadLedger: 'DownloadLedgerDetails',
+  approveVouchers: 'ApproveVoucher',
+  rejectvouchers: 'RejectVoucher',
+  vouchers: 'Vouchers',
+  logout: 'DeleteSession'
 };
 @Injectable()
 export class PdsApiService {
   // Base url
-  baseurl = "https://www.kleenandshine.com/v1/api/";
+  baseurl = 'https://www.kleenandshine.com/v1/api/';
   //baseurl = "https://localhost:9900/api/";
-  usrToken: string = "";
+  usrToken: string = '';
   apiResult: APIResult;
   //constantsUrl: string = "Constants";
-  financeUrl: string = "Finance/";
-  employeesUrl: string = "Employee/";
+  financeUrl: string = 'Finance/';
+  employeesUrl: string = 'Employee/';
   config = new HttpHeaders()
-    .set("Content-Type", "application/json")
-    .set("Accept", "application/json");
+    .set('Content-Type', 'application/json')
+    .set('Accept', 'application/json');
   constructor(private http: HttpClient, private router: Router) {}
   posthttpOptions = {
     headers: new HttpHeaders({
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*"
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
     })
   };
   httpOptions = {
     headers: new HttpHeaders({
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       //"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-      "X-Requested-With": "XMLHttpRequest",
-      "Access-Control-Allow-Origin": "*",
+      'X-Requested-With': 'XMLHttpRequest',
+      'Access-Control-Allow-Origin': '*',
       // "Access-Control-Allow-Methods:": "GET,POST,OPTIONS,DELETE,PUT",
-      "Access-Control-Allow-Headers": "*"
+      'Access-Control-Allow-Headers': '*'
     })
   };
   //   getUserTypes() :  R.Observable<any>  {
@@ -99,30 +102,30 @@ export class PdsApiService {
   // }
   ValidateAlpha(txt: string): boolean {
     var val = false;
-    var regexp = new RegExp("^[A-Za-z ]+$");
+    var regexp = new RegExp('^[A-Za-z ]+$');
     val = regexp.test(txt);
     return val;
   }
   ValidateNumbers(txt: string): boolean {
     var val = false;
-    var regexp = new RegExp("^[0-9]+$");
+    var regexp = new RegExp('^[0-9]+$');
     val = regexp.test(txt);
     return val;
   }
   getmonthFromDate(str) {
-    var mnth = "0";
-    if (str != null && str != "" && str != undefined) {
+    var mnth = '0';
+    if (str != null && str != '' && str != undefined) {
       var date = new Date(str),
-        mnth = ("0" + (date.getMonth() + 1)).slice(-2);
+        mnth = ('0' + (date.getMonth() + 1)).slice(-2);
       console.log(mnth);
     }
     return mnth;
   }
   convert(str) {
     var date = new Date(str),
-      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
-      day = ("0" + date.getDate()).slice(-2);
-    return [date.getFullYear(), mnth, day].join("-");
+      mnth = ('0' + (date.getMonth() + 1)).slice(-2),
+      day = ('0' + date.getDate()).slice(-2);
+    return [date.getFullYear(), mnth, day].join('-');
   }
   transform(value): any {
     let res = [];
@@ -143,9 +146,9 @@ export class PdsApiService {
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.adminDetails);
     const phttpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: "Bearer " + tkn
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: 'Bearer ' + tkn
       })
     };
     return this.http
@@ -165,7 +168,7 @@ export class PdsApiService {
   }
   //Employee login
   loginuser(username: string, password: string) {
-    let input: string = "?username=" + username + "&password=" + password;
+    let input: string = '?username=' + username + '&password=' + password;
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.login + input);
     return this.http
       .get(
@@ -184,7 +187,7 @@ export class PdsApiService {
   }
   //Employee Reset password
   resetPassword(employeeId: number, password: string) {
-    let input: string = "?employeeId=" + employeeId + "&password=" + password;
+    let input: string = '?employeeId=' + employeeId + '&password=' + password;
     console.log(
       this.baseurl + this.employeesUrl + CurrentUrls.resetPassword + input
     );
@@ -206,7 +209,7 @@ export class PdsApiService {
   //Employee login update session
   updateSession(userTypeId: Number, employeeId: Number) {
     let input: string =
-      "?usertypeId=" + userTypeId + "&employeeId=" + employeeId;
+      '?usertypeId=' + userTypeId + '&employeeId=' + employeeId;
     console.log(
       this.baseurl + this.employeesUrl + CurrentUrls.updatesession + input
     );
@@ -225,15 +228,77 @@ export class PdsApiService {
         })
       );
   }
+  //get list of UnApproved PDS Employees
+  getpdsunApprovedEmployees(input: any, tkn: string): R.Observable<any> {
+    var body = JSON.stringify(input);
+    const phttpOptions2 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'PUT,GET,POST,DELETE',
+        Authorization: 'Bearer ' + tkn
+      })
+    };
+    console.log(tkn);
+    console.log(
+      this.baseurl + this.employeesUrl + CurrentUrls.pdsunapprovedemployees
+    );
+    return this.http
+      .post(
+        this.baseurl + this.employeesUrl + CurrentUrls.pdsunapprovedemployees,
+        body,
+        phttpOptions2
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.log(error);
+          let obj: never;
+          obj = this.handlehttpError(error) as never;
+          return new Observable(function(x) {
+            x.next(obj);
+          });
+        })
+      );
+  }
+  //get list of PDS Employees
+  getPDSEmployees(input: any, tkn: string): R.Observable<any> {
+    var body = JSON.stringify(input);
+    const phttpOptions2 = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'PUT,GET,POST,DELETE',
+        Authorization: 'Bearer ' + tkn
+      })
+    };
+    console.log(tkn);
+    console.log(this.baseurl + this.employeesUrl + CurrentUrls.pdsemployees);
+    return this.http
+      .post(
+        this.baseurl + this.employeesUrl + CurrentUrls.pdsemployees,
+        body,
+        phttpOptions2
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.log(error);
+          let obj: never;
+          obj = this.handlehttpError(error) as never;
+          return new Observable(function(x) {
+            x.next(obj);
+          });
+        })
+      );
+  }
   //get list of Delivery Associates
   getdeliveryassociates(input: any, tkn: string): R.Observable<any> {
     var body = JSON.stringify(input);
     const phttpOptions2 = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "PUT,GET,POST,DELETE",
-        Authorization: "Bearer " + tkn
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'PUT,GET,POST,DELETE',
+        Authorization: 'Bearer ' + tkn
       })
     };
     console.log(tkn);
@@ -260,9 +325,9 @@ export class PdsApiService {
     var body = JSON.stringify(input);
     const phttpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: "Bearer " + tkn
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: 'Bearer ' + tkn
       })
     };
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.employeelogins);
@@ -286,9 +351,9 @@ export class PdsApiService {
     var body = JSON.stringify(input);
     const phttpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: "Bearer " + tkn
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: 'Bearer ' + tkn
       })
     };
     //this.posthttpOptions.headers=headers;
@@ -320,38 +385,38 @@ export class PdsApiService {
         // A client-side or network error occurred. Handle it accordingly.
 
         swal(
-          "Client Side Error!!!",
-          "An error occurred :" + err.error.message.toString(),
-          "error"
+          'Client Side Error!!!',
+          'An error occurred :' + err.error.message.toString(),
+          'error'
         );
       } else {
         let apierrResult: APIResult = new APIResult();
         // The backend returned an unsuccessful response code.
         // The response body may contain clues as to what went wrong,
-        let m: string = "";
+        let m: string = '';
         m = `Backend returned code ${err.status}`;
         //  console.log(err);
         obj = err.error;
 
-        if ("title" in obj) {
+        if ('title' in obj) {
           m = obj.title;
           apierrResult.status = false;
           apierrResult.message = m;
           //obj = apierrResult;
         }
-        if ("errors" in obj) {
-          m = m + " Reason : " + JSON.stringify(this.printObject(obj.errors));
+        if ('errors' in obj) {
+          m = m + ' Reason : ' + JSON.stringify(this.printObject(obj.errors));
           apierrResult.status = false;
           apierrResult.message = m;
           // obj = apierrResult;
         }
-        if ("commandType" in obj || "status" in obj || "message" in obj) {
-          m = m + " Reason : " + obj.message;
+        if ('commandType' in obj || 'status' in obj || 'message' in obj) {
+          m = m + ' Reason : ' + obj.message;
           apierrResult.status = false;
           apierrResult.message = m;
           obj = apierrResult;
         } else {
-          m = m + " Reason : " + JSON.stringify(obj);
+          m = m + ' Reason : ' + JSON.stringify(obj);
           apierrResult.status = false;
           apierrResult.message = m;
         }
@@ -376,18 +441,18 @@ export class PdsApiService {
     //handle your auth error or rethrow
 
     //navigate /delete cookies or whatever
-    console.log("handled error " + err.status);
+    console.log('handled error ' + err.status);
     swal(
-      "UnAuthorized Request!!!",
-      "Session Expired, please refresh the page and login again!!!",
-      "error"
+      'UnAuthorized Request!!!',
+      'Session Expired, please refresh the page and login again!!!',
+      'error'
     );
     this.router.navigate([`/login`]);
     // if you've caught / handled the error, you don't want to rethrow it unless you also want downstream consumers to have to handle it as well.
   }
   // get emloyees
-  getEmployees(stationCode: string = ""): R.Observable<any> {
-    let input = "?stationCode=" + stationCode;
+  getEmployees(stationCode: string = ''): R.Observable<any> {
+    let input = '?stationCode=' + stationCode;
     console.log(
       this.baseurl + this.employeesUrl + CurrentUrls.employeelist + input
     );
@@ -408,11 +473,11 @@ export class PdsApiService {
   //signout user
   signOut(userName: string, employeeId: number, usertypeId: number) {
     let input =
-      "?userName=" +
+      '?userName=' +
       userName +
-      "&employeeId=" +
+      '&employeeId=' +
       employeeId +
-      "&userTypeId=" +
+      '&userTypeId=' +
       usertypeId;
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.logout + input);
     return this.http
@@ -439,19 +504,19 @@ export class PdsApiService {
     tkn
   ): R.Observable<any> {
     let input =
-      "?registerId=" +
+      '?registerId=' +
       id +
-      "&status=" +
+      '&status=' +
       status +
-      "&pId=" +
+      '&pId=' +
       pId +
-      "&empCode=" +
+      '&empCode=' +
       empCode;
     const phttpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: "Bearer " + tkn
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: 'Bearer ' + tkn
       })
     };
     console.log(tkn);
@@ -472,7 +537,7 @@ export class PdsApiService {
   }
   //check user name for employee registration
   checkUserName(userName: string): R.Observable<any> {
-    let input = "?userName=" + userName;
+    let input = '?userName=' + userName;
     console.log(
       this.baseurl + this.employeesUrl + CurrentUrls.checkUsername + input
     );
@@ -492,7 +557,7 @@ export class PdsApiService {
   }
   //check Employee Code for approve employee
   checkEmpCode(empCode: string): R.Observable<any> {
-    let input = "?empCode=" + empCode;
+    let input = '?empCode=' + empCode;
     console.log(
       this.baseurl + this.employeesUrl + CurrentUrls.checkempCode + input
     );
@@ -512,7 +577,7 @@ export class PdsApiService {
   }
   //check CDA Code for cda enroll
   checkCDACode(cdaCode: string): R.Observable<any> {
-    let input = "?cdaCode=" + cdaCode;
+    let input = '?cdaCode=' + cdaCode;
     console.log(
       this.baseurl + this.employeesUrl + CurrentUrls.checkcdaCode + input
     );
@@ -559,9 +624,9 @@ export class PdsApiService {
   createemployee(input, tkn): R.Observable<any> {
     const phttpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: "Bearer " + tkn
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: 'Bearer ' + tkn
       })
     };
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.createemployee);
@@ -581,15 +646,43 @@ export class PdsApiService {
         })
       );
   }
+  //create PDS employee POST
 
+  createPDSemployee(input, tkn): R.Observable<any> {
+    const phttpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: 'Bearer ' + tkn
+      })
+    };
+    console.log(
+      this.baseurl + this.employeesUrl + CurrentUrls.createPDSemployee
+    );
+    return this.http
+      .post<any>(
+        this.baseurl + this.employeesUrl + CurrentUrls.createPDSemployee,
+        JSON.stringify(input),
+        phttpOptions
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let obj: never = this.handlehttpError(error) as never;
+          console.log(obj);
+          return new Observable(function(x) {
+            x.next(obj);
+          });
+        })
+      );
+  }
   //create DA employee POST
 
   createDAemployee(input, tkn): R.Observable<any> {
     const phttpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: "Bearer " + tkn
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: 'Bearer ' + tkn
       })
     };
     console.log(
@@ -614,12 +707,12 @@ export class PdsApiService {
   //Get CDA delivery deatils by station GET
 
   getCDADeliverybyStation(stationId, tkn): R.Observable<any> {
-    let input = "?stationId=" + stationId;
+    let input = '?stationId=' + stationId;
     const phttpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: "Bearer " + tkn
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: 'Bearer ' + tkn
       })
     };
     console.log(
@@ -651,9 +744,9 @@ export class PdsApiService {
   getCDADeliverylist(input, tkn): R.Observable<any> {
     const phttpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: "Bearer " + tkn
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: 'Bearer ' + tkn
       })
     };
     console.log(
@@ -680,9 +773,9 @@ export class PdsApiService {
   updateCDADeliverylist(input, tkn): R.Observable<any> {
     const phttpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: "Bearer " + tkn
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: 'Bearer ' + tkn
       })
     };
     console.log(
@@ -709,9 +802,9 @@ export class PdsApiService {
   createconstant(input, tkn): R.Observable<any> {
     const phttpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: "Bearer " + tkn
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: 'Bearer ' + tkn
       })
     };
     console.log(tkn);
@@ -737,11 +830,11 @@ export class PdsApiService {
   downloadpdffilesforemployees(input: any, tkn: string): R.Observable<any> {
     var body = JSON.stringify(input);
     const phttpOptions = {
-      responseType: "blob",
+      responseType: 'blob',
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: "Bearer " + tkn
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: 'Bearer ' + tkn
       })
       //   observe:"body",
       //   reportProgress:false,
@@ -754,11 +847,11 @@ export class PdsApiService {
         this.baseurl + this.employeesUrl + CurrentUrls.PDFFileDownload,
         body,
         {
-          responseType: "blob",
+          responseType: 'blob',
           headers: new HttpHeaders({
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            Authorization: "Bearer " + tkn
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            Authorization: 'Bearer ' + tkn
           })
         }
       )
@@ -778,11 +871,11 @@ export class PdsApiService {
   ): R.Observable<any> {
     var body = JSON.stringify(input);
     const phttpOptions = {
-      responseType: "blob",
+      responseType: 'blob',
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: "Bearer " + tkn
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: 'Bearer ' + tkn
       })
       //   observe:"body",
       //   reportProgress:false,
@@ -792,11 +885,11 @@ export class PdsApiService {
     // console.log(body);
     return this.http
       .post(this.baseurl + this.financeUrl + CurrentUrls.downloadLedger, body, {
-        responseType: "blob",
+        responseType: 'blob',
         headers: new HttpHeaders({
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          Authorization: "Bearer " + tkn
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          Authorization: 'Bearer ' + tkn
         })
       })
       .pipe(
@@ -812,9 +905,9 @@ export class PdsApiService {
   getBackups(tkn: string): R.Observable<any> {
     const phttpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: "Bearer " + tkn
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: 'Bearer ' + tkn
       })
     };
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.backuplist);
@@ -837,12 +930,12 @@ export class PdsApiService {
   restore(filename: string, tkn: string): R.Observable<any> {
     const phttpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: "Bearer " + tkn
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: 'Bearer ' + tkn
       })
     };
-    let input = "?file=" + filename;
+    let input = '?file=' + filename;
     console.log(this.baseurl + this.employeesUrl + CurrentUrls.restore);
     return this.http
       .get(
@@ -866,9 +959,9 @@ export class PdsApiService {
     console.log(JSON.stringify(input));
     const phttpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: "Bearer " + tkn
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: 'Bearer ' + tkn
       })
     };
     console.log(this.baseurl + this.financeUrl + CurrentUrls.voucherCreate);
@@ -892,12 +985,12 @@ export class PdsApiService {
   getvoucherdetails(voucherId, tkn): R.Observable<any> {
     const phttpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: "Bearer " + tkn
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: 'Bearer ' + tkn
       })
     };
-    let input = "?voucherId=" + voucherId;
+    let input = '?voucherId=' + voucherId;
     console.log(
       this.baseurl + this.financeUrl + CurrentUrls.voucherDetails + input
     );
@@ -922,9 +1015,9 @@ export class PdsApiService {
     console.log(JSON.stringify(input));
     const phttpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: "Bearer " + tkn
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: 'Bearer ' + tkn
       })
     };
     console.log(this.baseurl + this.financeUrl + CurrentUrls.voucherUpdate);
@@ -948,12 +1041,12 @@ export class PdsApiService {
   previousmonthCreditDetails(stationId: number, tkn): R.Observable<any> {
     const phttpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: "Bearer " + tkn
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: 'Bearer ' + tkn
       })
     };
-    let input = "?stationId=" + stationId;
+    let input = '?stationId=' + stationId;
     console.log(
       this.baseurl + this.financeUrl + CurrentUrls.previousmonthCredit + input
     );
@@ -981,9 +1074,9 @@ export class PdsApiService {
     console.log(JSON.stringify(input));
     const phttpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: "Bearer " + tkn
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: 'Bearer ' + tkn
       })
     };
     console.log(this.baseurl + this.financeUrl + CurrentUrls.creditInsert);
@@ -1008,9 +1101,9 @@ export class PdsApiService {
     var body = JSON.stringify(input);
     const phttpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: "Bearer " + tkn
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: 'Bearer ' + tkn
       })
     };
     //this.posthttpOptions.headers=headers;
@@ -1036,9 +1129,9 @@ export class PdsApiService {
     var body = JSON.stringify(input);
     const phttpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: "Bearer " + tkn
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: 'Bearer ' + tkn
       })
     };
     //this.posthttpOptions.headers=headers;
@@ -1065,9 +1158,9 @@ export class PdsApiService {
   approvevouchers(input, tkn): R.Observable<any> {
     const phttpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: "Bearer " + tkn
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: 'Bearer ' + tkn
       })
     };
     console.log(this.baseurl + this.financeUrl + CurrentUrls.approveVouchers);
@@ -1094,9 +1187,9 @@ export class PdsApiService {
   rejectVouchers(input, tkn): R.Observable<any> {
     const phttpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: "Bearer " + tkn
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Authorization: 'Bearer ' + tkn
       })
     };
     console.log(this.baseurl + this.financeUrl + CurrentUrls.rejectvouchers);
