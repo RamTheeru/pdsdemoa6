@@ -54,7 +54,6 @@ export class EmployeelistComponent implements OnInit, OnDestroy {
   isHrLE: Boolean = false;
   empId: number = 0;
   e: Employee;
-
   constructor(
     public dialog: MatDialog,
     private api: PdsApiService,
