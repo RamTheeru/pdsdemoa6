@@ -181,7 +181,6 @@ export class PdsApiService {
       //   reportProgress:false,
       //  responseType: "blob"
     };
-
     return this.http
       .post(
         this.baseurl + this.employeesUrl + CurrentUrls.downloadattendance,
