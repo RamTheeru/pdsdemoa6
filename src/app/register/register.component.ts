@@ -8,8 +8,6 @@ import {
 } from "@angular/forms";
 import { Router } from "@angular/router";
 import * as _moment from "moment";
-//import { default as _rollupMoment } from "moment";
-//const moment = _rollupMoment || _moment;
 import { MY_FORMATS } from "../models/dateformats";
 import { MomentDateAdapter } from "@angular/material-moment-adapter";
 import {
