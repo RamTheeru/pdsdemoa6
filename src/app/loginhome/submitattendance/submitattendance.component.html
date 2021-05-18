@@ -12,7 +12,7 @@
         </div>
         <div class="col-sm-2">
 
-          <input type="button" class="btn btn-primary" value="Download"/>
+          <input type="button" class="btn btn-primary" (click)="onDownloadle()" value="Download"/>
         </div>
         <div class="col"></div>
       </div>
@@ -56,12 +56,22 @@
 		  <option *ngFor="let s of stations" [ngValue]="s.stationId">
 						{{s.stationName}}
 					</option>
-</select>
+</select> <br>
           <label>Select Previous Month:</label>
           <select  class="form-control"   [(ngModel)]="selectedMonth" name="selectedMonth" id="mont">
 							<option value="" selected>Select Month</option>
 				  <option *ngFor="let m of months" [ngValue]="m.id">
 					{{m.name}}
+							</option>
+</select>
+          <label>Select Year:</label>
+          <select  class="form-control"   [(ngModel)]="year" name="year" id="year">
+							<option value="" selected>Select Year(optional Default(current Year))</option>
+				  <option  [ngValue]="1">
+					Previous Year
+							</option>
+                <option  [ngValue]="2">
+					Current Year
 							</option>
 </select>
         </div>
