@@ -35,7 +35,9 @@ export class FileInputComponent {
 
   import(): void {
     console.log('import ' + this.fileToUpload.name);
-    this.api.uploadAttendanceFile(this.fileToUpload).subscribe(
+    var formData = new FormData();
+    formData.append('file', this.fileToUpload, this.fileToUpload.name);
+    this.api.uploadAttendanceFile(formData).subscribe(
       (data: APIResult) => {
         //console.log(data);
         let status: Boolean = data.status;

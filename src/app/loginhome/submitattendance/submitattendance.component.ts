@@ -26,7 +26,7 @@ export class SubmitattendanceComponent implements OnInit, OnDestroy {
   location: string = '';
   month: number = 0;
   stationId: number = 0;
-  filename: string = ''; 
+  filename: string = '';
   months = [
     { id: 1, name: 'January' },
     { id: 2, name: 'Febrauary' },

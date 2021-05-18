@@ -146,7 +146,7 @@ export class PdsApiService {
   //upload attendance file
   uploadAttendanceFile(data: any): R.Observable<any> {
     let headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
+    headers.append('Content-Type', 'application/j');
     const httpOptions = {
       headers: headers
     };
