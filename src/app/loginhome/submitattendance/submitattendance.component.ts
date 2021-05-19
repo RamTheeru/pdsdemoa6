@@ -137,7 +137,13 @@ export class SubmitattendanceComponent implements OnInit, OnDestroy {
           this.apiInput = new ApiInput();
           this.apiInput.stationId = this.stationId;
           this.apiInput.currentmonth = this.month;
-          this.dowloadfile(this.apiInput, this.usrToken,monthName,y);
+          this.dowloadfile(
+            this.apiInput,
+            this.usrToken,
+            this.stationId,
+            monthName,
+            yr
+          );
         }
       }
     } else {
@@ -183,14 +189,20 @@ export class SubmitattendanceComponent implements OnInit, OnDestroy {
           this.apiInput.stationId = this.stationId;
           this.apiInput.currentmonth = this.month;
           this.apiInput.currentYear = this.yearmentioned;
-          this.dowloadfile(this.apiInput, this.usrToken, monthName, pastyear);
+          this.dowloadfile(
+            this.apiInput,
+            this.usrToken,
+            this.stationId,
+            monthName,
+            pastyear
+          );
         }
       }
     } else {
       this.swServ.showErrorMessage('Error!!', 'Please Select Month');
     }
   }
-  dowloadfile(input, tkn, monthName, yearname) {
+  dowloadfile(input, tkn, stationId, monthName, yearname) {
     this.api.downloadattedancefileforStation(input, tkn).subscribe(data => {
       console.log(data);
       if (data instanceof APIResult) {
@@ -201,7 +213,7 @@ export class SubmitattendanceComponent implements OnInit, OnDestroy {
           this.swServ.showErrorMessage('Failure!!!', message);
         }
       } else {
-        let stCode = this.stations.find(s => s.stationId == this.stationId)
+        let stCode = this.stations.find(s => s.stationId == stationId)
           .stationcode;
         this.filename = stCode + '-' + monthName + '-' + yearname + '.xlsx';
         saveAs(data, this.filename);
