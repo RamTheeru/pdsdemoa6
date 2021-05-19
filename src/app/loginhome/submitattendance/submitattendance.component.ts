@@ -105,7 +105,7 @@ export class SubmitattendanceComponent implements OnInit, OnDestroy {
     let currentDate = new Date();
     let cmonth = this.api.getmonthFromDate(currentDate);
     this.month = Number(cmonth);
-    //this.yearmentioned = currentDate.getFullYear();
+    this.yearmentioned = currentDate.getFullYear();
     if (this.month > 0 && this.month != NaN && this.month != undefined) {
       if (
         this.stationId == 0 ||
@@ -132,8 +132,7 @@ export class SubmitattendanceComponent implements OnInit, OnDestroy {
         ) {
           this.handleUnauthorizedrequest();
         } else {
-          let monthName = this.months[this.month];
-          var yr = currentDate.getFullYear();
+          let monthName = this.months[this.month - 1];
           this.apiInput = new ApiInput();
           this.apiInput.stationId = this.stationId;
           this.apiInput.currentmonth = this.month;
@@ -141,8 +140,8 @@ export class SubmitattendanceComponent implements OnInit, OnDestroy {
             this.apiInput,
             this.usrToken,
             this.stationId,
-            monthName,
-            yr
+            monthName.name,
+            this.yearmentioned
           );
         }
       }
@@ -157,6 +156,18 @@ export class SubmitattendanceComponent implements OnInit, OnDestroy {
     this.month = Number(this.selectedMonth);
     this.stationId = Number(this.location);
     this.yearmentioned = Number(this.year);
+    let currentDate = new Date();
+    let cyear = 0;
+    if (
+      this.yearmentioned == 0 ||
+      this.yearmentioned == 2 ||
+      this.yearmentioned == NaN
+    ) {
+      cyear = currentDate.getFullYear();
+    } else {
+      let yearId = this.yearmentioned == 1 ? 1 : 0;
+      cyear = currentDate.getFullYear() - yearId;
+    }
     if (this.month > 0 && this.month != NaN && this.month != undefined) {
       if (
         this.stationId == 0 ||
@@ -180,10 +191,7 @@ export class SubmitattendanceComponent implements OnInit, OnDestroy {
         ) {
           this.handleUnauthorizedrequest();
         } else {
-          let currentDate = new Date();
-          let monthName = this.months[this.month];
-          let yearId = this.yearmentioned == 1 ? 1 : 0;
-          var pastyear = currentDate.getFullYear() - yearId;
+          let monthName = this.months[this.month - 1];
 
           this.apiInput = new ApiInput();
           this.apiInput.stationId = this.stationId;
@@ -193,8 +201,8 @@ export class SubmitattendanceComponent implements OnInit, OnDestroy {
             this.apiInput,
             this.usrToken,
             this.stationId,
-            monthName,
-            pastyear
+            monthName.name,
+            cyear
           );
         }
       }
@@ -213,8 +221,16 @@ export class SubmitattendanceComponent implements OnInit, OnDestroy {
           this.swServ.showErrorMessage('Failure!!!', message);
         }
       } else {
-        let stCode = this.stations.find(s => s.stationId == stationId)
-          .stationcode;
+        console.log(this.stations);
+        console.log(stationId);
+        let stCode = this.stations.forEach(function(s) {
+          if (s.stationId == stationId) {
+            console.log(s.stationcode);
+            return s.stationcode;
+          } else {
+            console.log(s.stationcode);
+          }
+        });
         this.filename = stCode + '-' + monthName + '-' + yearname + '.xlsx';
         saveAs(data, this.filename);
         this.swServ.showSuccessMessage(
