@@ -223,14 +223,15 @@ export class SubmitattendanceComponent implements OnInit, OnDestroy {
       } else {
         console.log(this.stations);
         console.log(stationId);
-        let stCode = this.stations.forEach(function(s) {
-          if (s.stationId == stationId) {
-            console.log(s.stationcode);
-            return s.stationcode;
-          } else {
-            console.log(s.stationcode);
-          }
-        });
+        // let stCode = this.stations.forEach(s => {
+        //   if (s.stationId == stationId) {
+        //     console.log(s.stationCode);
+        //     return s.stationCode;
+        //   }
+        // });
+        let stCode = this.stations.find(s => s.stationId == stationId)
+          .stationCode;
+        console.log(stCode);
         this.filename = stCode + '-' + monthName + '-' + yearname + '.xlsx';
         saveAs(data, this.filename);
         this.swServ.showSuccessMessage(
