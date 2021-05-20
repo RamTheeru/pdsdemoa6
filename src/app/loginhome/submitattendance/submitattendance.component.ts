@@ -212,23 +212,15 @@ export class SubmitattendanceComponent implements OnInit, OnDestroy {
   }
   dowloadfile(input, tkn, stationId, monthName, yearname) {
     this.api.downloadattedancefileforStation(input, tkn).subscribe(data => {
-      console.log(data);
       if (data instanceof APIResult) {
         let status = data.status;
         let message = data.message;
         if (status) {
+          this.swServ.showWarning(message);
         } else {
           this.swServ.showErrorMessage('Failure!!!', message);
         }
       } else {
-        console.log(this.stations);
-        console.log(stationId);
-        // let stCode = this.stations.forEach(s => {
-        //   if (s.stationId == stationId) {
-        //     console.log(s.stationCode);
-        //     return s.stationCode;
-        //   }
-        // });
         let stCode = this.stations.find(s => s.stationId == stationId)
           .stationCode;
         console.log(stCode);
