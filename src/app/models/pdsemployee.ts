@@ -8,7 +8,7 @@ export class Pdsemployee extends Employee {
   PfFundName: string;
   PfMembershipNumber: string;
   PfDOJFund: string;
-  UAN: string;
+  //UAN: string;
   IsEsicApplicable: Boolean;
   ESICFundId: string;
   ESICMemberShipNumber: string;
