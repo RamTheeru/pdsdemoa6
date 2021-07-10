@@ -139,6 +139,7 @@ export class RegisterComponent implements OnInit {
       place: new FormControl(),
       state: new FormControl(),
       postal: new FormControl(),
+      dist: new FormControl(),
       aad: new FormControl(),
       pan: new FormControl(),
       phone: new FormControl(),
@@ -218,6 +219,7 @@ export class RegisterComponent implements OnInit {
     emp.Gender = this.empForm.value['gender'];
     emp.LoginType = loginusr.user;
     emp.UserTypeId = loginusr.userTypeId;
+    emp.District = this.empForm.value['dist'];
     //  if(selectedmaritals.length>0)
     //  {
     //   emp.Marital = selectedmaritals[0];
@@ -380,6 +382,13 @@ export class RegisterComponent implements OnInit {
     ) {
       this.fvalid = false;
       this.showrequiredMessage('Employee PostalCode', '', errorTitle);
+    } else if (
+      emp.District == '' ||
+      emp.District == null ||
+      emp.District == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage('Employee District', '', errorTitle);
     } else if (emp.State == '' || emp.State == null || emp.State == undefined) {
       this.fvalid = false;
       this.showrequiredMessage('Employee State', '', errorTitle);
@@ -516,6 +525,9 @@ export class RegisterComponent implements OnInit {
     if (this.fvalid) {
       this.validateNonEmptyfilelds(emp.Gaurd_PhoneNumber, 'gph');
     }
+    if (this.fvalid) {
+      this.validateNonEmptyfilelds(emp.Gaurd_PhoneNumber, 'dist');
+    }
     // let  prom :Promise<boolean>= new Promise((resolve,reject)=>{
     //   if(this.fvalid){
     //     resolve(true);
@@ -572,6 +584,9 @@ export class RegisterComponent implements OnInit {
     } else if (field == 'gph') {
       var f = 'Employee Guardian Phone Number';
       this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == 'dist') {
+      var f = 'Employee District';
+      this.showrequiredMessage(f, txt, errorTitle);
     } else if (field == 'g') {
       var f = 'Employee Location Name';
       // this.fvalid = true;
@@ -616,6 +631,9 @@ export class RegisterComponent implements OnInit {
       this.showrequiredMessage(f, txt, errorTitle);
     } else if (field == 'usr') {
       var f = 'Employee User Name';
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == 'dist') {
+      var f = 'Employee District';
       this.showrequiredMessage(f, txt, errorTitle);
     } else if (field == 'loc') {
       var f = 'Employee Location Name';

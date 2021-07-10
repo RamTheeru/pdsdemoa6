@@ -119,6 +119,60 @@
           </div>
         </div>
       </div>
+      <div class="card">
+        <div class="card-header">
+          <a class="card-link" data-toggle="collapse" href="#collapseTwo">
+            Address Information
+          </a>
+        </div>
+        <div id="collapseTwo" class="collapse show" data-parent="#accordion">
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="addressLine1" formControlName="ad1" (focusout)="focusOutFunction('ad1',$event)" matInput placeholder="Address Line 1" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="addressLine2" formControlName="ad2" (focusout)="focusOutFunction('ad1',$event)" matInput placeholder="Address Line 2" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="place" formControlName="place" matInput (focusout)="focusOutFunction('place',$event)" placeholder="Town/Mandal/Taluka/Village" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="state" formControlName="state" matInput (focusout)="focusOutFunction('state',$event)"  placeholder="State" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="postal" formControlName="postal" matInput (focusout)="focusOutFunction('post',$event)"     placeholder="Postal Code" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="dist" formControlName="dist" matInput (focusout)="focusOutFunction('dist',$event)"     placeholder="District" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
     </div>
     <!-- <mat-grid-list cols="2" rowHeight="1255px">
       <mat-grid-tile>
