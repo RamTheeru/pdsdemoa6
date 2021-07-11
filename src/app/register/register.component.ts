@@ -19,7 +19,7 @@ import { PdsApiService } from '../pds-api.service';
 import { SweetService } from '../sweet.service';
 import { UserType } from '../models/usertype';
 import { RegisterEmployee } from '../models/registeremployee';
-import { Pdsemployee } from '../models/Pdsemployee';
+import { Pdsemployee } from '../models/pdsemployee';
 import { APIResult } from '../models/apiresult';
 import { Designation } from '../models/designation';
 import { Station } from '../models/station';
@@ -167,7 +167,7 @@ export class RegisterComponent implements OnInit {
       dlstat: new FormControl(''),
       lissdate: new FormControl(),
       lexpdate: new FormControl(),
-      phy: new FormControl()
+      phy: new FormControl('')
     });
   }
   get maritalsFormArray() {
