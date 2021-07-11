@@ -19,10 +19,11 @@ import { PdsApiService } from '../pds-api.service';
 import { SweetService } from '../sweet.service';
 import { UserType } from '../models/usertype';
 import { RegisterEmployee } from '../models/registeremployee';
+import { Pdsemployee } from '../models/Pdsemployee';
 import { APIResult } from '../models/apiresult';
 import { Designation } from '../models/designation';
 import { Station } from '../models/station';
-var emp: RegisterEmployee = new RegisterEmployee();
+var emp: Pdsemployee = new Pdsemployee();
 
 @Component({
   selector: 'app-register',
@@ -154,7 +155,16 @@ export class RegisterComponent implements OnInit {
       ut: new FormControl(''),
       // desg: new FormControl(""),
       station: new FormControl(''),
-      location: new FormControl()
+      location: new FormControl(),
+      pMName: new FormControl(),
+      bankCName: new FormControl(),
+      account: new FormControl(),
+      ifsc: new FormControl(),
+      bank: new FormControl(),
+      bbranch: new FormControl(),
+      veh: new FormControl(),
+      dllr: new FormControl(),
+      dlstat: new FormControl('')
     });
   }
   get maritalsFormArray() {
@@ -220,6 +230,8 @@ export class RegisterComponent implements OnInit {
     emp.LoginType = loginusr.user;
     emp.UserTypeId = loginusr.userTypeId;
     emp.District = this.empForm.value['dist'];
+    emp.MotherName = this.empForm.value['pMName'];
+    emp.EmployeeNameasperBank = this.empForm.value['bankCName'];
     //  if(selectedmaritals.length>0)
     //  {
     //   emp.Marital = selectedmaritals[0];
@@ -270,6 +282,13 @@ export class RegisterComponent implements OnInit {
     emp.Gaurd_LastName = this.empForm.value['glastName'];
     emp.Gaurd_MiddleName = this.empForm.value['gmiddleName'];
     emp.Gaurd_PhoneNumber = this.empForm.value['gphone'];
+    emp.DLLRStatus = this.empForm.value['dlstat'];
+    emp.VehicleNumber = this.empForm.value['veh'];
+    emp.DLLRNumber = this.empForm.value['dllr'];
+    emp.BankAccountNumber = this.empForm.value['account'];
+    emp.BankName = this.empForm.value['bank'];
+    emp.IFSCCode = this.empForm.value['ifsc'];
+    emp.BranchName = this.empForm.value['bbranch'];
     // emp.Day2 = this.empForm.value["day2"];
     // emp.Month2 = this.empForm.value["month2"];
     // emp.Year2 = this.empForm.value["year2"];
@@ -383,6 +402,70 @@ export class RegisterComponent implements OnInit {
       this.fvalid = false;
       this.showrequiredMessage('Employee PostalCode', '', errorTitle);
     } else if (
+      emp.EmployeeNameasperBank == '' ||
+      emp.EmployeeNameasperBank == null ||
+      emp.EmployeeNameasperBank == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage(
+        'Employee EmployeeName as per Bank',
+        '',
+        errorTitle
+      );
+    } else if (
+      emp.BankAccountNumber == '' ||
+      emp.BankAccountNumber == null ||
+      emp.BankAccountNumber == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage('Employee Account Number', '', errorTitle);
+    } else if (
+      emp.BankName == '' ||
+      emp.BankName == null ||
+      emp.BankName == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage('Employee Bank Name', '', errorTitle);
+    } else if (
+      emp.IFSCCode == '' ||
+      emp.IFSCCode == null ||
+      emp.IFSCCode == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage('Employee IFSC Code', '', errorTitle);
+    } else if (
+      emp.BranchName == '' ||
+      emp.BranchName == null ||
+      emp.BranchName == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage('Employee Branch Name', '', errorTitle);
+    } else if (
+      emp.DLLRStatus == '' ||
+      emp.DLLRStatus == null ||
+      emp.DLLRStatus == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage('Employee DL/LLR Status', '', errorTitle);
+    } else if (
+      emp.DLLRNumber == '' ||
+      emp.DLLRNumber == null ||
+      emp.DLLRNumber == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage(
+        'Employee Driving or Lisence Number',
+        '',
+        errorTitle
+      );
+    } else if (
+      emp.VehicleNumber == '' ||
+      emp.VehicleNumber == null ||
+      emp.VehicleNumber == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage('Employee Vehicle Number', '', errorTitle);
+    } else if (
       emp.District == '' ||
       emp.District == null ||
       emp.District == undefined
@@ -443,7 +526,11 @@ export class RegisterComponent implements OnInit {
       this.validateallnonemptyfields();
       if (this.fvalid) {
         emp.HouseNo = emp.Address1;
-        emp.StreetName = emp
+        emp.StreetName = emp.Address2;
+        emp.FatherName = emp.Gaurd_FirstName;
+        emp.LandMark = emp.Address2;
+        emp.VillageorTown = emp.Place;
+        emp.Designation = '';
         this.submittoAPI(emp);
       }
 
@@ -475,7 +562,7 @@ export class RegisterComponent implements OnInit {
             this.designatons = data.designations;
             this._swServ.showSuccessMessage('Success!!!', m);
             this.router.navigate(['/login']);
-            emp = new RegisterEmployee();
+            emp = new Pdsemployee();
           } else {
             this._swServ.showErrorMessage('Error!!', m);
           }
@@ -529,6 +616,27 @@ export class RegisterComponent implements OnInit {
     }
     if (this.fvalid) {
       this.validateNonEmptyfilelds(emp.Gaurd_PhoneNumber, 'dist');
+    }
+    if (this.fvalid) {
+      this.validateNonEmptyfilelds(emp.Gaurd_PhoneNumber, 'enapb');
+    }
+    if (this.fvalid) {
+      this.validateNonEmptyfilelds(emp.VehicleNumber, 'veh');
+    }
+    if (this.fvalid) {
+      this.validateNonEmptyfilelds(emp.DLLRNumber, 'dllr');
+    }
+    if (this.fvalid) {
+      this.validateNonEmptyfilelds(emp.BankAccountNumber, 'acc');
+    }
+    if (this.fvalid) {
+      this.validateNonEmptyfilelds(emp.BankName, 'bank');
+    }
+    if (this.fvalid) {
+      this.validateNonEmptyfilelds(emp.BranchName, 'bb');
+    }
+    if (this.fvalid) {
+      this.validateNonEmptyfilelds(emp.IFSCCode, 'ifsc');
     }
     // let  prom :Promise<boolean>= new Promise((resolve,reject)=>{
     //   if(this.fvalid){
@@ -589,6 +697,27 @@ export class RegisterComponent implements OnInit {
     } else if (field == 'dist') {
       var f = 'Employee District';
       this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == 'enapb') {
+      var f = 'Employee Name as per Bank';
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == 'veh') {
+      var f = 'Employee Vehicle Number';
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == 'dllr') {
+      var f = 'Employee Drving or Learning Liscense';
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == 'acc') {
+      var f = 'Employee Bank Account Number';
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == 'bank') {
+      var f = 'Employee Bank Name';
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == 'ifsc') {
+      var f = 'Employee Bank IFSC Code';
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == 'bb') {
+      var f = 'Employee Bank  Branch Name';
+      this.showrequiredMessage(f, txt, errorTitle);
     } else if (field == 'g') {
       var f = 'Employee Location Name';
       // this.fvalid = true;
@@ -642,6 +771,27 @@ export class RegisterComponent implements OnInit {
       this.showrequiredMessage(f, txt, errorTitle);
     } else if (field == 'gph') {
       var f = 'Employee Guardian Phone Number';
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == 'enapb') {
+      var f = 'Employee Name as per Bank';
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == 'veh') {
+      var f = 'Employee Vehicle Number';
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == 'dllr') {
+      var f = 'Employee Drving or Learning Liscense';
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == 'acc') {
+      var f = 'Employee Bank Account Number';
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == 'bank') {
+      var f = 'Employee Bank Name';
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == 'ifsc') {
+      var f = 'Employee Bank IFSC Code';
+      this.showrequiredMessage(f, txt, errorTitle);
+    } else if (field == 'bb') {
+      var f = 'Employee Bank  Branch Name';
       this.showrequiredMessage(f, txt, errorTitle);
     } else if (field == 'g') {
       var f = 'Employee Location Name';

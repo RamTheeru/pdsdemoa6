@@ -96,24 +96,25 @@
               </div>
             </div>
             <div class="row">
+              <legend>Gaurdian Information</legend>
               <div class="col">
                 <mat-form-field>
-                  <input type="text" name="pFistName" (focusout)="focusOutFunction('g',$event)" formControlName="gfirstName" matInput placeholder="First Name" class="form-control">
+                  <input type="text" name="pFistName" (focusout)="focusOutFunction('g',$event)" formControlName="gfirstName" matInput placeholder="Father Name/Gaurdian Name" class="form-control">
                   <mat-error>This field is mandatory</mat-error>
                 </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="pMName" (focusout)="focusOutFunction('g',$event)" formControlName="pMName" matInput placeholder="Mother Name(optional)" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+
               </div>
               <div class="col">
                 <mat-form-field>
                   <mat-label>Alternate Contact:+91-</mat-label>
                   <input type="text" name="gphone" (focusout)="focusOutFunction('gph',$event)" formControlName="gphone" matInput placeholder="Phone" class="form-control">
                 </mat-form-field>
-              </div>
-              <div class="col">
-                <legend>Employee Type</legend>
-                <div class="add-bottom-padding" *ngFor="let c of empTypes; let i = index;">
-                  <mat-checkbox (change)="checkValue($event,'e')" name="{{c}}" value="{{c}}" [formControlName]="c">{{c}}
-                  </mat-checkbox>
-                </div>
               </div>
             </div>
           </div>
@@ -240,7 +241,13 @@
                   <mat-error>This field is mandatory</mat-error>
                 </mat-form-field>
               </div>
-              <div class="col"></div>
+              <div class="col">
+                <legend>Employee Type</legend>
+                <div class="add-bottom-padding" *ngFor="let c of empTypes; let i = index;">
+                  <mat-checkbox (change)="checkValue($event,'e')" name="{{c}}" value="{{c}}" [formControlName]="c">{{c}}
+                  </mat-checkbox>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -255,12 +262,85 @@
           <div class="card-body">
             <div class="row">
               <div class="col">
+                <mat-form-field>
+                  <input type="text" name="BankName" (focusout)="focusOutFunction('enapb',$event)" formControlName="bankCName" matInput placeholder="Name as per bank" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+
+                <mat-form-field>
+                  <input type="text" name="account" formControlName="account" (focusout)="focusOutFunction('acc',$event)" matInput placeholder="Account Number" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="bank" formControlName="bank" (focusout)="focusOutFunction('bank',$event)" matInput placeholder="Bank Name" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="bb" formControlName="bbranch" (focusout)="focusOutFunction('bb',$event)" matInput placeholder="Branch Name" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="ifsc" formControlName="ifsc" (focusout)="focusOutFunction('ifsc',$event)" matInput placeholder="IFSC CODE" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+              <!-- <div class="col"></div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <a class="card-link" data-toggle="collapse" href="#collapsefour">
+            Vehicle/Transport related Information
+          </a>
+        </div>
+        <div id="collapsefour" class="collapse show" data-parent="#accordion">
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <mat-select formControlName="dlstat" name="dlstat" aria-placeholder="DL/LLR Status">
+                    <mat-option value="">Select Status</mat-option>
+                    <mat-option value="DL">DL</mat-option>
+                    <mat-option value="LLR">LLR</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="veh" formControlName="veh" (focusout)="focusOutFunction('veh',$event)" matInput placeholder="Vehicle Number" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="dllr" formControlName="dllr" (focusout)="focusOutFunction('dllr',$event)" matInput placeholder="DL/LLR Number" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
 
               </div>
               <div class="col">
 
               </div>
-              <div class="col"></div>
+              <div class="col">
+
+              </div>
             </div>
           </div>
         </div>
