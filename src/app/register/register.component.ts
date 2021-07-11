@@ -164,7 +164,10 @@ export class RegisterComponent implements OnInit {
       bbranch: new FormControl(),
       veh: new FormControl(),
       dllr: new FormControl(),
-      dlstat: new FormControl('')
+      dlstat: new FormControl(''),
+      lissdate: new FormControl(),
+      lexpdate: new FormControl(),
+      phy: new FormControl()
     });
   }
   get maritalsFormArray() {
@@ -197,7 +200,8 @@ export class RegisterComponent implements OnInit {
     let st = this.empForm.value['station'];
     let db = this.convert(this.empForm.value['birthdate']);
     let dj = this.convert(this.empForm.value['joindate']);
-
+    let lis = this.convert(this.empForm.value['lissdate']);
+    let led = this.convert(this.empForm.value['lexpdate']);
     let loginusr = this.empForm.value['ut'];
     // let marit = this.empForm.value["married"];
 
@@ -289,10 +293,12 @@ export class RegisterComponent implements OnInit {
     emp.BankName = this.empForm.value['bank'];
     emp.IFSCCode = this.empForm.value['ifsc'];
     emp.BranchName = this.empForm.value['bbranch'];
+    emp.IssuedDate = lis;
+    emp.ExpiryDate = led;
     // emp.Day2 = this.empForm.value["day2"];
     // emp.Month2 = this.empForm.value["month2"];
     // emp.Year2 = this.empForm.value["year2"];
-
+    emp.PhysicallyHandicapStatus = this.empForm.value['phy'];
     emp.StationId = st.stationId;
     emp.StationCode = st.stationCode;
 
@@ -331,11 +337,7 @@ export class RegisterComponent implements OnInit {
     ) {
       this.fvalid = false;
       this.showrequiredMessage('Employee User Name', '', errorTitle);
-    }
-    // else {
-    //   this.showrequiredMessage("Employee User Name", emp.UserName, errorTitle);
-    // }
-    else if (emp.DOJ == '' || emp.DOJ == null || emp.DOJ == undefined) {
+    } else if (emp.DOJ == '' || emp.DOJ == null || emp.DOJ == undefined) {
       this.fvalid = false;
       this.showrequiredMessage('Employee Date Of Join', '', errorTitle);
     } else if (
@@ -441,6 +443,28 @@ export class RegisterComponent implements OnInit {
       this.fvalid = false;
       this.showrequiredMessage('Employee Branch Name', '', errorTitle);
     } else if (
+      emp.IssuedDate == '' ||
+      emp.IssuedDate == null ||
+      emp.IssuedDate == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage(
+        'Employee License Date Of Issued',
+        '',
+        errorTitle
+      );
+    } else if (
+      emp.ExpiryDate == '' ||
+      emp.ExpiryDate == null ||
+      emp.ExpiryDate == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage(
+        'Employee License Date Of Expired',
+        '',
+        errorTitle
+      );
+    } else if (
       emp.DLLRStatus == '' ||
       emp.DLLRStatus == null ||
       emp.DLLRStatus == undefined
@@ -492,6 +516,17 @@ export class RegisterComponent implements OnInit {
       this.fvalid = false;
       this.showrequiredMessage('Employee Date Of Birth', '', errorTitle);
     } else if (
+      emp.PhysicallyHandicapStatus == '' ||
+      emp.PhysicallyHandicapStatus == null ||
+      emp.PhysicallyHandicapStatus == undefined
+    ) {
+      this.fvalid = false;
+      this.showrequiredMessage(
+        'Employee PhysicallyHandicapStatus',
+        '',
+        errorTitle
+      );
+    } else if (
       emp.Gender == '' ||
       emp.Gender == null ||
       emp.Gender == undefined
@@ -528,6 +563,17 @@ export class RegisterComponent implements OnInit {
         emp.HouseNo = emp.Address1;
         emp.StreetName = emp.Address2;
         emp.FatherName = emp.Gaurd_FirstName;
+        if (
+          emp.MotherName == '' ||
+          emp.MotherName == null ||
+          emp.MotherName == undefined
+        ) {
+          emp.MotherName = 'default';
+        }
+        emp.RefContactNumber = '000';
+        emp.RefName = 'Default';
+        emp.ReferenceStatus = 'Default';
+
         emp.LandMark = emp.Address2;
         emp.VillageorTown = emp.Place;
         emp.Designation = '';
