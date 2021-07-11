@@ -442,6 +442,8 @@ export class RegisterComponent implements OnInit {
 
       this.validateallnonemptyfields();
       if (this.fvalid) {
+        emp.HouseNo = emp.Address1;
+        emp.StreetName = emp
         this.submittoAPI(emp);
       }
 

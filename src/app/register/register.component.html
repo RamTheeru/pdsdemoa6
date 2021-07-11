@@ -130,13 +130,13 @@
             <div class="row">
               <div class="col">
                 <mat-form-field>
-                  <input type="text" name="addressLine1" formControlName="ad1" (focusout)="focusOutFunction('ad1',$event)" matInput placeholder="Address Line 1" class="form-control">
+                  <input type="text" name="addressLine1" formControlName="ad1" (focusout)="focusOutFunction('ad1',$event)" matInput placeholder="HouseNO/FlatNO" class="form-control">
                   <mat-error>This field is mandatory</mat-error>
                 </mat-form-field>
               </div>
               <div class="col">
                 <mat-form-field>
-                  <input type="text" name="addressLine2" formControlName="ad2" (focusout)="focusOutFunction('ad1',$event)" matInput placeholder="Address Line 2" class="form-control">
+                  <input type="text" name="addressLine2" formControlName="ad2" (focusout)="focusOutFunction('ad1',$event)" matInput placeholder="Street Name/Area/LandMark" class="form-control">
                   <mat-error>This field is mandatory</mat-error>
                 </mat-form-field>
               </div>
@@ -150,7 +150,7 @@
             <div class="row">
               <div class="col">
                 <mat-form-field>
-                  <input type="text" name="state" formControlName="state" matInput (focusout)="focusOutFunction('state',$event)"  placeholder="State" class="form-control">
+                  <input type="text" name="dist" formControlName="dist" matInput (focusout)="focusOutFunction('dist',$event)"     placeholder="District" class="form-control">
                   <mat-error>This field is mandatory</mat-error>
                 </mat-form-field>
               </div>
@@ -161,17 +161,109 @@
                 </mat-form-field>
               </div>
               <div class="col">
+
                 <mat-form-field>
-                  <input type="text" name="dist" formControlName="dist" matInput (focusout)="focusOutFunction('dist',$event)"     placeholder="District" class="form-control">
+                  <input type="text" name="state" formControlName="state" matInput (focusout)="focusOutFunction('state',$event)"  placeholder="State" class="form-control">
                   <mat-error>This field is mandatory</mat-error>
                 </mat-form-field>
               </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="aad" formControlName="aad" (focusout)="focusOutFunction('aad',$event)" matInput placeholder="Aadhar number" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="pan" formControlName="pan" matInput (focusout)="focusOutFunction('pan',$event)" placeholder="PAN number" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+              <!-- <div class="col"></div> -->
             </div>
           </div>
         </div>
 
 
 
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <a class="card-link" data-toggle="collapse" href="#collapseThree">
+            User related Information
+          </a>
+        </div>
+        <div id="collapseThree" class="collapse show" data-parent="#accordion">
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <input  formControlName="joindate" matInput [matDatepicker]="picker2" class="form-control" placeholder="Date Of Join">
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <mat-select formControlName="ut" aria-placeholder="User Type">
+                    <mat-option value="">Select Login Type</mat-option>
+                    <mat-option *ngFor="let u of userTypes" [value]="u">{{u.user}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="usrname" formControlName="usr" matInput (focusout)="focusOutFunction('usr',$event)"  placeholder="User Name" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <legend>Location Details</legend>
+              <div class="col">
+                <mat-form-field>
+                  <mat-select formControlName="station" aria-placeholder="Station">
+                    <mat-option value="">Select Station</mat-option>
+                    <mat-option *ngFor="let s of stations" [value]="s">
+                      {{s.stationName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="location" formControlName="location" (focusout)="focusOutFunction('loc',$event)" matInput placeholder="Location Name" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <a class="card-link" data-toggle="collapse" href="#collapsefour">
+            Bank related Information
+          </a>
+        </div>
+        <div id="collapsefour" class="collapse show" data-parent="#accordion">
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+
+              </div>
+              <div class="col">
+
+              </div>
+              <div class="col"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <!-- <mat-grid-list cols="2" rowHeight="1255px">
