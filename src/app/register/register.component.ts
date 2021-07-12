@@ -573,7 +573,7 @@ export class RegisterComponent implements OnInit {
         emp.RefContactNumber = '000';
         emp.RefName = 'Default';
         emp.ReferenceStatus = 'Default';
-
+        emp.Guard_FullName = emp.Gaurd_FirstName;
         emp.LandMark = emp.Address2;
         emp.VillageorTown = emp.Place;
         emp.Designation = '';
