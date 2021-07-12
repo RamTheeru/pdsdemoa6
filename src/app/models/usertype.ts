@@ -4,6 +4,7 @@ export class UserType {
   employeeId: number;
   stationId: number;
   role: string;
+  EmpCode
   token: string;
   screen: string;
   valid: Boolean;
