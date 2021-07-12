@@ -185,7 +185,7 @@
               <div class="col">
                 <mat-form-field>
                   <mat-select formControlName="phy" class="form-control" aria-placeholder="Physically HandicapStatus">
-                    <mat-option value="">Select Option</mat-option>
+                    <mat-option value="">Select Physically HandicapStatus Option</mat-option>
                     <mat-option value="Yes">Yes</mat-option>
                     <mat-option value="No">No</mat-option>
                   </mat-select>
@@ -256,6 +256,15 @@
                   </mat-checkbox>
                 </div>
               </div>
+            </div>
+            <div class="row">
+              <mat-form-field>
+                <mat-select formControlName="inde" class="form-control" aria-placeholder="INDEMUNITY BOND">
+                  <mat-option value="">Select INDEMUNITY BOND Option</mat-option>
+                  <mat-option value="Yes">Yes</mat-option>
+                  <mat-option value="No">No</mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
           </div>
         </div>
@@ -359,6 +368,106 @@
               <!-- <div class="col">
 
             </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <a class="card-link" data-toggle="collapse" href="#collapsesix">
+            Other Essential or Optional Information
+          </a>
+        </div>
+        <div id="collapsesix" class="collapse show" data-parent="#accordion">
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="gpapNum" formControlName="gpapNum" matInput placeholder="GPAPolicyNumber" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="gpapIns" formControlName="gpapIns" matInput placeholder="GPAPolicyInsurer" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input  formControlName="gpaexpdate" matInput [matDatepicker]="picker5" class="form-control" placeholder="GPAPolicy Date Of Expiry">
+                  <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                  <mat-datepicker #picker5></mat-datepicker>
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="gmcpNum" formControlName="gmcpNum" matInput placeholder="GMCPolicyNumber" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="gmcpIns" formControlName="gmcpIns" matInput placeholder="GMCPolicyInsurer" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input  formControlName="gmcexpdate" matInput [matDatepicker]="picker6" class="form-control" placeholder="GMCPolicy Date Of Expiry">
+                  <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
+                  <mat-datepicker #picker6></mat-datepicker>
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <mat-select formControlName="hcstat" class="form-control" aria-placeholder="Health Card Status">
+                    <mat-option value="">Select Health Card Status Option</mat-option>
+                    <mat-option value="Yes">Yes</mat-option>
+                    <mat-option value="No">No</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="hcsNum" formControlName="hcsNum" matInput placeholder="Health Card Number" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="esicNum" formControlName="esicNum" matInput placeholder="ESIC Number" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="esicCNum" formControlName="esicCNum" matInput placeholder="ESICCardNumber" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="pfmemNum" formControlName="pfmemNum" matInput placeholder="PfMembershipNumber" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="text" name="uan" formControlName="uan" matInput placeholder="UAN" class="form-control">
+                  <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+              </div>
             </div>
           </div>
         </div>

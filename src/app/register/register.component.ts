@@ -167,7 +167,20 @@ export class RegisterComponent implements OnInit {
       dlstat: new FormControl(''),
       lissdate: new FormControl(),
       lexpdate: new FormControl(),
-      phy: new FormControl('')
+      phy: new FormControl(''),
+      gpapNum: new FormControl(),
+      gpapIns: new FormControl(),
+      gpaexpdate: new FormControl(),
+      gmcpNum: new FormControl(),
+      gmcpIns: new FormControl(),
+      gmcexpdate: new FormControl(),
+      inde: new FormControl(''),
+      hcstat: new FormControl(''),
+      hcsNum: new FormControl(),
+      esicNum: new FormControl(),
+      esicCNum: new FormControl(),
+      pfmemNum: new FormControl(),
+      uan: new FormControl()
     });
   }
   get maritalsFormArray() {
@@ -202,9 +215,25 @@ export class RegisterComponent implements OnInit {
     let dj = this.convert(this.empForm.value['joindate']);
     let lis = this.convert(this.empForm.value['lissdate']);
     let led = this.convert(this.empForm.value['lexpdate']);
+    let gpaed = this.convert(this.empForm.value['gpaexpdate']);
+    let gmced = this.convert(this.empForm.value['gmcexpdate']);
     let loginusr = this.empForm.value['ut'];
     // let marit = this.empForm.value["married"];
-
+    emp.GPAPolicyExpiryDate = gpaed;
+    emp.GMCPolicyExpiryDate = gmced;
+    emp.GPAPolicyInsurer = this.empForm.value['gpapIns'];
+    emp.GMCPolicyInsurer = this.empForm.value['gmcpIns'];
+    emp.GPAPolicyNumber = this.empForm.value['gpapNum'];
+    emp.GMCPolicyNumber = this.empForm.value['gmcpNum'];
+    emp.ESICCardNumber = this.empForm.value['esicCNum'];
+    emp.ESICNo = this.empForm.value['esicNum'];
+    emp.PfMembershipNumber = this.empForm.value['pfmemNum'];
+    emp.ua = this.empForm.value['uan'];
+    emp.HealthCardNumber = this.empForm.value['hcsNum'];
+    emp.HealthCardStatus = this.empForm.value['hcstat'];
+    if (emp.HealthCardStatus.toLowerCase().trim() == 'yes') {
+      emp.IsHealthCard = true;
+    }
     //this.loaded = true;
     // const selectedmaritals = this.empForm.value.mars
     //   .map((checked, i) => (checked ? this.maritals[i] : null))
@@ -299,6 +328,10 @@ export class RegisterComponent implements OnInit {
     // emp.Month2 = this.empForm.value["month2"];
     // emp.Year2 = this.empForm.value["year2"];
     emp.PhysicallyHandicapStatus = this.empForm.value['phy'];
+    if (emp.PhysicallyHandicapStatus.toLowerCase().trim() == 'yes') {
+      emp.IsPhysicallyHandicapped = true;
+    }
+    emp.Indemunity_Bond = this.empForm.value['inde'];
     emp.StationId = st.stationId;
     emp.StationCode = st.stationCode;
 
@@ -563,6 +596,7 @@ export class RegisterComponent implements OnInit {
         emp.HouseNo = emp.Address1;
         emp.StreetName = emp.Address2;
         emp.FatherName = emp.Gaurd_FirstName;
+        emp.IsActive = false;
         if (
           emp.MotherName == '' ||
           emp.MotherName == null ||
