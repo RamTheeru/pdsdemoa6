@@ -228,7 +228,7 @@ export class RegisterComponent implements OnInit {
     emp.ESICCardNumber = this.empForm.value['esicCNum'];
     emp.ESICNo = this.empForm.value['esicNum'];
     emp.PfMembershipNumber = this.empForm.value['pfmemNum'];
-    emp.ua = this.empForm.value['uan'];
+    emp.UAN = this.empForm.value['uan'];
     emp.HealthCardNumber = this.empForm.value['hcsNum'];
     emp.HealthCardStatus = this.empForm.value['hcstat'];
     if (emp.HealthCardStatus.toLowerCase().trim() == 'yes') {

@@ -1,4 +1,4 @@
-.register{
+/* .register{
     background: -webkit-linear-gradient(left, #3931af, #00c6ff);
     margin-top: 3%;
     padding: 3%;
@@ -103,6 +103,56 @@ legend{
 
 .example-button-row{
   float: center;  
+}
+.example-button-row {
+  margin: 8px 8px 8px 0;
+}
+.example-flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.example-button-row {
+  display: table-cell;
+  width: 490px;
+  padding-left: 313px;
+}
+
+.example-button-container {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+}
+section {
+  display: table;
+}
+
+.example-label {
+  display: table-cell;
+  font-size: 14px;
+  margin-left: 8px;
+  min-width: 120px;
+}
+
+.example-button-row {
+  display: table-cell;
+  width: 490px;
+} */
+.card-body {
+  background-color: bisque;
+}
+.card-header {
+  background-color: whitesmoke;
+}
+.container {
+  margin-left: 120px;
+}
+legend {
+  color: blue;
+  text-decoration: underline;
+}
+.example-button-row {
+  float: center;
 }
 .example-button-row {
   margin: 8px 8px 8px 0;
