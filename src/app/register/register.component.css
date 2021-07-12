@@ -138,14 +138,18 @@ section {
   display: table-cell;
   width: 490px;
 } */
+#accordion {
+  width: 100%;
+}
 .card-body {
-  background-color: bisque;
+  background-color: lightgray;
 }
 .card-header {
   background-color: whitesmoke;
 }
-.container {
+.container-fluid {
   margin-left: 120px;
+  width: 100%;
 }
 legend {
   color: blue;
