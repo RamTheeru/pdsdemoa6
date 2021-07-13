@@ -180,7 +180,8 @@ export class RegisterComponent implements OnInit {
       esicNum: new FormControl(),
       esicCNum: new FormControl(),
       pfmemNum: new FormControl(),
-      uan: new FormControl()
+      uan: new FormControl(),
+      cenddate: new FormControl()
     });
   }
   get maritalsFormArray() {
@@ -217,6 +218,7 @@ export class RegisterComponent implements OnInit {
     let led = this.convert(this.empForm.value['lexpdate']);
     let gpaed = this.convert(this.empForm.value['gpaexpdate']);
     let gmced = this.convert(this.empForm.value['gmcexpdate']);
+    let cend = this.convert(this.empForm.value['cenddate']);
     let loginusr = this.empForm.value['ut'];
     // let marit = this.empForm.value["married"];
     emp.GPAPolicyExpiryDate = gpaed;
@@ -234,6 +236,7 @@ export class RegisterComponent implements OnInit {
     if (emp.HealthCardStatus.toLowerCase().trim() == 'yes') {
       emp.IsHealthCard = true;
     }
+    emp.ContractEndDate = cend;
     //this.loaded = true;
     // const selectedmaritals = this.empForm.value.mars
     //   .map((checked, i) => (checked ? this.maritals[i] : null))
@@ -603,6 +606,20 @@ export class RegisterComponent implements OnInit {
           emp.MotherName == undefined
         ) {
           emp.MotherName = 'default';
+        }
+        if (
+          emp.PANNumber != '' &&
+          emp.PANNumber != null &&
+          emp.PANNumber != undefined
+        ) {
+          emp.PANStatus = 'Yes';
+        } else {
+          emp.PANStatus = 'No';
+        }
+        if (emp.MaritalStatus) {
+          emp.IsMarried = 'Yes';
+        } else {
+          emp.IsMarried = 'No';
         }
         emp.RefContactNumber = '000';
         emp.RefName = 'Default';

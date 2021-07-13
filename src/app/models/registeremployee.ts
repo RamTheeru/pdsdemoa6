@@ -25,6 +25,7 @@ export class RegisterEmployee {
   Gender: string;
   MaritalStatus: boolean;
   Marital: string;
+  IsMarried: string;
   Address1: string;
   Address2: string;
   Place: string;

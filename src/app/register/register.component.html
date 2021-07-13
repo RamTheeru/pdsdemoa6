@@ -259,6 +259,7 @@
               </div>
             </div>
             <div class="row">
+              <div class="col">
               <legend>INDEMUNITY BOND Info:</legend>
               <mat-form-field>
                 <mat-select formControlName="inde" aria-placeholder="INDEMUNITY BOND">
@@ -267,6 +268,15 @@
                   <mat-option value="No">No</mat-option>
                 </mat-select>
               </mat-form-field>
+            </div>
+             <div class="col">
+              <mat-form-field>
+                <input  formControlName="cenddate" matInput [matDatepicker]="picker7" class="form-control" placeholder="Contract End Date">
+                <mat-datepicker-toggle matSuffix [for]="picker7"></mat-datepicker-toggle>
+                <mat-datepicker #picker7></mat-datepicker>
+                <mat-error>This field is mandatory</mat-error>
+              </mat-form-field>
+             </div>
             </div>
           </div>
         </div>
