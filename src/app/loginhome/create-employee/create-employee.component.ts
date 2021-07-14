@@ -28,7 +28,7 @@ import * as r from 'rxjs';
 var emp: Pdsemployee = new Pdsemployee();
 @Component({
   selector: 'app-create-employee',
-  templateUrl: './create-employee.component.html',
+  templateUrl: './createemployee.component.html',
   styleUrls: ['./create-employee.component.css']
 })
 export class CreateEmployeeComponent
